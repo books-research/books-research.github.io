@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Books and Research by Anirudha Gaikwad offers expertly crafted resources on programming and technology, empowering learners with practical skills.">
+  <meta name="keywords" content="Programming books, Technology research, Anirudha Gaikwad, Programming courses, Software development projects, Training in Marathi Hindi English">
+  <meta name="author" content="Anirudha Gaikwad">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Books and Research by Anirudha Gaikwad">
+  <meta property="og:description" content="Books and Research by Anirudha Gaikwad offers expertly crafted resources on programming and technology, empowering learners with practical skills.">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="600">
+  <meta property="og:image:height" content="600">
+  <meta property="og:url" content="https://books-research.github.io /">
+  <meta property="og:image" content="https://books-research.github.io /img/logo.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Books and Research by Anirudha Gaikwad">
+  <meta name="twitter:description" content="Books and Research by Anirudha Gaikwad offers expertly crafted resources on programming and technology, empowering learners with practical skills.">
+  <meta name="twitter:image" content="assets/img/logo.png">
+  <link rel="shortcut icon" href="assets/img/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="assets/img/favicon.ico" type="image/x-icon">
+  <meta name="theme-color" content="#6a1b9a">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&family=Noto+Sans+Devanagari:wght@400;700&display=swap" rel="stylesheet">
+  <title>Books and Research by Anirudha Gaikwad</title>
+
+  <style>
+    :root {
+      --primary-gradient: linear-gradient(135deg, #EEAECA, #94BBE9);
+      --hover-color: #801FC4;
+      --card-bg: #ffffff;
+      --text-color: #2d2d2d;
+      --shadow-color: rgba(0, 0, 0, 0.1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      color: var(--text-color);
+      line-height: 1.6;
+      background: var(--primary-gradient);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Intro Section */
+    .intro-section {
+      max-width: 1280px;
+      width: 100%;
+      margin: 40px auto 20px;
+      padding: 20px;
+      text-align: center;
+      color: #fff;
+    }
+
+    .intro-section h2 {
+      font-size: 2em;
+      font-weight: 700;
+      margin-bottom: 15px;
+    }
+
+    .intro-section p {
+      font-size: 1.1em;
+      margin-bottom: 10px;
+      line-height: 1.7;
+    }
+
+    .intro-section p.marathi {
+      font-family: 'Noto Sans Devanagari', sans-serif;
+      font-size: 1.15em;
+      font-weight: 500;
+    }
+
+    /* Books Section */
+    .books-container {
+      max-width: 1280px;
+      width: 100%;
+      margin: 20px auto;
+      padding: 20px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      flex: 1;
+    }
+
+    .book-card {
+      perspective: 1000px;
+      width: 100%;
+      max-width: 320px;
+      height: 300px;
+      margin: 0 auto;
+      transition: transform 0.3s ease;
+    }
+
+    .book-card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.6s;
+      transform-style: preserve-3d;
+      box-shadow: 0 8px 16px var(--shadow-color);
+      border-radius: 16px;
+      background: var(--card-bg);
+    }
+
+    .book-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .book-card:hover .book-card-inner {
+      transform: rotateY(180deg);
+    }
+
+    .book-card-front, .book-card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      border-radius: 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 25px;
+      overflow: hidden;
+    }
+
+    .book-card-front {
+      background: var(--card-bg);
+      color: var(--text-color);
+    }
+
+    .book-card-back {
+      background: var(--hover-color);
+      color: #fff;
+      transform: rotateY(180deg);
+      text-align: center;
+      font-size: 0.95em;
+      line-height: 1.6;
+      overflow-y: auto;
+    }
+
+    .book-card h4 {
+      font-size: 1.4em;
+      margin-bottom: 15px;
+      text-align: center;
+      font-weight: 700;
+    }
+
+    .book-card p {
+      font-size: 0.95em;
+      line-height: 1.6;
+    }
+
+    /* Footer */
+    footer {
+      background: var(--primary-gradient);
+      color: #fff;
+      padding: 40px 20px;
+      text-align: center;
+      width: 100%;
+    }
+
+    footer h3 {
+      font-size: 1.9em;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    footer h5 {
+      font-size: 1.2em;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    footer p {
+      font-size: 1.1em;
+      margin-bottom: 20px;
+    }
+
+    .social-links a {
+      color: #fff;
+      margin: 0 15px;
+      font-size: 2em;
+      text-decoration: none;
+      transition: color 0.3s ease, transform 0.3s ease;
+    }
+
+    .social-links a:hover {
+      color: var(--hover-color);
+      transform: scale(1.2);
+    }
+
+    .copyright {
+      font-size: 0.95em;
+      margin-top: 20px;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .intro-section h2 {
+        font-size: 1.6em;
+      }
+
+      .intro-section p {
+        font-size: 1em;
+      }
+
+      .intro-section p.marathi {
+        font-size: 1.05em;
+      }
+
+      .books-container {
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 20px;
+        padding: 15px;
+      }
+
+      .book-card {
+        max-width: 100%;
+        height: 280px;
+      }
+
+      .book-card h4 {
+        font-size: 1.3em;
+      }
+
+      .book-card p {
+        font-size: 0.9em;
+      }
+
+      footer h3 {
+        font-size: 1.6em;
+      }
+
+      footer h5 {
+        font-size: 1.1em;
+      }
+
+      .social-links a {
+        font-size: 1.8em;
+        margin: 0 12px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .intro-section {
+        margin: 20px auto 10px;
+        padding: 15px;
+      }
+
+      .intro-section h2 {
+        font-size: 1.4em;
+      }
+
+      .intro-section p {
+        font-size: 0.95em;
+      }
+
+      .intro-section p.marathi {
+        font-size: 1em;
+      }
+
+      .books-container {
+        grid-template-columns: 1fr;
+        gap: 15px;
+      }
+
+      .book-card {
+        height: 260px;
+      }
+
+      .book-card h4 {
+        font-size: 1.2em;
+      }
+
+      .book-card p {
+        font-size: 0.85em;
+      }
+
+      footer h3 {
+        font-size: 1.4em;
+      }
+
+      footer h5 {
+        font-size: 1em;
+      }
+
+      .social-links a {
+        font-size: 1.6em;
+        margin: 0 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Intro Section -->
+  <div class="intro-section">
+    <h2>A learning path to empowering everyone to build reliable and efficient software.</h2>
+    <p class="marathi">ही पुस्तके विविध क्षेत्रांतील आणि प्रोग्रामिंग भाषा शिकणाऱ्यांना सक्षम करतात. प्रत्येक पुस्तक एक रचनात्मक व अभ्यासकेंद्रित अनुभव प्रदान करता, जो नवशिक्यांसाठी सुलभ आणि तज्जज्ञांसाठी उपयुक्त आहे।</p>
+    <p>Join thousands of learners mastering Programming & Technology with Books’ expertly crafted resources, designed for both beginners and professionals.</p>
+  </div>
+
+  <!-- Books Section -->
+  <div class="books-container">
+    <div class="book-card">
+      <div class="book-card-inner">
+        <div class="book-card-front">
+          <h4>Software Development</h4>
+        </div>
+        <div class="book-card-back">
+          <p>I have expertise in developing software solutions using various programming languages such as Python, Java, and Rust. I am experienced in web development, mobile app development (including Android), and have knowledge of frameworks like Django, Rocket, and Spring Boot.</p>
+        </div>
+      </div>
+    </div>
+    <div class="book-card">
+      <div class="book-card-inner">
+        <div class="book-card-front">
+          <h4>Teaching and Training</h4>
+        </div>
+        <div class="book-card-back">
+          <p>With extensive experience as a corporate technical trainer, I possess strong instructional and presentation skills. I excel in designing training programs, creating learning materials, and delivering engaging and effective training sessions.</p>
+        </div>
+      </div>
+    </div>
+    <div class="book-card">
+      <div class="book-card-inner">
+        <div class="book-card-front">
+          <h4>Problem Solving</h4>
+        </div>
+        <div class="book-card-back">
+          <p>I am adept at analyzing complex problems and implementing efficient solutions. My logical thinking and troubleshooting abilities allow me to address software development challenges effectively.</p>
+        </div>
+      </div>
+    </div>
+    <div class="book-card">
+      <div class="book-card-inner">
+        <div class="book-card-front">
+          <h4>Project Management</h4>
+        </div>
+        <div class="book-card-back">
+          <p>I have experience in managing software projects from inception to completion, including requirements gathering, planning, resource allocation, and ensuring timely delivery while maintaining quality standards.</p>
+        </div>
+      </div>
+    </div>
+    <!-- 
+    <div class="book-card">
+      <div class="book-card-inner">
+        <div class="book-card-front">
+          <h4>Adaptability</h4>
+        </div>
+        <div class="book-card-back">
+          <p>I am adaptable and can quickly adjust to new technologies, frameworks, and project requirements, embracing new tools and methodologies to enhance productivity.</p>
+        </div>
+      </div>
+    </div>
+    <div class="book-card">
+      <div class="book-card-inner">
+        <div class="book-card-front">
+          <h4>Analytical Thinking</h4>
+        </div>
+        <div class="book-card-back">
+          <p>I possess strong analytical skills, allowing me to dissect problems, evaluate options, and make informed decisions to drive effective solutions.</p>
+        </div>
+      </div>
+    </div>
+    <div class="book-card">
+      <div class="book-card-inner">
+        <div class="book-card-front">
+          <h4>Collaboration</h4>
+        </div>
+        <div class="book-card-back">
+          <p>I am a team player, thriving in collaborative environments, contributing ideas, and working effectively in cross-functional teams to achieve shared goals.</p>
+        </div>
+      </div>
+    </div>
+    <div class="book-card">
+      <div class="book-card-inner">
+        <div class="book-card-front">
+          <h4>Attention to Detail</h4>
+        </div>
+        <div class="book-card-back">
+          <p>I pay close attention to detail in both software development and training activities, ensuring accuracy and quality in my work.</p>
+        </div>
+      </div>
+    </div>
+    <div class="book-card">
+      <div class="book-card-inner">
+        <div class="book-card-front">
+          <h4>Continuous Learning</h4>
+        </div>
+        <div class="book-card-back">
+          <p>I have a passion for continuous learning, staying updated with the latest industry trends, technologies, and best practices to expand my skillset.</p>
+        </div>
+      </div>
+    </div> -->
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <h3>Books and Research by Anirudha Gaikwad</h3>
+    <h5><i class="fa-solid fa-envelope"></i> gaikwadanirudha@rediffmail.com</h5>
+    <p>Explore my collection of books and research projects designed to empower learners and professionals in programming and technology.</p>
+    <div class="social-links">
+      <a href="https://twitter.com/" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-twitter"></i></a>
+      <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-facebook"></i></a>
+      <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-instagram"></i></a>
+      <a href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-youtube"></i></a>
+      <a href="https://api.whatsapp.com/send/?phone=910000000000&text=Hi%2CI%20got%20your%20number%20from%20your%20portfolio%20page&app_absent=0" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-whatsapp"></i></a>
+    </div>
+    <div class="copyright">
+      &copy; <script>document.write(new Date().getFullYear());</script> Anirudha Gaikwad. All Rights Reserved
+    </div>
+  </footer>
+</body>
+</html>
