@@ -1,0 +1,599 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>CircularQueueTest - Java Data Structures and Algorithms for Beginners</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../../favicon.svg">
+        <link rel="shortcut icon" href="../../favicon.png">
+        <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+        <link rel="stylesheet" href="../../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="../../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../../theme/ferris.css">
+        <link rel="stylesheet" href="../../theme/semantic-notes.css">
+        <link rel="stylesheet" href="../../theme/listing.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../../toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Java Data Structures and Algorithms for Beginners</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <style>
+body {
+  text-align: justify;
+}
+</style>
+<h1 id="circular-queue-test"><a class="header" href="#circular-queue-test">Circular Queue Test</a></h1>
+<h2 id="problem-statement"><a class="header" href="#problem-statement">Problem Statement</a></h2>
+<p>Write a Java program that implements a circular queue to handle edge cases, such as enqueueing and dequeuing in a loop, and tests it with a sequence of operations to verify circular behavior. The circular queue should reuse array space by wrapping around when the rear pointer reaches the end, and handle full and empty queue conditions. Test the implementation with various sequences of enqueue and dequeue operations, including wrap-around scenarios, full queues, and empty queues. You can visualize this as a circular conveyor belt where items are added and removed, and when the belt’s end is reached, it loops back to the start to continue adding items.</p>
+<p><strong>Input</strong>: A sequence of operations, where each operation is either:</p>
+<ul>
+<li>Enqueue: Add an integer to the queue (e.g., enqueue 5).</li>
+<li>Dequeue: Remove and return the next integer from the queue.
+<strong>Output</strong>: For each operation, print the action performed (enqueue or dequeue) and the result, including queue state or error messages for full/empty conditions.
+<strong>Constraints</strong>:</li>
+<li>Queue capacity is fixed (e.g., 5 elements for testing).</li>
+<li>Elements are integers in the range [-10^9, 10^9].</li>
+<li>The queue may be empty or full during operations.
+<strong>Example</strong>:</li>
+<li>Input: Operations = [enqueue(1), enqueue(2), enqueue(3), dequeue, enqueue(4), dequeue, enqueue(5)]</li>
+<li>Output:
+<pre><code>Enqueued 1, Queue: [1]
+Enqueued 2, Queue: [1, 2]
+Enqueued 3, Queue: [1, 2, 3]
+Dequeued 1, Queue: [2, 3]
+Enqueued 4, Queue: [2, 3, 4]
+Dequeued 2, Queue: [3, 4]
+Enqueued 5, Queue: [3, 4, 5]
+</code></pre>
+</li>
+<li>Explanation: The queue operates in FIFO order, reusing space as elements are dequeued.</li>
+<li>Input: Operations = [enqueue(1), enqueue(2), enqueue(3), enqueue(4), enqueue(5), enqueue(6) on capacity 5]</li>
+<li>Output: <code>Enqueue 6 failed: Queue full</code></li>
+</ul>
+<h2 id="pseudocode"><a class="header" href="#pseudocode">Pseudocode</a></h2>
+<pre><code>CLASS CircularQueue
+    SET array to new integer array of size capacity
+    SET front to 0
+    SET rear to -1
+    SET size to 0
+    SET capacity to input capacity
+    
+    FUNCTION enqueue(number)
+        IF size equals capacity THEN
+            RETURN false (queue full)
+        ENDIF
+        SET rear to (rear + 1) mod capacity
+        SET array[rear] to number
+        INCREMENT size
+        RETURN true
+    ENDFUNCTION
+    
+    FUNCTION dequeue()
+        IF size equals 0 THEN
+            RETURN null (queue empty)
+        ENDIF
+        SET number to array[front]
+        SET front to (front + 1) mod capacity
+        DECREMENT size
+        RETURN number
+    ENDFUNCTION
+    
+    FUNCTION isEmpty()
+        RETURN size equals 0
+    ENDFUNCTION
+    
+    FUNCTION isFull()
+        RETURN size equals capacity
+    ENDFUNCTION
+    
+    FUNCTION toString()
+        CREATE result as empty string
+        APPEND "["
+        FOR i from 0 to size - 1
+            SET index to (front + i) mod capacity
+            APPEND array[index] and ", " to result
+        ENDFOR
+        IF result ends with ", " THEN
+            REMOVE last ", "
+        ENDIF
+        APPEND "]" to result
+        RETURN result
+    ENDFUNCTION
+ENDCLASS
+
+FUNCTION testCircularQueue(operations, capacity)
+    CREATE queue as new CircularQueue with capacity
+    FOR each operation in operations
+        IF operation.type equals "enqueue" THEN
+            IF queue.enqueue(operation.number) THEN
+                PRINT enqueued number and queue state
+            ELSE
+                PRINT enqueue failed: queue full
+            ENDIF
+        ELSE IF operation.type equals "dequeue" THEN
+            SET number to queue.dequeue()
+            IF number is null THEN
+                PRINT queue empty message
+            ELSE
+                PRINT dequeued number and queue state
+            ENDIF
+        ENDIF
+    ENFOR
+ENDFUNCTION
+
+FUNCTION main()
+    SET testCases to array of operation sequences with fixed capacity
+    FOR each testCase in testCases
+        PRINT test case details
+        CALL testCircularQueue(testCase, capacity)
+    ENDFOR
+ENDFUNCTION
+</code></pre>
+<h2 id="algorithm-steps"><a class="header" href="#algorithm-steps">Algorithm Steps</a></h2>
+<ol>
+<li>Define a <code>CircularQueue</code> class with:
+a. An array of fixed capacity, with <code>front</code>, <code>rear</code>, and <code>size</code> to track state.
+b. Methods: <code>enqueue</code> (add to rear with wrap-around), <code>dequeue</code> (remove from front with wrap-around), <code>isEmpty</code>, <code>isFull</code>, <code>toString</code>.</li>
+<li>In <code>enqueue</code>:
+a. If queue is full, return false.
+b. Increment <code>rear</code> modulo capacity, add number, increment size.</li>
+<li>In <code>dequeue</code>:
+a. If queue is empty, return null.
+b. Remove number at <code>front</code>, increment <code>front</code> modulo capacity, decrement size.</li>
+<li>In <code>testCircularQueue</code>:
+a. Create a <code>CircularQueue</code> with given capacity.
+b. For each operation:
+<ul>
+<li>Enqueue: Add number, print queue state or "Queue full".</li>
+<li>Dequeue: Remove number, print result and queue state or "Queue empty".</li>
+</ul>
+</li>
+<li>In the <code>main</code> method, test with sequences demonstrating normal operations, wrap-around, full queue, and empty queue cases.</li>
+</ol>
+<h2 id="java-implementation"><a class="header" href="#java-implementation">Java Implementation</a></h2>
+<pre><code class="language-java">import java.util.*;
+
+public class CircularQueueTest {
+    // Custom circular queue implementation for integers
+    static class CircularQueue {
+        private int[] array;
+        private int front;
+        private int rear;
+        private int size;
+        private int capacity;
+
+        public CircularQueue(int capacity) {
+            this.array = new int[capacity];
+            this.front = 0;
+            this.rear = -1;
+            this.size = 0;
+            this.capacity = capacity;
+        }
+
+        public boolean enqueue(int number) {
+            if (size == capacity) {
+                return false; // Queue full
+            }
+            rear = (rear + 1) % capacity;
+            array[rear] = number;
+            size++;
+            return true;
+        }
+
+        public Integer dequeue() {
+            if (size == 0) {
+                return null; // Queue empty
+            }
+            int number = array[front];
+            front = (front + 1) % capacity;
+            size--;
+            return number;
+        }
+
+        public boolean isEmpty() {
+            return size == 0;
+        }
+
+        public boolean isFull() {
+            return size == capacity;
+        }
+
+        public String toString() {
+            StringBuilder result = new StringBuilder("[");
+            for (int i = 0; i &lt; size; i++) {
+                int index = (front + i) % capacity;
+                result.append(array[index]);
+                if (i &lt; size - 1) {
+                    result.append(", ");
+                }
+            }
+            result.append("]");
+            return result.toString();
+        }
+    }
+
+    // Helper class for operations
+    static class Operation {
+        String type;
+        Integer number; // For enqueue operations
+
+        Operation(String type, Integer number) {
+            this.type = type;
+            this.number = number;
+        }
+    }
+
+    // Tests circular queue with operations
+    public void testCircularQueue(List&lt;Operation&gt; operations, int capacity) {
+        CircularQueue queue = new CircularQueue(capacity);
+        for (Operation op : operations) {
+            if (op.type.equals("enqueue")) {
+                if (queue.enqueue(op.number)) {
+                    System.out.println("Enqueued " + op.number + ", Queue: " + queue);
+                } else {
+                    System.out.println("Enqueue " + op.number + " failed: Queue full");
+                }
+            } else if (op.type.equals("dequeue")) {
+                Integer number = queue.dequeue();
+                if (number == null) {
+                    System.out.println("Queue empty, cannot dequeue");
+                } else {
+                    System.out.println("Dequeued " + number + ", Queue: " + queue);
+                }
+            }
+        }
+    }
+
+    // Main method to test circular queue
+    public static void main(String[] args) {
+        CircularQueueTest tester = new CircularQueueTest();
+        int capacity = 5; // Fixed capacity for all test cases
+
+        // Test cases
+        List&lt;List&lt;Operation&gt;&gt; testCases = new ArrayList&lt;&gt;();
+        
+        // Test case 1: Normal sequence
+        List&lt;Operation&gt; case1 = Arrays.asList(
+            new Operation("enqueue", 1),
+            new Operation("enqueue", 2),
+            new Operation("enqueue", 3),
+            new Operation("dequeue", null),
+            new Operation("enqueue", 4),
+            new Operation("dequeue", null),
+            new Operation("enqueue", 5)
+        );
+        testCases.add(case1);
+        
+        // Test case 2: Wrap-around behavior
+        List&lt;Operation&gt; case2 = Arrays.asList(
+            new Operation("enqueue", 1),
+            new Operation("enqueue", 2),
+            new Operation("enqueue", 3),
+            new Operation("dequeue", null),
+            new Operation("dequeue", null),
+            new Operation("enqueue", 4),
+            new Operation("enqueue", 5),
+            new Operation("enqueue", 6)
+        );
+        testCases.add(case2);
+        
+        // Test case 3: Full queue
+        List&lt;Operation&gt; case3 = Arrays.asList(
+            new Operation("enqueue", 1),
+            new Operation("enqueue", 2),
+            new Operation("enqueue", 3),
+            new Operation("enqueue", 4),
+            new Operation("enqueue", 5),
+            new Operation("enqueue", 6)
+        );
+        testCases.add(case3);
+        
+        // Test case 4: Empty queue
+        List&lt;Operation&gt; case4 = Arrays.asList(
+            new Operation("dequeue", null)
+        );
+        testCases.add(case4);
+
+        // Run test cases
+        for (int i = 0; i &lt; testCases.size(); i++) {
+            System.out.println("Test case " + (i + 1) + " (capacity=" + capacity + "):");
+            tester.testCircularQueue(testCases.get(i), capacity);
+            System.out.println();
+        }
+    }
+}
+</code></pre>
+<h2 id="output"><a class="header" href="#output">Output</a></h2>
+<p>Running the <code>main</code> method produces:</p>
+<pre><code>Test case 1 (capacity=5):
+Enqueued 1, Queue: [1]
+Enqueued 2, Queue: [1, 2]
+Enqueued 3, Queue: [1, 2, 3]
+Dequeued 1, Queue: [2, 3]
+Enqueued 4, Queue: [2, 3, 4]
+Dequeued 2, Queue: [3, 4]
+Enqueued 5, Queue: [3, 4, 5]
+
+Test case 2 (capacity=5):
+Enqueued 1, Queue: [1]
+Enqueued 2, Queue: [1, 2]
+Enqueued 3, Queue: [1, 2, 3]
+Dequeued 1, Queue: [2, 3]
+Dequeued 2, Queue: [3]
+Enqueued 4, Queue: [3, 4]
+Enqueued 5, Queue: [3, 4, 5]
+Enqueued 6, Queue: [3, 4, 5, 6]
+
+Test case 3 (capacity=5):
+Enqueued 1, Queue: [1]
+Enqueued 2, Queue: [1, 2]
+Enqueued 3, Queue: [1, 2, 3]
+Enqueued 4, Queue: [1, 2, 3, 4]
+Enqueued 5, Queue: [1, 2, 3, 4, 5]
+Enqueue 6 failed: Queue full
+
+Test case 4 (capacity=5):
+Queue empty, cannot dequeue
+</code></pre>
+<p>Explanation:</p>
+<ul>
+<li>Test case 1: Normal enqueue/dequeue operations within capacity.</li>
+<li>Test case 2: Demonstrates wrap-around (after dequeuing, rear wraps to start for 4, 5, 6).</li>
+<li>Test case 3: Fills queue to capacity, fails to enqueue 6.</li>
+<li>Test case 4: Dequeue on empty queue returns error.</li>
+</ul>
+<h2 id="how-it-works"><a class="header" href="#how-it-works">How It Works</a></h2>
+<ul>
+<li><strong>CircularQueue</strong>:
+<ul>
+<li>Uses an array with <code>front</code>, <code>rear</code>, and <code>size</code> to manage integers in FIFO order.</li>
+<li><code>enqueue</code>: Adds to <code>rear</code> (modulo capacity) if not full.</li>
+<li><code>dequeue</code>: Removes from <code>front</code> (modulo capacity) if not empty.</li>
+<li><code>toString</code>: Formats queue contents from <code>front</code> to <code>rear</code>.</li>
+<li>Wrap-around: <code>rear = (rear + 1) % capacity</code> and <code>front = (front + 1) % capacity</code> enable circular behavior.</li>
+</ul>
+</li>
+<li><strong>testCircularQueue</strong>:
+<ul>
+<li>Enqueues numbers, prints queue state or "Queue full".</li>
+<li>Dequeues numbers, prints result and queue state or "Queue empty".</li>
+</ul>
+</li>
+<li><strong>Example Trace (Test case 2)</strong>:
+<ul>
+<li>Enqueue 1: array=[1], front=0, rear=0, size=1.</li>
+<li>Enqueue 2: array=[1,2], front=0, rear=1, size=2.</li>
+<li>Enqueue 3: array=[1,2,3], front=0, rear=2, size=3.</li>
+<li>Dequeue 1: array=[-,2,3], front=1, rear=2, size=2.</li>
+<li>Dequeue 2: array=[-,-,3], front=2, rear=2, size=1.</li>
+<li>Enqueue 4: array=[4,-,3], front=2, rear=0, size=2 (wrap-around).</li>
+<li>Enqueue 5: array=[4,5,3], front=2, rear=1, size=3.</li>
+<li>Enqueue 6: array=[4,5,3,6], front=2, rear=2, size=4.</li>
+</ul>
+</li>
+<li><strong>Main Method</strong>: Tests normal operations, wrap-around, full queue, and empty queue.</li>
+</ul>
+<h2 id="complexity-analysis-table"><a class="header" href="#complexity-analysis-table">Complexity Analysis Table</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Operation</th><th>Time Complexity</th><th>Space Complexity</th></tr></thead><tbody>
+<tr><td>Enqueue/Dequeue</td><td>O(1)</td><td>O(1)</td></tr>
+<tr><td>Full Algorithm</td><td>O(n)</td><td>O(c)</td></tr>
+</tbody></table>
+</div>
+<p><em>Note</em>:</p>
+<ul>
+<li>n is the number of operations, c is the fixed capacity.</li>
+<li>Time complexity: O(1) for each enqueue/dequeue; O(n) for n operations.</li>
+<li>Space complexity: O(c) for the fixed-size array.</li>
+<li>Worst case: O(n) time for n operations, O(c) space for the queue.</li>
+</ul>
+<blockquote>
+<p><strong>✅ Tip</strong>: Use a circular queue to efficiently reuse array space, especially for applications with frequent enqueue and dequeue operations. Test wrap-around behavior by dequeuing some elements and then enqueuing more to verify the circular property.</p>
+</blockquote>
+<blockquote>
+<p><strong>⚠ Warning</strong>: Carefully manage <code>front</code> and <code>rear</code> indices with modulo operations to ensure correct wrap-around. Handle full and empty queue cases to avoid incorrect behavior.</p>
+</blockquote>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../problemStatements/queuesProblemSolving.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../../problemStatements/ch03_05/PrintJobSimulator.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../problemStatements/queuesProblemSolving.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../../problemStatements/ch03_05/PrintJobSimulator.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../../elasticlunr.min.js"></script>
+        <script src="../../mark.min.js"></script>
+        <script src="../../searcher.js"></script>
+
+        <script src="../../clipboard.min.js"></script>
+        <script src="../../highlight.js"></script>
+        <script src="../../book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="../../theme/ferris.js"></script>
+
+
+    </div>
+    </body>
+</html>

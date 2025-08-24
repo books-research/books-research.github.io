@@ -1,0 +1,445 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>WordFrequencyCounter - Java Data Structures and Algorithms for Beginners</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../../favicon.svg">
+        <link rel="shortcut icon" href="../../favicon.png">
+        <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+        <link rel="stylesheet" href="../../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="../../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../../theme/ferris.css">
+        <link rel="stylesheet" href="../../theme/semantic-notes.css">
+        <link rel="stylesheet" href="../../theme/listing.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../../toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Java Data Structures and Algorithms for Beginners</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <style>
+body {
+  text-align: justify;
+}
+</style>
+<h1 id="word-frequency-counter"><a class="header" href="#word-frequency-counter">Word Frequency Counter</a></h1>
+<h2 id="problem-statement"><a class="header" href="#problem-statement">Problem Statement</a></h2>
+<p>Write a Java program that uses a hash table to count the frequency of words in a given text. The hash table should use words (case-insensitive) as keys and their frequency counts as values. The program should process the input text by splitting it into words, ignoring punctuation, and print the word-frequency pairs in a readable format. Test the implementation with different text inputs, including empty text, single-word text, and text with repeated words. You can visualize this as analyzing a book page to count how often each word appears, storing the results in a dictionary-like structure for quick lookup.</p>
+<p><strong>Input</strong>:</p>
+<ul>
+<li>A string of text containing words separated by spaces, punctuation, or other delimiters.
+<strong>Output</strong>: A string representation of the hash table’s word-frequency pairs, or "Empty" if no words are present.
+<strong>Constraints</strong>:</li>
+<li>The text length is between 0 and 10^5 characters.</li>
+<li>Words are sequences of alphabetic characters (a-z, A-Z).</li>
+<li>Punctuation and non-alphabetic characters are ignored.</li>
+<li>Words are case-insensitive (e.g., "The" and "the" are the same).
+<strong>Example</strong>:</li>
+<li>Input: Text = "The quick brown fox, the quick!"</li>
+<li>Output: "the: 2, quick: 2, brown: 1, fox: 1"</li>
+<li>Explanation: Words are counted case-insensitively, ignoring punctuation.</li>
+<li>Input: Text = ""</li>
+<li>Output: "Empty"</li>
+<li>Explanation: No words in empty text.</li>
+<li>Input: Text = "hello Hello HELLO"</li>
+<li>Output: "hello: 3"</li>
+<li>Explanation: Case-insensitive, all "hello" variants count as one word.</li>
+</ul>
+<h2 id="pseudocode"><a class="header" href="#pseudocode">Pseudocode</a></h2>
+<pre><code>FUNCTION countWordFrequencies(text)
+    CREATE hashTable as new HashMap
+    IF text is empty THEN
+        RETURN "Empty"
+    ENDIF
+    SET words to split text by non-alphabetic characters
+    FOR each word in words
+        IF word is not empty THEN
+            SET word to lowercase(word)
+            IF hashTable contains word THEN
+                INCREMENT hashTable[word] by 1
+            ELSE
+                SET hashTable[word] to 1
+            ENDIF
+        ENDIF
+    ENDFOR
+    IF hashTable is empty THEN
+        RETURN "Empty"
+    ENDIF
+    CREATE result as new StringBuilder
+    FOR each entry in hashTable
+        APPEND entry.key and ":" and entry.value to result
+        IF not last entry THEN
+            APPEND ", " to result
+        ENDIF
+    ENDFOR
+    RETURN result as string
+ENDFUNCTION
+
+FUNCTION main()
+    SET testCases to array of text inputs
+    FOR each testCase in testCases
+        PRINT test case details
+        CALL countWordFrequencies(testCase.text)
+        PRINT word frequencies
+    ENFOR
+ENDFUNCTION
+</code></pre>
+<h2 id="algorithm-steps"><a class="header" href="#algorithm-steps">Algorithm Steps</a></h2>
+<ol>
+<li>Define <code>countWordFrequencies</code>:
+a. Create a <code>HashMap&lt;String, Integer&gt;</code> to store word frequencies.
+b. If text is empty, return "Empty".
+c. Split text into words using non-alphabetic characters as delimiters.
+d. For each non-empty word:
+<ul>
+<li>Convert to lowercase for case-insensitive counting.</li>
+<li>If word exists in hash table, increment its count.</li>
+<li>Otherwise, add word with count 1.
+e. If hash table is empty, return "Empty".
+f. Build a string of word-frequency pairs, separated by commas.</li>
+</ul>
+</li>
+<li>In <code>main</code>, test with different texts:
+a. Normal text with repeated words.
+b. Empty text.
+c. Single-word text.
+d. Text with punctuation and mixed case.
+e. Text with only non-alphabetic characters.</li>
+</ol>
+<h2 id="java-implementation"><a class="header" href="#java-implementation">Java Implementation</a></h2>
+<pre><code class="language-java">import java.util.*;
+
+public class WordFrequencyCounter {
+    // Counts word frequencies in the given text
+    public String countWordFrequencies(String text) {
+        HashMap&lt;String, Integer&gt; hashTable = new HashMap&lt;&gt;();
+        if (text == null || text.trim().isEmpty()) {
+            return "Empty";
+        }
+        // Split text into words, ignoring non-alphabetic characters
+        String[] words = text.split("[^a-zA-Z]+");
+        for (String word : words) {
+            if (!word.isEmpty()) {
+                word = word.toLowerCase();
+                hashTable.put(word, hashTable.getOrDefault(word, 0) + 1);
+            }
+        }
+        if (hashTable.isEmpty()) {
+            return "Empty";
+        }
+        // Build result string
+        StringBuilder result = new StringBuilder();
+        int index = 0;
+        for (Map.Entry&lt;String, Integer&gt; entry : hashTable.entrySet()) {
+            result.append(entry.getKey()).append(": ").append(entry.getValue());
+            if (index &lt; hashTable.size() - 1) {
+                result.append(", ");
+            }
+            index++;
+        }
+        return result.toString();
+    }
+
+    // Main method to test word frequency counter
+    public static void main(String[] args) {
+        WordFrequencyCounter counter = new WordFrequencyCounter();
+
+        // Test cases
+        String[] testCases = {
+            "The quick brown fox, the quick!",           // Normal text with repeats
+            "",                                         // Empty text
+            "hello Hello HELLO",                        // Case-insensitive repeats
+            "hello",                                    // Single word
+            "!!! --- 123",                              // No words
+        };
+
+        // Run test cases
+        for (int i = 0; i &lt; testCases.length; i++) {
+            System.out.println("Test case " + (i + 1) + ":");
+            System.out.println("Input text: \"" + testCases[i] + "\"");
+            String result = counter.countWordFrequencies(testCases[i]);
+            System.out.println("Word frequencies: " + result + "\n");
+        }
+    }
+}
+</code></pre>
+<h2 id="output"><a class="header" href="#output">Output</a></h2>
+<p>Running the <code>main</code> method produces:</p>
+<pre><code>Test case 1:
+Input text: "The quick brown fox, the quick!"
+Word frequencies: the: 2, quick: 2, brown: 1, fox: 1
+
+Test case 2:
+Input text: ""
+Word frequencies: Empty
+
+Test case 3:
+Input text: "hello Hello HELLO"
+Word frequencies: hello: 3
+
+Test case 4:
+Input text: "hello"
+Word frequencies: hello: 1
+
+Test case 5:
+Input text: "!!! --- 123"
+Word frequencies: Empty
+</code></pre>
+<p>Explanation:</p>
+<ul>
+<li>Test case 1: Counts "the" (2), "quick" (2), "brown" (1), "fox" (1), ignoring punctuation.</li>
+<li>Test case 2: Empty text returns "Empty".</li>
+<li>Test case 3: Counts "hello" (3) case-insensitively.</li>
+<li>Test case 4: Single word "hello" has frequency 1.</li>
+<li>Test case 5: No alphabetic words, returns "Empty".</li>
+</ul>
+<h2 id="how-it-works"><a class="header" href="#how-it-works">How It Works</a></h2>
+<ul>
+<li><strong>countWordFrequencies</strong>:
+<ul>
+<li>Creates a <code>HashMap&lt;String, Integer&gt;</code> for word frequencies.</li>
+<li>Handles null or empty text by returning "Empty".</li>
+<li>Splits text using regex <code>[^a-zA-Z]+</code> to ignore non-alphabetic characters.</li>
+<li>Processes each non-empty word:
+<ul>
+<li>Converts to lowercase.</li>
+<li>Updates count in hash table using <code>getOrDefault</code>.</li>
+</ul>
+</li>
+<li>Builds a comma-separated string of word-frequency pairs or returns "Empty" if none.</li>
+</ul>
+</li>
+<li><strong>Example Trace (Test case 1)</strong>:
+<ul>
+<li>Input: "The quick brown fox, the quick!".</li>
+<li>Split: ["The", "quick", "brown", "fox", "the", "quick"].</li>
+<li>Process: hashTable={the:2, quick:2, brown:1, fox:1}.</li>
+<li>Output: "the: 2, quick: 2, brown: 1, fox: 1".</li>
+</ul>
+</li>
+<li><strong>Main Method</strong>: Tests normal text, empty text, repeated words, single word, and non-alphabetic text.</li>
+</ul>
+<h2 id="complexity-analysis-table"><a class="header" href="#complexity-analysis-table">Complexity Analysis Table</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Operation</th><th>Time Complexity</th><th>Space Complexity</th></tr></thead><tbody>
+<tr><td>Count Frequencies</td><td>O(n)</td><td>O(m)</td></tr>
+</tbody></table>
+</div>
+<p><em>Note</em>:</p>
+<ul>
+<li>n is the length of the input text (characters).</li>
+<li>m is the number of unique words.</li>
+<li>Time complexity: O(n) for splitting and processing text; HashMap operations (put, get) are O(1) average case.</li>
+<li>Space complexity: O(m) for HashMap storing unique words; O(n) for output string in worst case.</li>
+<li>Worst case: O(n) time, O(n) space for many unique words or long output.</li>
+</ul>
+<blockquote>
+<p><strong>✅ Tip</strong>: Use a regular expression like <code>[^a-zA-Z]+</code> to split text and handle punctuation effectively. Convert words to lowercase to ensure case-insensitive counting.</p>
+</blockquote>
+<blockquote>
+<p><strong>⚠ Warning</strong>: Handle edge cases like empty text or non-alphabetic input to avoid empty hash tables. Ensure regex splitting correctly separates words to prevent invalid tokens.</p>
+</blockquote>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../problemStatements/ch03_06/TwoSumProblem.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../../problemStatements/treesProblemSolving.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../problemStatements/ch03_06/TwoSumProblem.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../../problemStatements/treesProblemSolving.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../../elasticlunr.min.js"></script>
+        <script src="../../mark.min.js"></script>
+        <script src="../../searcher.js"></script>
+
+        <script src="../../clipboard.min.js"></script>
+        <script src="../../highlight.js"></script>
+        <script src="../../book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="../../theme/ferris.js"></script>
+
+
+    </div>
+    </body>
+</html>

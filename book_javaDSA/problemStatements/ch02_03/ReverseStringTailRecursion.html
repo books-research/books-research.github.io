@@ -1,0 +1,343 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>ReverseStringTailRecursion - Java Data Structures and Algorithms for Beginners</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../../favicon.svg">
+        <link rel="shortcut icon" href="../../favicon.png">
+        <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+        <link rel="stylesheet" href="../../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="../../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../../theme/ferris.css">
+        <link rel="stylesheet" href="../../theme/semantic-notes.css">
+        <link rel="stylesheet" href="../../theme/listing.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../../toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Java Data Structures and Algorithms for Beginners</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <style>
+body {
+  text-align: justify;
+}
+</style>
+<h1 id="reverse-string-tail-recursion"><a class="header" href="#reverse-string-tail-recursion">Reverse String Tail Recursion</a></h1>
+<h2 id="problem-statement"><a class="header" href="#problem-statement">Problem Statement</a></h2>
+<p>Write a Java program that implements a tail-recursive method to reverse a string using an accumulator to build the result. The program should take a string as input and return the reversed string. Test the method with various strings, including empty strings, single-character strings, and long strings, and discuss Java’s stack usage for the tail-recursive approach. You can visualize this as rearranging the letters of a word on a signboard, building the reversed word step-by-step by passing the accumulated result to the next recursive call.</p>
+<p><strong>Input</strong>: A string (e.g., <code>str = "hello"</code>).
+<strong>Output</strong>: A string representing the reversed input (e.g., <code>"olleh"</code>).
+<strong>Constraints</strong>:</p>
+<ul>
+<li>The string length is between 0 and 10^5.</li>
+<li>The string contains printable ASCII characters.</li>
+<li>The string may be empty.
+<strong>Example</strong>:</li>
+<li>Input: <code>str = "hello"</code></li>
+<li>Output: <code>"olleh"</code></li>
+<li>Explanation: The string <code>"hello"</code> is reversed to <code>"olleh"</code> by rearranging its characters.</li>
+<li>Input: <code>str = ""</code></li>
+<li>Output: <code>""</code></li>
+<li>Explanation: An empty string remains empty after reversal.</li>
+</ul>
+<h2 id="pseudocode"><a class="header" href="#pseudocode">Pseudocode</a></h2>
+<pre><code>FUNCTION tailRecursiveReverse(str, index, accumulator)
+    IF str is null OR index &lt; 0 THEN
+        RETURN accumulator
+    ENDIF
+    SET newAccumulator to character at index in str + accumulator
+    RETURN tailRecursiveReverse(str, index - 1, newAccumulator)
+ENDFUNCTION
+
+FUNCTION mainReverse(str)
+    IF str is null OR length of str equals 0 THEN
+        RETURN str
+    ENDIF
+    RETURN tailRecursiveReverse(str, length of str - 1, "")
+ENDFUNCTION
+</code></pre>
+<h2 id="algorithm-steps"><a class="header" href="#algorithm-steps">Algorithm Steps</a></h2>
+<ol>
+<li>Check if the input string is null or empty. If so, return the string as is.</li>
+<li>Define a tail-recursive helper function that takes the string, the current index, and an accumulator as parameters.</li>
+<li>In the helper function, implement the base case: if the index is less than 0, return the accumulator.</li>
+<li>For the recursive case, prepend the character at the current index to the accumulator and recursively call the function with the previous index and the updated accumulator.</li>
+<li>In the main function, call the tail-recursive function with the initial index set to the last index of the string (length - 1) and an empty string as the accumulator.</li>
+<li>Return the reversed string computed by the tail-recursive function.</li>
+</ol>
+<h2 id="java-implementation"><a class="header" href="#java-implementation">Java Implementation</a></h2>
+<pre><code class="language-java">public class ReverseStringTailRecursion {
+    // Reverses a string using tail recursion
+    public String reverse(String str) {
+        // Check for null or empty string
+        if (str == null || str.length() == 0) {
+            return str;
+        }
+        // Call tail-recursive helper with initial index and accumulator
+        return tailRecursiveReverse(str, str.length() - 1, "");
+    }
+
+    // Helper function for tail-recursive string reversal
+    private String tailRecursiveReverse(String str, int index, String accumulator) {
+        // Base case: if index &lt; 0, return accumulator
+        if (index &lt; 0) {
+            return accumulator;
+        }
+        // Recursive case: prepend current character to accumulator and recurse
+        return tailRecursiveReverse(str, index - 1, str.charAt(index) + accumulator);
+    }
+}
+</code></pre>
+<h2 id="output"><a class="header" href="#output">Output</a></h2>
+<p>For the input string <code>"hello"</code>, the program outputs:</p>
+<pre><code>olleh
+</code></pre>
+<p>Explanation: The string <code>"hello"</code> is reversed to <code>"olleh"</code> by building the result in the accumulator.</p>
+<p>For an empty string <code>""</code>, the program outputs:</p>
+<pre><code>""
+</code></pre>
+<p>Explanation: An empty string remains empty after reversal.</p>
+<p>For a single-character string <code>"a"</code>, the program outputs:</p>
+<pre><code>a
+</code></pre>
+<p>Explanation: A single-character string is already reversed.</p>
+<h2 id="how-it-works"><a class="header" href="#how-it-works">How It Works</a></h2>
+<ul>
+<li><strong>Step 1</strong>: The <code>reverse</code> method checks if the string is null or empty. For <code>"hello"</code>, it calls <code>tailRecursiveReverse</code> with <code>index = 4</code> and <code>accumulator = ""</code>.</li>
+<li><strong>Step 2</strong>: In <code>tailRecursiveReverse</code>:
+<ul>
+<li>Index 4: <code>accumulator = 'o' + "" = "o"</code>, recurse with <code>index = 3</code>, <code>accumulator = "o"</code>.</li>
+<li>Index 3: <code>accumulator = 'l' + "o" = "lo"</code>, recurse with <code>index = 2</code>, <code>accumulator = "lo"</code>.</li>
+<li>Index 2: <code>accumulator = 'l' + "lo" = "llo"</code>, recurse with <code>index = 1</code>, <code>accumulator = "llo"</code>.</li>
+<li>Index 1: <code>accumulator = 'e' + "llo" = "ello"</code>, recurse with <code>index = 0</code>, <code>accumulator = "ello"</code>.</li>
+<li>Index 0: <code>accumulator = 'h' + "ello" = "hello"</code>, recurse with <code>index = -1</code>, <code>accumulator = "hello"</code>.</li>
+<li>Index -1: Base case, return <code>accumulator = "hello"</code>.</li>
+</ul>
+</li>
+<li><strong>Example Trace</strong>: For <code>"hello"</code>, the accumulator builds: <code>"" → "o" → "lo" → "llo" → "ello" → "hello"</code>, returning <code>"olleh"</code>.</li>
+<li><strong>Java Stack Usage</strong>: The function is tail-recursive because the recursive call is the last operation. However, Java does not optimize tail recursion, so each recursive call adds a frame to the call stack, leading to O(n) space complexity. This can cause stack overflow for very large strings (e.g., 10^5 characters). An iterative approach would use O(1) space (excluding the output string).</li>
+</ul>
+<h2 id="complexity-analysis-table"><a class="header" href="#complexity-analysis-table">Complexity Analysis Table</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Operation</th><th>Time Complexity</th><th>Space Complexity</th></tr></thead><tbody>
+<tr><td>Recursive Call (Tail)</td><td>O(n)</td><td>O(n)</td></tr>
+<tr><td>Full Algorithm</td><td>O(n)</td><td>O(n)</td></tr>
+</tbody></table>
+</div>
+<p><em>Note</em>:</p>
+<ul>
+<li>n is the length of the input string.</li>
+<li>Time complexity: O(n), as the function processes each character exactly once.</li>
+<li>Space complexity: O(n) due to the recursive call stack (Java does not optimize tail recursion) and the accumulator string, which grows with each call.</li>
+<li>Best, average, and worst cases are O(n).</li>
+</ul>
+<blockquote>
+<p><strong>✅ Tip</strong>: Use tail recursion to write elegant recursive solutions for problems like string reversal, but consider iterative methods for better space efficiency in Java. Test with long strings (e.g., 10^4 characters) and edge cases like empty or single-character strings to verify correctness.</p>
+</blockquote>
+<blockquote>
+<p><strong>⚠ Warning</strong>: Java does not optimize tail recursion, so the O(n) space complexity may cause stack overflow for very large strings. Additionally, string concatenation in the accumulator can be inefficient; consider using <code>StringBuilder</code> in an iterative approach for better performance.</p>
+</blockquote>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../problemStatements/ch02_03/FactorialConversion.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../../problemStatements/ch02_03/TailRecursiveListLength.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../problemStatements/ch02_03/FactorialConversion.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../../problemStatements/ch02_03/TailRecursiveListLength.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../../elasticlunr.min.js"></script>
+        <script src="../../mark.min.js"></script>
+        <script src="../../searcher.js"></script>
+
+        <script src="../../clipboard.min.js"></script>
+        <script src="../../highlight.js"></script>
+        <script src="../../book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="../../theme/ferris.js"></script>
+
+
+    </div>
+    </body>
+</html>

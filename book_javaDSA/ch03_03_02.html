@@ -1,0 +1,445 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Circular Linked Lists - Java Data Structures and Algorithms for Beginners</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="theme/ferris.css">
+        <link rel="stylesheet" href="theme/semantic-notes.css">
+        <link rel="stylesheet" href="theme/listing.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Java Data Structures and Algorithms for Beginners</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <style>
+body {
+  text-align: justify;
+}
+</style>
+<h2 id="circular-linked-list-data-structure"><a class="header" href="#circular-linked-list-data-structure">Circular Linked List Data Structure</a></h2>
+<h3 id="definition-and-concepts"><a class="header" href="#definition-and-concepts">Definition and Concepts</a></h3>
+<p>A circular linked list is a linear data structure where nodes are arranged in a sequence, and the last node points back to the first node, forming a loop. In a singly circular linked list, each node contains data and a reference to the next node, with the last node’s next pointer linking to the head node instead of null. Unlike a standard singly linked list, which has a definite end, a circular linked list allows continuous traversal. You can visualize a circular linked list as a ring of boxes, where each box holds a value and an arrow points to the next box, with the last box pointing back to the first. This structure is ideal for applications requiring cyclic or round-robin processing.</p>
+<h3 id="why-use-it"><a class="header" href="#why-use-it">Why Use It?</a></h3>
+<p>A circular linked list is used when you need a data structure that supports continuous looping through elements, such as in round-robin scheduling or cyclic data processing. It eliminates the need to reset traversal to the beginning after reaching the end, making it efficient for repetitive tasks. The circular nature simplifies certain operations, like rotating the list, and it can be used as a foundation for structures like circular buffers.</p>
+<h3 id="where-to-use-real-life-examples"><a class="header" href="#where-to-use-real-life-examples">Where to Use? (Real-Life Examples)</a></h3>
+<ul>
+<li><strong>Round-Robin Scheduling</strong>: Operating systems use circular linked lists to manage processes in a round-robin fashion, cycling through tasks to allocate CPU time.</li>
+<li><strong>Music Playlist Looping</strong>: Music players use circular linked lists to implement a looping playlist, where playback restarts from the first song after the last one.</li>
+<li><strong>Circular Buffers</strong>: Network applications use circular linked lists to implement buffers for streaming data, reusing space in a fixed-size structure.</li>
+<li><strong>Multiplayer Game Turns</strong>: Board games or turn-based applications use circular linked lists to cycle through players’ turns indefinitely.</li>
+</ul>
+<!-- ### SVG Diagram
+The diagram for a singly circular linked list would depict a sequence of rectangular nodes arranged in a circle, each containing a value (e.g., 10, 20, 30). Arrows would connect each node to the next, with the last node’s arrow pointing back to the first node, labeled "Head." The diagram would illustrate an **insert at tail** operation adding a new node (e.g., 40) and a **delete at head** operation removing the head node. A caption would note: "In a circular linked list, the last node points back to the head, forming a loop for continuous traversal." -->
+<h3 id="explain-operations"><a class="header" href="#explain-operations">Explain Operations</a></h3>
+<ul>
+<li><strong>Insert at Head</strong>: This operation adds a new node at the beginning of the list, updating the last node’s pointer to the new head. It has a time complexity of O(1) if a tail pointer is maintained.</li>
+<li><strong>Insert at Tail</strong>: This operation adds a new node at the end of the list, updating the last node’s pointer to the new node and linking it to the head. It has a time complexity of O(1) if a tail pointer is maintained.</li>
+<li><strong>Delete at Head</strong>: This operation removes the first node, updating the last node’s pointer to the new head. It has a time complexity of O(1) if a tail pointer is maintained.</li>
+<li><strong>Delete by Value</strong>: This operation removes the first node with a given value. It has a time complexity of O(n) due to traversal.</li>
+<li><strong>Search</strong>: This operation finds a node with a given value. It has a time complexity of O(n).</li>
+<li><strong>isEmpty</strong>: This operation checks whether the circular linked list is empty. It has a time complexity of O(1).</li>
+<li><strong>Size</strong>: This operation returns the number of nodes in the circular linked list. It has a time complexity of O(1) if maintained.</li>
+</ul>
+<h3 id="java-implementation"><a class="header" href="#java-implementation">Java Implementation</a></h3>
+<p>The following Java code implements a singly circular linked list with basic operations, maintaining a tail pointer for efficiency.</p>
+<pre><code class="language-java">public class CircularLinkedList {
+    private class Node {
+        int value; // Value stored in the node
+        Node next; // Reference to the next node
+
+        Node(int value) {
+            this.value = value;
+            this.next = null;
+        }
+    }
+
+    private Node tail; // Tail of the circular linked list
+    private int size; // Number of nodes in the circular linked list
+
+    // Constructor to initialize an empty circular linked list
+    public CircularLinkedList() {
+        tail = null;
+        size = 0;
+    }
+
+    // Insert at Head: Adds a new node at the beginning
+    public void insertAtHead(int value) {
+        Node newNode = new Node(value); // Creates a new node
+        if (isEmpty()) { // If list is empty, sets tail to new node and links to itself
+            tail = newNode;
+            newNode.next = newNode;
+        } else {
+            newNode.next = tail.next; // Points new node to current head
+            tail.next = newNode; // Points tail to new node (new head)
+        }
+        size++; // Increments size
+    }
+
+    // Insert at Tail: Adds a new node at the end
+    public void insertAtTail(int value) {
+        Node newNode = new Node(value); // Creates a new node
+        if (isEmpty()) { // If list is empty, sets tail to new node and links to itself
+            tail = newNode;
+            newNode.next = newNode;
+        } else {
+            newNode.next = tail.next; // Points new node to current head
+            tail.next = newNode; // Points current tail to new node
+            tail = newNode; // Updates tail to new node
+        }
+        size++; // Increments size
+    }
+
+    // Delete at Head: Removes the first node
+    public void deleteAtHead() {
+        if (isEmpty()) { // Checks if the list is empty
+            throw new IllegalStateException("The circular linked list is empty.");
+        }
+        if (size == 1) { // If only one node, clears the list
+            tail = null;
+        } else {
+            tail.next = tail.next.next; // Points tail to the second node (new head)
+        }
+        size--; // Decrements size
+    }
+
+    // Delete by Value: Removes the first node with the given value
+    public void deleteByValue(int value) {
+        if (isEmpty()) { // Checks if the list is empty
+            throw new IllegalStateException("The circular linked list is empty.");
+        }
+        Node current = tail.next; // Starts at head
+        Node prev = tail; // Previous node for deletion
+        do {
+            if (current.value == value) { // If value is found
+                if (size == 1) { // If only one node, clears the list
+                    tail = null;
+                } else if (current == tail.next) { // If head node
+                    tail.next = current.next;
+                } else if (current == tail) { // If tail node
+                    prev.next = tail.next;
+                    tail = prev;
+                } else { // If middle node
+                    prev.next = current.next;
+                }
+                size--; // Decrements size
+                return;
+            }
+            prev = current;
+            current = current.next;
+        } while (current != tail.next); // Loops until back to head
+        throw new IllegalArgumentException("Value not found in the circular linked list.");
+    }
+
+    // Search: Checks if a value exists in the circular linked list
+    public boolean search(int value) {
+        if (isEmpty()) { // Checks if the list is empty
+            return false;
+        }
+        Node current = tail.next; // Starts at head
+        do {
+            if (current.value == value) { // Returns true if value is found
+                return true;
+            }
+            current = current.next;
+        } while (current != tail.next); // Loops until back to head
+        return false; // Returns false if value is not found
+    }
+
+    // isEmpty: Checks if the circular linked list is empty
+    public boolean isEmpty() {
+        return size == 0;
+    }
+
+    // Size: Returns the number of nodes in the circular linked list
+    public int size() {
+        return size;
+    }
+}
+</code></pre>
+<h3 id="how-it-works"><a class="header" href="#how-it-works">How It Works</a></h3>
+<ol>
+<li><strong>Initialization</strong>: The constructor initializes <code>tail</code> as null and <code>size</code> as 0, indicating an empty circular linked list.</li>
+<li><strong>Insert at Head</strong>:
+<ul>
+<li>The method creates a new node with the given value.</li>
+<li>If the list is empty, it sets <code>tail</code> to the new node and links it to itself.</li>
+<li>Otherwise, it sets the new node’s <code>next</code> to the current head (<code>tail.next</code>), updates <code>tail.next</code> to the new node, and increments <code>size</code>.</li>
+</ul>
+</li>
+<li><strong>Insert at Tail</strong>:
+<ul>
+<li>The method creates a new node.</li>
+<li>If the list is empty, it sets <code>tail</code> to the new node and links it to itself.</li>
+<li>Otherwise, it sets the new node’s <code>next</code> to the current head, updates <code>tail.next</code> to the new node, sets <code>tail</code> to the new node, and increments <code>size</code>.</li>
+</ul>
+</li>
+<li><strong>Delete at Head</strong>:
+<ul>
+<li>The method checks if the list is empty. If not, it updates <code>tail.next</code> to the second node (new head) if multiple nodes exist, or sets <code>tail</code> to null if only one node, then decrements <code>size</code>. If empty, it throws an exception.</li>
+</ul>
+</li>
+<li><strong>Delete by Value</strong>:
+<ul>
+<li>The method traverses from the head (<code>tail.next</code>) to find the value, keeping track of the previous node.</li>
+<li>If found, it handles three cases: single node (clears the list), head node (updates <code>tail.next</code>), tail node (updates <code>tail</code> and <code>prev.next</code>), or middle node (updates <code>prev.next</code>). It decrements <code>size</code>.</li>
+<li>If the value is not found after a full loop, it throws an exception.</li>
+</ul>
+</li>
+<li><strong>Search Operation</strong>: The method traverses from the head, returning true if the value is found, or false after a full loop to the head.</li>
+<li><strong>isEmpty Operation</strong>: The method returns true if <code>size</code> equals 0, indicating an empty list, and false otherwise.</li>
+<li><strong>Size Operation</strong>: The method returns <code>size</code>, which tracks the number of nodes.</li>
+</ol>
+<h3 id="complexity-analysis-table"><a class="header" href="#complexity-analysis-table">Complexity Analysis Table</a></h3>
+<div class="table-wrapper"><table><thead><tr><th>Operation</th><th>Time Complexity</th><th>Space Complexity</th></tr></thead><tbody>
+<tr><td>Insert at Head</td><td>O(1)</td><td>O(1)</td></tr>
+<tr><td>Insert at Tail</td><td>O(1)</td><td>O(1)</td></tr>
+<tr><td>Delete at Head</td><td>O(1)</td><td>O(1)</td></tr>
+<tr><td>Delete by Value</td><td>O(n)</td><td>O(1)</td></tr>
+<tr><td>Search</td><td>O(n)</td><td>O(1)</td></tr>
+<tr><td>isEmpty</td><td>O(1)</td><td>O(1)</td></tr>
+<tr><td>Size</td><td>O(1)</td><td>O(1)</td></tr>
+</tbody></table>
+</div>
+<p><em>Note</em>: n is the number of nodes in the circular linked list. O(1) operations assume a tail pointer is maintained.</p>
+<h3 id="key-differences--notes"><a class="header" href="#key-differences--notes">Key Differences / Notes</a></h3>
+<ul>
+<li><strong>Circular vs. Singly Linked List</strong>:
+<ul>
+<li>The implementation above is a singly circular linked list, where the last node points to the head, enabling continuous traversal. A singly linked list ends with a null pointer, requiring traversal to restart from the head.</li>
+<li>Circular linked lists are more complex to manage due to the loop, but they simplify cyclic operations.</li>
+</ul>
+</li>
+<li><strong>Circular vs. Doubly Circular Linked List</strong>:
+<ul>
+<li>A doubly circular linked list includes previous pointers, allowing bidirectional traversal, but uses more memory.</li>
+<li>The singly circular linked list is simpler and more memory-efficient but only supports forward traversal.</li>
+</ul>
+</li>
+<li><strong>Thread Safety</strong>: The implementation is not thread-safe. For concurrent applications, use Java’s <code>ConcurrentLinkedDeque</code> or synchronize access.</li>
+<li><strong>Java’s Built-in Support</strong>: Java’s <code>LinkedList</code> can be adapted for circular behavior, but no direct circular linked list class is provided. Libraries like Apache Commons Collections offer circular list implementations.</li>
+</ul>
+<blockquote>
+<p><strong>✅ Tip</strong>: Use a circular linked list when your application requires continuous cycling through elements, such as in scheduling or looping playlists. Maintaining a tail pointer simplifies head and tail operations to O(1).</p>
+</blockquote>
+<blockquote>
+<p><strong>⚠ Warning</strong>: Be cautious when traversing a circular linked list to avoid infinite loops. Always use a condition (e.g., checking for the head node) to terminate traversal.</p>
+</blockquote>
+<h3 id="exercises"><a class="header" href="#exercises">Exercises</a></h3>
+<ol>
+<li><strong>Rotate the List</strong>: Write a Java program that rotates the circular linked list by k positions (e.g., move the head k nodes forward). Test with different values of k and list sizes.</li>
+<li><strong>Split Circular List</strong>: Implement a method to split a circular linked list into two circular linked lists of roughly equal size. Test with even and odd-sized lists.</li>
+<li><strong>Josephus Problem</strong>: Solve the Josephus problem using the circular linked list, where every k-th person in a circle is eliminated until one remains. Test with different k values.</li>
+<li><strong>Insert After Value</strong>: Add a method to insert a new node after the first occurrence of a given value in the circular linked list. Test with cases where the value exists and does not exist.</li>
+<li><strong>Round-Robin Scheduler</strong>: Create a program that simulates a round-robin scheduler using the circular linked list. Allow users to add tasks (nodes), cycle through them, and remove completed tasks.</li>
+</ol>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="ch03_03_01.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="ch03_06.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="ch03_03_01.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="ch03_06.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="theme/ferris.js"></script>
+
+
+    </div>
+    </body>
+</html>

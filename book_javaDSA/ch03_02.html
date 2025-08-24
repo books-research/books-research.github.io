@@ -1,0 +1,391 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Strings - Java Data Structures and Algorithms for Beginners</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="theme/ferris.css">
+        <link rel="stylesheet" href="theme/semantic-notes.css">
+        <link rel="stylesheet" href="theme/listing.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Java Data Structures and Algorithms for Beginners</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <style>
+body {
+  text-align: justify;
+}
+</style>
+<h2 id="string-data-structure"><a class="header" href="#string-data-structure">String Data Structure</a></h2>
+<h3 id="definition-and-concepts"><a class="header" href="#definition-and-concepts">Definition and Concepts</a></h3>
+<p>A string is a sequence of characters used to represent text in programming. In Java, the <code>String</code> class is a fundamental data structure that is immutable, meaning its content cannot be changed after creation. Strings are stored as arrays of characters internally, but Java’s <code>String</code> class provides a high-level interface for manipulating text. You can visualize a string as a chain of characters, such as "Hello", where each character occupies a specific position (index) starting from 0. Strings support operations like concatenation, substring extraction, and searching, making them essential for text processing. Java also provides mutable alternatives like <code>StringBuilder</code> and <code>StringBuffer</code> for scenarios requiring frequent modifications.</p>
+<h3 id="why-use-it"><a class="header" href="#why-use-it">Why Use It?</a></h3>
+<p>Strings are used to handle and manipulate textual data in a wide range of applications, from user input processing to file parsing. Their immutability in Java ensures thread safety and consistency, making them ideal for constant or shared text data. Strings provide a rich set of methods for searching, modifying, and comparing text, simplifying complex text operations. For performance-critical applications, mutable classes like <code>StringBuilder</code> are used to reduce overhead from creating multiple string objects.</p>
+<h3 id="where-to-use-real-life-examples"><a class="header" href="#where-to-use-real-life-examples">Where to Use? (Real-Life Examples)</a></h3>
+<ul>
+<li><strong>Text Processing</strong>: Text editors use strings to store and manipulate document content, such as formatting or searching text.</li>
+<li><strong>Web Development</strong>: Web applications use strings to process URLs, HTML content, and user input, such as form data.</li>
+<li><strong>Data Parsing</strong>: CSV or JSON parsers use strings to extract fields and values from structured data files.</li>
+<li><strong>Search and Validation</strong>: Search engines and form validators use strings to match patterns (e.g., email validation) or search for keywords.</li>
+</ul>
+<!-- ### SVG Diagram
+The diagram for a string would depict a sequence of boxes, each containing a character (e.g., "H", "e", "l", "l", "o") with indices (0 to 4). Arrows would illustrate a **substring** operation extracting "ell" (indices 1 to 3) and a **concatenation** operation appending " World" to form "Hello World". A caption would note: "Strings in Java are immutable sequences of characters, supporting operations like substring and concatenation." -->
+<h3 id="explain-operations"><a class="header" href="#explain-operations">Explain Operations</a></h3>
+<ul>
+<li><strong>Concatenation</strong>: This operation combines two strings into a new string. It has a time complexity of O(n), where n is the total length of the resulting string.</li>
+<li><strong>Substring Extraction</strong>: This operation extracts a portion of the string based on start and end indices. It has a time complexity of O(n) in Java due to string immutability.</li>
+<li><strong>Search (Index Of)</strong>: This operation finds the index of a substring or character within the string. It has a time complexity of O(n*m) in the worst case, where n is the string length and m is the substring length.</li>
+<li><strong>Length</strong>: This operation returns the number of characters in the string. It has a time complexity of O(1).</li>
+<li><strong>Character Access</strong>: This operation retrieves the character at a specific index. It has a time complexity of O(1).</li>
+</ul>
+<h3 id="java-implementation"><a class="header" href="#java-implementation">Java Implementation</a></h3>
+<p>The following Java code demonstrates common string operations using the <code>String</code> class and introduces <code>StringBuilder</code> for mutable string manipulation.</p>
+<pre><code class="language-java">public class StringExamples {
+    // Concatenation: Combines two strings
+    public String concatenate(String str1, String str2) {
+        return str1 + str2; // Uses + operator for concatenation
+    }
+
+    // Substring: Extracts a portion of the string
+    public String getSubstring(String str, int start, int end) {
+        if (start &lt; 0 || end &gt; str.length() || start &gt; end) {
+            throw new IllegalArgumentException("Invalid start or end index.");
+        }
+        return str.substring(start, end); // Returns substring from start to end-1
+    }
+
+    // Search: Finds the index of a substring
+    public int findIndex(String str, String target) {
+        return str.indexOf(target); // Returns index of first occurrence or -1 if not found
+    }
+
+    // Length: Returns the number of characters
+    public int getLength(String str) {
+        return str.length(); // Returns the string length
+    }
+
+    // Character Access: Gets character at index
+    public char getCharAt(String str, int index) {
+        if (index &lt; 0 || index &gt;= str.length()) {
+            throw new IllegalArgumentException("Invalid index.");
+        }
+        return str.charAt(index); // Returns character at specified index
+    }
+
+    // StringBuilder Example: Demonstrates mutable string manipulation
+    public String buildString(String[] parts) {
+        StringBuilder builder = new StringBuilder();
+        for (String part : parts) {
+            builder.append(part); // Appends each part to the builder
+        }
+        return builder.toString(); // Converts StringBuilder to String
+    }
+}
+</code></pre>
+<h3 id="how-it-works"><a class="header" href="#how-it-works">How It Works</a></h3>
+<ol>
+<li><strong>Concatenation</strong>:
+<ul>
+<li>The <code>concatenate</code> method uses the <code>+</code> operator, which internally creates a new <code>String</code> object combining <code>str1</code> and <code>str2</code>.</li>
+<li>For example, <code>concatenate("Hello", " World")</code> creates a new string "Hello World".</li>
+</ul>
+</li>
+<li><strong>Substring Extraction</strong>:
+<ul>
+<li>The <code>getSubstring</code> method calls <code>str.substring(start, end)</code>, which creates a new string containing characters from index <code>start</code> to <code>end-1</code>.</li>
+<li>For example, <code>getSubstring("Hello", 1, 4)</code> returns "ell".</li>
+</ul>
+</li>
+<li><strong>Search (Index Of)</strong>:
+<ul>
+<li>The <code>findIndex</code> method uses <code>str.indexOf(target)</code> to return the starting index of <code>target</code> in <code>str</code> or -1 if not found.</li>
+<li>For example, <code>findIndex("Hello", "ll")</code> returns 2.</li>
+</ul>
+</li>
+<li><strong>Length</strong>:
+<ul>
+<li>The <code>getLength</code> method calls <code>str.length()</code> to return the number of characters.</li>
+<li>For example, <code>getLength("Hello")</code> returns 5.</li>
+</ul>
+</li>
+<li><strong>Character Access</strong>:
+<ul>
+<li>The <code>getCharAt</code> method uses <code>str.charAt(index)</code> to return the character at the specified index.</li>
+<li>For example, <code>getCharAt("Hello", 1)</code> returns 'e'.</li>
+</ul>
+</li>
+<li><strong>StringBuilder Example</strong>:
+<ul>
+<li>The <code>buildString</code> method uses <code>StringBuilder</code> to efficiently append multiple strings from an array, then converts the result to a <code>String</code>.</li>
+<li>For example, <code>buildString(new String[]{"He", "llo"})</code> returns "Hello".</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity-analysis-table"><a class="header" href="#complexity-analysis-table">Complexity Analysis Table</a></h3>
+<div class="table-wrapper"><table><thead><tr><th>Operation</th><th>Time Complexity</th><th>Space Complexity</th></tr></thead><tbody>
+<tr><td>Concatenation</td><td>O(n)</td><td>O(n)</td></tr>
+<tr><td>Substring Extraction</td><td>O(n)</td><td>O(n)</td></tr>
+<tr><td>Search (Index Of)</td><td>O(n*m) worst case</td><td>O(1)</td></tr>
+<tr><td>Length</td><td>O(1)</td><td>O(1)</td></tr>
+<tr><td>Character Access</td><td>O(1)</td><td>O(1)</td></tr>
+<tr><td>StringBuilder Append</td><td>O(1) amortized</td><td>O(n)</td></tr>
+</tbody></table>
+</div>
+<p><em>Note</em>:</p>
+<ul>
+<li>n is the length of the string (or total length for concatenation).</li>
+<li>m is the length of the substring in <code>indexOf</code>.</li>
+<li><code>StringBuilder</code> append is O(1) amortized due to dynamic resizing.</li>
+</ul>
+<h3 id="key-differences--notes"><a class="header" href="#key-differences--notes">Key Differences / Notes</a></h3>
+<ul>
+<li><strong>String Immutability</strong>:
+<ul>
+<li>Java’s <code>String</code> class is immutable, so operations like concatenation and substring create new strings, increasing space complexity.</li>
+<li><code>StringBuilder</code> and <code>StringBuffer</code> are mutable, reducing overhead for frequent modifications.</li>
+</ul>
+</li>
+<li><strong>String vs. StringBuilder/StringBuffer</strong>:
+<ul>
+<li>Use <code>String</code> for constant or infrequently modified text due to its immutability and thread safety.</li>
+<li>Use <code>StringBuilder</code> for single-threaded, mutable string operations, or <code>StringBuffer</code> for thread-safe mutable operations.</li>
+</ul>
+</li>
+<li><strong>Thread Safety</strong>:
+<ul>
+<li><code>String</code> and <code>StringBuilder</code> are not thread-safe for modifications (though <code>String</code> is immutable). <code>StringBuffer</code> is thread-safe but slower.</li>
+</ul>
+</li>
+<li><strong>String Pool</strong>:
+<ul>
+<li>Java maintains a string pool, a special area in the heap (part of the constant pool in the PermGen or Metaspace, depending on the Java version), to store unique string literals and interned strings. When a string literal (e.g., <code>"Hello"</code>) is created, Java checks the string pool. If the string exists, the reference is reused; otherwise, a new string is added to the pool. This optimizes memory usage for repeated literals.</li>
+<li>The <code>intern()</code> method can manually add a string to the pool, ensuring that identical strings share the same reference. For example, <code>new String("Hello").intern()</code> returns the pooled reference if <code>"Hello"</code> exists.</li>
+<li>String pool usage reduces memory overhead but requires careful handling in performance-critical applications, as excessive interning can increase pool size and lookup time.</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p><strong>✅ Tip</strong>: Use <code>StringBuilder</code> for concatenating strings in a loop to avoid the overhead of creating multiple <code>String</code> objects. For simple, one-time concatenations, the <code>+</code> operator is sufficient and readable. Use <code>String.intern()</code> to leverage the string pool for memory optimization when dealing with frequently reused strings.</p>
+</blockquote>
+<blockquote>
+<p><strong>⚠ Warning</strong>: Avoid excessive string concatenation in loops using the <code>+</code> operator, as it creates multiple intermediate <code>String</code> objects, leading to O(n²) time complexity. Use <code>StringBuilder</code> for better performance. Be cautious with <code>String.intern()</code>, as overusing it can bloat the string pool and degrade performance.</p>
+</blockquote>
+<h3 id="exercises"><a class="header" href="#exercises">Exercises</a></h3>
+<ol>
+<li><strong>Reverse a String</strong>: Write a Java program that reverses a string using both <code>String</code> methods and <code>StringBuilder</code>. Compare their performance for large strings.</li>
+<li><strong>Palindrome Checker</strong>: Implement a method to check if a string is a palindrome (ignoring case and non-alphanumeric characters). Test with various inputs.</li>
+<li><strong>String Compression</strong>: Create a program that compresses a string by replacing repeated characters with their count (e.g., "aabbb" becomes "a2b3"). Use <code>StringBuilder</code> for efficiency.</li>
+<li><strong>Substring Frequency</strong>: Write a method to count the occurrences of a substring in a string using <code>indexOf</code>. Test with overlapping and non-overlapping cases.</li>
+<li><strong>String Pool Experiment</strong>: Write a Java program that demonstrates the string pool by comparing string literals, <code>new String()</code> objects, and interned strings using <code>==</code> and <code>equals()</code>. Analyze memory usage and equality behavior.</li>
+</ol>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="ch03_01_02.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="ch03_02_01.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="ch03_01_02.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="ch03_02_01.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="theme/ferris.js"></script>
+
+
+    </div>
+    </body>
+</html>

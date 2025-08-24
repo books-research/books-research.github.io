@@ -1,0 +1,423 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>FactorialConversion - Java Data Structures and Algorithms for Beginners</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../../favicon.svg">
+        <link rel="shortcut icon" href="../../favicon.png">
+        <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+        <link rel="stylesheet" href="../../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="../../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../../theme/ferris.css">
+        <link rel="stylesheet" href="../../theme/semantic-notes.css">
+        <link rel="stylesheet" href="../../theme/listing.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../../toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Java Data Structures and Algorithms for Beginners</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <style>
+body {
+  text-align: justify;
+}
+</style>
+<h1 id="factorial-conversion"><a class="header" href="#factorial-conversion">Factorial Conversion</a></h1>
+<h2 id="problem-statement"><a class="header" href="#problem-statement">Problem Statement</a></h2>
+<p>Write a Java program that implements a tail-recursive method to compute the factorial of a non-negative integer (n) using an accumulator to track the running product, and convert this tail-recursive implementation to an iterative version. The program should return the factorial of (n) and test both methods with various inputs, including large values, while measuring stack usage by catching <code>StackOverflowError</code> for recursive calls. You can visualize this as calculating the number of ways to arrange (n) books on a shelf, either by recursively multiplying and passing the product forward or by iteratively accumulating the product.</p>
+<p><strong>Input</strong>: A non-negative integer (n) (e.g., (n = 5)).
+<strong>Output</strong>: A long integer representing the factorial of (n) (e.g., 120 for (n = 5)).
+<strong>Constraints</strong>:</p>
+<ul>
+<li>(0 \leq n \leq 20) (to avoid overflow with <code>long</code>).</li>
+<li>The input is a non-negative integer.
+<strong>Example</strong>:</li>
+<li>Input: (n = 5)</li>
+<li>Output: 120</li>
+<li>Explanation: The factorial of 5 is (5 * 4 * 3 * 2 * 1 = 120).</li>
+<li>Input: (n = 0)</li>
+<li>Output: 1</li>
+<li>Explanation: The factorial of 0 is defined as 1.</li>
+</ul>
+<h2 id="pseudocode"><a class="header" href="#pseudocode">Pseudocode</a></h2>
+<pre><code>FUNCTION tailRecursiveFactorial(n, accumulator)
+    IF n &lt; 0 THEN
+        RETURN -1
+    ENDIF
+    IF n equals 0 THEN
+        RETURN accumulator
+    ENDIF
+    SET newAccumulator to accumulator * n
+    RETURN tailRecursiveFactorial(n - 1, newAccumulator)
+ENDFUNCTION
+
+FUNCTION iterativeFactorial(n)
+    IF n &lt; 0 THEN
+        RETURN -1
+    ENDIF
+    IF n equals 0 THEN
+        RETURN 1
+    ENDIF
+    SET result to 1
+    FOR i from 1 to n
+        SET result to result * i
+    ENDFOR
+    RETURN result
+ENDFUNCTION
+
+FUNCTION mainFactorial(n)
+    TRY
+        CALL tailRecursiveFactorial(n, 1)
+    CATCH StackOverflowError
+        PRINT "Stack overflow occurred"
+    ENDTRY
+    CALL iterativeFactorial(n)
+    RETURN results
+ENDFUNCTION
+</code></pre>
+<h2 id="algorithm-steps"><a class="header" href="#algorithm-steps">Algorithm Steps</a></h2>
+<ol>
+<li>For the tail-recursive approach:
+a. Check if (n) is negative. If so, return -1, as factorial is undefined for negative numbers.
+b. Define a tail-recursive helper function that takes (n) and an accumulator as parameters.
+c. Implement the base case: if (n = 0), return the accumulator.
+d. For the recursive case, multiply the accumulator by (n) and recursively call the function with (n - 1) and the updated accumulator.
+e. Call the helper function with the initial accumulator set to 1.</li>
+<li>For the iterative approach:
+a. Check if (n) is negative. If so, return -1.
+b. Check if (n = 0). If so, return 1.
+c. Initialize a variable <code>result</code> to 1.
+d. Iterate from 1 to (n), multiplying <code>result</code> by each integer.
+e. Return the final <code>result</code>.</li>
+<li>Test both methods with various inputs, including large values (e.g., (n = 20)), and wrap the tail-recursive call in a try-catch block to detect <code>StackOverflowError</code>.</li>
+<li>Measure stack usage by observing whether <code>StackOverflowError</code> occurs for large inputs in the recursive method.</li>
+</ol>
+<h2 id="java-implementation"><a class="header" href="#java-implementation">Java Implementation</a></h2>
+<pre><code class="language-java">public class FactorialConversion {
+    // Computes factorial using tail recursion
+    public long tailRecursiveFactorial(int n) {
+        // Check for invalid input
+        if (n &lt; 0) {
+            return -1;
+        }
+        // Call tail-recursive helper with initial accumulator
+        try {
+            return tailRecursiveFactorialHelper(n, 1);
+        } catch (StackOverflowError e) {
+            System.out.println("Stack overflow occurred for n = " + n);
+            return -1;
+        }
+    }
+
+    // Helper function for tail-recursive factorial
+    private long tailRecursiveFactorialHelper(int n, long accumulator) {
+        // Base case: n = 0 returns accumulator
+        if (n == 0) {
+            return accumulator;
+        }
+        // Recursive case: multiply accumulator by n and recurse
+        return tailRecursiveFactorialHelper(n - 1, accumulator * n);
+    }
+
+    // Computes factorial using iteration
+    public long iterativeFactorial(int n) {
+        // Check for invalid input
+        if (n &lt; 0) {
+            return -1;
+        }
+        // Base case: 0! = 1
+        if (n == 0) {
+            return 1;
+        }
+        // Initialize result
+        long result = 1;
+        // Multiply numbers from 1 to n
+        for (int i = 1; i &lt;= n; i++) {
+            result *= i;
+        }
+        // Return final result
+        return result;
+    }
+}
+</code></pre>
+<h2 id="output"><a class="header" href="#output">Output</a></h2>
+<p>For the input (n = 5), both methods output:</p>
+<pre><code>120
+</code></pre>
+<p>Explanation: The factorial of 5 is (5 * 4 * 3 * 2 * 1 = 120).</p>
+<p>For the input (n = 0), both methods output:</p>
+<pre><code>1
+</code></pre>
+<p>Explanation: The factorial of 0 is defined as 1.</p>
+<p>For a large input (n = 20), both methods output:</p>
+<pre><code>2432902008176640000
+</code></pre>
+<p>Explanation: The factorial of 20 is computed correctly within the <code>long</code> range.</p>
+<p>For a very large input (e.g., (n = 10000)), the tail-recursive method may output:</p>
+<pre><code>Stack overflow occurred for n = 10000
+-1
+</code></pre>
+<p>Explanation: Java’s lack of tail-call optimization causes a stack overflow, while the iterative method may overflow the <code>long</code> data type but avoids stack issues.</p>
+<h2 id="how-it-works"><a class="header" href="#how-it-works">How It Works</a></h2>
+<ul>
+<li><strong>Tail-Recursive Approach</strong>:
+<ul>
+<li><strong>Step 1</strong>: The <code>tailRecursiveFactorial</code> method checks if (n &lt; 0). For (n = 5), it calls the helper with <code>accumulator = 1</code>.</li>
+<li><strong>Step 2</strong>: In <code>tailRecursiveFactorialHelper</code>:
+<ul>
+<li>For (n = 5): <code>accumulator = 1 * 5 = 5</code>, recurse with (n = 4, accumulator = 5).</li>
+<li>For (n = 4): <code>accumulator = 5 * 4 = 20</code>, recurse with (n = 3, accumulator = 20).</li>
+<li>For (n = 3): <code>accumulator = 20 * 3 = 60</code>, recurse with (n = 2, accumulator = 60).</li>
+<li>For (n = 2): <code>accumulator = 60 * 2 = 120</code>, recurse with (n = 1, accumulator = 120).</li>
+<li>For (n = 1): <code>accumulator = 120 * 1 = 120</code>, recurse with (n = 0, accumulator = 120).</li>
+<li>For (n = 0): Base case, return <code>accumulator = 120</code>.</li>
+</ul>
+</li>
+<li><strong>Example Trace</strong>: For (n = 5), the accumulator builds: (1 \rightarrow 5 \rightarrow 20 \rightarrow 60 \rightarrow 120), returning 120.</li>
+<li><strong>Stack Usage</strong>: The function is tail-recursive, but Java does not optimize tail recursion, so each call adds a stack frame, leading to O(n) stack usage and potential <code>StackOverflowError</code> for large (n).</li>
+</ul>
+</li>
+<li><strong>Iterative Approach</strong>:
+<ul>
+<li><strong>Step 1</strong>: The <code>iterativeFactorial</code> method checks if (n &lt; 0) or (n = 0). For (n = 5), it initializes <code>result = 1</code>.</li>
+<li><strong>Step 2</strong>: Iterates from 1 to 5:
+<ul>
+<li>(i = 1): <code>result = 1 * 1 = 1</code>.</li>
+<li>(i = 2): <code>result = 1 * 2 = 2</code>.</li>
+<li>(i = 3): <code>result = 2 * 3 = 6</code>.</li>
+<li>(i = 4): <code>result = 6 * 4 = 24</code>.</li>
+<li>(i = 5): <code>result = 24 * 5 = 120</code>.</li>
+</ul>
+</li>
+<li><strong>Example Trace</strong>: For (n = 5), multiplies (1 * 2 * 3 * 4 * 5 = 120).</li>
+<li><strong>Stack Usage</strong>: The iterative approach uses O(1) stack space, as it avoids recursive calls, making it immune to <code>StackOverflowError</code>.</li>
+</ul>
+</li>
+<li><strong>Comparison</strong>: Both methods are O(n) time, but iterative is more space-efficient (O(1) vs. O(n)). For large inputs, the tail-recursive method may throw <code>StackOverflowError</code>, while the iterative method is limited only by <code>long</code> overflow.</li>
+</ul>
+<h2 id="complexity-analysis-table"><a class="header" href="#complexity-analysis-table">Complexity Analysis Table</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Operation</th><th>Time Complexity</th><th>Space Complexity</th></tr></thead><tbody>
+<tr><td>Recursive Call (Tail)</td><td>O(n)</td><td>O(n)</td></tr>
+<tr><td>Iteration</td><td>O(n)</td><td>O(1)</td></tr>
+<tr><td>Full Algorithm (Tail-Recursive)</td><td>O(n)</td><td>O(n)</td></tr>
+<tr><td>Full Algorithm (Iterative)</td><td>O(n)</td><td>O(1)</td></tr>
+</tbody></table>
+</div>
+<p><em>Note</em>:</p>
+<ul>
+<li>n is the input integer.</li>
+<li>Time complexity: O(n) for both, as tail-recursive makes n calls, and iterative performs n multiplications.</li>
+<li>Space complexity: O(n) for tail-recursive due to the call stack (Java does not optimize tail recursion); O(1) for iterative, using only a single variable.</li>
+<li>Best, average, and worst cases are O(n) for both.</li>
+</ul>
+<blockquote>
+<p><strong>✅ Tip</strong>: Convert tail-recursive functions to iterative versions to eliminate stack overflow risks in Java. Test with large inputs (e.g., (n = 1000)) to observe stack overflow in the recursive version and verify correctness in the iterative version.</p>
+</blockquote>
+<blockquote>
+<p><strong>⚠ Warning</strong>: Java does not optimize tail recursion, so the O(n) space complexity may cause <code>StackOverflowError</code> for large inputs. Be cautious with inputs larger than 20, as factorial results may exceed the <code>long</code> data type’s capacity, causing overflow.</p>
+</blockquote>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../problemStatements/ch02_02/ReverseStringComparison.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../../problemStatements/ch02_03/ReverseStringTailRecursion.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../problemStatements/ch02_02/ReverseStringComparison.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../../problemStatements/ch02_03/ReverseStringTailRecursion.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../../elasticlunr.min.js"></script>
+        <script src="../../mark.min.js"></script>
+        <script src="../../searcher.js"></script>
+
+        <script src="../../clipboard.min.js"></script>
+        <script src="../../highlight.js"></script>
+        <script src="../../book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="../../theme/ferris.js"></script>
+
+
+    </div>
+    </body>
+</html>

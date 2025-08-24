@@ -1,0 +1,516 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>PreorderPostorderTraversals - Java Data Structures and Algorithms for Beginners</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../../favicon.svg">
+        <link rel="shortcut icon" href="../../favicon.png">
+        <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+        <link rel="stylesheet" href="../../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="../../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../../theme/ferris.css">
+        <link rel="stylesheet" href="../../theme/semantic-notes.css">
+        <link rel="stylesheet" href="../../theme/listing.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../../toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Java Data Structures and Algorithms for Beginners</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <style>
+body {
+  text-align: justify;
+}
+</style>
+<h1 id="preorder-and-postorder-traversals"><a class="header" href="#preorder-and-postorder-traversals">Preorder and Postorder Traversals</a></h1>
+<h2 id="problem-statement"><a class="header" href="#problem-statement">Problem Statement</a></h2>
+<p>Write a Java program that extends a Binary Search Tree (BST) implementation to include methods for preorder (root, left, right) and postorder (left, right, root) traversals. The program should reuse the BST node structure and print the results of both traversals for sample trees, including balanced, unbalanced, empty, and single-node trees. The traversals should output node values in the respective orders as space-separated strings. You can visualize this as exploring a family tree in two different ways: preorder visits the parent before children, while postorder visits children before the parent, listing their names in the order visited.</p>
+<p><strong>Input</strong>:</p>
+<ul>
+<li>A BST represented by nodes with integer values.
+<strong>Output</strong>: Two strings representing the preorder and postorder traversals of the tree, each containing space-separated node values, or "Empty" for an empty tree.
+<strong>Constraints</strong>:</li>
+<li>The tree has between 0 and 10^5 nodes.</li>
+<li>Node values are integers in the range [-10^9, 10^9].</li>
+<li>Duplicate values are not allowed in the BST.
+<strong>Example</strong>:</li>
+<li>Input: Tree = [5, left: [3, left: [1], right: [4]], right: [7]]</li>
+<li>Output:
+<ul>
+<li>Preorder: "5 3 1 4 7"</li>
+<li>Postorder: "1 4 3 7 5"</li>
+</ul>
+</li>
+<li>Explanation: Preorder visits root first (5), then left (3, 1, 4), then right (7); postorder visits left (1, 4), then right (7), then root (5).</li>
+<li>Input: Tree = []</li>
+<li>Output:
+<ul>
+<li>Preorder: "Empty"</li>
+<li>Postorder: "Empty"</li>
+</ul>
+</li>
+<li>Explanation: Empty tree has no nodes to traverse.</li>
+</ul>
+<h2 id="pseudocode"><a class="header" href="#pseudocode">Pseudocode</a></h2>
+<pre><code>CLASS Node
+    SET value to integer
+    SET left to Node (null by default)
+    SET right to Node (null by default)
+ENDCLASS
+
+FUNCTION preorderTraversal(root)
+    IF root is null THEN
+        RETURN "Empty"
+    ENDIF
+    CREATE result as new StringBuilder
+    FUNCTION preorder(node)
+        IF node is null THEN
+            RETURN
+        ENDIF
+        APPEND node.value and " " to result
+        CALL preorder(node.left)
+        CALL preorder(node.right)
+    ENDFUNCTION
+    CALL preorder(root)
+    RETURN result as string trimmed
+ENDFUNCTION
+
+FUNCTION postorderTraversal(root)
+    IF root is null THEN
+        RETURN "Empty"
+    ENDIF
+    CREATE result as new StringBuilder
+    FUNCTION postorder(node)
+        IF node is null THEN
+            RETURN
+        ENDIF
+        CALL postorder(node.left)
+        CALL postorder(node.right)
+        APPEND node.value and " " to result
+    ENDFUNCTION
+    CALL postorder(root)
+    RETURN result as string trimmed
+ENDFUNCTION
+
+FUNCTION main()
+    SET testCases to array of trees
+    FOR each testCase in testCases
+        PRINT test case details
+        CALL preorderTraversal(testCase.root)
+        CALL postorderTraversal(testCase.root)
+        PRINT preorder and postorder results
+    ENDFOR
+ENDFUNCTION
+</code></pre>
+<h2 id="algorithm-steps"><a class="header" href="#algorithm-steps">Algorithm Steps</a></h2>
+<ol>
+<li>Reuse the <code>Node</code> class with:
+a. An integer <code>value</code>.
+b. <code>left</code> and <code>right</code> pointers to child nodes.</li>
+<li>Define <code>preorderTraversal</code>:
+a. If root is null, return "Empty".
+b. Use a helper function to:
+<ul>
+<li>Append node value.</li>
+<li>Recurse on left subtree.</li>
+<li>Recurse on right subtree.
+c. Return trimmed result string.</li>
+</ul>
+</li>
+<li>Define <code>postorderTraversal</code>:
+a. If root is null, return "Empty".
+b. Use a helper function to:
+<ul>
+<li>Recurse on left subtree.</li>
+<li>Recurse on right subtree.</li>
+<li>Append node value.
+c. Return trimmed result string.</li>
+</ul>
+</li>
+<li>In <code>main</code>, test with:
+a. A balanced BST.
+b. An unbalanced (skewed) BST.
+c. An empty tree.
+d. A single-node tree.</li>
+</ol>
+<h2 id="java-implementation"><a class="header" href="#java-implementation">Java Implementation</a></h2>
+<pre><code class="language-java">public class PreorderPostorderTraversals {
+    // Node class for the binary search tree
+    static class Node {
+        int value;
+        Node left, right;
+
+        Node(int value) {
+            this.value = value;
+            this.left = null;
+            this.right = null;
+        }
+    }
+
+    // Performs preorder traversal (root, left, right)
+    public String preorderTraversal(Node root) {
+        if (root == null) {
+            return "Empty";
+        }
+        StringBuilder result = new StringBuilder();
+        preorder(root, result);
+        return result.toString().trim();
+    }
+
+    private void preorder(Node node, StringBuilder result) {
+        if (node == null) {
+            return;
+        }
+        result.append(node.value).append(" ");
+        preorder(node.left, result);
+        preorder(node.right, result);
+    }
+
+    // Performs postorder traversal (left, right, root)
+    public String postorderTraversal(Node root) {
+        if (root == null) {
+            return "Empty";
+        }
+        StringBuilder result = new StringBuilder();
+        postorder(root, result);
+        return result.toString().trim();
+    }
+
+    private void postorder(Node node, StringBuilder result) {
+        if (node == null) {
+            return;
+        }
+        postorder(node.left, result);
+        postorder(node.right, result);
+        result.append(node.value).append(" ");
+    }
+
+    // Helper class for test cases
+    static class TestCase {
+        Node root;
+
+        TestCase(int[] values, int[][] edges) {
+            if (values.length == 0) {
+                root = null;
+                return;
+            }
+            Node[] nodes = new Node[values.length];
+            for (int i = 0; i &lt; values.length; i++) {
+                nodes[i] = new Node(values[i]);
+            }
+            for (int[] edge : edges) {
+                int parent = edge[0], child = edge[1];
+                if (edge[2] == 0) {
+                    nodes[parent].left = nodes[child];
+                } else {
+                    nodes[parent].right = nodes[child];
+                }
+            }
+            root = nodes[0];
+        }
+    }
+
+    // Main method to test traversals
+    public static void main(String[] args) {
+        PreorderPostorderTraversals traverser = new PreorderPostorderTraversals();
+
+        // Test cases
+        TestCase[] testCases = {
+            // Balanced BST: [5, left: [3, left: 1, right: 4], right: 7]
+            new TestCase(
+                new int[]{5, 3, 1, 4, 7},
+                new int[][]{{0, 1, 0}, {0, 4, 1}, {1, 2, 0}, {1, 3, 1}}
+            ),
+            // Unbalanced BST: [5, right: [7, right: [9, right: 10]]]
+            new TestCase(
+                new int[]{5, 7, 9, 10},
+                new int[][]{{0, 1, 1}, {1, 2, 1}, {2, 3, 1}}
+            ),
+            // Empty tree
+            new TestCase(new int[]{}, new int[][]{}),
+            // Single node
+            new TestCase(new int[]{10}, new int[][]{})
+        };
+
+        // Run test cases
+        for (int i = 0; i &lt; testCases.length; i++) {
+            System.out.println("Test case " + (i + 1) + ":");
+            System.out.println("Preorder: " + traverser.preorderTraversal(testCases[i].root));
+            System.out.println("Postorder: " + traverser.postorderTraversal(testCases[i].root) + "\n");
+        }
+    }
+}
+</code></pre>
+<h2 id="output"><a class="header" href="#output">Output</a></h2>
+<p>Running the <code>main</code> method produces:</p>
+<pre><code>Test case 1:
+Preorder: 5 3 1 4 7
+Postorder: 1 4 3 7 5
+
+Test case 2:
+Preorder: 5 7 9 10
+Postorder: 10 9 7 5
+
+Test case 3:
+Preorder: Empty
+Postorder: Empty
+
+Test case 4:
+Preorder: 10
+Postorder: 10
+</code></pre>
+<p>Explanation:</p>
+<ul>
+<li>Test case 1: Balanced BST, preorder visits root (5), left (3, 1, 4), right (7); postorder visits left (1, 4), right (7), root (5).</li>
+<li>Test case 2: Unbalanced (skewed) BST, preorder visits 5, 7, 9, 10; postorder visits 10, 9, 7, 5.</li>
+<li>Test case 3: Empty tree, both traversals return "Empty".</li>
+<li>Test case 4: Single node, both traversals return "10".</li>
+</ul>
+<h2 id="how-it-works"><a class="header" href="#how-it-works">How It Works</a></h2>
+<ul>
+<li><strong>Node</strong>: Stores an integer value and pointers to left and right children.</li>
+<li><strong>preorderTraversal</strong>:
+<ul>
+<li>Returns "Empty" for null root.</li>
+<li>Appends root value, recurses on left, then right.</li>
+</ul>
+</li>
+<li><strong>postorderTraversal</strong>:
+<ul>
+<li>Returns "Empty" for null root.</li>
+<li>Recurses on left, then right, then appends root value.</li>
+</ul>
+</li>
+<li><strong>Example Trace (Test case 1)</strong>:
+<ul>
+<li>Preorder: Visit 5, left (3, left (1), right (4)), right (7) → "5 3 1 4 7".</li>
+<li>Postorder: Left (1, 4), right (7), root (5) → "1 4 3 7 5".</li>
+</ul>
+</li>
+<li><strong>Main Method</strong>: Tests balanced BST, unbalanced BST, empty tree, and single node.</li>
+</ul>
+<h2 id="complexity-analysis-table"><a class="header" href="#complexity-analysis-table">Complexity Analysis Table</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Operation</th><th>Time Complexity</th><th>Space Complexity</th></tr></thead><tbody>
+<tr><td>preorderTraversal</td><td>O(n)</td><td>O(h)</td></tr>
+<tr><td>postorderTraversal</td><td>O(n)</td><td>O(h)</td></tr>
+</tbody></table>
+</div>
+<p><em>Note</em>:</p>
+<ul>
+<li>n is the number of nodes in the tree.</li>
+<li>h is the height of the tree (O(n) for skewed, O(log n) for balanced).</li>
+<li>Time complexity: O(n) for both traversals (visit each node once).</li>
+<li>Space complexity: O(h) for recursion stack.</li>
+<li>Worst case: O(n) time and O(n) space for skewed trees.</li>
+</ul>
+<blockquote>
+<p><strong>✅ Tip</strong>: Use recursive traversal methods for simplicity, as they naturally follow the tree’s structure. Preorder is useful for copying a tree, while postorder is useful for deleting a tree.</p>
+</blockquote>
+<blockquote>
+<p><strong>⚠ Warning</strong>: Handle null nodes to avoid null pointer exceptions. Ensure the output string is trimmed to remove trailing spaces for clean presentation.</p>
+</blockquote>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../problemStatements/ch03_07/LowestCommonAncestor.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../../problemStatements/ch03_07/RangeSumQuery.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../problemStatements/ch03_07/LowestCommonAncestor.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../../problemStatements/ch03_07/RangeSumQuery.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../../elasticlunr.min.js"></script>
+        <script src="../../mark.min.js"></script>
+        <script src="../../searcher.js"></script>
+
+        <script src="../../clipboard.min.js"></script>
+        <script src="../../highlight.js"></script>
+        <script src="../../book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="../../theme/ferris.js"></script>
+
+
+    </div>
+    </body>
+</html>

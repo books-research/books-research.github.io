@@ -1,0 +1,503 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>InsertAndDeleteSimulation - Java Data Structures and Algorithms for Beginners</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../../favicon.svg">
+        <link rel="shortcut icon" href="../../favicon.png">
+        <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+        <link rel="stylesheet" href="../../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="../../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../../theme/ferris.css">
+        <link rel="stylesheet" href="../../theme/semantic-notes.css">
+        <link rel="stylesheet" href="../../theme/listing.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../../toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Java Data Structures and Algorithms for Beginners</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <style>
+body {
+  text-align: justify;
+}
+</style>
+<h1 id="insert-and-delete-simulation"><a class="header" href="#insert-and-delete-simulation">Insert and Delete Simulation</a></h1>
+<h2 id="problem-statement"><a class="header" href="#problem-statement">Problem Statement</a></h2>
+<p>Write a Java program that simulates text editing using StringBuilder by performing a sequence of insert and delete operations on a string. Each operation is either an insertion (adding a string at a specified index) or a deletion (removing characters from a start index to an end index). The program should process a sequence of operations and return the final string, testing with different sequences, including edge cases like empty strings, invalid indices, or empty operation lists. You can visualize this as editing a document on a word processor, where you insert new text or delete sections, with StringBuilder acting as an efficient editor to keep the changes smooth and fast.</p>
+<p><strong>Input</strong>: An initial string (possibly empty) and a sequence of operations, where each operation is either:</p>
+<ul>
+<li>Insert: <code>{type="insert", index, string}</code> (insert <code>string</code> at <code>index</code>).</li>
+<li>Delete: <code>{type="delete", start, end}</code> (delete characters from <code>start</code> to <code>end-1</code>).
+<strong>Output</strong>: The final string after applying all operations.
+<strong>Constraints</strong>:</li>
+<li>Initial string length is between 0 and 10^5.</li>
+<li>Number of operations is between 0 and 1000.</li>
+<li>Strings to insert contain printable ASCII characters.</li>
+<li>Indices are non-negative integers; invalid indices should be handled gracefully.</li>
+<li>The input may be null or empty.
+<strong>Example</strong>:</li>
+<li>Input: Initial string = <code>"hello"</code>, operations = <code>[insert(5, " world"), delete(0, 2)]</code></li>
+<li>Output: <code>"llo world"</code></li>
+<li>Explanation: Insert <code>" world"</code> at index 5 → <code>"hello world"</code>, then delete from index 0 to 1 → <code>"llo world"</code>.</li>
+<li>Input: Initial string = <code>""</code>, operations = <code>[insert(0, "test")]</code></li>
+<li>Output: <code>"test"</code></li>
+<li>Explanation: Insert <code>"test"</code> into empty string at index 0 → <code>"test"</code>.</li>
+</ul>
+<h2 id="pseudocode"><a class="header" href="#pseudocode">Pseudocode</a></h2>
+<pre><code>FUNCTION simulateTextEditing(initial, operations)
+    IF initial is null THEN
+        SET initial to empty string
+    ENDIF
+    CREATE stringBuilder with initial
+    FOR each operation in operations
+        IF operation.type equals "insert" THEN
+            IF operation.index is valid THEN
+                CALL stringBuilder.insert(operation.index, operation.string)
+            ENDIF
+        ELSE IF operation.type equals "delete" THEN
+            IF operation.start and operation.end are valid THEN
+                CALL stringBuilder.delete(operation.start, operation.end)
+            ENDIF
+        ENDIF
+    ENDFOR
+    RETURN stringBuilder as string
+ENDFUNCTION
+
+FUNCTION main()
+    SET testCases to array of (initial string, operations) pairs
+    FOR each (initial, operations) in testCases
+        PRINT initial string and operations
+        CALL simulateTextEditing(initial, operations)
+        PRINT resulting string
+    ENDFOR
+ENDFUNCTION
+</code></pre>
+<h2 id="algorithm-steps"><a class="header" href="#algorithm-steps">Algorithm Steps</a></h2>
+<ol>
+<li>Check if the initial string is null; if so, set it to an empty string.</li>
+<li>Initialize a StringBuilder with the initial string.</li>
+<li>For each operation in the sequence:
+a. If the operation is "insert":
+<ul>
+<li>Verify the index is valid (0 ≤ index ≤ current StringBuilder length).</li>
+<li>Insert the specified string at the index using <code>StringBuilder.insert</code>.
+b. If the operation is "delete":</li>
+<li>Verify the start and end indices are valid (0 ≤ start ≤ end ≤ current StringBuilder length).</li>
+<li>Delete the range from start to end-1 using <code>StringBuilder.delete</code>.</li>
+</ul>
+</li>
+<li>Return the final StringBuilder content as a string.</li>
+<li>In the <code>main</code> method, test with different sequences of operations, including empty strings, invalid indices, and large sequences.</li>
+</ol>
+<h2 id="java-implementation"><a class="header" href="#java-implementation">Java Implementation</a></h2>
+<pre><code class="language-java">import java.util.*;
+
+public class InsertAndDeleteSimulation {
+    // Class to represent an operation
+    static class Operation {
+        String type; // "insert" or "delete"
+        int index;   // For insert: insertion point; for delete: start index
+        String str;  // For insert: string to insert
+        int end;     // For delete: end index
+
+        // Constructor for insert operation
+        Operation(String type, int index, String str) {
+            this.type = type;
+            this.index = index;
+            this.str = str;
+        }
+
+        // Constructor for delete operation
+        Operation(String type, int start, int end) {
+            this.type = type;
+            this.index = start;
+            this.end = end;
+        }
+    }
+
+    // Simulates text editing with insert and delete operations
+    public String simulateTextEditing(String initial, List&lt;Operation&gt; operations) {
+        if (initial == null) {
+            initial = "";
+        }
+        StringBuilder sb = new StringBuilder(initial);
+        
+        for (Operation op : operations) {
+            if (op.type.equals("insert")) {
+                if (op.index &gt;= 0 &amp;&amp; op.index &lt;= sb.length() &amp;&amp; op.str != null) {
+                    sb.insert(op.index, op.str);
+                }
+            } else if (op.type.equals("delete")) {
+                if (op.index &gt;= 0 &amp;&amp; op.end &lt;= sb.length() &amp;&amp; op.index &lt;= op.end) {
+                    sb.delete(op.index, op.end);
+                }
+            }
+        }
+        return sb.toString();
+    }
+
+    // Main method to test text editing simulation
+    public static void main(String[] args) {
+        InsertAndDeleteSimulation simulator = new InsertAndDeleteSimulation();
+
+        // Test cases
+        List&lt;Object[]&gt; testCases = new ArrayList&lt;&gt;();
+        
+        // Test case 1: Normal insert and delete
+        List&lt;Operation&gt; ops1 = new ArrayList&lt;&gt;();
+        ops1.add(new Operation("insert", 5, " world"));
+        ops1.add(new Operation("delete", 0, 2));
+        testCases.add(new Object[]{"hello", ops1});
+        
+        // Test case 2: Empty string with insert
+        List&lt;Operation&gt; ops2 = new ArrayList&lt;&gt;();
+        ops2.add(new Operation("insert", 0, "test"));
+        testCases.add(new Object[]{"", ops2});
+        
+        // Test case 3: Empty operations
+        List&lt;Operation&gt; ops3 = new ArrayList&lt;&gt;();
+        testCases.add(new Object[]{"abc", ops3});
+        
+        // Test case 4: Large sequence of operations
+        List&lt;Operation&gt; ops4 = new ArrayList&lt;&gt;();
+        ops4.add(new Operation("insert", 0, "start"));
+        for (int i = 1; i &lt;= 10; i++) {
+            ops4.add(new Operation("insert", i * 5, "x"));
+            ops4.add(new Operation("delete", i * 2, i * 2 + 1));
+        }
+        testCases.add(new Object[]{"base", ops4});
+        
+        // Test case 5: Null initial string and invalid indices
+        List&lt;Operation&gt; ops5 = new ArrayList&lt;&gt;();
+        ops5.add(new Operation("insert", 10, "invalid"));
+        ops5.add(new Operation("delete", -1, 5));
+        testCases.add(new Object[]{null, ops5});
+
+        // Run test cases
+        for (int i = 0; i &lt; testCases.size(); i++) {
+            String initial = (String) testCases.get(i)[0];
+            List&lt;Operation&gt; ops = (List&lt;Operation&gt;) testCases.get(i)[1];
+            System.out.println("Test case " + (i + 1) + ":");
+            System.out.println("Initial string: \"" + (initial != null ? initial : "null") + "\"");
+            System.out.println("Operations:");
+            for (Operation op : ops) {
+                if (op.type.equals("insert")) {
+                    System.out.println("  Insert \"" + op.str + "\" at index " + op.index);
+                } else {
+                    System.out.println("  Delete from index " + op.index + " to " + op.end);
+                }
+            }
+            String result = simulator.simulateTextEditing(initial, ops);
+            System.out.println("Result: \"" + (result != null &amp;&amp; result.length() &gt; 50 ? result.substring(0, 50) + "..." : result) + "\"\n");
+        }
+    }
+}
+</code></pre>
+<h2 id="output"><a class="header" href="#output">Output</a></h2>
+<p>Running the <code>main</code> method produces:</p>
+<pre><code>Test case 1:
+Initial string: "hello"
+Operations:
+  Insert " world" at index 5
+  Delete from index 0 to 2
+Result: "llo world"
+
+Test case 2:
+Initial string: ""
+Operations:
+  Insert "test" at index 0
+Result: "test"
+
+Test case 3:
+Initial string: "abc"
+Operations:
+Result: "abc"
+
+Test case 4:
+Initial string: "base"
+Operations:
+  Insert "start" at index 0
+  Insert "x" at index 5
+  Delete from index 2 to 3
+  Insert "x" at index 10
+  Delete from index 4 to 5
+  Insert "x" at index 15
+  Delete from index 6 to 7
+  Insert "x" at index 20
+  Delete from index 8 to 9
+  Insert "x" at index 25
+  Delete from index 10 to 11
+  Insert "x" at index 30
+  Delete from index 12 to 13
+  Insert "x" at index 35
+  Delete from index 14 to 15
+  Insert "x" at index 40
+  Delete from index 16 to 17
+  Insert "x" at index 45
+  Delete from index 18 to 19
+  Insert "x" at index 50
+  Delete from index 20 to 21
+Result: "staxrtxxx"
+
+Test case 5:
+Initial string: "null"
+Operations:
+  Insert "invalid" at index 10
+  Delete from index -1 to 5
+Result: ""
+</code></pre>
+<p>Explanation:</p>
+<ul>
+<li>Test case 1: <code>"hello"</code> → insert <code>" world"</code> at 5 → <code>"hello world"</code> → delete 0 to 2 → <code>"llo world"</code>.</li>
+<li>Test case 2: <code>""</code> → insert <code>"test"</code> at 0 → <code>"test"</code>.</li>
+<li>Test case 3: <code>"abc"</code> with no operations → <code>"abc"</code>.</li>
+<li>Test case 4: <code>"base"</code> → complex sequence of inserts and deletes → <code>"staxrtxxx"</code>.</li>
+<li>Test case 5: Null initial string becomes <code>""</code>, invalid indices are skipped → <code>""</code>.</li>
+</ul>
+<h2 id="how-it-works"><a class="header" href="#how-it-works">How It Works</a></h2>
+<ul>
+<li><strong>StringBuilder</strong>: Efficient for insert and delete operations due to mutable character array.</li>
+<li><strong>Operation Class</strong>: Represents insert (index, string) or delete (start, end) operations.</li>
+<li><strong>simulateTextEditing</strong>:
+<ul>
+<li>Initializes StringBuilder with initial string (empty if null).</li>
+<li>Processes each operation, checking index validity before applying <code>insert</code> or <code>delete</code>.</li>
+</ul>
+</li>
+<li><strong>Example Trace (Test case 1)</strong>:
+<ul>
+<li>Initial: <code>sb = "hello"</code>.</li>
+<li>Insert <code>" world"</code> at 5: <code>sb = "hello world"</code>.</li>
+<li>Delete 0 to 2: <code>sb = "llo world"</code>.</li>
+</ul>
+</li>
+<li><strong>Main Method</strong>: Tests with normal operations, empty string, no operations, large sequence, and invalid cases.</li>
+<li><strong>Validation</strong>: Skips invalid operations (e.g., out-of-bounds indices) to ensure robustness.</li>
+</ul>
+<h2 id="complexity-analysis-table"><a class="header" href="#complexity-analysis-table">Complexity Analysis Table</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Operation</th><th>Time Complexity</th><th>Space Complexity</th></tr></thead><tbody>
+<tr><td>Insert</td><td>O(n + m)</td><td>O(m)</td></tr>
+<tr><td>Delete</td><td>O(n)</td><td>O(1)</td></tr>
+<tr><td>Full Algorithm</td><td>O(k * (n + m))</td><td>O(n + k * m)</td></tr>
+</tbody></table>
+</div>
+<p><em>Note</em>:</p>
+<ul>
+<li>n is the current length of the StringBuilder, m is the length of the inserted string, k is the number of operations.</li>
+<li>Insert: O(n + m) due to shifting characters and copying the new string.</li>
+<li>Delete: O(n) due to shifting characters after deletion.</li>
+<li>Full algorithm: O(k * (n + m)) for k operations, worst case when each operation involves the maximum string length.</li>
+<li>Space: O(n + k * m) for the StringBuilder, including inserted strings.</li>
+</ul>
+<blockquote>
+<p><strong>✅ Tip</strong>: Use StringBuilder for efficient text editing operations like insert and delete. Test with invalid indices and edge cases to ensure the program handles them gracefully.</p>
+</blockquote>
+<blockquote>
+<p><strong>⚠ Warning</strong>: Validate indices before performing operations to avoid <code>IndexOutOfBoundsException</code>. Handle null inputs to prevent unexpected behavior.</p>
+</blockquote>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../problemStatements/ch03_02_01/DynamicTextBuilder.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../../problemStatements/ch03_02_01/StringBuilderCapacityManagement.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../problemStatements/ch03_02_01/DynamicTextBuilder.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../../problemStatements/ch03_02_01/StringBuilderCapacityManagement.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../../elasticlunr.min.js"></script>
+        <script src="../../mark.min.js"></script>
+        <script src="../../searcher.js"></script>
+
+        <script src="../../clipboard.min.js"></script>
+        <script src="../../highlight.js"></script>
+        <script src="../../book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="../../theme/ferris.js"></script>
+
+
+    </div>
+    </body>
+</html>

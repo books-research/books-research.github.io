@@ -1,0 +1,436 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>ArraySorting - Java Data Structures and Algorithms for Beginners</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../../favicon.svg">
+        <link rel="shortcut icon" href="../../favicon.png">
+        <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+        <link rel="stylesheet" href="../../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="../../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../../theme/ferris.css">
+        <link rel="stylesheet" href="../../theme/semantic-notes.css">
+        <link rel="stylesheet" href="../../theme/listing.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../../toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Java Data Structures and Algorithms for Beginners</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <style>
+body {
+  text-align: justify;
+}
+</style>
+<h1 id="array-sorting"><a class="header" href="#array-sorting">Array Sorting</a></h1>
+<h2 id="problem-statement"><a class="header" href="#problem-statement">Problem Statement</a></h2>
+<p>Write a Java program that implements the bubble sort algorithm to sort an array of integers in ascending order. The program should modify the input array in-place to arrange its elements from smallest to largest and test the implementation with various input arrays, including empty arrays, single-element arrays, and arrays with duplicate or negative numbers. You can visualize this as organizing a row of books on a shelf by repeatedly comparing and swapping adjacent books to ensure they are in order by size.</p>
+<p><strong>Input</strong>: An array of integers (e.g., <code>arr = [64, 34, 25, 12, 22]</code>).
+<strong>Output</strong>: The array modified in-place to be sorted in ascending order (e.g., <code>[12, 22, 25, 34, 64]</code>).
+<strong>Constraints</strong>:</p>
+<ul>
+<li>The array length is between 0 and 10^5.</li>
+<li>Elements are integers between -10^9 and 10^9.</li>
+<li>The array may be empty.
+<strong>Example</strong>:</li>
+<li>Input: <code>arr = [64, 34, 25, 12, 22]</code></li>
+<li>Output: <code>[12, 22, 25, 34, 64]</code></li>
+<li>Explanation: The array is sorted in ascending order using bubble sort.</li>
+<li>Input: <code>arr = [1, 1, 1]</code></li>
+<li>Output: <code>[1, 1, 1]</code></li>
+<li>Explanation: The array with duplicate elements remains sorted.</li>
+</ul>
+<h2 id="pseudocode"><a class="header" href="#pseudocode">Pseudocode</a></h2>
+<pre><code>FUNCTION bubbleSort(arr)
+    IF arr is null OR length of arr &lt;= 1 THEN
+        RETURN
+    ENDIF
+    SET n to length of arr
+    FOR i from 0 to n - 1
+        FOR j from 0 to n - i - 2
+            IF arr[j] &gt; arr[j + 1] THEN
+                SET temp to arr[j]
+                SET arr[j] to arr[j + 1]
+                SET arr[j + 1] to temp
+            ENDIF
+        ENDFOR
+    ENDFOR
+ENDFUNCTION
+
+FUNCTION main()
+    SET testArrays to arrays of integers
+    FOR each array in testArrays
+        CALL bubbleSort(array)
+        PRINT array
+    ENDFOR
+ENDFUNCTION
+</code></pre>
+<h2 id="algorithm-steps"><a class="header" href="#algorithm-steps">Algorithm Steps</a></h2>
+<ol>
+<li>Check if the input array is null or has 0 or 1 element. If so, return, as no sorting is needed.</li>
+<li>Initialize <code>n</code> as the length of the array.</li>
+<li>For each index <code>i</code> from 0 to <code>n - 1</code>:
+a. Iterate through indices <code>j</code> from 0 to <code>n - i - 2</code>.
+b. If <code>arr[j] &gt; arr[j + 1]</code>, swap the elements at indices <code>j</code> and <code>j + 1</code> using a temporary variable.</li>
+<li>Repeat until no more swaps are needed, indicating the array is sorted.</li>
+<li>In the <code>main</code> method, create test arrays with various cases (e.g., unsorted, sorted, duplicates, negative numbers) and call <code>bubbleSort</code> to verify correctness.</li>
+</ol>
+<h2 id="java-implementation"><a class="header" href="#java-implementation">Java Implementation</a></h2>
+<pre><code class="language-java">public class ArraySorting {
+    // Sorts array in ascending order using bubble sort
+    public void bubbleSort(int[] arr) {
+        // Check for null or single-element/empty array
+        if (arr == null || arr.length &lt;= 1) {
+            return;
+        }
+        // Get array length
+        int n = arr.length;
+        // Outer loop for passes
+        for (int i = 0; i &lt; n; i++) {
+            // Inner loop for comparisons and swaps
+            for (int j = 0; j &lt; n - i - 1; j++) {
+                // Compare adjacent elements
+                if (arr[j] &gt; arr[j + 1]) {
+                    // Swap elements
+                    int temp = arr[j];
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = temp;
+                }
+            }
+        }
+    }
+
+    // Main method to test bubbleSort with various arrays
+    public static void main(String[] args) {
+        ArraySorting sorter = new ArraySorting();
+
+        // Test case 1: Unsorted array
+        int[] arr1 = {64, 34, 25, 12, 22};
+        System.out.print("Test case 1 before: ");
+        printArray(arr1);
+        sorter.bubbleSort(arr1);
+        System.out.print("Test case 1 after: ");
+        printArray(arr1);
+
+        // Test case 2: Already sorted array
+        int[] arr2 = {1, 2, 3, 4, 5};
+        System.out.print("Test case 2 before: ");
+        printArray(arr2);
+        sorter.bubbleSort(arr2);
+        System.out.print("Test case 2 after: ");
+        printArray(arr2);
+
+        // Test case 3: Array with duplicates
+        int[] arr3 = {3, 1, 3, 2, 1};
+        System.out.print("Test case 3 before: ");
+        printArray(arr3);
+        sorter.bubbleSort(arr3);
+        System.out.print("Test case 3 after: ");
+        printArray(arr3);
+
+        // Test case 4: Array with negative numbers
+        int[] arr4 = {-5, 0, -2, 3, -1};
+        System.out.print("Test case 4 before: ");
+        printArray(arr4);
+        sorter.bubbleSort(arr4);
+        System.out.print("Test case 4 after: ");
+        printArray(arr4);
+
+        // Test case 5: Empty array
+        int[] arr5 = {};
+        System.out.print("Test case 5 before: ");
+        printArray(arr5);
+        sorter.bubbleSort(arr5);
+        System.out.print("Test case 5 after: ");
+        printArray(arr5);
+
+        // Test case 6: Single-element array
+        int[] arr6 = {42};
+        System.out.print("Test case 6 before: ");
+        printArray(arr6);
+        sorter.bubbleSort(arr6);
+        System.out.print("Test case 6 after: ");
+        printArray(arr6);
+    }
+
+    // Helper method to print array
+    private static void printArray(int[] arr) {
+        if (arr == null || arr.length == 0) {
+            System.out.println("[]");
+            return;
+        }
+        System.out.print("[");
+        for (int i = 0; i &lt; arr.length; i++) {
+            System.out.print(arr[i]);
+            if (i &lt; arr.length - 1) {
+                System.out.print(", ");
+            }
+        }
+        System.out.println("]");
+    }
+}
+</code></pre>
+<h2 id="output"><a class="header" href="#output">Output</a></h2>
+<p>Running the <code>main</code> method produces:</p>
+<pre><code>Test case 1 before: [64, 34, 25, 12, 22]
+Test case 1 after: [12, 22, 25, 34, 64]
+Test case 2 before: [1, 2, 3, 4, 5]
+Test case 2 after: [1, 2, 3, 4, 5]
+Test case 3 before: [3, 1, 3, 2, 1]
+Test case 3 after: [1, 1, 2, 3, 3]
+Test case 4 before: [-5, 0, -2, 3, -1]
+Test case 4 after: [-5, -2, -1, 0, 3]
+Test case 5 before: []
+Test case 5 after: []
+Test case 6 before: [42]
+Test case 6 after: [42]
+</code></pre>
+<p>Explanation:</p>
+<ul>
+<li>Test case 1: Sorts <code>[64, 34, 25, 12, 22]</code> to <code>[12, 22, 25, 34, 64]</code>.</li>
+<li>Test case 2: Already sorted <code>[1, 2, 3, 4, 5]</code> remains unchanged.</li>
+<li>Test case 3: Sorts <code>[3, 1, 3, 2, 1]</code> to <code>[1, 1, 2, 3, 3]</code>, handling duplicates.</li>
+<li>Test case 4: Sorts <code>[-5, 0, -2, 3, -1]</code> to <code>[-5, -2, -1, 0, 3]</code>, handling negatives.</li>
+<li>Test case 5: Empty array <code>[]</code> remains unchanged.</li>
+<li>Test case 6: Single-element array <code>[42]</code> remains unchanged.</li>
+</ul>
+<h2 id="how-it-works"><a class="header" href="#how-it-works">How It Works</a></h2>
+<ul>
+<li><strong>Step 1</strong>: The <code>bubbleSort</code> method checks if the array is null or has 0 or 1 element. For <code>[64, 34, 25, 12, 22]</code>, it proceeds.</li>
+<li><strong>Step 2</strong>: For <code>n = 5</code>, perform 5 passes:
+<ul>
+<li>Pass 1: Compare and swap adjacent elements: <code>[64, 34] → [34, 64]</code>, <code>[64, 25] → [25, 64]</code>, <code>[64, 12] → [12, 64]</code>, <code>[64, 22] → [22, 64]</code>. Result: <code>[34, 25, 12, 22, 64]</code>.</li>
+<li>Pass 2: <code>[34, 25] → [25, 34]</code>, <code>[34, 12] → [12, 34]</code>, <code>[34, 22] → [22, 34]</code>. Result: <code>[25, 12, 22, 34, 64]</code>.</li>
+<li>Pass 3: <code>[25, 12] → [12, 25]</code>, <code>[25, 22] → [22, 25]</code>. Result: <code>[12, 22, 25, 34, 64]</code>.</li>
+<li>Pass 4: No swaps needed, array is sorted.</li>
+<li>Pass 5: No swaps needed, done.</li>
+</ul>
+</li>
+<li><strong>Example Trace</strong>: For <code>[64, 34, 25, 12, 22]</code>, sorts to <code>[12, 22, 25, 34, 64]</code> by bubbling larger elements to the end.</li>
+<li><strong>Main Method</strong>: Tests the method with unsorted, sorted, duplicate, negative, empty, and single-element arrays, printing results.</li>
+<li><strong>In-Place Property</strong>: Bubble sort modifies the array in-place, using only a temporary variable for swaps.</li>
+</ul>
+<h2 id="complexity-analysis-table"><a class="header" href="#complexity-analysis-table">Complexity Analysis Table</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Operation</th><th>Time Complexity</th><th>Space Complexity</th></tr></thead><tbody>
+<tr><td>Sorting</td><td>O(n^2)</td><td>O(1)</td></tr>
+<tr><td>Full Algorithm</td><td>O(n^2)</td><td>O(1)</td></tr>
+</tbody></table>
+</div>
+<p><em>Note</em>:</p>
+<ul>
+<li>n is the size of the input array.</li>
+<li>Time complexity: O(n^2) in the worst and average cases, as the algorithm performs up to n passes, each with up to n-1 comparisons. Best case is O(n) when the array is already sorted (no swaps).</li>
+<li>Space complexity: O(1), as only a temporary variable is used for swapping.</li>
+<li>Worst case: O(n^2) for reverse-sorted arrays. Best case: O(n) for sorted arrays.</li>
+</ul>
+<blockquote>
+<p><strong>✅ Tip</strong>: Bubble sort is simple but inefficient for large arrays. Consider adding a flag to detect if no swaps occur in a pass to optimize for nearly sorted arrays. Test with various cases to ensure correctness.</p>
+</blockquote>
+<blockquote>
+<p><strong>⚠ Warning</strong>: Ensure the input array is not null to avoid <code>NullPointerException</code>. Be cautious with very large arrays, as O(n^2) time complexity can lead to slow performance.</p>
+</blockquote>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../problemStatements/ch03_01/ArrayRotation.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../../problemStatements/ch03_01/DuplicateFinder.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../problemStatements/ch03_01/ArrayRotation.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../../problemStatements/ch03_01/DuplicateFinder.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../../elasticlunr.min.js"></script>
+        <script src="../../mark.min.js"></script>
+        <script src="../../searcher.js"></script>
+
+        <script src="../../clipboard.min.js"></script>
+        <script src="../../highlight.js"></script>
+        <script src="../../book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="../../theme/ferris.js"></script>
+
+
+    </div>
+    </body>
+</html>

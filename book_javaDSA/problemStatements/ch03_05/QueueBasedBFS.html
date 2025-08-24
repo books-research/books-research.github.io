@@ -1,0 +1,564 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>QueueBasedBFS - Java Data Structures and Algorithms for Beginners</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../../favicon.svg">
+        <link rel="shortcut icon" href="../../favicon.png">
+        <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+        <link rel="stylesheet" href="../../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="../../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../../theme/ferris.css">
+        <link rel="stylesheet" href="../../theme/semantic-notes.css">
+        <link rel="stylesheet" href="../../theme/listing.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../../toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Java Data Structures and Algorithms for Beginners</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <style>
+body {
+  text-align: justify;
+}
+</style>
+<h1 id="queue-based-bfs"><a class="header" href="#queue-based-bfs">Queue-Based BFS</a></h1>
+<h2 id="problem-statement"><a class="header" href="#problem-statement">Problem Statement</a></h2>
+<p>Write a Java program that implements a Breadth-First Search (BFS) algorithm for a graph using a queue. Represent the graph as an adjacency list and print the nodes visited in BFS order, starting from a specified node. The program should handle undirected graphs, enqueue nodes to explore them level by level, and mark visited nodes to avoid cycles. Test the implementation with various graph structures, including connected, disconnected, and cyclic graphs, as well as edge cases like empty graphs. You can visualize this as exploring a network of cities, visiting all cities at the current distance from the starting point before moving farther, using a queue to keep track of the next cities to visit.</p>
+<p><strong>Input</strong>:</p>
+<ul>
+<li>Number of nodes <code>n</code> (0 ≤ n ≤ 10^5).</li>
+<li>List of edges as pairs of nodes (e.g., [[0,1], [1,2]] for edges 0-1, 1-2).</li>
+<li>Starting node for BFS.
+<strong>Output</strong>: A string of nodes visited in BFS order (e.g., "0 1 2").
+<strong>Constraints</strong>:</li>
+<li>Nodes are integers from 0 to n-1.</li>
+<li>Edges are undirected (if u-v exists, v-u exists).</li>
+<li>The graph may be empty, disconnected, or cyclic.
+<strong>Example</strong>:</li>
+<li>Input: n=4, edges=[[0,1], [0,2], [1,3]], start=0</li>
+<li>Output: "0 1 2 3"</li>
+<li>Explanation: Starting from node 0, visit 0, then neighbors 1 and 2, then 1’s neighbor 3.</li>
+<li>Input: n=3, edges=[], start=0</li>
+<li>Output: "0"</li>
+<li>Explanation: No edges, only node 0 is visited.</li>
+</ul>
+<h2 id="pseudocode"><a class="header" href="#pseudocode">Pseudocode</a></h2>
+<pre><code>CLASS IntQueue
+    SET array to new integer array of size 1000
+    SET front to 0
+    SET rear to -1
+    SET size to 0
+    
+    FUNCTION enqueue(number)
+        IF size equals array length THEN
+            RETURN false
+        ENDIF
+        INCREMENT rear
+        SET array[rear] to number
+        INCREMENT size
+        RETURN true
+    ENDFUNCTION
+    
+    FUNCTION dequeue()
+        IF size equals 0 THEN
+            RETURN null
+        ENDIF
+        SET number to array[front]
+        INCREMENT front
+        DECREMENT size
+        RETURN number
+    ENDFUNCTION
+    
+    FUNCTION isEmpty()
+        RETURN size equals 0
+    ENDFUNCTION
+ENDCLASS
+
+FUNCTION bfs(n, edges, start)
+    IF n equals 0 THEN
+        RETURN empty string
+    ENDIF
+    CREATE adjList as new list of lists for n nodes
+    FOR each edge in edges
+        ADD edge[1] to adjList[edge[0]]
+        ADD edge[0] to adjList[edge[1]] (undirected)
+    ENDFOR
+    CREATE queue as new IntQueue
+    CREATE visited as boolean array of size n, initialized to false
+    CREATE result as new StringBuilder
+    ENQUEUE start to queue
+    SET visited[start] to true
+    APPEND start to result
+    WHILE queue is not empty
+        SET node to queue.dequeue()
+        FOR each neighbor in adjList[node]
+            IF not visited[neighbor] THEN
+                ENQUEUE neighbor to queue
+                SET visited[neighbor] to true
+                APPEND " " and neighbor to result
+            ENDIF
+        ENDFOR
+    ENDWHILE
+    RETURN result as string
+ENDFUNCTION
+
+FUNCTION main()
+    SET testCases to array of graphs (n, edges, start)
+    FOR each testCase in testCases
+        PRINT test case details
+        CALL bfs(testCase.n, testCase.edges, testCase.start)
+        PRINT BFS order
+    ENDFOR
+ENDFUNCTION
+</code></pre>
+<h2 id="algorithm-steps"><a class="header" href="#algorithm-steps">Algorithm Steps</a></h2>
+<ol>
+<li>Define an <code>IntQueue</code> class with:
+a. An array to store integers, with <code>front</code>, <code>rear</code>, and <code>size</code>.
+b. Methods: <code>enqueue</code> (add to rear), <code>dequeue</code> (remove from front), <code>isEmpty</code>.</li>
+<li>In the <code>bfs</code> method:
+a. If n=0, return empty string.
+b. Build an adjacency list from edges (add u-v and v-u for undirected).
+c. Create a queue, a boolean array for visited nodes, and a StringBuilder for output.
+d. Enqueue the start node, mark it visited, append to result.
+e. While queue is not empty:
+<ul>
+<li>Dequeue a node.</li>
+<li>For each unvisited neighbor, enqueue it, mark it visited, append to result.
+f. Return the result string.</li>
+</ul>
+</li>
+<li>In the <code>main</code> method, test with graphs of varying structures (connected, disconnected, cyclic, empty).</li>
+</ol>
+<h2 id="java-implementation"><a class="header" href="#java-implementation">Java Implementation</a></h2>
+<pre><code class="language-java">import java.util.*;
+
+public class QueueBasedBFS {
+    // Custom queue implementation for integers
+    static class IntQueue {
+        private int[] array;
+        private int front;
+        private int rear;
+        private int size;
+        private static final int DEFAULT_SIZE = 1000;
+
+        public IntQueue() {
+            array = new int[DEFAULT_SIZE];
+            front = 0;
+            rear = -1;
+            size = 0;
+        }
+
+        public boolean enqueue(int number) {
+            if (size == array.length) {
+                return false; // Queue full
+            }
+            array[++rear] = number;
+            size++;
+            return true;
+        }
+
+        public Integer dequeue() {
+            if (size == 0) {
+                return null; // Queue empty
+            }
+            int number = array[front++];
+            size--;
+            return number;
+        }
+
+        public boolean isEmpty() {
+            return size == 0;
+        }
+    }
+
+    // Performs BFS and returns nodes in visit order
+    public String bfs(int n, int[][] edges, int start) {
+        if (n == 0) {
+            return "";
+        }
+
+        // Build adjacency list
+        List&lt;List&lt;Integer&gt;&gt; adjList = new ArrayList&lt;&gt;();
+        for (int i = 0; i &lt; n; i++) {
+            adjList.add(new ArrayList&lt;&gt;());
+        }
+        for (int[] edge : edges) {
+            adjList.get(edge[0]).add(edge[1]);
+            adjList.get(edge[1]).add(edge[0]); // Undirected
+        }
+
+        // BFS
+        IntQueue queue = new IntQueue();
+        boolean[] visited = new boolean[n];
+        StringBuilder result = new StringBuilder();
+
+        queue.enqueue(start);
+        visited[start] = true;
+        result.append(start);
+
+        while (!queue.isEmpty()) {
+            Integer node = queue.dequeue();
+            if (node == null) break;
+            for (int neighbor : adjList.get(node)) {
+                if (!visited[neighbor]) {
+                    queue.enqueue(neighbor);
+                    visited[neighbor] = true;
+                    result.append(" ").append(neighbor);
+                }
+            }
+        }
+
+        return result.toString();
+    }
+
+    // Helper class for test cases
+    static class GraphTestCase {
+        int n;
+        int[][] edges;
+        int start;
+
+        GraphTestCase(int n, int[][] edges, int start) {
+            this.n = n;
+            this.edges = edges;
+            this.start = start;
+        }
+    }
+
+    // Main method to test BFS
+    public static void main(String[] args) {
+        QueueBasedBFS bfs = new QueueBasedBFS();
+
+        // Test cases
+        List&lt;GraphTestCase&gt; testCases = new ArrayList&lt;&gt;();
+        
+        // Test case 1: Connected graph
+        testCases.add(new GraphTestCase(
+            4,
+            new int[][]{{0,1}, {0,2}, {1,3}},
+            0
+        ));
+        
+        // Test case 2: Cyclic graph
+        testCases.add(new GraphTestCase(
+            4,
+            new int[][]{{0,1}, {1,2}, {2,3}, {3,0}},
+            1
+        ));
+        
+        // Test case 3: Disconnected graph
+        testCases.add(new GraphTestCase(
+            5,
+            new int[][]{{0,1}, {2,3}},
+            0
+        ));
+        
+        // Test case 4: Empty graph
+        testCases.add(new GraphTestCase(
+            0,
+            new int[][]{},
+            0
+        ));
+        
+        // Test case 5: Single node
+        testCases.add(new GraphTestCase(
+            1,
+            new int[][]{},
+            0
+        ));
+
+        // Run test cases
+        for (int i = 0; i &lt; testCases.size(); i++) {
+            GraphTestCase test = testCases.get(i);
+            System.out.println("Test case " + (i + 1) + ": n=" + test.n + ", start=" + test.start);
+            System.out.println("Edges: " + Arrays.deepToString(test.edges));
+            String result = bfs.bfs(test.n, test.edges, test.start);
+            System.out.println("BFS order: " + (result.isEmpty() ? "[]" : result) + "\n");
+        }
+    }
+}
+</code></pre>
+<h2 id="output"><a class="header" href="#output">Output</a></h2>
+<p>Running the <code>main</code> method produces:</p>
+<pre><code>Test case 1: n=4, start=0
+Edges: [[0, 1], [0, 2], [1, 3]]
+BFS order: 0 1 2 3
+
+Test case 2: n=4, start=1
+Edges: [[0, 1], [1, 2], [2, 3], [3, 0]]
+BFS order: 1 0 2 3
+
+Test case 3: n=5, start=0
+Edges: [[0, 1], [2, 3]]
+BFS order: 0 1
+
+Test case 4: n=0, start=0
+Edges: []
+BFS order: []
+
+Test case 5: n=1, start=0
+Edges: []
+BFS order: 0
+</code></pre>
+<p>Explanation:</p>
+<ul>
+<li>Test case 1: From node 0, visits 0, then 1 and 2, then 3 (via 1).</li>
+<li>Test case 2: From node 1 in a cycle (0-1-2-3-0), visits 1, then 0 and 2, then 3.</li>
+<li>Test case 3: From node 0, visits 0 and 1; nodes 2, 3, 4 are disconnected.</li>
+<li>Test case 4: Empty graph returns empty string.</li>
+<li>Test case 5: Single node 0, no edges, visits only 0.</li>
+</ul>
+<h2 id="how-it-works"><a class="header" href="#how-it-works">How It Works</a></h2>
+<ul>
+<li><strong>IntQueue</strong>:
+<ul>
+<li>Uses an array with <code>front</code>, <code>rear</code>, and <code>size</code> for FIFO operations.</li>
+<li><code>enqueue</code>: Adds to rear if not full.</li>
+<li><code>dequeue</code>: Removes from front if not empty.</li>
+</ul>
+</li>
+<li><strong>bfs</strong>:
+<ul>
+<li>Builds an adjacency list from edges (undirected: add u-v and v-u).</li>
+<li>Uses a queue to explore nodes level by level, a boolean array to track visited nodes, and a StringBuilder for output.</li>
+<li>Enqueues start node, marks visited, appends to result.</li>
+<li>Dequeues nodes, enqueues unvisited neighbors, appends them to result.</li>
+</ul>
+</li>
+<li><strong>Example Trace (Test case 1)</strong>:
+<ul>
+<li>n=4, edges=[[0,1], [0,2], [1,3]], start=0.</li>
+<li>Adjacency list: [0: [1,2], 1: [0,3], 2: [0], 3: [1]].</li>
+<li>Enqueue 0: queue=[0], visited=[T,F,F,F], result="0".</li>
+<li>Dequeue 0, enqueue 1,2: queue=[1,2], visited=[T,T,T,F], result="0 1 2".</li>
+<li>Dequeue 1, enqueue 3: queue=[2,3], visited=[T,T,T,T], result="0 1 2 3".</li>
+<li>Dequeue 2, 3: queue=[], result="0 1 2 3".</li>
+</ul>
+</li>
+<li><strong>Main Method</strong>: Tests connected, cyclic, disconnected, empty, and single-node graphs.</li>
+</ul>
+<h2 id="complexity-analysis-table"><a class="header" href="#complexity-analysis-table">Complexity Analysis Table</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Operation</th><th>Time Complexity</th><th>Space Complexity</th></tr></thead><tbody>
+<tr><td>Enqueue/Dequeue</td><td>O(1)</td><td>O(1)</td></tr>
+<tr><td>BFS Algorithm</td><td>O(V + E)</td><td>O(V + E)</td></tr>
+</tbody></table>
+</div>
+<p><em>Note</em>:</p>
+<ul>
+<li>V is the number of vertices, E is the number of edges.</li>
+<li>Time complexity: O(V + E) for visiting all nodes and edges via adjacency list.</li>
+<li>Space complexity: O(V) for queue and visited array, O(E) for adjacency list.</li>
+<li>Worst case: O(V + E) time and space for dense graphs.</li>
+</ul>
+<blockquote>
+<p><strong>✅ Tip</strong>: Use a queue for BFS to ensure level-by-level traversal, and an adjacency list for efficient neighbor access. Test with cyclic and disconnected graphs to verify correct handling of visited nodes.</p>
+</blockquote>
+<blockquote>
+<p><strong>⚠ Warning</strong>: Always mark nodes as visited before enqueuing to avoid infinite loops in cyclic graphs. Ensure the queue size is sufficient for large graphs.</p>
+</blockquote>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../problemStatements/ch03_05/PrintJobSimulator.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../../problemStatements/ch03_05/QueueReversal.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../problemStatements/ch03_05/PrintJobSimulator.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../../problemStatements/ch03_05/QueueReversal.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../../elasticlunr.min.js"></script>
+        <script src="../../mark.min.js"></script>
+        <script src="../../searcher.js"></script>
+
+        <script src="../../clipboard.min.js"></script>
+        <script src="../../highlight.js"></script>
+        <script src="../../book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="../../theme/ferris.js"></script>
+
+
+    </div>
+    </body>
+</html>

@@ -1,0 +1,502 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>WaveTraversal - Java Data Structures and Algorithms for Beginners</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../../favicon.svg">
+        <link rel="shortcut icon" href="../../favicon.png">
+        <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+        <link rel="stylesheet" href="../../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="../../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../../theme/ferris.css">
+        <link rel="stylesheet" href="../../theme/semantic-notes.css">
+        <link rel="stylesheet" href="../../theme/listing.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../../toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Java Data Structures and Algorithms for Beginners</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <style>
+body {
+  text-align: justify;
+}
+</style>
+<h1 id="wave-traversal"><a class="header" href="#wave-traversal">Wave Traversal</a></h1>
+<h2 id="problem-statement"><a class="header" href="#problem-statement">Problem Statement</a></h2>
+<p>Write a Java program that implements a method to traverse a 2D array (matrix) in a wave pattern, where even-indexed columns (0-based) are traversed top-to-bottom and odd-indexed columns are traversed bottom-to-top. The program should return a 1D array containing the elements in the order of traversal and test the implementation with matrices of different sizes, including edge cases like single-row or single-column matrices. You can visualize this as navigating a grid like a wave, moving down even columns and up odd columns, collecting numbers like a surfer riding along a zigzag path.</p>
+<p><strong>Input</strong>: A 2D array (matrix) of integers with dimensions m × n (e.g., <code>matrix = [[1, 2, 3], [4, 5, 6]]</code>).
+<strong>Output</strong>: A 1D array containing the elements in wave traversal order (e.g., <code>[1, 4, 6, 5, 3, 2]</code>).
+<strong>Constraints</strong>:</p>
+<ul>
+<li>1 ≤ m, n ≤ 100 (where m is the number of rows and n is the number of columns).</li>
+<li>Elements are integers between -10^9 and 10^9.</li>
+<li>The matrix is guaranteed to be non-empty and rectangular (all rows have the same number of columns).
+<strong>Example</strong>:</li>
+<li>Input: <code>matrix = [[1, 2, 3], [4, 5, 6]]</code></li>
+<li>Output: <code>[1, 4, 6, 5, 3, 2]</code></li>
+<li>Explanation: Column 0 (even): top-to-bottom [1, 4]; Column 1 (odd): bottom-to-top [6, 5]; Column 2 (even): top-to-bottom [3, 2].</li>
+<li>Input: <code>matrix = [[1, 2], [3, 4], [5, 6]]</code></li>
+<li>Output: <code>[1, 3, 5, 6, 4, 2]</code></li>
+<li>Explanation: Column 0 (even): top-to-bottom [1, 3, 5]; Column 1 (odd): bottom-to-top [6, 4, 2].</li>
+</ul>
+<h2 id="pseudocode"><a class="header" href="#pseudocode">Pseudocode</a></h2>
+<pre><code>FUNCTION waveTraversal(matrix)
+    IF matrix is null OR matrix is empty OR matrix[0] is empty THEN
+        RETURN null
+    ENDIF
+    SET rows to number of rows in matrix
+    SET cols to number of columns in matrix
+    CREATE result array of size rows * cols
+    SET index to 0
+    FOR j from 0 to cols - 1
+        IF j is even THEN
+            FOR i from 0 to rows - 1
+                SET result[index] to matrix[i][j]
+                INCREMENT index
+            ENDFOR
+        ELSE
+            FOR i from rows - 1 to 0
+                SET result[index] to matrix[i][j]
+                INCREMENT index
+            ENDFOR
+        ENDIF
+    ENDFOR
+    RETURN result
+ENDFUNCTION
+
+FUNCTION main()
+    SET testMatrices to 2D arrays
+    FOR each matrix in testMatrices
+        CALL waveTraversal(matrix)
+        PRINT result
+    ENDFOR
+ENDFUNCTION
+</code></pre>
+<h2 id="algorithm-steps"><a class="header" href="#algorithm-steps">Algorithm Steps</a></h2>
+<ol>
+<li>Check if the input matrix is null, empty, or has empty rows. If so, return null.</li>
+<li>Get the dimensions: <code>rows</code> (m) and <code>columns</code> (n).</li>
+<li>Create a 1D result array of size m * n to store the wave traversal elements.</li>
+<li>Initialize an index to track the position in the result array.</li>
+<li>Iterate through each column j from 0 to n-1:
+a. If j is even, traverse top-to-bottom (i from 0 to rows-1), adding <code>matrix[i][j]</code> to result.
+b. If j is odd, traverse bottom-to-top (i from rows-1 to 0), adding <code>matrix[i][j]</code> to result.
+c. Increment the index after each element is added.</li>
+<li>Return the result array.</li>
+<li>In the <code>main</code> method, create test matrices of different sizes and call <code>waveTraversal</code> to verify correctness.</li>
+</ol>
+<h2 id="java-implementation"><a class="header" href="#java-implementation">Java Implementation</a></h2>
+<pre><code class="language-java">public class WaveTraversal {
+    // Traverses matrix in wave pattern and returns 1D array
+    public int[] waveTraversal(int[][] matrix) {
+        // Check for null or empty matrix
+        if (matrix == null || matrix.length == 0 || matrix[0].length == 0) {
+            return null;
+        }
+        // Get dimensions
+        int rows = matrix.length;
+        int cols = matrix[0].length;
+        // Create result array
+        int[] result = new int[rows * cols];
+        int index = 0;
+        // Traverse each column
+        for (int j = 0; j &lt; cols; j++) {
+            // Even column: top-to-bottom
+            if (j % 2 == 0) {
+                for (int i = 0; i &lt; rows; i++) {
+                    result[index++] = matrix[i][j];
+                }
+            }
+            // Odd column: bottom-to-top
+            else {
+                for (int i = rows - 1; i &gt;= 0; i--) {
+                    result[index++] = matrix[i][j];
+                }
+            }
+        }
+        return result;
+    }
+
+    // Main method to test waveTraversal with various inputs
+    public static void main(String[] args) {
+        WaveTraversal traverser = new WaveTraversal();
+
+        // Test case 1: 2x3 matrix
+        int[][] matrix1 = {{1, 2, 3}, {4, 5, 6}};
+        System.out.println("Test case 1:");
+        System.out.println("Matrix:");
+        printMatrix(matrix1);
+        System.out.print("Wave traversal: ");
+        printArray(traverser.waveTraversal(matrix1));
+
+        // Test case 2: 3x2 matrix
+        int[][] matrix2 = {{1, 2}, {3, 4}, {5, 6}};
+        System.out.println("Test case 2:");
+        System.out.println("Matrix:");
+        printMatrix(matrix2);
+        System.out.print("Wave traversal: ");
+        printArray(traverser.waveTraversal(matrix2));
+
+        // Test case 3: 1x3 single-row matrix
+        int[][] matrix3 = {{1, 2, 3}};
+        System.out.println("Test case 3:");
+        System.out.println("Matrix:");
+        printMatrix(matrix3);
+        System.out.print("Wave traversal: ");
+        printArray(traverser.waveTraversal(matrix3));
+
+        // Test case 4: 3x1 single-column matrix
+        int[][] matrix4 = {{1}, {2}, {3}};
+        System.out.println("Test case 4:");
+        System.out.println("Matrix:");
+        printMatrix(matrix4);
+        System.out.print("Wave traversal: ");
+        printArray(traverser.waveTraversal(matrix4));
+
+        // Test case 5: 2x2 matrix with negative numbers
+        int[][] matrix5 = {{-1, -2}, {-3, -4}};
+        System.out.println("Test case 5:");
+        System.out.println("Matrix:");
+        printMatrix(matrix5);
+        System.out.print("Wave traversal: ");
+        printArray(traverser.waveTraversal(matrix5));
+
+        // Test case 6: Null matrix
+        int[][] matrix6 = null;
+        System.out.println("Test case 6:");
+        System.out.println("Matrix:");
+        printMatrix(matrix6);
+        System.out.print("Wave traversal: ");
+        printArray(traverser.waveTraversal(matrix6));
+    }
+
+    // Helper method to print matrix
+    private static void printMatrix(int[][] matrix) {
+        if (matrix == null || matrix.length == 0) {
+            System.out.println("null");
+            return;
+        }
+        System.out.println("[");
+        for (int i = 0; i &lt; matrix.length; i++) {
+            System.out.print("  [");
+            for (int j = 0; j &lt; matrix[i].length; j++) {
+                System.out.print(matrix[i][j]);
+                if (j &lt; matrix[i].length - 1) {
+                    System.out.print(", ");
+                }
+            }
+            System.out.println("]");
+        }
+        System.out.println("]");
+    }
+
+    // Helper method to print 1D array
+    private static void printArray(int[] arr) {
+        if (arr == null) {
+            System.out.println("null");
+            return;
+        }
+        System.out.print("[");
+        for (int i = 0; i &lt; arr.length; i++) {
+            System.out.print(arr[i]);
+            if (i &lt; arr.length - 1) {
+                System.out.print(", ");
+            }
+        }
+        System.out.println("]");
+    }
+}
+</code></pre>
+<h2 id="output"><a class="header" href="#output">Output</a></h2>
+<p>Running the <code>main</code> method produces:</p>
+<pre><code>Test case 1:
+Matrix:
+[
+  [1, 2, 3]
+  [4, 5, 6]
+]
+Wave traversal: [1, 4, 6, 5, 3, 2]
+Test case 2:
+Matrix:
+[
+  [1, 2]
+  [3, 4]
+  [5, 6]
+]
+Wave traversal: [1, 3, 5, 6, 4, 2]
+Test case 3:
+Matrix:
+[
+  [1, 2, 3]
+]
+Wave traversal: [1, 3, 2]
+Test case 4:
+Matrix:
+[
+  [1]
+  [2]
+  [3]
+]
+Wave traversal: [1, 2, 3]
+Test case 5:
+Matrix:
+[
+  [-1, -2]
+  [-3, -4]
+]
+Wave traversal: [-1, -3, -4, -2]
+Test case 6:
+Matrix:
+null
+Wave traversal: null
+</code></pre>
+<p>Explanation:</p>
+<ul>
+<li>Test case 1: Traverses 2×3 matrix: Col 0 (even): [1, 4]; Col 1 (odd): [6, 5]; Col 2 (even): [3, 2].</li>
+<li>Test case 2: Traverses 3×2 matrix: Col 0 (even): [1, 3, 5]; Col 1 (odd): [6, 4, 2].</li>
+<li>Test case 3: Traverses 1×3 matrix: Col 0 (even): [1]; Col 1 (odd): [3]; Col 2 (even): [2].</li>
+<li>Test case 4: Traverses 3×1 matrix: Col 0 (even): [1, 2, 3].</li>
+<li>Test case 5: Traverses 2×2 matrix with negatives: Col 0 (even): [-1, -3]; Col 1 (odd): [-4, -2].</li>
+<li>Test case 6: Returns null for a null matrix.</li>
+</ul>
+<h2 id="how-it-works"><a class="header" href="#how-it-works">How It Works</a></h2>
+<ul>
+<li><strong>Step 1</strong>: The <code>waveTraversal</code> method checks for null or empty matrices. For <code>[[1, 2, 3], [4, 5, 6]]</code>, it proceeds.</li>
+<li><strong>Step 2</strong>: Get dimensions: <code>rows = 2</code>, <code>cols = 3</code>.</li>
+<li><strong>Step 3</strong>: Create a result array of size 2 * 3 = 6.</li>
+<li><strong>Step 4</strong>: Iterate through columns:
+<ul>
+<li>Col 0 (even): <code>i = 0 to 1</code> → <code>result[0] = matrix[0][0] = 1</code>, <code>result[1] = matrix[1][0] = 4</code>.</li>
+<li>Col 1 (odd): <code>i = 1 to 0</code> → <code>result[2] = matrix[1][1] = 6</code>, <code>result[3] = matrix[0][1] = 5</code>.</li>
+<li>Col 2 (even): <code>i = 0 to 1</code> → <code>result[4] = matrix[0][2] = 3</code>, <code>result[5] = matrix[1][2] = 2</code>.</li>
+</ul>
+</li>
+<li><strong>Example Trace</strong>: For test case 1, builds <code>[1, 4, 6, 5, 3, 2]</code> by alternating directions.</li>
+<li><strong>Main Method</strong>: Tests with different sizes (2×3, 3×2, 1×3, 3×1, 2×2) and a null matrix, printing inputs and results.</li>
+<li><strong>Wave Property</strong>: Alternates top-to-bottom and bottom-to-top traversal based on column index parity.</li>
+</ul>
+<h2 id="complexity-analysis-table"><a class="header" href="#complexity-analysis-table">Complexity Analysis Table</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Operation</th><th>Time Complexity</th><th>Space Complexity</th></tr></thead><tbody>
+<tr><td>Traversal</td><td>O(m*n)</td><td>O(m*n)</td></tr>
+<tr><td>Full Algorithm</td><td>O(m*n)</td><td>O(m*n)</td></tr>
+</tbody></table>
+</div>
+<p><em>Note</em>:</p>
+<ul>
+<li>m is the number of rows, n is the number of columns.</li>
+<li>Time complexity: O(m*n), as the algorithm visits each element once.</li>
+<li>Space complexity: O(m*n), for the result array. Temporary variables use O(1) space.</li>
+<li>Best, average, and worst cases are O(m*n).</li>
+</ul>
+<blockquote>
+<p><strong>✅ Tip</strong>: Use a single index to track the result array position for simplicity. Test with single-row, single-column, and negative number matrices to ensure the wave pattern is correct.</p>
+</blockquote>
+<blockquote>
+<p><strong>⚠ Warning</strong>: Ensure the input matrix is not null and is rectangular to avoid <code>NullPointerException</code> or <code>ArrayIndexOutOfBoundsException</code>. Verify consistent row lengths for a well-formed matrix.</p>
+</blockquote>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../problemStatements/ch03_01_01/TransposeMatrix.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../../problemStatements/ch03_01_02/AdjacencyListRepresentation.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../problemStatements/ch03_01_01/TransposeMatrix.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../../problemStatements/ch03_01_02/AdjacencyListRepresentation.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../../elasticlunr.min.js"></script>
+        <script src="../../mark.min.js"></script>
+        <script src="../../searcher.js"></script>
+
+        <script src="../../clipboard.min.js"></script>
+        <script src="../../highlight.js"></script>
+        <script src="../../book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="../../theme/ferris.js"></script>
+
+
+    </div>
+    </body>
+</html>

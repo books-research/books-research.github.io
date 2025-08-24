@@ -1,0 +1,544 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>InfixToPostfixConversion - Java Data Structures and Algorithms for Beginners</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../../favicon.svg">
+        <link rel="shortcut icon" href="../../favicon.png">
+        <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+        <link rel="stylesheet" href="../../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="../../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../../theme/ferris.css">
+        <link rel="stylesheet" href="../../theme/semantic-notes.css">
+        <link rel="stylesheet" href="../../theme/listing.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../../toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Java Data Structures and Algorithms for Beginners</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <style>
+body {
+  text-align: justify;
+}
+</style>
+<h1 id="infix-to-postfix-conversion"><a class="header" href="#infix-to-postfix-conversion">Infix to Postfix Conversion</a></h1>
+<h2 id="problem-statement"><a class="header" href="#problem-statement">Problem Statement</a></h2>
+<p>Write a Java program that converts an infix expression (e.g., "A + B * C") to its postfix equivalent (e.g., "A B C * +") using a stack. The program should handle operators (+, -, *, /) and parentheses, pushing operators onto the stack based on precedence and popping them to the output when appropriate. Test the implementation with at least three different expressions, including simple expressions, expressions with parentheses, and complex expressions with multiple operators. You can visualize this as rearranging a mathematical sentence so that the operations are performed in the correct order without needing parentheses, like organizing tasks in a queue where the work gets done step by step.</p>
+<p><strong>Input</strong>: A string representing an infix expression (e.g., "A + B * C", "(A + B) * C").
+<strong>Output</strong>: A string representing the postfix expression (e.g., "A B C * +", "A B + C *").
+<strong>Constraints</strong>:</p>
+<ul>
+<li>The input string length is between 0 and 10^5.</li>
+<li>The string contains operands (single letters A-Z), operators (+, -, *, /), parentheses (()), and spaces.</li>
+<li>The input may be empty, null, or invalid (handled gracefully).
+<strong>Example</strong>:</li>
+<li>Input: <code>"A + B * C"</code></li>
+<li>Output: <code>"A B C * +"</code></li>
+<li>Explanation: * has higher precedence than +, so B * C is processed first, resulting in A B C * +.</li>
+<li>Input: <code>"(A + B) * C"</code></li>
+<li>Output: <code>"A B + C *"</code></li>
+<li>Explanation: Parentheses ensure A + B is evaluated first, then multiplied by C.</li>
+<li>Input: <code>"A + B - C"</code></li>
+<li>Output: <code>"A B + C -"</code></li>
+<li>Explanation: Operators + and - have equal precedence, processed left to right.</li>
+</ul>
+<h2 id="pseudocode"><a class="header" href="#pseudocode">Pseudocode</a></h2>
+<pre><code>CLASS CharStack
+    SET array to new character array of size 1000
+    SET top to -1
+    
+    FUNCTION push(char)
+        IF top equals array length - 1 THEN
+            RETURN false
+        ENDIF
+        INCREMENT top
+        SET array[top] to char
+        RETURN true
+    ENDFUNCTION
+    
+    FUNCTION pop()
+        IF top equals -1 THEN
+            RETURN null
+        ENDIF
+        SET char to array[top]
+        DECREMENT top
+        RETURN char
+    ENDFUNCTION
+    
+    FUNCTION peek()
+        IF top equals -1 THEN
+            RETURN null
+        ENDIF
+        RETURN array[top]
+    ENDFUNCTION
+    
+    FUNCTION isEmpty()
+        RETURN top equals -1
+    ENDFUNCTION
+ENDCLASS
+
+FUNCTION getPrecedence(operator)
+    IF operator is '*' or '/' THEN
+        RETURN 2
+    ELSE IF operator is '+' or '-' THEN
+        RETURN 1
+    ELSE
+        RETURN 0
+    ENDIF
+ENDFUNCTION
+
+FUNCTION infixToPostfix(expression)
+    IF expression is null or empty THEN
+        RETURN empty string
+    ENDIF
+    CREATE stack as new CharStack
+    CREATE result as new StringBuilder
+    FOR each char in expression
+        IF char is letter THEN
+            APPEND char to result
+        ELSE IF char is '(' THEN
+            PUSH char to stack
+        ELSE IF char is ')' THEN
+            WHILE stack is not empty and stack.peek() is not '('
+                APPEND stack.pop() to result
+            ENDWHILE
+            IF stack is not empty THEN
+                POP '(' from stack
+            ENDIF
+        ELSE IF char is operator (+, -, *, /) THEN
+            WHILE stack is not empty and stack.peek() is not '(' and getPrecedence(stack.peek()) &gt;= getPrecedence(char)
+                APPEND stack.pop() to result
+            ENDWHILE
+            PUSH char to stack
+        ENDIF
+    ENDFOR
+    WHILE stack is not empty
+        APPEND stack.pop() to result
+    ENDWHILE
+    RETURN result as string
+ENDFUNCTION
+
+FUNCTION main()
+    SET testExpressions to array of infix expressions
+    FOR each expression in testExpressions
+        PRINT input expression
+        CALL infixToPostfix(expression)
+        PRINT postfix result
+    ENDFOR
+ENDFUNCTION
+</code></pre>
+<h2 id="algorithm-steps"><a class="header" href="#algorithm-steps">Algorithm Steps</a></h2>
+<ol>
+<li>Define a <code>CharStack</code> class with methods: <code>push</code>, <code>pop</code>, <code>peek</code>, <code>isEmpty</code>.</li>
+<li>Define a <code>getPrecedence</code> function to return operator precedence: 2 for *, /; 1 for +, -; 0 for others.</li>
+<li>In the <code>infixToPostfix</code> method:
+a. If the input is null or empty, return an empty string.
+b. Create a stack for operators and a StringBuilder for the result.
+c. For each character in the expression:
+<ul>
+<li>If it’s a letter (operand), append it to the result.</li>
+<li>If it’s '(', push it to the stack.</li>
+<li>If it’s ')', pop operators from the stack to the result until '(' is found, then pop '('.</li>
+<li>If it’s an operator, pop higher or equal precedence operators from the stack to the result, then push the current operator.
+d. After processing, pop remaining operators from the stack to the result.
+e. Return the result as a string.</li>
+</ul>
+</li>
+<li>In the <code>main</code> method, test with at least three expressions, including simple, parenthesized, and complex cases.</li>
+</ol>
+<h2 id="java-implementation"><a class="header" href="#java-implementation">Java Implementation</a></h2>
+<pre><code class="language-java">public class InfixToPostfixConversion {
+    // Custom stack implementation for characters
+    static class CharStack {
+        private char[] array;
+        private int top;
+        private static final int DEFAULT_SIZE = 1000;
+
+        public CharStack() {
+            array = new char[DEFAULT_SIZE];
+            top = -1;
+        }
+
+        public boolean push(char c) {
+            if (top == array.length - 1) {
+                return false; // Stack full
+            }
+            array[++top] = c;
+            return true;
+        }
+
+        public Character pop() {
+            if (top == -1) {
+                return null; // Stack empty
+            }
+            return array[top--];
+        }
+
+        public Character peek() {
+            if (top == -1) {
+                return null; // Stack empty
+            }
+            return array[top];
+        }
+
+        public boolean isEmpty() {
+            return top == -1;
+        }
+    }
+
+    // Returns precedence of operators
+    private int getPrecedence(char operator) {
+        if (operator == '*' || operator == '/') {
+            return 2;
+        } else if (operator == '+' || operator == '-') {
+            return 1;
+        }
+        return 0;
+    }
+
+    // Converts infix expression to postfix
+    public String infixToPostfix(String expression) {
+        if (expression == null || expression.isEmpty()) {
+            return "";
+        }
+        CharStack stack = new CharStack();
+        StringBuilder result = new StringBuilder();
+
+        for (char c : expression.replaceAll("\\s", "").toCharArray()) {
+            if (Character.isLetter(c)) {
+                result.append(c);
+            } else if (c == '(') {
+                stack.push(c);
+            } else if (c == ')') {
+                while (!stack.isEmpty() &amp;&amp; stack.peek() != '(') {
+                    result.append(stack.pop());
+                }
+                if (!stack.isEmpty()) {
+                    stack.pop(); // Remove '('
+                }
+            } else if (c == '+' || c == '-' || c == '*' || c == '/') {
+                while (!stack.isEmpty() &amp;&amp; stack.peek() != '(' &amp;&amp; 
+                       getPrecedence(stack.peek()) &gt;= getPrecedence(c)) {
+                    result.append(stack.pop());
+                }
+                stack.push(c);
+            }
+        }
+
+        while (!stack.isEmpty()) {
+            result.append(stack.pop());
+        }
+
+        return result.toString();
+    }
+
+    // Main method to test infix to postfix conversion
+    public static void main(String[] args) {
+        InfixToPostfixConversion converter = new InfixToPostfixConversion();
+
+        // Test cases
+        String[] testExpressions = {
+            "A + B * C",          // Simple expression
+            "(A + B) * C",        // Expression with parentheses
+            "A + B * C - D / E",  // Complex expression
+            "",                   // Empty string
+            "X * (Y + Z)"        // Nested parentheses
+        };
+
+        for (int i = 0; i &lt; testExpressions.length; i++) {
+            System.out.println("Test case " + (i + 1) + ":");
+            System.out.println("Infix: \"" + testExpressions[i] + "\"");
+            String result = converter.infixToPostfix(testExpressions[i]);
+            System.out.println("Postfix: \"" + result + "\"\n");
+        }
+    }
+}
+</code></pre>
+<h2 id="output"><a class="header" href="#output">Output</a></h2>
+<p>Running the <code>main</code> method produces:</p>
+<pre><code>Test case 1:
+Infix: "A + B * C"
+Postfix: "ABC*+"
+
+Test case 2:
+Infix: "(A + B) * C"
+Postfix: "AB+C*"
+
+Test case 3:
+Infix: "A + B * C - D / E"
+Postfix: "ABC*+DE/-"
+
+Test case 4:
+Infix: ""
+Postfix: ""
+
+Test case 5:
+Infix: "X * (Y + Z)"
+Postfix: "XYZ+*"
+</code></pre>
+<p>Explanation:</p>
+<ul>
+<li>Test case 1: <code>"A + B * C"</code> → * has higher precedence, so B * C becomes "BC*", then + gives "ABC*+".</li>
+<li>Test case 2: <code>"(A + B) * C"</code> → Parentheses prioritize A + B, giving "AB+", then * gives "AB+C*".</li>
+<li>Test case 3: <code>"A + B * C - D / E"</code> → * and / have higher precedence, processed left to right, then + and -, giving "ABC*+DE/-".</li>
+<li>Test case 4: <code>""</code> → Empty input returns empty string.</li>
+<li>Test case 5: <code>"X * (Y + Z)"</code> → Parentheses prioritize Y + Z, giving "YZ+", then * gives "XYZ+*".</li>
+</ul>
+<h2 id="how-it-works"><a class="header" href="#how-it-works">How It Works</a></h2>
+<ul>
+<li><strong>CharStack</strong>:
+<ul>
+<li>Stores operators and parentheses, with methods <code>push</code>, <code>pop</code>, <code>peek</code>, <code>isEmpty</code>.</li>
+</ul>
+</li>
+<li><strong>getPrecedence</strong>:
+<ul>
+<li>Assigns precedence: 2 for *, /; 1 for +, -; 0 for others.</li>
+</ul>
+</li>
+<li><strong>infixToPostfix</strong>:
+<ul>
+<li>Outputs operands (letters) directly to the result.</li>
+<li>Pushes '(' to stack, pops operators until ')' for closing parentheses.</li>
+<li>For operators, pops higher/equal precedence operators, then pushes current operator.</li>
+<li>Pops remaining operators at the end.</li>
+</ul>
+</li>
+<li><strong>Example Trace (Test case 1)</strong>:
+<ul>
+<li>Input: <code>"A + B * C"</code>.</li>
+<li>A: Append to result → "A".</li>
+<li>+: Push to stack → [+].</li>
+<li>B: Append to result → "AB".</li>
+<li>*: Higher precedence than +, push → [+, *].</li>
+<li>C: Append to result → "ABC".</li>
+<li>End: Pop * → "ABC*", pop + → "ABC*+".</li>
+</ul>
+</li>
+<li><strong>Main Method</strong>: Tests simple, parenthesized, complex, empty, and nested expressions.</li>
+</ul>
+<h2 id="complexity-analysis-table"><a class="header" href="#complexity-analysis-table">Complexity Analysis Table</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Operation</th><th>Time Complexity</th><th>Space Complexity</th></tr></thead><tbody>
+<tr><td>Push/Pop/Peek</td><td>O(1)</td><td>O(1)</td></tr>
+<tr><td>Full Algorithm</td><td>O(n)</td><td>O(n)</td></tr>
+</tbody></table>
+</div>
+<p><em>Note</em>:</p>
+<ul>
+<li>n is the length of the input expression.</li>
+<li>Time complexity: O(n) for iterating through the expression, with O(1) for each stack operation.</li>
+<li>Space complexity: O(n) for the stack (worst case: all operators/parentheses) and StringBuilder.</li>
+<li>Worst case: O(n) time and O(n) space for expressions like <code>"((A+B)*C)"</code>.</li>
+</ul>
+<blockquote>
+<p><strong>✅ Tip</strong>: Use a stack to manage operator precedence in infix-to-postfix conversion, as it naturally handles the order of operations. Test with parentheses and multiple operator types to ensure correctness.</p>
+</blockquote>
+<blockquote>
+<p><strong>⚠ Warning</strong>: Handle invalid inputs (e.g., unbalanced parentheses) gracefully to avoid stack underflow. Remove spaces from the input to simplify processing.</p>
+</blockquote>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../problemStatements/ch03_04/BrowserBackButtonSimulation.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../../problemStatements/ch03_04/ParenthesesChecker.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../problemStatements/ch03_04/BrowserBackButtonSimulation.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../../problemStatements/ch03_04/ParenthesesChecker.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../../elasticlunr.min.js"></script>
+        <script src="../../mark.min.js"></script>
+        <script src="../../searcher.js"></script>
+
+        <script src="../../clipboard.min.js"></script>
+        <script src="../../highlight.js"></script>
+        <script src="../../book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="../../theme/ferris.js"></script>
+
+
+    </div>
+    </body>
+</html>

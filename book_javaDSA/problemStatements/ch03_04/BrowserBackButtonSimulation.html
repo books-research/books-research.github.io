@@ -1,0 +1,544 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>BrowserBackButtonSimulation - Java Data Structures and Algorithms for Beginners</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../../favicon.svg">
+        <link rel="shortcut icon" href="../../favicon.png">
+        <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+        <link rel="stylesheet" href="../../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="../../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../../theme/ferris.css">
+        <link rel="stylesheet" href="../../theme/semantic-notes.css">
+        <link rel="stylesheet" href="../../theme/listing.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../../toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Java Data Structures and Algorithms for Beginners</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <style>
+body {
+  text-align: justify;
+}
+</style>
+<h1 id="real-world-simulation-browser-back-button"><a class="header" href="#real-world-simulation-browser-back-button">Real-World Simulation: Browser Back Button</a></h1>
+<h2 id="problem-statement"><a class="header" href="#problem-statement">Problem Statement</a></h2>
+<p>Write a Java program that simulates a browser’s back button functionality using a stack. The program should allow users to input a list of URLs to push onto the stack, representing page navigation, and print the current page each time the back button is simulated by popping a URL from the stack. The current page is the topmost URL on the stack after each operation. Test the implementation with various sequences of push and pop operations, including edge cases like empty stacks and null inputs. You can visualize this as a stack of visited webpages, where each new page is added to the top, and pressing the back button removes the current page to reveal the previous one.</p>
+<p><strong>Input</strong>: A sequence of operations, where each operation is either:</p>
+<ul>
+<li>Push: Add a URL (string) to the stack (e.g., <code>"https://example.com"</code>).</li>
+<li>Pop: Simulate the back button by removing the top URL and revealing the new top.
+<strong>Output</strong>: For each operation, print the operation performed and the current page (top of the stack) or a message if the stack is empty.
+<strong>Constraints</strong>:</li>
+<li>Stack size is between 0 and 10^5.</li>
+<li>URLs are non-empty strings containing printable ASCII characters, or null (handled gracefully).</li>
+<li>The stack may be empty when pop is called.
+<strong>Example</strong>:</li>
+<li>Input: Operations = [push("page1"), push("page2"), pop, push("page3"), pop]</li>
+<li>Output:
+<pre><code>Pushed page1, Current page: page1
+Pushed page2, Current page: page2
+Popped page2, Current page: page1
+Pushed page3, Current page: page3
+Popped page3, Current page: page1
+</code></pre>
+</li>
+<li>Explanation: Push adds URLs to the stack; pop removes the top URL, showing the previous one.</li>
+<li>Input: Operations = [pop on empty stack]</li>
+<li>Output: <code>Popped, Stack empty</code></li>
+</ul>
+<h2 id="pseudocode"><a class="header" href="#pseudocode">Pseudocode</a></h2>
+<pre><code>CLASS StringStack
+    SET array to new string array of size 1000
+    SET top to -1
+    
+    FUNCTION push(url)
+        IF top equals array length - 1 THEN
+            RETURN false (stack full)
+        ENDIF
+        INCREMENT top
+        SET array[top] to url
+        RETURN true
+    ENDFUNCTION
+    
+    FUNCTION pop()
+        IF top equals -1 THEN
+            RETURN null (stack empty)
+        ENDIF
+        SET url to array[top]
+        DECREMENT top
+        RETURN url
+    ENDFUNCTION
+    
+    FUNCTION peek()
+        IF top equals -1 THEN
+            RETURN null (stack empty)
+        ENDIF
+        RETURN array[top]
+    ENDFUNCTION
+    
+    FUNCTION isEmpty()
+        RETURN top equals -1
+    ENDFUNCTION
+ENDCLASS
+
+FUNCTION simulateBrowser(operations)
+    CREATE stack as new StringStack
+    FOR each operation in operations
+        IF operation.type equals "push" THEN
+            CALL stack.push(operation.url)
+            PRINT pushed url and current page (stack.peek())
+        ELSE IF operation.type equals "pop" THEN
+            SET popped to stack.pop()
+            IF popped is null THEN
+                PRINT stack empty message
+            ELSE
+                PRINT popped url and current page (stack.peek())
+            ENDIF
+        ENDIF
+    ENDFOR
+ENDFUNCTION
+
+FUNCTION main()
+    SET testCases to array of operation sequences
+    FOR each testCase in testCases
+        PRINT test case details
+        CALL simulateBrowser(testCase)
+    ENDFOR
+ENDFUNCTION
+</code></pre>
+<h2 id="algorithm-steps"><a class="header" href="#algorithm-steps">Algorithm Steps</a></h2>
+<ol>
+<li>Define a <code>StringStack</code> class with:
+a. An array to store URLs (strings), with a <code>top</code> index.
+b. Methods: <code>push</code> (add URL), <code>pop</code> (remove and return top URL), <code>peek</code> (view top URL), <code>isEmpty</code> (check if empty).</li>
+<li>In the <code>simulateBrowser</code> method:
+a. Create a new <code>StringStack</code>.
+b. For each operation:
+<ul>
+<li>If "push", push the URL and print the current page (top of stack).</li>
+<li>If "pop", pop the top URL and print the new current page (top of stack) or "Stack empty" if empty.</li>
+</ul>
+</li>
+<li>In the <code>main</code> method, test with sequences of push and pop operations, including empty stacks, single URLs, and null URLs.</li>
+</ol>
+<h2 id="java-implementation"><a class="header" href="#java-implementation">Java Implementation</a></h2>
+<pre><code class="language-java">import java.util.*;
+
+public class BrowserBackButtonSimulation {
+    // Custom stack implementation for strings
+    static class StringStack {
+        private String[] array;
+        private int top;
+        private static final int DEFAULT_SIZE = 1000;
+
+        public StringStack() {
+            array = new String[DEFAULT_SIZE];
+            top = -1;
+        }
+
+        public boolean push(String url) {
+            if (top == array.length - 1) {
+                return false; // Stack full
+            }
+            array[++top] = url;
+            return true;
+        }
+
+        public String pop() {
+            if (top == -1) {
+                return null; // Stack empty
+            }
+            return array[top--];
+        }
+
+        public String peek() {
+            if (top == -1) {
+                return null; // Stack empty
+            }
+            return array[top];
+        }
+
+        public boolean isEmpty() {
+            return top == -1;
+        }
+    }
+
+    // Helper class for operations
+    static class Operation {
+        String type;
+        String url; // For push operations
+
+        Operation(String type, String url) {
+            this.type = type;
+            this.url = url;
+        }
+    }
+
+    // Simulates browser back button functionality
+    public void simulateBrowser(List&lt;Operation&gt; operations) {
+        StringStack stack = new StringStack();
+        for (Operation op : operations) {
+            if (op.type.equals("push")) {
+                boolean success = stack.push(op.url);
+                if (success) {
+                    System.out.println("Pushed " + op.url + ", Current page: " + stack.peek());
+                } else {
+                    System.out.println("Push " + op.url + " failed: Stack full");
+                }
+            } else if (op.type.equals("pop")) {
+                String popped = stack.pop();
+                if (popped == null) {
+                    System.out.println("Popped, Stack empty");
+                } else {
+                    System.out.println("Popped " + popped + ", Current page: " + 
+                                       (stack.peek() != null ? stack.peek() : "Stack empty"));
+                }
+            }
+        }
+    }
+
+    // Main method to test browser simulation
+    public static void main(String[] args) {
+        BrowserBackButtonSimulation simulator = new BrowserBackButtonSimulation();
+
+        // Test cases
+        List&lt;List&lt;Operation&gt;&gt; testCases = new ArrayList&lt;&gt;();
+        
+        // Test case 1: Normal sequence
+        List&lt;Operation&gt; case1 = Arrays.asList(
+            new Operation("push", "https://page1.com"),
+            new Operation("push", "https://page2.com"),
+            new Operation("pop", null),
+            new Operation("push", "https://page3.com"),
+            new Operation("pop", null)
+        );
+        testCases.add(case1);
+        
+        // Test case 2: Empty stack
+        List&lt;Operation&gt; case2 = Arrays.asList(
+            new Operation("pop", null)
+        );
+        testCases.add(case2);
+        
+        // Test case 3: Single URL
+        List&lt;Operation&gt; case3 = Arrays.asList(
+            new Operation("push", "https://single.com"),
+            new Operation("pop", null)
+        );
+        testCases.add(case3);
+        
+        // Test case 4: Multiple pushes
+        List&lt;Operation&gt; case4 = Arrays.asList(
+            new Operation("push", "https://site1.com"),
+            new Operation("push", "https://site2.com"),
+            new Operation("push", "https://site3.com"),
+            new Operation("pop", null),
+            new Operation("pop", null)
+        );
+        testCases.add(case4);
+        
+        // Test case 5: Null URL
+        List&lt;Operation&gt; case5 = Arrays.asList(
+            new Operation("push", null),
+            new Operation("pop", null)
+        );
+        testCases.add(case5);
+
+        // Run test cases
+        for (int i = 0; i &lt; testCases.size(); i++) {
+            System.out.println("Test case " + (i + 1) + ":");
+            simulator.simulateBrowser(testCases.get(i));
+            System.out.println();
+        }
+    }
+}
+</code></pre>
+<h2 id="output"><a class="header" href="#output">Output</a></h2>
+<p>Running the <code>main</code> method produces:</p>
+<pre><code>Test case 1:
+Pushed https://page1.com, Current page: https://page1.com
+Pushed https://page2.com, Current page: https://page2.com
+Popped https://page2.com, Current page: https://page1.com
+Pushed https://page3.com, Current page: https://page3.com
+Popped https://page3.com, Current page: https://page1.com
+
+Test case 2:
+Popped, Stack empty
+
+Test case 3:
+Pushed https://single.com, Current page: https://single.com
+Popped https://single.com, Current page: Stack empty
+
+Test case 4:
+Pushed https://site1.com, Current page: https://site1.com
+Pushed https://site2.com, Current page: https://site2.com
+Pushed https://site3.com, Current page: https://site3.com
+Popped https://site3.com, Current page: https://site2.com
+Popped https://site2.com, Current page: https://site1.com
+
+Test case 5:
+Pushed null, Current page: null
+Popped null, Current page: Stack empty
+</code></pre>
+<p>Explanation:</p>
+<ul>
+<li>Test case 1: Pushes "page1", "page2", pops to "page1", pushes "page3", pops to "page1".</li>
+<li>Test case 2: Pop on empty stack returns "Stack empty".</li>
+<li>Test case 3: Pushes single URL, pops to empty stack.</li>
+<li>Test case 4: Multiple pushes, then pops back to "site1".</li>
+<li>Test case 5: Pushes null URL, pops to empty stack.</li>
+</ul>
+<h2 id="how-it-works"><a class="header" href="#how-it-works">How It Works</a></h2>
+<ul>
+<li><strong>StringStack</strong>:
+<ul>
+<li>Uses an array to store URLs, with <code>top</code> tracking the latest element.</li>
+<li><code>push</code>: Adds a URL if the stack isn’t full.</li>
+<li><code>pop</code>: Removes and returns the top URL if not empty.</li>
+<li><code>peek</code>: Returns the top URL without removing it.</li>
+<li><code>isEmpty</code>: Checks if the stack is empty.</li>
+</ul>
+</li>
+<li><strong>simulateBrowser</strong>:
+<ul>
+<li>Pushes URLs to simulate navigation, prints current page.</li>
+<li>Pops URLs to simulate back button, prints new current page or "Stack empty".</li>
+</ul>
+</li>
+<li><strong>Example Trace (Test case 1)</strong>:
+<ul>
+<li>Push "page1": stack = ["page1"], current = "page1".</li>
+<li>Push "page2": stack = ["page1", "page2"], current = "page2".</li>
+<li>Pop: Removes "page2", current = "page1".</li>
+<li>Push "page3": stack = ["page1", "page3"], current = "page3".</li>
+<li>Pop: Removes "page3", current = "page1".</li>
+</ul>
+</li>
+<li><strong>Main Method</strong>: Tests normal sequences, empty stack, single URL, multiple pushes, and null URL.</li>
+</ul>
+<h2 id="complexity-analysis-table"><a class="header" href="#complexity-analysis-table">Complexity Analysis Table</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Operation</th><th>Time Complexity</th><th>Space Complexity</th></tr></thead><tbody>
+<tr><td>Push/Pop/Peek</td><td>O(1)</td><td>O(1)</td></tr>
+<tr><td>Full Algorithm</td><td>O(n)</td><td>O(n)</td></tr>
+</tbody></table>
+</div>
+<p><em>Note</em>:</p>
+<ul>
+<li>n is the number of operations.</li>
+<li>Time complexity: O(1) for each push, pop, or peek; O(n) for processing n operations.</li>
+<li>Space complexity: O(n) for the stack storing up to n URLs.</li>
+<li>Worst case: O(n) time and O(n) space for many push operations.</li>
+</ul>
+<blockquote>
+<p><strong>✅ Tip</strong>: Use a stack to simulate browser navigation, as its LIFO nature naturally tracks the history of visited pages. Test with sequences that include multiple pops to verify the back button functionality.</p>
+</blockquote>
+<blockquote>
+<p><strong>⚠ Warning</strong>: Handle null URLs and empty stack cases to avoid unexpected behavior. Ensure the stack size is sufficient to accommodate the input sequence.</p>
+</blockquote>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../problemStatements/stackProblemSolving.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../../problemStatements/ch03_04/InfixToPostfixConversion.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../problemStatements/stackProblemSolving.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../../problemStatements/ch03_04/InfixToPostfixConversion.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../../elasticlunr.min.js"></script>
+        <script src="../../mark.min.js"></script>
+        <script src="../../searcher.js"></script>
+
+        <script src="../../clipboard.min.js"></script>
+        <script src="../../highlight.js"></script>
+        <script src="../../book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="../../theme/ferris.js"></script>
+
+
+    </div>
+    </body>
+</html>

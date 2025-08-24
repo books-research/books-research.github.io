@@ -1,0 +1,413 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Hashing - Java Data Structures and Algorithms for Beginners</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="theme/ferris.css">
+        <link rel="stylesheet" href="theme/semantic-notes.css">
+        <link rel="stylesheet" href="theme/listing.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Java Data Structures and Algorithms for Beginners</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <style>
+body {
+  text-align: justify;
+}
+</style>
+<h2 id="hashing-data-structure"><a class="header" href="#hashing-data-structure">Hashing Data Structure</a></h2>
+<h3 id="definition-and-concepts"><a class="header" href="#definition-and-concepts">Definition and Concepts</a></h3>
+<p>Hashing is a technique used to map data of arbitrary size to fixed-size values, typically for efficient storage and retrieval in a data structure called a hash table. A hash table uses a hash function to compute an index (or hash code) for each key, which determines where the key-value pair is stored in an array. The goal is to enable fast access to data using keys, such as strings or numbers. You can visualize a hash table as a set of labeled drawers, where each label (key) quickly directs you to the corresponding drawer (value). Collisions, where multiple keys map to the same index, are resolved using techniques like separate chaining (using linked lists) or open addressing (using probing). Hashing is fundamental for applications requiring quick lookups, insertions, and deletions.</p>
+<h3 id="why-use-it"><a class="header" href="#why-use-it">Why Use It?</a></h3>
+<p>Hashing is used to achieve fast data retrieval, insertion, and deletion with an average time complexity of O(1). It is ideal for scenarios where you need to associate keys with values and access them efficiently without iterating through the entire dataset. Hash tables are versatile and widely used in databases, caches, and other systems requiring rapid data access.</p>
+<h3 id="where-to-use-real-life-examples"><a class="header" href="#where-to-use-real-life-examples">Where to Use? (Real-Life Examples)</a></h3>
+<ul>
+<li><strong>Database Indexing</strong>: Databases use hashing to index records, allowing quick retrieval of data based on keys like user IDs.</li>
+<li><strong>Caches</strong>: Web browsers and content delivery networks use hash tables to cache web pages, mapping URLs to cached content for fast access.</li>
+<li><strong>Symbol Tables in Compilers</strong>: Compilers use hash tables to store variable names and their attributes during code compilation.</li>
+<li><strong>Password Storage</strong>: Systems store hashed passwords to verify user credentials quickly without storing plain text.</li>
+</ul>
+<!-- 
+### SVG Diagram
+The diagram for a hash table would depict an array of fixed size (e.g., 10 slots), with each slot representing a bucket. Some slots would contain linked lists (for separate chaining) to handle collisions, with nodes labeled as key-value pairs (e.g., "key1:value1"). Arrows would show a hash function mapping a key (e.g., "apple") to an index (e.g., 3) via a formula like `hash("apple") % 10`. The diagram would illustrate an **insert** operation adding a key-value pair and a **lookup** operation retrieving a value by key. A caption would note: "Hashing maps keys to indices for fast access, with collisions resolved by linked lists." -->
+<h3 id="explain-operations"><a class="header" href="#explain-operations">Explain Operations</a></h3>
+<ul>
+<li><strong>Insert</strong>: This operation adds a key-value pair to the hash table. The hash function computes an index for the key, and the pair is stored at that index (or in a linked list if a collision occurs). It has an average time complexity of O(1).</li>
+<li><strong>Lookup</strong>: This operation retrieves the value associated with a given key by computing its hash and checking the corresponding index. It has an average time complexity of O(1).</li>
+<li><strong>Delete</strong>: This operation removes a key-value pair by finding the key’s index and removing it from the bucket (or linked list). It has an average time complexity of O(1).</li>
+<li><strong>isEmpty</strong>: This operation checks whether the hash table is empty. It has a time complexity of O(1).</li>
+<li><strong>Size</strong>: This operation returns the number of key-value pairs in the hash table. It has a time complexity of O(1).</li>
+</ul>
+<h3 id="java-implementation"><a class="header" href="#java-implementation">Java Implementation</a></h3>
+<p>The following Java code implements a hash table using separate chaining (linked lists for collision resolution).</p>
+<pre><code class="language-java">public class HashTable {
+    private static class Node {
+        String key; // Key for the hash table entry
+        int value; // Value associated with the key
+        Node next; // Reference to the next node in case of collision
+
+        Node(String key, int value) {
+            this.key = key;
+            this.value = value;
+            this.next = null;
+        }
+    }
+
+    private Node[] buckets; // Array of linked lists for storing key-value pairs
+    private int capacity; // Size of the buckets array
+    private int size; // Number of key-value pairs in the hash table
+
+    // Constructor to initialize the hash table with a given capacity
+    public HashTable(int capacity) {
+        this.capacity = capacity;
+        this.buckets = new Node[capacity];
+        this.size = 0;
+    }
+
+    // Hash function to compute index for a key
+    private int hash(String key) {
+        return Math.abs(key.hashCode() % capacity); // Ensures non-negative index
+    }
+
+    // Insert: Adds a key-value pair to the hash table
+    public void insert(String key, int value) {
+        int index = hash(key); // Computes the index for the key
+        if (buckets[index] == null) { // If bucket is empty, create new node
+            buckets[index] = new Node(key, value);
+            size++;
+            return;
+        }
+        Node current = buckets[index];
+        while (current != null) { // Traverses the linked list
+            if (current.key.equals(key)) { // Updates value if key exists
+                current.value = value;
+                return;
+            }
+            if (current.next == null) break; // Reaches the end of the list
+            current = current.next;
+        }
+        current.next = new Node(key, value); // Adds new node at the end
+        size++;
+    }
+
+    // Lookup: Retrieves the value for a given key
+    public int lookup(String key) {
+        int index = hash(key); // Computes the index for the key
+        Node current = buckets[index];
+        while (current != null) { // Traverses the linked list
+            if (current.key.equals(key)) {
+                return current.value; // Returns value if key is found
+            }
+            current = current.next;
+        }
+        throw new IllegalArgumentException("Key not found in the hash table.");
+    }
+
+    // Delete: Removes a key-value pair from the hash table
+    public void delete(String key) {
+        int index = hash(key); // Computes the index for the key
+        Node current = buckets[index];
+        Node prev = null;
+        while (current != null) { // Traverses the linked list
+            if (current.key.equals(key)) {
+                if (prev == null) { // If key is at the head
+                    buckets[index] = current.next;
+                } else {
+                    prev.next = current.next; // Bypasses the node
+                }
+                size--;
+                return;
+            }
+            prev = current;
+            current = current.next;
+        }
+        throw new IllegalArgumentException("Key not found in the hash table.");
+    }
+
+    // isEmpty: Checks if the hash table is empty
+    public boolean isEmpty() {
+        return size == 0;
+    }
+
+    // Size: Returns the number of key-value pairs in the hash table
+    public int size() {
+        return size;
+    }
+}
+</code></pre>
+<h3 id="how-it-works"><a class="header" href="#how-it-works">How It Works</a></h3>
+<ol>
+<li><strong>Initialization</strong>: The constructor initializes an array of <code>Node</code> objects (<code>buckets</code>) with a given <code>capacity</code> and sets <code>size</code> to 0, indicating an empty hash table.</li>
+<li><strong>Hash Function</strong>: The <code>hash</code> method computes an index by applying Java’s <code>hashCode</code> to the key and using modulo <code>capacity</code> to fit within the array bounds, ensuring a non-negative index.</li>
+<li><strong>Insert Operation</strong>:
+<ul>
+<li>The method computes the index for the key using the hash function.</li>
+<li>If the bucket at that index is empty, it creates a new <code>Node</code> with the key-value pair.</li>
+<li>If the bucket contains a linked list, it traverses to check if the key exists (updating the value if found) or appends a new node at the end.</li>
+<li>It increments <code>size</code> for new entries.</li>
+</ul>
+</li>
+<li><strong>Lookup Operation</strong>:
+<ul>
+<li>The method computes the index for the key and traverses the linked list at that index.</li>
+<li>If the key is found, it returns the associated value; otherwise, it throws an exception.</li>
+</ul>
+</li>
+<li><strong>Delete Operation</strong>:
+<ul>
+<li>The method computes the index and traverses the linked list to find the key.</li>
+<li>If found, it removes the node by updating pointers (either setting the bucket to the next node or bypassing the node) and decrements <code>size</code>.</li>
+<li>If the key is not found, it throws an exception.</li>
+</ul>
+</li>
+<li><strong>isEmpty Operation</strong>: The method returns true if <code>size</code> equals 0, indicating an empty hash table, and false otherwise.</li>
+<li><strong>Size Operation</strong>: The method returns <code>size</code>, which represents the number of key-value pairs.</li>
+</ol>
+<h3 id="complexity-analysis-table"><a class="header" href="#complexity-analysis-table">Complexity Analysis Table</a></h3>
+<div class="table-wrapper"><table><thead><tr><th>Operation</th><th>Average Time Complexity</th><th>Worst-Case Time Complexity</th><th>Space Complexity</th></tr></thead><tbody>
+<tr><td>Insert</td><td>O(1)</td><td>O(n)</td><td>O(1)</td></tr>
+<tr><td>Lookup</td><td>O(1)</td><td>O(n)</td><td>O(1)</td></tr>
+<tr><td>Delete</td><td>O(1)</td><td>O(n)</td><td>O(1)</td></tr>
+<tr><td>isEmpty</td><td>O(1)</td><td>O(1)</td><td>O(1)</td></tr>
+<tr><td>Size</td><td>O(1)</td><td>O(1)</td><td>O(1)</td></tr>
+</tbody></table>
+</div>
+<p><em>Note</em>: Worst-case time complexity occurs when many keys hash to the same index, causing long linked lists.</p>
+<h3 id="key-differences--notes"><a class="header" href="#key-differences--notes">Key Differences / Notes</a></h3>
+<ul>
+<li><strong>Separate Chaining vs. Open Addressing</strong>:
+<ul>
+<li>The implementation above uses separate chaining (linked lists) to handle collisions, which is simpler and handles high load factors well.</li>
+<li>Open addressing resolves collisions by probing for the next available slot, which can be more memory-efficient but requires careful handling of deletions.</li>
+</ul>
+</li>
+<li><strong>Load Factor</strong>: The load factor (size/capacity) affects performance. A high load factor increases collisions, slowing operations. Resizing the hash table (doubling capacity) can maintain efficiency.</li>
+<li><strong>Thread Safety</strong>: The provided implementation is not thread-safe. For concurrent applications, use Java’s <code>ConcurrentHashMap</code> or synchronize access.</li>
+<li><strong>Java’s Built-in Hash Table</strong>: Java provides <code>HashMap</code> and <code>Hashtable</code> in <code>java.util</code>. <code>HashMap</code> is preferred for non-thread-safe applications, while <code>ConcurrentHashMap</code> is used for thread safety.</li>
+</ul>
+<blockquote>
+<p><strong>✅ Tip</strong>: Choose a good hash function to minimize collisions, as this directly impacts performance. Java’s <code>hashCode</code> is a reasonable default, but custom hash functions may be needed for specific key types.</p>
+</blockquote>
+<blockquote>
+<p><strong>⚠ Warning</strong>: A poorly designed hash function or a small table size can lead to frequent collisions, degrading performance to O(n) in the worst case. Monitor the load factor and resize the table if necessary.</p>
+</blockquote>
+<h3 id="exercises"><a class="header" href="#exercises">Exercises</a></h3>
+<ol>
+<li><strong>Word Frequency Counter</strong>: Write a Java program that uses the hash table implementation above to count the frequency of words in a given text. Use words as keys and their counts as values, then print the results.</li>
+<li><strong>Phone Book Application</strong>: Create a program that implements a phone book using the hash table. Allow users to insert, lookup, and delete contacts (name as key, phone number as value).</li>
+<li><strong>Collision Analysis</strong>: Modify the hash table to track the number of collisions (multiple keys mapping to the same index). Test it with a set of keys and report the collision count.</li>
+<li><strong>Two Sum Problem</strong>: Implement a solution to the Two Sum problem (find two numbers in an array that add up to a target sum) using the hash table. Return the indices of the two numbers.</li>
+<li><strong>Custom Hash Function</strong>: Create a custom hash function for a specific key type (e.g., strings with a fixed format) and integrate it into the hash table implementation. Compare its performance with Java’s default <code>hashCode</code>.</li>
+</ol>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="ch03_03_02.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="ch03_07.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="ch03_03_02.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="ch03_07.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="theme/ferris.js"></script>
+
+
+    </div>
+    </body>
+</html>

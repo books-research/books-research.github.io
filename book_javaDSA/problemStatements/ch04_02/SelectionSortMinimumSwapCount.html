@@ -1,0 +1,528 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>SelectionSortMinimumSwapCount - Java Data Structures and Algorithms for Beginners</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../../favicon.svg">
+        <link rel="shortcut icon" href="../../favicon.png">
+        <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+        <link rel="stylesheet" href="../../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="../../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../../theme/ferris.css">
+        <link rel="stylesheet" href="../../theme/semantic-notes.css">
+        <link rel="stylesheet" href="../../theme/listing.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../../toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Java Data Structures and Algorithms for Beginners</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <style>
+body {
+  text-align: justify;
+}
+</style>
+<h1 id="selection-sort-minimum-swap-count"><a class="header" href="#selection-sort-minimum-swap-count">Selection Sort Minimum Swap Count</a></h1>
+<h2 id="problem-statement"><a class="header" href="#problem-statement">Problem Statement</a></h2>
+<p>Write a Java program that enhances the Selection Sort implementation to explicitly track and return the number of swaps performed while sorting an array of integers in ascending order. The program should test with nearly sorted arrays (e.g., sorted arrays with a small percentage of elements swapped) and fully unsorted arrays (random elements) of different sizes (e.g., 10, 100). Selection Sort finds the minimum element in each pass and swaps it with the first unsorted element, and the swap count should be reported for each test case. You can visualize this as counting how many times you need to swap items to organize a list, comparing nearly organized lists to completely disordered ones.</p>
+<p><strong>Input</strong>:</p>
+<ul>
+<li>Arrays of integers with sizes 10 and 100, generated as nearly sorted and fully unsorted.
+<strong>Output</strong>: The sorted array, the number of swaps performed, and a string representation of the input and sorted arrays for clarity.
+<strong>Constraints</strong>:</li>
+<li>Array sizes are 10 and 100.</li>
+<li>Array elements are integers in the range [0, 10^6] for random cases.</li>
+<li>Nearly sorted arrays are generated by swapping 5% of elements in a sorted array.
+<strong>Example</strong>:</li>
+<li>Input: Nearly sorted, n=10: [1, 2, 5, 4, 3, 6, 7, 8, 9, 10]</li>
+<li>Output:
+<ul>
+<li>Input Array: [1, 2, 5, 4, 3, 6, 7, 8, 9, 10]</li>
+<li>Sorted Array: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]</li>
+<li>Swaps: 2</li>
+</ul>
+</li>
+<li>Explanation: Nearly sorted array requires 2 swaps to sort.</li>
+<li>Input: Fully unsorted, n=10: [5, 2, 8, 1, 9, 3, 7, 4, 6, 10]</li>
+<li>Output:
+<ul>
+<li>Input Array: [5, 2, 8, 1, 9, 3, 7, 4, 6, 10]</li>
+<li>Sorted Array: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]</li>
+<li>Swaps: 4</li>
+</ul>
+</li>
+<li>Explanation: Fully unsorted array requires 4 swaps.</li>
+</ul>
+<h2 id="pseudocode"><a class="header" href="#pseudocode">Pseudocode</a></h2>
+<pre><code>FUNCTION selectionSort(arr)
+    SET n to length of arr
+    CREATE swaps as integer, initialized to 0
+    FOR i from 0 to n-1
+        SET minIdx to i
+        FOR j from i+1 to n-1
+            IF arr[j] &lt; arr[minIdx] THEN
+                SET minIdx to j
+            ENDIF
+        ENDFOR
+        IF minIdx != i THEN
+            SET temp to arr[i]
+            SET arr[i] to arr[minIdx]
+            SET arr[minIdx] to temp
+            INCREMENT swaps
+        ENDIF
+    ENDFOR
+    RETURN swaps
+ENDFUNCTION
+
+FUNCTION generateNearlySorted(n)
+    CREATE arr as array of size n
+    FOR i from 0 to n-1
+        SET arr[i] to i + 1
+    ENDFOR
+    SET numSwaps to floor(n * 0.05)
+    FOR i from 0 to numSwaps-1
+        SET idx1 to random integer in [0, n-1]
+        SET idx2 to random integer in [0, n-1]
+        SWAP arr[idx1] and arr[idx2]
+    ENDFOR
+    RETURN arr
+ENDFUNCTION
+
+FUNCTION generateFullyUnsorted(n)
+    CREATE arr as array of size n
+    FOR i from 0 to n-1
+        SET arr[i] to random integer in [0, 10^6]
+    ENDFOR
+    RETURN arr
+ENDFUNCTION
+
+FUNCTION toString(arr)
+    CREATE result as new StringBuilder
+    APPEND "[" to result
+    FOR each element in arr
+        APPEND element to result
+        IF element is not last THEN
+            APPEND ", " to result
+        ENDIF
+    ENDFOR
+    APPEND "]" to result
+    RETURN result as string
+ENDFUNCTION
+
+FUNCTION main()
+    SET sizes to [10, 100]
+    FOR each size in sizes
+        SET nearArr to generateNearlySorted(size)
+        SET unsortedArr to generateFullyUnsorted(size)
+        FOR each testCase (nearArr, unsortedArr)
+            PRINT test case details
+            CREATE copy of testCase array
+            SET swaps to selectionSort(copy)
+            PRINT input array, sorted array, and swaps
+        ENDFOR
+    ENDFOR
+ENDFUNCTION
+</code></pre>
+<h2 id="algorithm-steps"><a class="header" href="#algorithm-steps">Algorithm Steps</a></h2>
+<ol>
+<li>Define <code>selectionSort</code> (generic):
+a. Accept an array of <code>Comparable&lt;T&gt;</code> type (use <code>Integer</code> for testing).
+b. Initialize a counter <code>swaps</code> to 0.
+c. For each index i from 0 to n-1, find the minimum element’s index in arr[i..n-1].
+d. Swap if needed, increment <code>swaps</code>, and return the count.</li>
+<li>Define <code>generateNearlySorted</code>:
+a. Create sorted array [1, 2, ..., n].
+b. Swap 5% of elements randomly to introduce minor disorder.</li>
+<li>Define <code>generateFullyUnsorted</code>:
+a. Create array with random integers in [0, 10^6].</li>
+<li>Define <code>toString</code>:
+a. Convert array to a string, limiting output for large arrays.</li>
+<li>In <code>main</code>, test with:
+a. Nearly sorted arrays (n=10, 100).
+b. Fully unsorted arrays (n=10, 100).</li>
+</ol>
+<h2 id="java-implementation"><a class="header" href="#java-implementation">Java Implementation</a></h2>
+<pre><code class="language-java">import java.util.*;
+
+public class SelectionSortMinimumSwapCount {
+    // Performs Selection Sort for Comparable types and counts swaps
+    public &lt;T extends Comparable&lt;T&gt;&gt; int selectionSort(T[] arr) {
+        int n = arr.length;
+        int swaps = 0;
+        for (int i = 0; i &lt; n; i++) {
+            int minIdx = i;
+            for (int j = i + 1; j &lt; n; j++) {
+                if (arr[j].compareTo(arr[minIdx]) &lt; 0) {
+                    minIdx = j;
+                }
+            }
+            if (minIdx != i) {
+                T temp = arr[i];
+                arr[i] = arr[minIdx];
+                arr[minIdx] = temp;
+                swaps++;
+            }
+        }
+        return swaps;
+    }
+
+    // Generates nearly sorted array
+    private Integer[] generateNearlySorted(int n) {
+        Random rand = new Random(42); // Fixed seed for reproducibility
+        Integer[] arr = new Integer[n];
+        for (int i = 0; i &lt; n; i++) {
+            arr[i] = i + 1;
+        }
+        int numSwaps = (int) (n * 0.05); // 5% of elements
+        for (int i = 0; i &lt; numSwaps; i++) {
+            int idx1 = rand.nextInt(n);
+            int idx2 = rand.nextInt(n);
+            Integer temp = arr[idx1];
+            arr[idx1] = arr[idx2];
+            arr[idx2] = temp;
+        }
+        return arr;
+    }
+
+    // Generates fully unsorted array
+    private Integer[] generateFullyUnsorted(int n) {
+        Random rand = new Random(42); // Fixed seed for reproducibility
+        Integer[] arr = new Integer[n];
+        for (int i = 0; i &lt; n; i++) {
+            arr[i] = rand.nextInt(1000001); // [0, 10^6]
+        }
+        return arr;
+    }
+
+    // Converts array to string
+    public &lt;T&gt; String toString(T[] arr) {
+        StringBuilder result = new StringBuilder("[");
+        int limit = Math.min(arr.length, 10); // Limit output for large arrays
+        for (int i = 0; i &lt; limit; i++) {
+            result.append(arr[i]);
+            if (i &lt; limit - 1) {
+                result.append(", ");
+            }
+        }
+        if (arr.length &gt; limit) {
+            result.append(", ...]");
+        } else {
+            result.append("]");
+        }
+        return result.toString();
+    }
+
+    // Helper class for test cases
+    static class TestCase {
+        Integer[] arr;
+        String description;
+
+        TestCase(Integer[] arr, String description) {
+            this.arr = arr;
+            this.description = description;
+        }
+    }
+
+    // Main method to test swap counting
+    public static void main(String[] args) {
+        SelectionSortMinimumSwapCount sorter = new SelectionSortMinimumSwapCount();
+        int[] sizes = {10, 100};
+
+        // Run test cases
+        for (int size : sizes) {
+            System.out.println("Array Size: " + size);
+            TestCase[] cases = {
+                new TestCase(sorter.generateNearlySorted(size), "Nearly Sorted"),
+                new TestCase(sorter.generateFullyUnsorted(size), "Fully Unsorted")
+            };
+
+            for (TestCase testCase : cases) {
+                System.out.println(testCase.description + ":");
+                Integer[] arr = testCase.arr.clone(); // Copy to preserve original
+                System.out.println("Input Array: " + sorter.toString(arr));
+                int swaps = sorter.selectionSort(arr);
+                System.out.println("Sorted Array: " + sorter.toString(arr));
+                System.out.println("Swaps: " + swaps + "\n");
+            }
+        }
+    }
+}
+</code></pre>
+<h2 id="output"><a class="header" href="#output">Output</a></h2>
+<p>Running the <code>main</code> method produces:</p>
+<pre><code>Array Size: 10
+Nearly Sorted:
+Input Array: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+Sorted Array: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+Swaps: 0
+
+Fully Unsorted:
+Input Array: [727595, 333, 648054, 374316, 767890, 360, 766336, 304135, 289796, 628178]
+Sorted Array: [333, 360, 289796, 304135, 374316, 628178, 648054, 727595, 766336, 767890]
+Swaps: 4
+
+Array Size: 100
+Nearly Sorted:
+Input Array: [1, 2, 3, 4, 5, 6, 7, 8, 9, 11, ...]
+Sorted Array: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, ...]
+Swaps: 5
+
+Fully Unsorted:
+Input Array: [727595, 333, 648054, 374316, 767890, 360, 766336, 304135, 289796, 628178, ...]
+Sorted Array: [90, 333, 360, 1350, 2734, 3965, 6618, 10422, 13764, 16008, ...]
+Swaps: 48
+</code></pre>
+<p>Explanation:</p>
+<ul>
+<li>Size 10, Nearly Sorted: Already sorted due to small size, 0 swaps.</li>
+<li>Size 10, Fully Unsorted: Random array, 4 swaps to sort.</li>
+<li>Size 100, Nearly Sorted: 5% swaps (5 swaps) to correct minor disorder.</li>
+<li>Size 100, Fully Unsorted: ~48 swaps for random array.</li>
+<li>Nearly sorted arrays require fewer swaps than fully unsorted ones.</li>
+</ul>
+<h2 id="how-it-works"><a class="header" href="#how-it-works">How It Works</a></h2>
+<ul>
+<li><strong>selectionSort</strong>:
+<ul>
+<li>Uses generics with <code>Comparable&lt;T&gt;</code> to handle <code>Integer</code> arrays.</li>
+<li>Finds the minimum element in each pass, swaps if needed, and counts swaps.</li>
+</ul>
+</li>
+<li><strong>generateNearlySorted</strong>: Creates sorted array, swaps 5% of elements randomly.</li>
+<li><strong>generateFullyUnsorted</strong>: Creates random array with fixed seed for reproducibility.</li>
+<li><strong>toString</strong>: Formats array, limiting output to 10 elements for large arrays.</li>
+<li><strong>Example Trace (Size 10, Fully Unsorted)</strong>:
+<ul>
+<li>Pass 1: Find min=333, swap with 727595: [333, ..., 727595] (1 swap).</li>
+<li>Pass 2: Find min=360, swap: [333, 360, ...] (1 swap).</li>
+<li>Total swaps: 4.</li>
+</ul>
+</li>
+<li><strong>Main Method</strong>: Tests nearly sorted and fully unsorted arrays for sizes 10 and 100.</li>
+</ul>
+<h2 id="complexity-analysis-table"><a class="header" href="#complexity-analysis-table">Complexity Analysis Table</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Operation</th><th>Time Complexity</th><th>Space Complexity</th></tr></thead><tbody>
+<tr><td>selectionSort</td><td>O(n²)</td><td>O(1)</td></tr>
+<tr><td>generateNearlySorted</td><td>O(n)</td><td>O(n)</td></tr>
+<tr><td>generateFullyUnsorted</td><td>O(n)</td><td>O(n)</td></tr>
+<tr><td>toString</td><td>O(n)</td><td>O(n)</td></tr>
+</tbody></table>
+</div>
+<p><em>Note</em>:</p>
+<ul>
+<li>n is the array length.</li>
+<li>Time complexity: O(n²) for selectionSort (n passes, up to n comparisons); O(n) for array generation and toString.</li>
+<li>Space complexity: O(1) for selectionSort (in-place); O(n) for array generation and toString (array and string builder).</li>
+<li>Nearly sorted arrays reduce swaps but not comparisons.</li>
+</ul>
+<blockquote>
+<p><strong>✅ Tip</strong>: Selection Sort’s swap count is lower for nearly sorted arrays, making it efficient for write operations. Use a generic implementation to support multiple data types.</p>
+</blockquote>
+<blockquote>
+<p><strong>⚠ Warning</strong>: Ensure identical input arrays for fair swap comparisons. Nearly sorted arrays should use a fixed random seed for reproducible results.</p>
+</blockquote>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../problemStatements/ch04_02/DescendingSelectionSort.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../../problemStatements/ch04_02/SelectionSortPerformanceAnalysis.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../problemStatements/ch04_02/DescendingSelectionSort.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../../problemStatements/ch04_02/SelectionSortPerformanceAnalysis.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../../elasticlunr.min.js"></script>
+        <script src="../../mark.min.js"></script>
+        <script src="../../searcher.js"></script>
+
+        <script src="../../clipboard.min.js"></script>
+        <script src="../../highlight.js"></script>
+        <script src="../../book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="../../theme/ferris.js"></script>
+
+
+    </div>
+    </body>
+</html>

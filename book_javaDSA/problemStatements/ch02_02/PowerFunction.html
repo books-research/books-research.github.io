@@ -1,0 +1,387 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>PowerFunction - Java Data Structures and Algorithms for Beginners</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../../favicon.svg">
+        <link rel="shortcut icon" href="../../favicon.png">
+        <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+        <link rel="stylesheet" href="../../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="../../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../../theme/ferris.css">
+        <link rel="stylesheet" href="../../theme/semantic-notes.css">
+        <link rel="stylesheet" href="../../theme/listing.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../../toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Java Data Structures and Algorithms for Beginners</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <style>
+body {
+  text-align: justify;
+}
+</style>
+<h1 id="power-function"><a class="header" href="#power-function">Power Function</a></h1>
+<h2 id="problem-statement"><a class="header" href="#problem-statement">Problem Statement</a></h2>
+<p>Write a Java program that implements both recursive and iterative methods to compute (x^n), where (x) is a double and (n) is a non-negative integer representing the power. The program should return the result of (x) raised to the power (n) and test the methods with different inputs, including edge cases like (n = 0) and (n = 1). Analyze the space complexity of both approaches. You can visualize this as calculating the total area of a square piece of land ((x)) that is scaled by itself (n) times, either by repeatedly multiplying (iterative) or by breaking it into smaller multiplications (recursive).</p>
+<p><strong>Input</strong>: A double (x) and a non-negative integer (n) (e.g., (x = 2.0, n = 3)).
+<strong>Output</strong>: A double representing (x^n) (e.g., 8.0 for (2.0^3)).
+<strong>Constraints</strong>:</p>
+<ul>
+<li>(-100.0 \leq x \leq 100.0).</li>
+<li>(0 \leq n \leq 10^3).</li>
+<li>The result should fit within a double’s precision.
+<strong>Example</strong>:</li>
+<li>Input: (x = 2.0, n = 3)</li>
+<li>Output: 8.0</li>
+<li>Explanation: (2.0^3 = 2.0 * 2.0 * 2.0 = 8.0).</li>
+<li>Input: (x = 5.0, n = 0)</li>
+<li>Output: 1.0</li>
+<li>Explanation: Any non-zero number raised to the power 0 is 1.</li>
+</ul>
+<h2 id="pseudocode"><a class="header" href="#pseudocode">Pseudocode</a></h2>
+<pre><code>FUNCTION recursivePower(x, n)
+    IF n equals 0 THEN
+        RETURN 1.0
+    ENDIF
+    IF n equals 1 THEN
+        RETURN x
+    ENDIF
+    RETURN x * recursivePower(x, n - 1)
+ENDFUNCTION
+
+FUNCTION iterativePower(x, n)
+    IF n equals 0 THEN
+        RETURN 1.0
+    ENDIF
+    SET result to 1.0
+    FOR i from 1 to n
+        SET result to result * x
+    ENDFOR
+    RETURN result
+ENDFUNCTION
+</code></pre>
+<h2 id="algorithm-steps"><a class="header" href="#algorithm-steps">Algorithm Steps</a></h2>
+<ol>
+<li>For the recursive approach:
+a. Check if (n) is 0. If so, return 1.0, as any non-zero number raised to the power 0 is 1.
+b. Check if (n) is 1. If so, return (x), as (x^1 = x).
+c. Define a recursive function that multiplies (x) by the result of the recursive call for (n - 1).
+d. Return the computed result.</li>
+<li>For the iterative approach:
+a. Check if (n) is 0. If so, return 1.0.
+b. Initialize a variable <code>result</code> to 1.0.
+c. Iterate (n) times, multiplying <code>result</code> by (x) in each iteration.
+d. Return the final <code>result</code>.</li>
+<li>Test both methods with various inputs (e.g., (n = 0, 1, 5)) and analyze space complexity.</li>
+</ol>
+<h2 id="java-implementation"><a class="header" href="#java-implementation">Java Implementation</a></h2>
+<pre><code class="language-java">public class PowerFunction {
+    // Computes x^n using recursion
+    public double recursivePower(double x, int n) {
+        // Base case: x^0 = 1
+        if (n == 0) {
+            return 1.0;
+        }
+        // Base case: x^1 = x
+        if (n == 1) {
+            return x;
+        }
+        // Recursive case: x * x^(n-1)
+        return x * recursivePower(x, n - 1);
+    }
+
+    // Computes x^n using iteration
+    public double iterativePower(double x, int n) {
+        // Base case: x^0 = 1
+        if (n == 0) {
+            return 1.0;
+        }
+        // Initialize result
+        double result = 1.0;
+        // Multiply x by itself n times
+        for (int i = 1; i &lt;= n; i++) {
+            result *= x;
+        }
+        // Return final result
+        return result;
+    }
+}
+</code></pre>
+<h2 id="output"><a class="header" href="#output">Output</a></h2>
+<p>For the input (x = 2.0, n = 3), both methods output:</p>
+<pre><code>8.0
+</code></pre>
+<p>Explanation: (2.0^3 = 2.0 * 2.0 * 2.0 = 8.0).</p>
+<p>For the input (x = 5.0, n = 0), both methods output:</p>
+<pre><code>1.0
+</code></pre>
+<p>Explanation: Any non-zero number raised to the power 0 is 1.</p>
+<p>For the input (x = 3.0, n = 2), both methods output:</p>
+<pre><code>9.0
+</code></pre>
+<p>Explanation: (3.0^2 = 3.0 * 3.0 = 9.0).</p>
+<h2 id="how-it-works"><a class="header" href="#how-it-works">How It Works</a></h2>
+<ul>
+<li><strong>Recursive Approach</strong>:
+<ul>
+<li><strong>Step 1</strong>: The <code>recursivePower</code> method checks if (n = 0). For (x = 2.0, n = 3), it proceeds to recursion.</li>
+<li><strong>Step 2</strong>: Recursion:
+<ul>
+<li>For (n = 3): Returns (2.0 * recursivePower(2.0, 2)).</li>
+<li>For (n = 2): Returns (2.0 * recursivePower(2.0, 1)).</li>
+<li>For (n = 1): Base case, returns 2.0.</li>
+<li>Unwind: (2.0 * (2.0 * 2.0) = 2.0 * 4.0 = 8.0).</li>
+</ul>
+</li>
+<li><strong>Example Trace</strong>: For (x = 2.0, n = 3), computes (2.0 * (2.0 * (2.0 * 1)) = 8.0).</li>
+</ul>
+</li>
+<li><strong>Iterative Approach</strong>:
+<ul>
+<li><strong>Step 1</strong>: The <code>iterativePower</code> method checks if (n = 0). For (x = 2.0, n = 3), it initializes <code>result = 1.0</code>.</li>
+<li><strong>Step 2</strong>: Iterates 3 times:
+<ul>
+<li>Iteration 1: <code>result = 1.0 * 2.0 = 2.0</code>.</li>
+<li>Iteration 2: <code>result = 2.0 * 2.0 = 4.0</code>.</li>
+<li>Iteration 3: <code>result = 4.0 * 2.0 = 8.0</code>.</li>
+</ul>
+</li>
+<li><strong>Example Trace</strong>: For (x = 2.0, n = 3), multiplies (2.0 * 2.0 * 2.0 = 8.0).</li>
+</ul>
+</li>
+<li><strong>Space Complexity Analysis</strong>:
+<ul>
+<li>Recursive: O(n) due to the call stack, which grows linearly with (n).</li>
+<li>Iterative: O(1), as it uses only a single variable for the result.</li>
+<li>The iterative approach is more space-efficient, especially for large (n), while both have similar time performance for this basic implementation.</li>
+</ul>
+</li>
+</ul>
+<h2 id="complexity-analysis-table"><a class="header" href="#complexity-analysis-table">Complexity Analysis Table</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Operation</th><th>Time Complexity</th><th>Space Complexity</th></tr></thead><tbody>
+<tr><td>Recursive Call</td><td>O(n)</td><td>O(n)</td></tr>
+<tr><td>Iteration</td><td>O(n)</td><td>O(1)</td></tr>
+<tr><td>Full Algorithm (Recursive)</td><td>O(n)</td><td>O(n)</td></tr>
+<tr><td>Full Algorithm (Iterative)</td><td>O(n)</td><td>O(1)</td></tr>
+</tbody></table>
+</div>
+<p><em>Note</em>:</p>
+<ul>
+<li>n is the exponent.</li>
+<li>Time complexity: O(n) for both, as recursive makes n calls, and iterative performs n multiplications.</li>
+<li>Space complexity: O(n) for recursive due to the call stack; O(1) for iterative, using only a single variable.</li>
+<li>Best, average, and worst cases are O(n) for both.</li>
+</ul>
+<blockquote>
+<p><strong>✅ Tip</strong>: Use the iterative approach for large (n) to avoid stack overflow and minimize space usage. Test with edge cases like (n = 0), (n = 1), and large (n) (e.g., 1000) to verify correctness and compare space efficiency.</p>
+</blockquote>
+<blockquote>
+<p><strong>⚠ Warning</strong>: The recursive approach may cause stack overflow for very large (n) due to O(n) space complexity. Be cautious with floating-point precision for large (x) or (n), as results may exceed double’s capacity.</p>
+</blockquote>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../problemStatements/ch02_02/LinkedListTraversal.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../../problemStatements/ch02_02/RecursiveVsIterativeSum.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../problemStatements/ch02_02/LinkedListTraversal.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../../problemStatements/ch02_02/RecursiveVsIterativeSum.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../../elasticlunr.min.js"></script>
+        <script src="../../mark.min.js"></script>
+        <script src="../../searcher.js"></script>
+
+        <script src="../../clipboard.min.js"></script>
+        <script src="../../highlight.js"></script>
+        <script src="../../book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="../../theme/ferris.js"></script>
+
+
+    </div>
+    </body>
+</html>

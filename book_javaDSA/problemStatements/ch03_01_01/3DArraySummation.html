@@ -1,0 +1,468 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>3DArraySummation - Java Data Structures and Algorithms for Beginners</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../../favicon.svg">
+        <link rel="shortcut icon" href="../../favicon.png">
+        <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+        <link rel="stylesheet" href="../../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="../../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../../theme/ferris.css">
+        <link rel="stylesheet" href="../../theme/semantic-notes.css">
+        <link rel="stylesheet" href="../../theme/listing.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../../toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Java Data Structures and Algorithms for Beginners</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <style>
+body {
+  text-align: justify;
+}
+</style>
+<h1 id="3d-array-summation"><a class="header" href="#3d-array-summation">3D Array Summation</a></h1>
+<h2 id="problem-statement"><a class="header" href="#problem-statement">Problem Statement</a></h2>
+<p>Write a Java program that initializes a 3D array of integers and computes the sum of all elements using nested loops. The program should return the total sum and test the implementation with 3D arrays of different dimensions, including edge cases like single-element arrays and arrays with varying sizes for each dimension. You can visualize this as calculating the total value of items stored in a 3D grid, such as boxes stacked in a warehouse with layers, rows, and columns, by adding up every item’s value.</p>
+<p><strong>Input</strong>: A 3D array of integers with dimensions d × r × c (e.g., <code>array = {{{1, 2}, {3, 4}}, {{5, 6}, {7, 8}}}</code>).
+<strong>Output</strong>: A long integer representing the sum of all elements in the 3D array (e.g., 36 for the example above).
+<strong>Constraints</strong>:</p>
+<ul>
+<li>1 ≤ d, r, c ≤ 100 (where d is depth, r is rows, c is columns).</li>
+<li>Elements are integers between -10^4 and 10^4.</li>
+<li>The array is guaranteed to be non-empty and well-formed (all sub-arrays have consistent dimensions).
+<strong>Example</strong>:</li>
+<li>Input: <code>array = {{{1, 2}, {3, 4}}, {{5, 6}, {7, 8}}}</code></li>
+<li>Output: 36</li>
+<li>Explanation: Sum = 1 + 2 + 3 + 4 + 5 + 6 + 7 + 8 = 36.</li>
+<li>Input: <code>array = {{{1}}}</code></li>
+<li>Output: 1</li>
+<li>Explanation: The single-element 3D array has sum 1.</li>
+</ul>
+<h2 id="pseudocode"><a class="header" href="#pseudocode">Pseudocode</a></h2>
+<pre><code>FUNCTION sum3DArray(array)
+    IF array is null OR array is empty OR array[0] is empty OR array[0][0] is empty THEN
+        RETURN 0
+    ENDIF
+    SET depth to number of layers in array
+    SET rows to number of rows in array[0]
+    SET cols to number of columns in array[0][0]
+    SET sum to 0
+    FOR i from 0 to depth - 1
+        FOR j from 0 to rows - 1
+            FOR k from 0 to cols - 1
+                SET sum to sum + array[i][j][k]
+            ENDFOR
+        ENDFOR
+    ENDFOR
+    RETURN sum
+ENDFUNCTION
+
+FUNCTION main()
+    SET testArrays to 3D arrays with different dimensions
+    FOR each array in testArrays
+        CALL sum3DArray(array)
+        PRINT result
+    ENDFOR
+ENDFUNCTION
+</code></pre>
+<h2 id="algorithm-steps"><a class="header" href="#algorithm-steps">Algorithm Steps</a></h2>
+<ol>
+<li>Check if the input 3D array is null, empty, or has empty sub-arrays. If so, return 0.</li>
+<li>Determine the dimensions: <code>depth</code> (d), <code>rows</code> (r), and <code>columns</code> (c) of the 3D array.</li>
+<li>Initialize a variable <code>sum</code> to 0.</li>
+<li>Use three nested loops to iterate through each element <code>array[i][j][k]</code>:
+a. Add the element to <code>sum</code>.</li>
+<li>Return the final <code>sum</code>.</li>
+<li>In the <code>main</code> method, create test 3D arrays with different dimensions and call <code>sum3DArray</code> to verify correctness.</li>
+</ol>
+<h2 id="java-implementation"><a class="header" href="#java-implementation">Java Implementation</a></h2>
+<pre><code class="language-java">public class ThreeDArraySummation {
+    // Computes the sum of all elements in a 3D array
+    public long sum3DArray(int[][][] array) {
+        // Check for null or empty array
+        if (array == null || array.length == 0 || array[0].length == 0 || array[0][0].length == 0) {
+            return 0;
+        }
+        // Get dimensions
+        int depth = array.length;
+        int rows = array[0].length;
+        int cols = array[0][0].length;
+        // Initialize sum
+        long sum = 0;
+        // Iterate through all elements
+        for (int i = 0; i &lt; depth; i++) {
+            for (int j = 0; j &lt; rows; j++) {
+                for (int k = 0; k &lt; cols; k++) {
+                    sum += array[i][j][k];
+                }
+            }
+        }
+        return sum;
+    }
+
+    // Main method to test sum3DArray with various inputs
+    public static void main(String[] args) {
+        ThreeDArraySummation summer = new ThreeDArraySummation();
+
+        // Test case 1: 2x2x2 3D array
+        int[][][] array1 = {{{1, 2}, {3, 4}}, {{5, 6}, {7, 8}}};
+        System.out.println("Test case 1:");
+        System.out.println("Array:");
+        print3DArray(array1);
+        System.out.println("Sum: " + summer.sum3DArray(array1));
+
+        // Test case 2: 1x1x1 single-element array
+        int[][][] array2 = {{{1}}};
+        System.out.println("Test case 2:");
+        System.out.println("Array:");
+        print3DArray(array2);
+        System.out.println("Sum: " + summer.sum3DArray(array2));
+
+        // Test case 3: 2x3x2 non-uniform dimensions
+        int[][][] array3 = {{{1, 2}, {3, 4}, {5, 6}}, {{7, 8}, {9, 10}, {11, 12}}};
+        System.out.println("Test case 3:");
+        System.out.println("Array:");
+        print3DArray(array3);
+        System.out.println("Sum: " + summer.sum3DArray(array3));
+
+        // Test case 4: 1x2x3 array with negative numbers
+        int[][][] array4 = {{{-1, -2, -3}, {-4, -5, -6}}};
+        System.out.println("Test case 4:");
+        System.out.println("Array:");
+        print3DArray(array4);
+        System.out.println("Sum: " + summer.sum3DArray(array4));
+
+        // Test case 5: Empty array
+        int[][][] array5 = {};
+        System.out.println("Test case 5:");
+        System.out.println("Array:");
+        print3DArray(array5);
+        System.out.println("Sum: " + summer.sum3DArray(array5));
+    }
+
+    // Helper method to print 3D array
+    private static void print3DArray(int[][][] array) {
+        if (array == null || array.length == 0) {
+            System.out.println("null");
+            return;
+        }
+        System.out.println("[");
+        for (int i = 0; i &lt; array.length; i++) {
+            System.out.println("  [");
+            for (int j = 0; j &lt; array[i].length; j++) {
+                System.out.print("    [");
+                for (int k = 0; k &lt; array[i][j].length; k++) {
+                    System.out.print(array[i][j][k]);
+                    if (k &lt; array[i][j].length - 1) {
+                        System.out.print(", ");
+                    }
+                }
+                System.out.println("]");
+            }
+            System.out.println("  ]");
+        }
+        System.out.println("]");
+    }
+}
+</code></pre>
+<h2 id="output"><a class="header" href="#output">Output</a></h2>
+<p>Running the <code>main</code> method produces:</p>
+<pre><code>Test case 1:
+Array:
+[
+  [
+    [1, 2]
+    [3, 4]
+  ]
+  [
+    [5, 6]
+    [7, 8]
+  ]
+]
+Sum: 36
+Test case 2:
+Array:
+[
+  [
+    [1]
+  ]
+]
+Sum: 1
+Test case 3:
+Array:
+[
+  [
+    [1, 2]
+    [3, 4]
+    [5, 6]
+  ]
+  [
+    [7, 8]
+    [9, 10]
+    [11, 12]
+  ]
+]
+Sum: 78
+Test case 4:
+Array:
+[
+  [
+    [-1, -2, -3]
+    [-4, -5, -6]
+  ]
+]
+Sum: -21
+Test case 5:
+Array:
+null
+Sum: 0
+</code></pre>
+<p>Explanation:</p>
+<ul>
+<li>Test case 1: Sums a 2×2×2 array: 1 + 2 + 3 + 4 + 5 + 6 + 7 + 8 = 36.</li>
+<li>Test case 2: Sums a 1×1×1 array: 1 = 1.</li>
+<li>Test case 3: Sums a 2×3×2 array: 1 + 2 + 3 + 4 + 5 + 6 + 7 + 8 + 9 + 10 + 11 + 12 = 78.</li>
+<li>Test case 4: Sums a 1×2×3 array with negatives: -1 + (-2) + (-3) + (-4) + (-5) + (-6) = -21.</li>
+<li>Test case 5: Returns 0 for an empty array.</li>
+</ul>
+<h2 id="how-it-works"><a class="header" href="#how-it-works">How It Works</a></h2>
+<ul>
+<li><strong>Step 1</strong>: The <code>sum3DArray</code> method checks for null or empty arrays. For <code>{{{1, 2}, {3, 4}}, {{5, 6}, {7, 8}}}</code>, it proceeds.</li>
+<li><strong>Step 2</strong>: Get dimensions: <code>depth = 2</code>, <code>rows = 2</code>, <code>cols = 2</code>.</li>
+<li><strong>Step 3</strong>: Initialize <code>sum = 0</code>.</li>
+<li><strong>Step 4</strong>: Iterate through all elements:
+<ul>
+<li>Layer 0: <code>[1, 2]</code> → sum = 0 + 1 + 2 = 3; <code>[3, 4]</code> → sum = 3 + 3 + 4 = 10.</li>
+<li>Layer 1: <code>[5, 6]</code> → sum = 10 + 5 + 6 = 21; <code>[7, 8]</code> → sum = 21 + 7 + 8 = 36.</li>
+</ul>
+</li>
+<li><strong>Example Trace</strong>: For test case 1, accumulates: 1 + 2 + 3 + 4 + 5 + 6 + 7 + 8 = 36.</li>
+<li><strong>Main Method</strong>: Tests with different dimensions (2×2×2, 1×1×1, 2×3×2, 1×2×3) and an empty array, printing inputs and sums.</li>
+<li><strong>Summation Property</strong>: Uses nested loops to access each element, ensuring all are included in the sum.</li>
+</ul>
+<h2 id="complexity-analysis-table"><a class="header" href="#complexity-analysis-table">Complexity Analysis Table</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Operation</th><th>Time Complexity</th><th>Space Complexity</th></tr></thead><tbody>
+<tr><td>Summation</td><td>O(d<em>r</em>c)</td><td>O(1)</td></tr>
+<tr><td>Full Algorithm</td><td>O(d<em>r</em>c)</td><td>O(1)</td></tr>
+</tbody></table>
+</div>
+<p><em>Note</em>:</p>
+<ul>
+<li>d is the depth, r is the number of rows, c is the number of columns.</li>
+<li>Time complexity: O(d<em>r</em>c), as the algorithm iterates through each element once.</li>
+<li>Space complexity: O(1), as only a single <code>sum</code> variable is used (excluding input/output).</li>
+<li>Best, average, and worst cases are O(d<em>r</em>c).</li>
+</ul>
+<blockquote>
+<p><strong>✅ Tip</strong>: Use nested loops for straightforward 3D array traversal. Test with varying dimensions and negative numbers to ensure correctness, especially for edge cases like single-element arrays.</p>
+</blockquote>
+<blockquote>
+<p><strong>⚠ Warning</strong>: Ensure the 3D array is well-formed (consistent dimensions across layers, rows, and columns) to avoid <code>NullPointerException</code> or <code>ArrayIndexOutOfBoundsException</code>. Use a <code>long</code> for the sum to handle large arrays within the given constraints.</p>
+</blockquote>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../problemStatements/ch03_01/MaximumElement.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../../problemStatements/ch03_01_01/DiagonalElements.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../problemStatements/ch03_01/MaximumElement.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../../problemStatements/ch03_01_01/DiagonalElements.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../../elasticlunr.min.js"></script>
+        <script src="../../mark.min.js"></script>
+        <script src="../../searcher.js"></script>
+
+        <script src="../../clipboard.min.js"></script>
+        <script src="../../highlight.js"></script>
+        <script src="../../book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="../../theme/ferris.js"></script>
+
+
+    </div>
+    </body>
+</html>

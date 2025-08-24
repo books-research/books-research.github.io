@@ -1,0 +1,37 @@
+<svg width="450" height="260" xmlns="http://www.w3.org/2000/svg">
+  <!-- Array boxes -->
+  <rect x="50" y="100" width="40" height="40" stroke="black" fill="white"/>
+  <text x="65" y="125" font-size="20" text-anchor="middle">1</text>
+  <rect x="110" y="100" width="40" height="40" stroke="black" fill="white"/>
+  <text x="125" y="125" font-size="20" text-anchor="middle">3</text>
+  <rect x="170" y="100" width="40" height="40" stroke="black" fill="lightgreen"/>
+  <text x="185" y="125" font-size="20" text-anchor="middle">5</text>
+  <rect x="230" y="100" width="40" height="40" stroke="black" fill="white"/>
+  <text x="245" y="125" font-size="20" text-anchor="middle">8</text>
+  <rect x="290" y="100" width="40" height="40" stroke="black" fill="white"/>
+  <text x="305" y="125" font-size="20" text-anchor="middle">9</text>
+
+  <!-- Arrows showing sequential checks -->
+  <path d="M65 60 L65 85" stroke="blue" stroke-width="3" marker-end="url(#arrowhead)"/>
+  <path d="M125 60 L125 85" stroke="blue" stroke-width="3" marker-end="url(#arrowhead)"/>
+  <path d="M185 60 L185 85" stroke="red" stroke-width="3" marker-end="url(#arrowhead-red)"/>
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="blue"/>
+    </marker>
+    <marker id="arrowhead-red" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="red"/>
+    </marker>
+  </defs>
+  <text x="65" y="30" font-size="14" text-anchor="middle" fill="blue">Check</text>
+  <text x="125" y="40" font-size="14" text-anchor="middle" fill="blue">Check</text>
+  <text x="185" y="50" font-size="14" text-anchor="middle" fill="red">Found (Target = 5)</text>
+
+  <!-- Caption -->
+  <text x="50" y="170" font-size="12" text-anchor="start">
+    Linear Search checks each element in sequence until the target
+  </text>
+  <text x="50" y="185" font-size="12" text-anchor="start">
+    is found or the array is exhausted.
+  </text>
+</svg>

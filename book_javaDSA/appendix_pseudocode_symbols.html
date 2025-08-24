@@ -1,0 +1,287 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Appendix-Pseudocode Symbols - Java Data Structures and Algorithms for Beginners</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="theme/ferris.css">
+        <link rel="stylesheet" href="theme/semantic-notes.css">
+        <link rel="stylesheet" href="theme/listing.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Java Data Structures and Algorithms for Beginners</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <style>
+body {
+  text-align: justify;
+}
+</style>
+<h1 id="appendix-pseudocode-symbols-and-conventions"><a class="header" href="#appendix-pseudocode-symbols-and-conventions">Appendix: Pseudocode Symbols and Conventions</a></h1>
+<h2 id="introduction"><a class="header" href="#introduction">Introduction</a></h2>
+<p>This appendix provides a comprehensive reference for the pseudocode symbols and conventions used in the "Java Data Structures and Algorithms for Beginners" curriculum, particularly in the Binary Search chapter and other data structures and algorithms (DSA) exercises. Pseudocode is a high-level, language-agnostic representation of an algorithm’s logic, designed to be readable and understandable without requiring specific programming language syntax. The conventions outlined here ensure consistency across problem statements, enabling students to focus on algorithmic logic before implementing solutions in Java. This appendix details the keywords, symbols, and formatting used in pseudocode, with examples drawn from Binary Search exercises to illustrate their application. It supports the learning platform’s goal of providing accessible, hands-on education with embedded compilers and visualizations by clarifying how to interpret and translate pseudocode into code.</p>
+<h2 id="pseudocode-symbols-and-conventions"><a class="header" href="#pseudocode-symbols-and-conventions">Pseudocode Symbols and Conventions</a></h2>
+<p>The following table and descriptions outline the standardized pseudocode symbols, keywords, and conventions used throughout the curriculum. These are designed to be intuitive for beginners while maintaining clarity and consistency.</p>
+<div class="table-wrapper"><table><thead><tr><th>Symbol/Keyword</th><th>Description</th><th>Example</th></tr></thead><tbody>
+<tr><td><code>FUNCTION</code></td><td>Declares the start of a function or procedure, followed by the function name and parameters.</td><td><code>FUNCTION binarySearch(arr, target)</code> defines a Binary Search function taking an array and target value.</td></tr>
+<tr><td><code>ENDFUNCTION</code></td><td>Marks the end of a function definition.</td><td><code>ENDFUNCTION</code> closes the <code>binarySearch</code> function.</td></tr>
+<tr><td><code>SET</code></td><td>Assigns a value to a variable or updates a variable’s value.</td><td><code>SET left to 0</code> initializes the <code>left</code> pointer to 0 in Binary Search.</td></tr>
+<tr><td><code>RETURN</code></td><td>Specifies the output of a function and terminates its execution.</td><td><code>RETURN mid, comparisons</code> returns the index and comparison count in Binary Search.</td></tr>
+<tr><td><code>IF</code>, <code>ELSE IF</code>, <code>ELSE</code>, <code>ENDIF</code></td><td>Conditional statements for decision-making.</td><td><code>IF arr[mid] equals target THEN RETURN mid, comparisons ENDIF</code> checks if the middle element is the target.</td></tr>
+<tr><td><code>WHILE</code>, <code>ENDWHILE</code></td><td>Defines a loop that continues as long as a condition is true.</td><td><code>WHILE left &lt;= right</code> loops until the search range is invalid in Binary Search.</td></tr>
+<tr><td><code>FOR</code>, <code>ENDFOR</code></td><td>Iterates over a range or sequence of values.</td><td><code>FOR i from 0 to n-1</code> iterates through an array to generate test data.</td></tr>
+<tr><td><code>CREATE</code></td><td>Initializes a new data structure or object.</td><td><code>CREATE arr as array of size n</code> creates an array for testing.</td></tr>
+<tr><td><code>INCREMENT</code></td><td>Increases a variable’s value by 1.</td><td><code>INCREMENT comparisons</code> tracks the number of comparisons in Binary Search.</td></tr>
+<tr><td><code>floor()</code></td><td>Rounds a number down to the nearest integer.</td><td><code>SET mid to floor((left + right) / 2)</code> calculates the middle index.</td></tr>
+<tr><td><code>length of</code></td><td>Returns the size or number of elements in a data structure.</td><td><code>SET right to length of arr - 1</code> sets the right pointer to the last index.</td></tr>
+<tr><td><code>APPEND</code></td><td>Adds an element or string to a data structure, such as a StringBuilder.</td><td><code>APPEND "[" to result</code> adds an opening bracket to a string representation.</td></tr>
+<tr><td><code>equals</code></td><td>Checks for equality between two values.</td><td><code>IF arr[mid] equals target THEN</code> compares the middle element to the target.</td></tr>
+<tr><td><code>//</code></td><td>Indicates a comment explaining the pseudocode.</td><td><code>// Avoid overflow</code> explains the use of <code>left + (right - left) / 2</code>.</td></tr>
+<tr><td>Indentation</td><td>Used to denote the scope or body of functions, loops, and conditionals.</td><td>Indented lines under <code>WHILE</code> indicate the loop’s body.</td></tr>
+<tr><td><code>THEN</code></td><td>Marks the action to take if a condition is true in an <code>IF</code> statement.</td><td><code>IF arr[mid] &lt; target THEN SET left to mid + 1</code> updates the left pointer.</td></tr>
+</tbody></table>
+</div>
+<h3 id="additional-conventions"><a class="header" href="#additional-conventions">Additional Conventions</a></h3>
+<ul>
+<li><strong>Case Sensitivity</strong>: Keywords are written in uppercase (e.g., <code>FUNCTION</code>, <code>SET</code>) to distinguish them from variables and improve readability.</li>
+<li><strong>Variable Naming</strong>: Variables use descriptive, lowercase names (e.g., <code>left</code>, <code>right</code>, <code>mid</code>) to clearly indicate their purpose.</li>
+<li><strong>Data Structures</strong>: Arrays, lists, or objects are referenced generically (e.g., <code>arr</code> for an array) to focus on logic rather than language-specific syntax.</li>
+<li><strong>Clarity Over Conciseness</strong>: Pseudocode prioritizes readability, using full words like <code>equals</code> instead of symbols like <code>==</code> to avoid confusion for beginners.</li>
+<li><strong>Consistency</strong>: The same keywords and structure are used across all exercises, such as Binary Search, Linear Search, and sorting algorithms, to ensure a uniform learning experience.</li>
+</ul>
+<h3 id="example-from-binary-search"><a class="header" href="#example-from-binary-search">Example from Binary Search</a></h3>
+<p>The following pseudocode from the Basic Binary Search exercise (<code>artifact_id="850a19d5-b136-4ecc-9dc6-53e9a8fcc6bc"</code>) illustrates these conventions:</p>
+<pre><code>FUNCTION binarySearch(arr, target)
+    SET comparisons to 0
+    SET left to 0
+    SET right to length of arr - 1
+    WHILE left &lt;= right
+        SET mid to floor((left + right) / 2) // Avoid overflow
+        INCREMENT comparisons
+        IF arr[mid] equals target THEN
+            RETURN mid, comparisons
+        ELSE IF arr[mid] &lt; target THEN
+            SET left to mid + 1
+        ELSE
+            SET right to mid - 1
+        ENDIF
+    ENDWHILE
+    RETURN -1, comparisons
+ENDFUNCTION
+</code></pre>
+<ul>
+<li><strong>Explanation</strong>: This pseudocode uses <code>FUNCTION</code> to define the search, <code>SET</code> for variable assignments, <code>WHILE</code> for looping, <code>IF</code>/<code>ELSE IF</code>/<code>ELSE</code> for conditionals, and <code>RETURN</code> for output. Indentation clarifies the scope, and <code>//</code> comments explain key steps.</li>
+</ul>
+<h2 id="-tip-or-warning-box"><a class="header" href="#-tip-or-warning-box">✅ Tip or Warning Box</a></h2>
+<p><strong>✅ Tip</strong>: Familiarize yourself with these pseudocode conventions before tackling DSA exercises. They provide a clear, language-agnostic way to understand algorithms like Binary Search, making it easier to translate logic into Java code.</p>
+<p><strong>⚠ Warning</strong>: Ensure you follow the indentation and keyword conventions (e.g., <code>FUNCTION</code>, <code>SET</code>) exactly as shown, as they indicate the structure and flow of the algorithm. Misinterpreting symbols like <code>floor()</code> or <code>length of</code> may lead to errors when implementing the code.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="appendix_glossary.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="appendix_java_templates.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="appendix_glossary.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="appendix_java_templates.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="theme/ferris.js"></script>
+
+
+    </div>
+    </body>
+</html>

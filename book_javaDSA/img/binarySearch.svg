@@ -1,0 +1,30 @@
+<svg width="400" height="200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Array boxes -->
+  <rect x="50" y="50" width="40" height="40" stroke="black" fill="white"/>
+  <text x="65" y="75" font-size="20" text-anchor="middle">1</text>
+  <rect x="90" y="50" width="40" height="40" stroke="black" fill="white"/>
+  <text x="105" y="75" font-size="20" text-anchor="middle">3</text>
+  <rect x="130" y="50" width="40" height="40" stroke="black" fill="lightgreen"/>
+  <text x="145" y="75" font-size="20" text-anchor="middle">5</text>
+  <rect x="170" y="50" width="40" height="40" stroke="black" fill="white"/>
+  <text x="185" y="75" font-size="20" text-anchor="middle">8</text>
+  <rect x="210" y="50" width="40" height="40" stroke="black" fill="white"/>
+  <text x="225" y="75" font-size="20" text-anchor="middle">9</text>
+
+  <!-- Arrow pointing to middle element -->
+  <path d="M145 30 L145 45" stroke="red" stroke-width="3" marker-end="url(#arrowhead)"/>
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="red"/>
+    </marker>
+  </defs>
+  <text x="145" y="25" font-size="14" text-anchor="middle" fill="red">Middle (Target = 5)</text>
+
+  <!-- Caption -->
+  <text x="50" y="120" font-size="12" text-anchor="start">
+    Binary Search divides a sorted array in half, comparing the middle
+  </text>
+  <text x="50" y="135" font-size="12" text-anchor="start">
+    element to the target and narrowing the search space.
+  </text>
+</svg>

@@ -1,0 +1,480 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>SelectionSortStringArray - Java Data Structures and Algorithms for Beginners</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../../favicon.svg">
+        <link rel="shortcut icon" href="../../favicon.png">
+        <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+        <link rel="stylesheet" href="../../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="../../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../../theme/ferris.css">
+        <link rel="stylesheet" href="../../theme/semantic-notes.css">
+        <link rel="stylesheet" href="../../theme/listing.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../../toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Java Data Structures and Algorithms for Beginners</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <style>
+body {
+  text-align: justify;
+}
+</style>
+<h1 id="selection-sort-for-string-arrays"><a class="header" href="#selection-sort-for-string-arrays">Selection Sort for String Arrays</a></h1>
+<h2 id="problem-statement"><a class="header" href="#problem-statement">Problem Statement</a></h2>
+<p>Write a Java program that extends the Selection Sort implementation to sort an array of strings lexicographically in ascending order (based on Unicode values, case-sensitive). The program should count the number of swaps performed and test with string arrays containing strings of varying lengths (short, medium, long) and cases (mixed upper/lowercase, all lowercase), including edge cases like empty arrays and arrays with duplicate strings. Selection Sort will find the lexicographically smallest string in each pass and swap it with the first unsorted element. You can visualize this as organizing a list of words alphabetically, selecting the "smallest" word (e.g., "apple" before "Banana") to build the sorted list.</p>
+<p><strong>Input</strong>:</p>
+<ul>
+<li>An array of strings to be sorted lexicographically.
+<strong>Output</strong>: The sorted array, the number of swaps performed, and a string representation of the input and sorted arrays for clarity.
+<strong>Constraints</strong>:</li>
+<li>The array length <code>n</code> is between 0 and 10^5.</li>
+<li>Strings can be of any length and contain any valid Unicode characters.
+<strong>Example</strong>:</li>
+<li>Input: array = ["banana", "Apple", "cherry", "date"]</li>
+<li>Output:
+<ul>
+<li>Input Array: [banana, Apple, cherry, date]</li>
+<li>Sorted Array: [Apple, banana, cherry, date]</li>
+<li>Swaps: 2</li>
+</ul>
+</li>
+<li>Explanation: Selection Sort sorts lexicographically (case-sensitive, "Apple" &lt; "banana"), requiring 2 swaps.</li>
+<li>Input: array = ["cat", "Cat", "CAT"]</li>
+<li>Output:
+<ul>
+<li>Input Array: [cat, Cat, CAT]</li>
+<li>Sorted Array: [CAT, Cat, cat]</li>
+<li>Swaps: 2</li>
+</ul>
+</li>
+<li>Explanation: Case-sensitive sorting places uppercase before lowercase, 2 swaps.</li>
+</ul>
+<h2 id="pseudocode"><a class="header" href="#pseudocode">Pseudocode</a></h2>
+<pre><code>FUNCTION selectionSort(arr)
+    SET n to length of arr
+    CREATE swaps as integer, initialized to 0
+    FOR i from 0 to n-1
+        SET minIdx to i
+        FOR j from i+1 to n-1
+            IF arr[j] &lt; arr[minIdx] THEN
+                SET minIdx to j
+            ENDIF
+        ENDFOR
+        IF minIdx != i THEN
+            SET temp to arr[i]
+            SET arr[i] to arr[minIdx]
+            SET arr[minIdx] to temp
+            INCREMENT swaps
+        ENDIF
+    ENDFOR
+    RETURN swaps
+ENDFUNCTION
+
+FUNCTION toString(arr)
+    CREATE result as new StringBuilder
+    APPEND "[" to result
+    FOR each element in arr
+        APPEND element to result
+        IF element is not last THEN
+            APPEND ", " to result
+        ENDIF
+    ENDFOR
+    APPEND "]" to result
+    RETURN result as string
+ENDFUNCTION
+
+FUNCTION main()
+    SET testCases to array of input string arrays
+    FOR each testCase in testCases
+        PRINT test case details
+        CREATE copy of testCase array
+        SET swaps to selectionSort(copy)
+        PRINT input array, sorted array, and swaps
+    ENDFOR
+ENDFUNCTION
+</code></pre>
+<h2 id="algorithm-steps"><a class="header" href="#algorithm-steps">Algorithm Steps</a></h2>
+<ol>
+<li>Define <code>selectionSort</code> (generic):
+a. Accept an array of <code>Comparable&lt;T&gt;</code> type (use <code>String</code> for testing).
+b. Initialize a counter <code>swaps</code> to 0.
+c. For each index i from 0 to n-1:
+<ul>
+<li>Find the index <code>minIdx</code> of the lexicographically smallest element in arr[i..n-1] using <code>compareTo</code>.</li>
+<li>If <code>minIdx</code> != i, swap arr[i] with arr[minIdx] and increment <code>swaps</code>.
+d. Return the number of swaps.</li>
+</ul>
+</li>
+<li>Define <code>toString</code>:
+a. Convert the array to a string, e.g., "[banana, Apple, cherry]".</li>
+<li>In <code>main</code>, test with:
+a. Mixed case strings (short, n=4).
+b. Mixed case strings with duplicates (n=5).
+c. Long strings (n=6).
+d. Empty array (n=0).
+e. Single-element array (n=1).
+f. All lowercase strings (n=7).</li>
+</ol>
+<h2 id="java-implementation"><a class="header" href="#java-implementation">Java Implementation</a></h2>
+<pre><code class="language-java">import java.util.*;
+
+public class SelectionSortStringArray {
+    // Performs Selection Sort for Comparable types and counts swaps
+    public &lt;T extends Comparable&lt;T&gt;&gt; int selectionSort(T[] arr) {
+        int n = arr.length;
+        int swaps = 0;
+        for (int i = 0; i &lt; n; i++) {
+            int minIdx = i;
+            for (int j = i + 1; j &lt; n; j++) {
+                if (arr[j].compareTo(arr[minIdx]) &lt; 0) {
+                    minIdx = j;
+                }
+            }
+            if (minIdx != i) {
+                T temp = arr[i];
+                arr[i] = arr[minIdx];
+                arr[minIdx] = temp;
+                swaps++;
+            }
+        }
+        return swaps;
+    }
+
+    // Converts array to string
+    public &lt;T&gt; String toString(T[] arr) {
+        StringBuilder result = new StringBuilder("[");
+        for (int i = 0; i &lt; arr.length; i++) {
+            result.append(arr[i]);
+            if (i &lt; arr.length - 1) {
+                result.append(", ");
+            }
+        }
+        result.append("]");
+        return result.toString();
+    }
+
+    // Helper class for test cases
+    static class TestCase {
+        String[] arr;
+        String description;
+
+        TestCase(String[] arr, String description) {
+            this.arr = arr;
+            this.description = description;
+        }
+    }
+
+    // Main method to test string Selection Sort
+    public static void main(String[] args) {
+        SelectionSortStringArray sorter = new SelectionSortStringArray();
+
+        // Test cases
+        TestCase[] testCases = {
+            new TestCase(new String[]{"banana", "Apple", "cherry", "date"}, "Mixed case (n=4)"),
+            new TestCase(new String[]{"cat", "Cat", "CAT", "cat", "Dog"}, "Mixed case with duplicates (n=5)"),
+            new TestCase(new String[]{"elephant", "giraffe", "hippopotamus", "rhinoceros", "zebra", "antelope"}, "Long strings (n=6)"),
+            new TestCase(new String[]{}, "Empty (n=0)"),
+            new TestCase(new String[]{"single"}, "Single element (n=1)"),
+            new TestCase(new String[]{"apple", "banana", "cherry", "date", "elderberry", "fig", "grape"}, "All lowercase (n=7)")
+        };
+
+        // Run test cases
+        for (int i = 0; i &lt; testCases.length; i++) {
+            System.out.println("Test case " + (i + 1) + ": " + testCases[i].description);
+            String[] arr = testCases[i].arr.clone(); // Copy to preserve original
+            System.out.println("Input Array: " + sorter.toString(arr));
+            int swaps = sorter.selectionSort(arr);
+            System.out.println("Sorted Array: " + sorter.toString(arr));
+            System.out.println("Swaps: " + swaps + "\n");
+        }
+    }
+}
+</code></pre>
+<h2 id="output"><a class="header" href="#output">Output</a></h2>
+<p>Running the <code>main</code> method produces:</p>
+<pre><code>Test case 1: Mixed case (n=4)
+Input Array: [banana, Apple, cherry, date]
+Sorted Array: [Apple, banana, cherry, date]
+Swaps: 2
+
+Test case 2: Mixed case with duplicates (n=5)
+Input Array: [cat, Cat, CAT, cat, Dog]
+Sorted Array: [CAT, Cat, Dog, cat, cat]
+Swaps: 4
+
+Test case 3: Long strings (n=6)
+Input Array: [elephant, giraffe, hippopotamus, rhinoceros, zebra, antelope]
+Sorted Array: [antelope, elephant, giraffe, hippopotamus, rhinoceros, zebra]
+Swaps: 5
+
+Test case 4: Empty (n=0)
+Input Array: []
+Sorted Array: []
+Swaps: 0
+
+Test case 5: Single element (n=1)
+Input Array: [single]
+Sorted Array: [single]
+Swaps: 0
+
+Test case 6: All lowercase (n=7)
+Input Array: [apple, banana, cherry, date, elderberry, fig, grape]
+Sorted Array: [apple, banana, cherry, date, elderberry, fig, grape]
+Swaps: 0
+</code></pre>
+<p>Explanation:</p>
+<ul>
+<li>Test case 1: Mixed case strings, 2 swaps ("Apple" before "banana" due to case).</li>
+<li>Test case 2: Mixed case with duplicates, 4 swaps (uppercase "CAT" first).</li>
+<li>Test case 3: Long strings, 5 swaps to sort lexicographically.</li>
+<li>Test case 4: Empty array, 0 swaps.</li>
+<li>Test case 5: Single element, 0 swaps.</li>
+<li>Test case 6: Already sorted lowercase strings, 0 swaps.</li>
+</ul>
+<h2 id="how-it-works"><a class="header" href="#how-it-works">How It Works</a></h2>
+<ul>
+<li><strong>selectionSort</strong>:
+<ul>
+<li>Uses generics with <code>Comparable&lt;T&gt;</code> to handle <code>String</code> arrays.</li>
+<li>Finds the lexicographically smallest string in each pass using <code>compareTo</code>.</li>
+<li>Swaps if needed, counts swaps, and builds the sorted array.</li>
+</ul>
+</li>
+<li><strong>toString</strong>: Formats array as a string, handling <code>String</code> elements.</li>
+<li><strong>Example Trace (Test case 1)</strong>:
+<ul>
+<li>Pass 1: Find min="Apple" at index 1, swap with "banana": [Apple, banana, cherry, date] (1 swap).</li>
+<li>Pass 2: Find min="banana", no swap: [Apple, banana, cherry, date].</li>
+<li>Pass 3: Find min="cherry", no swap: [Apple, banana, cherry, date].</li>
+<li>Pass 4: Find min="date", no swap. Total swaps: 2.</li>
+</ul>
+</li>
+<li><strong>Main Method</strong>: Tests mixed case, duplicates, long strings, empty, single element, and lowercase arrays.</li>
+</ul>
+<h2 id="complexity-analysis-table"><a class="header" href="#complexity-analysis-table">Complexity Analysis Table</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Operation</th><th>Time Complexity</th><th>Space Complexity</th></tr></thead><tbody>
+<tr><td>selectionSort</td><td>O(n²)</td><td>O(1)</td></tr>
+<tr><td>toString</td><td>O(n)</td><td>O(n)</td></tr>
+</tbody></table>
+</div>
+<p><em>Note</em>:</p>
+<ul>
+<li>n is the array length.</li>
+<li>Time complexity: O(n²) for selectionSort (n passes, up to n comparisons each); O(n) for toString. String comparisons depend on string length, but this is not included in standard analysis.</li>
+<li>Space complexity: O(1) for selectionSort (in-place); O(n) for toString (string builder).</li>
+<li>Selection Sort performs O(n²) comparisons, with swaps O(n) in the worst case.</li>
+</ul>
+<blockquote>
+<p><strong>✅ Tip</strong>: Use generics with <code>Comparable</code> to extend Selection Sort to strings, leveraging <code>compareTo</code> for lexicographical ordering. Test with mixed cases to understand case-sensitive sorting.</p>
+</blockquote>
+<blockquote>
+<p><strong>⚠ Warning</strong>: Java’s <code>compareTo</code> is case-sensitive (uppercase before lowercase). For case-insensitive sorting, use <code>compareToIgnoreCase</code>. Handle empty arrays to avoid index errors.</p>
+</blockquote>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../problemStatements/ch04_02/SelectionSortPerformanceAnalysis.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../../problemStatements/ch04_03/BasicInsertionSort.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../problemStatements/ch04_02/SelectionSortPerformanceAnalysis.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../../problemStatements/ch04_03/BasicInsertionSort.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../../elasticlunr.min.js"></script>
+        <script src="../../mark.min.js"></script>
+        <script src="../../searcher.js"></script>
+
+        <script src="../../clipboard.min.js"></script>
+        <script src="../../highlight.js"></script>
+        <script src="../../book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="../../theme/ferris.js"></script>
+
+
+    </div>
+    </body>
+</html>

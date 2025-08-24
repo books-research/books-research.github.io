@@ -1,0 +1,526 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>SplitCircularLinkedList - Java Data Structures and Algorithms for Beginners</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../../favicon.svg">
+        <link rel="shortcut icon" href="../../favicon.png">
+        <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+        <link rel="stylesheet" href="../../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="../../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../../theme/ferris.css">
+        <link rel="stylesheet" href="../../theme/semantic-notes.css">
+        <link rel="stylesheet" href="../../theme/listing.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../../toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Java Data Structures and Algorithms for Beginners</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <style>
+body {
+  text-align: justify;
+}
+</style>
+<h1 id="split-circular-list"><a class="header" href="#split-circular-list">Split Circular List</a></h1>
+<h2 id="problem-statement"><a class="header" href="#problem-statement">Problem Statement</a></h2>
+<p>Write a Java program that splits a circular linked list into two circular linked lists of roughly equal size. A circular linked list is a singly linked list where the last node’s <code>next</code> pointer points to the head, forming a cycle. The splitting should divide the nodes as evenly as possible, with one list having at most one more node than the other for odd-sized lists, and each resulting list maintaining its circular structure. Test the implementation with even-sized lists, odd-sized lists, empty lists, and single-node lists. You can visualize this as dividing a ring of numbered beads into two smaller rings, each containing about half the beads, with both rings remaining closed loops.</p>
+<p><strong>Input</strong>:</p>
+<ul>
+<li>A circular linked list of integers (e.g., 1→2→3→4→1, where 4→1 forms the cycle).
+<strong>Output</strong>: Two circular linked lists as strings, listing nodes from each head until just before it cycles (e.g., "1 2" and "3 4" for the input above).
+<strong>Constraints</strong>:</li>
+<li>The list size is between 0 and 10^5.</li>
+<li>Node values are integers in the range [-10^9, 10^9].</li>
+<li>The list may be empty.
+<strong>Example</strong>:</li>
+<li>Input: List = 1→2→3→4→1</li>
+<li>Output: First list: "1 2", Second list: "3 4"</li>
+<li>Explanation: Splits into two circular lists of 2 nodes each: 1→2→1 and 3→4→3.</li>
+<li>Input: List = 1→2→3→1</li>
+<li>Output: First list: "1 2", Second list: "3"</li>
+<li>Explanation: Splits into 1→2→1 (2 nodes) and 3→3 (1 node).</li>
+<li>Input: List = []</li>
+<li>Output: First list: "[]", Second list: "[]"</li>
+<li>Explanation: Empty list splits into two empty lists.</li>
+</ul>
+<h2 id="pseudocode"><a class="header" href="#pseudocode">Pseudocode</a></h2>
+<pre><code>CLASS Node
+    SET value to integer
+    SET next to Node (null by default)
+ENDCLASS
+
+FUNCTION splitList(head)
+    IF head is null THEN
+        RETURN (null, null)
+    ENDIF
+    IF head.next is head THEN
+        RETURN (head, null)
+    ENDIF
+    SET length to 1
+    SET tail to head
+    WHILE tail.next is not head
+        INCREMENT length
+        SET tail to tail.next
+    ENDWHILE
+    SET splitPoint to length / 2
+    SET current to head
+    FOR i from 1 to splitPoint - 1
+        SET current to current.next
+    ENDFOR
+    SET firstHead to head
+    SET secondHead to current.next
+    SET secondTail to tail
+    SET firstTail to current
+    SET firstTail.next to firstHead
+    SET secondTail.next to secondHead
+    RETURN (firstHead, secondHead)
+ENDFUNCTION
+
+FUNCTION toString(head)
+    IF head is null THEN
+        RETURN "[]"
+    ENDIF
+    CREATE result as new StringBuilder
+    SET current to head
+    SET visited as new Set
+    WHILE current is not null AND current not in visited
+        ADD current to visited
+        APPEND current.value to result
+        IF current.next is not head THEN
+            APPEND " " to result
+        ENDIF
+        SET current to current.next
+    ENDWHILE
+    RETURN result as string
+ENDFUNCTION
+
+FUNCTION main()
+    SET testCases to array of circular linked lists
+    FOR each testCase in testCases
+        PRINT test case details
+        CALL splitList(testCase.head)
+        PRINT first and second lists using toString
+    ENDFOR
+ENDFUNCTION
+</code></pre>
+<h2 id="algorithm-steps"><a class="header" href="#algorithm-steps">Algorithm Steps</a></h2>
+<ol>
+<li>Define a <code>Node</code> class with:
+a. An integer <code>value</code>.
+b. A <code>next</code> pointer to the next node.</li>
+<li>In <code>splitList</code>:
+a. If the list is empty, return (null, null).
+b. If the list has one node, return (head, null).
+c. Find the list length and tail by traversing until <code>tail.next</code> is head.
+d. Compute split point as <code>length / 2</code>.
+e. Traverse to the node before the split point (first list’s tail).
+f. Set first list’s head and tail, second list’s head and tail.
+g. Connect first list’s tail to its head, second list’s tail to its head.
+h. Return (firstHead, secondHead).</li>
+<li>In <code>toString</code>:
+a. If head is null, return "[]".
+b. Traverse from head, use a Set to avoid cycling, append values with spaces.
+c. Return the string representation.</li>
+<li>In <code>main</code>, test with even-sized, odd-sized, empty, and single-node circular lists.</li>
+</ol>
+<h2 id="java-implementation"><a class="header" href="#java-implementation">Java Implementation</a></h2>
+<pre><code class="language-java">import java.util.*;
+
+public class SplitCircularLinkedList {
+    // Node class for the circular linked list
+    static class Node {
+        int value;
+        Node next;
+
+        Node(int value) {
+            this.value = value;
+            this.next = null;
+        }
+    }
+
+    // Splits the circular linked list into two circular lists
+    public Node[] splitList(Node head) {
+        Node[] result = new Node[2];
+        if (head == null) {
+            result[0] = null;
+            result[1] = null;
+            return result;
+        }
+        if (head.next == head) {
+            result[0] = head;
+            result[1] = null;
+            return result;
+        }
+        // Find length and tail
+        int length = 1;
+        Node tail = head;
+        while (tail.next != head) {
+            length++;
+            tail = tail.next;
+        }
+        // Find split point
+        int splitPoint = length / 2;
+        Node current = head;
+        for (int i = 0; i &lt; splitPoint - 1; i++) {
+            current = current.next;
+        }
+        // Set heads and tails
+        Node firstHead = head;
+        Node secondHead = current.next;
+        Node firstTail = current;
+        Node secondTail = tail;
+        // Form two circular lists
+        firstTail.next = firstHead;
+        secondTail.next = secondHead;
+        result[0] = firstHead;
+        result[1] = secondHead;
+        return result;
+    }
+
+    // Converts circular linked list to string
+    public String toString(Node head) {
+        if (head == null) {
+            return "[]";
+        }
+        StringBuilder result = new StringBuilder();
+        Node current = head;
+        Set&lt;Node&gt; visited = new HashSet&lt;&gt;();
+        while (current != null &amp;&amp; !visited.contains(current)) {
+            visited.add(current);
+            result.append(current.value);
+            if (current.next != head) {
+                result.append(" ");
+            }
+            current = current.next;
+        }
+        return result.toString();
+    }
+
+    // Helper class for test cases
+    static class TestCase {
+        Node head;
+
+        TestCase(int[] values) {
+            if (values.length == 0) {
+                head = null;
+                return;
+            }
+            head = new Node(values[0]);
+            Node current = head;
+            for (int i = 1; i &lt; values.length; i++) {
+                current.next = new Node(values[i]);
+                current = current.next;
+            }
+            // Make circular
+            current.next = head;
+        }
+    }
+
+    // Main method to test circular linked list splitting
+    public static void main(String[] args) {
+        SplitCircularLinkedList splitter = new SplitCircularLinkedList();
+
+        // Test cases
+        TestCase[] testCases = {
+            new TestCase(new int[]{1, 2, 3, 4}),     // Even-sized list
+            new TestCase(new int[]{1, 2, 3}),        // Odd-sized list
+            new TestCase(new int[]{}),               // Empty list
+            new TestCase(new int[]{5}),              // Single node
+            new TestCase(new int[]{1, 1, 1, 1, 1})   // Odd-sized with duplicates
+        };
+
+        // Run test cases
+        for (int i = 0; i &lt; testCases.length; i++) {
+            TestCase test = testCases[i];
+            System.out.println("Test case " + (i + 1) + ":");
+            System.out.println("Input list: " + splitter.toString(test.head));
+            Node[] result = splitter.splitList(test.head);
+            System.out.println("First list: " + splitter.toString(result[0]));
+            System.out.println("Second list: " + splitter.toString(result[1]) + "\n");
+        }
+    }
+}
+</code></pre>
+<h2 id="output"><a class="header" href="#output">Output</a></h2>
+<p>Running the <code>main</code> method produces:</p>
+<pre><code>Test case 1:
+Input list: 1 2 3 4
+First list: 1 2
+Second list: 3 4
+
+Test case 2:
+Input list: 1 2 3
+First list: 1 2
+Second list: 3
+
+Test case 3:
+Input list: []
+First list: []
+Second list: []
+
+Test case 4:
+Input list: 5
+First list: 5
+Second list: []
+
+Test case 5:
+Input list: 1 1 1 1 1
+First list: 1 1 1
+Second list: 1 1
+</code></pre>
+<p>Explanation:</p>
+<ul>
+<li>Test case 1: Splits 1→2→3→4→1 into 1→2→1 (2 nodes) and 3→4→3 (2 nodes).</li>
+<li>Test case 2: Splits 1→2→3→1 into 1→2→1 (2 nodes) and 3→3 (1 node).</li>
+<li>Test case 3: Empty list splits into "[]" and "[]".</li>
+<li>Test case 4: Single node 5→5 splits into 5→5 and "[]".</li>
+<li>Test case 5: Splits 1→1→1→1→1→1 into 1→1→1→1 (3 nodes) and 1→1→1 (2 nodes).</li>
+</ul>
+<h2 id="how-it-works"><a class="header" href="#how-it-works">How It Works</a></h2>
+<ul>
+<li><strong>Node</strong>: Stores an integer value and a <code>next</code> pointer.</li>
+<li><strong>splitList</strong>:
+<ul>
+<li>Returns (null, null) for empty lists, (head, null) for single-node lists.</li>
+<li>Finds list length and tail by traversing to <code>tail.next</code>=head.</li>
+<li>Computes split point as <code>length / 2</code>.</li>
+<li>Traverses to the node before the split point (first list’s tail).</li>
+<li>Sets first list’s head/tail and second list’s head/tail.</li>
+<li>Connects first tail to first head, second tail to second head.</li>
+</ul>
+</li>
+<li><strong>toString</strong>: Traverses from head, uses a Set to prevent cycling, returns space-separated string or "[]".</li>
+<li><strong>Example Trace (Test case 1)</strong>:
+<ul>
+<li>Input: 1→2→3→4→1.</li>
+<li>length=4, tail=4, splitPoint=2.</li>
+<li>current=2 (after 1 step), firstHead=1, firstTail=2, secondHead=3, secondTail=4.</li>
+<li>firstTail.next=firstHead: 1→2→1.</li>
+<li>secondTail.next=secondHead: 3→4→3.</li>
+<li>Returns (1, 3), outputs "1 2" and "3 4".</li>
+</ul>
+</li>
+<li><strong>Main Method</strong>: Tests even-sized, odd-sized, empty, single-node, and duplicate lists.</li>
+</ul>
+<h2 id="complexity-analysis-table"><a class="header" href="#complexity-analysis-table">Complexity Analysis Table</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Operation</th><th>Time Complexity</th><th>Space Complexity</th></tr></thead><tbody>
+<tr><td>Split List</td><td>O(n)</td><td>O(1)</td></tr>
+<tr><td>To String</td><td>O(n)</td><td>O(n)</td></tr>
+</tbody></table>
+</div>
+<p><em>Note</em>:</p>
+<ul>
+<li>n is the number of nodes in the list.</li>
+<li>Time complexity: O(n) for splitList (traverse to find length and split point); O(n) for toString (traverse list).</li>
+<li>Space complexity: O(1) for splitList (constant pointers); O(n) for toString (StringBuilder and Set).</li>
+<li>Worst case: O(n) time, O(n) space for output with large lists.</li>
+</ul>
+<blockquote>
+<p><strong>✅ Tip</strong>: Split</p>
+</blockquote>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../problemStatements/ch03_03_02/RoundRobinScheduler.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../../problemStatements/hasingProblemSolving.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../problemStatements/ch03_03_02/RoundRobinScheduler.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../../problemStatements/hasingProblemSolving.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../../elasticlunr.min.js"></script>
+        <script src="../../mark.min.js"></script>
+        <script src="../../searcher.js"></script>
+
+        <script src="../../clipboard.min.js"></script>
+        <script src="../../highlight.js"></script>
+        <script src="../../book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="../../theme/ferris.js"></script>
+
+
+    </div>
+    </body>
+</html>

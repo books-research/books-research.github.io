@@ -1,0 +1,333 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>What is an Algorithms? - Java Data Structures and Algorithms for Beginners</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="theme/ferris.css">
+        <link rel="stylesheet" href="theme/semantic-notes.css">
+        <link rel="stylesheet" href="theme/listing.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Java Data Structures and Algorithms for Beginners</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <style>
+body {
+  text-align: justify;
+}
+</style>
+<h2 id="what-is-an-algorithm"><a class="header" href="#what-is-an-algorithm">What is an Algorithm?</a></h2>
+<p>An <strong>algorithm</strong> is a <strong>step-by-step procedure</strong> or a <strong>set of instructions</strong> designed to perform a specific task or solve a problem.<br />
+It is like a <strong>recipe</strong> in cooking — a list of steps you follow in a specific order to achieve the desired outcome.</p>
+<h3 id="characteristics-of-a-good-algorithm"><a class="header" href="#characteristics-of-a-good-algorithm">Characteristics of a Good Algorithm</a></h3>
+<ol>
+<li><strong>Clear and Unambiguous</strong> – Each step is well-defined.</li>
+<li><strong>Input</strong> – Takes zero or more inputs.</li>
+<li><strong>Output</strong> – Produces at least one output.</li>
+<li><strong>Finiteness</strong> – Completes after a finite number of steps.</li>
+<li><strong>Effectiveness</strong> – Each step is basic enough to be performed exactly and in a reasonable time.</li>
+</ol>
+<h3 id="example-real-world"><a class="header" href="#example-real-world">Example (Real-World)</a></h3>
+<p><strong>Making Tea Algorithm:</strong></p>
+<ol>
+<li>Boil water.</li>
+<li>Add tea leaves.</li>
+<li>Add sugar and milk.</li>
+<li>Pour into a cup and serve.</li>
+</ol>
+<h3 id="here-each-step-is-clear-ordered-and-finite--just-like-in-programming"><a class="header" href="#here-each-step-is-clear-ordered-and-finite--just-like-in-programming">Here, each step is <strong>clear</strong>, <strong>ordered</strong>, and <strong>finite</strong> — just like in programming.</a></h3>
+<hr />
+<h3 id="example-of-an-algorithm--adding-two-numbers"><a class="header" href="#example-of-an-algorithm--adding-two-numbers">Example of an Algorithm – Adding Two Numbers</a></h3>
+<p>Let’s take a very simple problem:</p>
+<p><strong>Problem:</strong><br />
+Write an algorithm to add two numbers and display the result.</p>
+<h3 id="step-by-step-algorithm"><a class="header" href="#step-by-step-algorithm">Step-by-Step Algorithm</a></h3>
+<ol>
+<li><strong>Start</strong></li>
+<li><strong>Input</strong> the first number.</li>
+<li><strong>Input</strong> the second number.</li>
+<li><strong>Add</strong> the two numbers.</li>
+<li><strong>Output</strong> the result.</li>
+<li><strong>End</strong></li>
+</ol>
+<h3 id="flowchart-representation"><a class="header" href="#flowchart-representation">Flowchart Representation</a></h3>
+<p>Flowcharts are <strong>visual diagrams</strong> that show the steps of an algorithm using shapes and arrows.</p>
+<p><strong>Benefits:</strong></p>
+<ul>
+<li>Easy to understand for beginners.</li>
+<li>Shows the flow of logic visually.</li>
+<li>Useful for planning before coding.</li>
+</ul>
+<h3 id="common-flowchart-symbols"><a class="header" href="#common-flowchart-symbols">Common Flowchart Symbols</a></h3>
+<div class="table-wrapper"><table><thead><tr><th>Symbol</th><th>Name</th><th>Purpose</th></tr></thead><tbody>
+<tr><td>🔵 <strong>Oval</strong></td><td><strong>Start / End</strong></td><td>Indicates the start or end of the process</td></tr>
+<tr><td>▭ <strong>Rectangle</strong></td><td><strong>Process</strong></td><td>Shows a task, step, or action to be performed</td></tr>
+<tr><td>🔷 <strong>Diamond</strong></td><td><strong>Decision</strong></td><td>Represents a question or condition (Yes/No)</td></tr>
+<tr><td>▱ <strong>Parallelogram</strong></td><td><strong>Input / Output</strong></td><td>Used for reading inputs or displaying outputs</td></tr>
+<tr><td>➡ <strong>Arrow</strong></td><td><strong>Flow Line</strong></td><td>Shows the direction of process flow</td></tr>
+<tr><td>🗂 <strong>Document Shape</strong></td><td><strong>Predefined Process</strong></td><td>Indicates a subroutine or pre-defined process</td></tr>
+</tbody></table>
+</div>
+<hr />
+<div style="text-align:center;">
+    <img src="img/flowchart.svg" alt="flowchart" style="max-width:255px; height:auto;"/>
+</div>
+<h3 id="explanation-of-the-flowchart"><a class="header" href="#explanation-of-the-flowchart">Explanation of the Flowchart</a></h3>
+<ul>
+<li><strong>Start (A)</strong>: Represented by an oval, indicating the beginning of the algorithm.</li>
+<li><strong>Input first number (B)</strong>: A parallelogram, showing the user inputs the first number.</li>
+<li><strong>Input second number (C)</strong>: Another parallelogram, for inputting the second number.</li>
+<li><strong>Add numbers (D)</strong>: A rectangle, representing the processing step where the two numbers are added.</li>
+<li><strong>Display sum (E)</strong>: A parallelogram, indicating the output of the sum to the user.</li>
+<li><strong>End (F)</strong>: An oval, marking the end of the algorithm.</li>
+<li><strong>Arrows</strong>: Show the flow of execution from one step to the next.</li>
+</ul>
+<pre><code class="language-java">import java.util.Scanner;
+
+public class AddTwoNumbers {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        // Input
+        System.out.print("Enter first number: ");
+        int num1 = sc.nextInt();
+
+        System.out.print("Enter second number: ");
+        int num2 = sc.nextInt();
+
+        // Processing
+        int sum = num1 + num2;
+
+        // Output
+        System.out.println("Sum = " + sum);
+
+        sc.close();
+    }
+}
+
+</code></pre>
+<hr />
+<h3 id="-examples-of-algorithms-in-computer-science"><a class="header" href="#-examples-of-algorithms-in-computer-science">🔍 Examples of Algorithms in Computer Science</a></h3>
+<ul>
+<li><strong>Searching</strong>: Linear Search, Binary Search</li>
+<li><strong>Sorting</strong>: Bubble Sort, Merge Sort</li>
+<li><strong>Graph Traversal</strong>: BFS, DFS</li>
+<li><strong>Dynamic Programming</strong>: Fibonacci, Knapsack</li>
+</ul>
+<hr />
+<h3 id="-key-takeaway"><a class="header" href="#-key-takeaway">💡 Key Takeaway</a></h3>
+<p>An algorithm is <strong>not code</strong> — it’s the <strong>logic and steps</strong> to solve a problem.<br />
+You can write algorithms in <strong>plain language</strong>, <strong>pseudocode</strong>, or <strong>flowcharts</strong> before turning them into Java code.</p>
+<hr />
+<p>▶ <strong>Next:</strong> <a href="./ch01_03.html">What is Pseudocode and Flowchart?</a></p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="ch01_01.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="ch01_03.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="ch01_01.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="ch01_03.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="theme/ferris.js"></script>
+
+
+    </div>
+    </body>
+</html>

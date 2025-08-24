@@ -1,0 +1,669 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>DequeImplementation - Java Data Structures and Algorithms for Beginners</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../../favicon.svg">
+        <link rel="shortcut icon" href="../../favicon.png">
+        <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+        <link rel="stylesheet" href="../../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="../../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../../theme/ferris.css">
+        <link rel="stylesheet" href="../../theme/semantic-notes.css">
+        <link rel="stylesheet" href="../../theme/listing.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../../toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Java Data Structures and Algorithms for Beginners</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <style>
+body {
+  text-align: justify;
+}
+</style>
+<h1 id="deque-implementation"><a class="header" href="#deque-implementation">Deque Implementation</a></h1>
+<h2 id="problem-statement"><a class="header" href="#problem-statement">Problem Statement</a></h2>
+<p>Write a Java program that implements a double-ended queue (deque) using a doubly linked list. The doubly linked list consists of nodes, each containing an integer value, a reference to the next node, and a reference to the previous node. The deque should support methods to add elements at the front (head) and back (tail), and remove elements from the front and back, maintaining the list’s bidirectional structure. Test the implementation with a sequence of operations, including adding and removing elements at both ends, and handling edge cases like empty deques and single-element deques. You can visualize this as managing a queue of numbered cards where you can add or remove cards from either the front or the back of the deck.</p>
+<p><strong>Input</strong>:</p>
+<ul>
+<li>A sequence of operations, where each operation is:
+<ul>
+<li><code>addFront(value)</code>: Add a value to the front of the deque.</li>
+<li><code>addBack(value)</code>: Add a value to the back of the deque.</li>
+<li><code>removeFront()</code>: Remove and return the front value, or -1 if empty.</li>
+<li><code>removeBack()</code>: Remove and return the back value, or -1 if empty.</li>
+<li><code>printDeque()</code>: Print the deque in forward order.
+<strong>Output</strong>: For each operation, print the action performed (e.g., "Added 5 at front", "Removed 3 from back", or the deque as a string). Return -1 for remove operations on an empty deque.
+<strong>Constraints</strong>:</li>
+</ul>
+</li>
+<li>The deque size is between 0 and 10^5.</li>
+<li>Values are integers in the range [-10^9, 10^9].</li>
+<li>The deque may be empty.
+<strong>Example</strong>:</li>
+<li>Input: Operations = [addFront(1), addBack(2), addFront(3), printDeque, removeFront, printDeque, removeBack, printDeque]</li>
+<li>Output:
+<pre><code>Added 1 at front
+Added 2 at back
+Added 3 at front
+Deque: 3 1 2
+Removed 3 from front
+Deque: 1 2
+Removed 2 from back
+Deque: 1
+</code></pre>
+</li>
+<li>Input: Operations = [removeFront, printDeque]</li>
+<li>Output:
+<pre><code>Removed -1 from front
+Deque: []
+</code></pre>
+</li>
+</ul>
+<h2 id="pseudocode"><a class="header" href="#pseudocode">Pseudocode</a></h2>
+<pre><code>CLASS DoublyNode
+    SET value to integer
+    SET next to DoublyNode (null by default)
+    SET prev to DoublyNode (null by default)
+ENDCLASS
+
+CLASS Deque
+    SET head to null
+    SET tail to null
+
+    FUNCTION addFront(value)
+        CREATE newNode as new DoublyNode(value)
+        IF head is null THEN
+            SET head to newNode
+            SET tail to newNode
+        ELSE
+            SET newNode.next to head
+            SET head.prev to newNode
+            SET head to newNode
+        ENDIF
+    ENDFUNCTION
+
+    FUNCTION addBack(value)
+        CREATE newNode as new DoublyNode(value)
+        IF tail is null THEN
+            SET head to newNode
+            SET tail to newNode
+        ELSE
+            SET newNode.prev to tail
+            SET tail.next to newNode
+            SET tail to newNode
+        ENDIF
+    ENDFUNCTION
+
+    FUNCTION removeFront()
+        IF head is null THEN
+            RETURN -1
+        ENDIF
+        SET value to head.value
+        SET head to head.next
+        IF head is null THEN
+            SET tail to null
+        ELSE
+            SET head.prev to null
+        ENDIF
+        RETURN value
+    ENDFUNCTION
+
+    FUNCTION removeBack()
+        IF tail is null THEN
+            RETURN -1
+        ENDIF
+        SET value to tail.value
+        SET tail to tail.prev
+        IF tail is null THEN
+            SET head to null
+        ELSE
+            SET tail.next to null
+        ENDIF
+        RETURN value
+    ENDFUNCTION
+
+    FUNCTION toString()
+        IF head is null THEN
+            RETURN "[]"
+        ENDIF
+        CREATE result as new StringBuilder
+        SET current to head
+        WHILE current is not null
+            APPEND current.value to result
+            IF current.next is not null THEN
+                APPEND " " to result
+            ENDIF
+            SET current to current.next
+        ENDWHILE
+        RETURN result as string
+    ENDFUNCTION
+ENDCLASS
+
+FUNCTION testDeque(operations)
+    CREATE deque as new Deque
+    FOR each operation in operations
+        IF operation.type equals "addFront" THEN
+            CALL deque.addFront(operation.value)
+            PRINT added value at front
+        ELSE IF operation.type equals "addBack" THEN
+            CALL deque.addBack(operation.value)
+            PRINT added value at back
+        ELSE IF operation.type equals "removeFront" THEN
+            SET value to deque.removeFront()
+            PRINT removed value from front
+        ELSE IF operation.type equals "removeBack" THEN
+            SET value to deque.removeBack()
+            PRINT removed value from back
+        ELSE IF operation.type equals "print" THEN
+            PRINT deque using toString
+        ENDIF
+    ENDFOR
+ENDFUNCTION
+
+FUNCTION main()
+    SET testCases to array of operation sequences
+    FOR each testCase in testCases
+        PRINT test case details
+        CALL testDeque(testCase)
+    ENDFOR
+ENDFUNCTION
+</code></pre>
+<h2 id="algorithm-steps"><a class="header" href="#algorithm-steps">Algorithm Steps</a></h2>
+<ol>
+<li>Define a <code>DoublyNode</code> class with:
+a. An integer <code>value</code>.
+b. A <code>next</code> pointer to the next node.
+c. A <code>prev</code> pointer to the previous node.</li>
+<li>Define a <code>Deque</code> class with:
+a. <code>head</code> and <code>tail</code> pointers to track both ends.
+b. <code>addFront</code>: Add node at head, update <code>prev</code> and <code>tail</code> if needed.
+c. <code>addBack</code>: Add node at tail, update <code>next</code> and <code>head</code> if needed.
+d. <code>removeFront</code>: Remove head, update <code>head</code> and <code>tail</code>, return value or -1.
+e. <code>removeBack</code>: Remove tail, update <code>tail</code> and <code>head</code>, return value or -1.
+f. <code>toString</code>: Print list forward, return "[]" if empty.</li>
+<li>In <code>testDeque</code>:
+a. Create a <code>Deque</code>.
+b. For each operation:
+<ul>
+<li><code>addFront</code>: Call <code>addFront</code>, print action.</li>
+<li><code>addBack</code>: Call <code>addBack</code>, print action.</li>
+<li><code>removeFront</code>: Call <code>removeFront</code>, print value.</li>
+<li><code>removeBack</code>: Call <code>removeBack</code>, print value.</li>
+<li><code>print</code>: Call <code>toString</code>, print deque.</li>
+</ul>
+</li>
+<li>In <code>main</code>, test with sequences including adds/removes at both ends and edge cases.</li>
+</ol>
+<h2 id="java-implementation"><a class="header" href="#java-implementation">Java Implementation</a></h2>
+<pre><code class="language-java">import java.util.*;
+
+public class DequeImplementation {
+    // Node class for the doubly linked list
+    static class DoublyNode {
+        int value;
+        DoublyNode next;
+        DoublyNode prev;
+
+        DoublyNode(int value) {
+            this.value = value;
+            this.next = null;
+            this.prev = null;
+        }
+    }
+
+    // Deque class using doubly linked list
+    static class Deque {
+        private DoublyNode head;
+        private DoublyNode tail;
+
+        public void addFront(int value) {
+            DoublyNode newNode = new DoublyNode(value);
+            if (head == null) {
+                head = newNode;
+                tail = newNode;
+            } else {
+                newNode.next = head;
+                head.prev = newNode;
+                head = newNode;
+            }
+        }
+
+        public void addBack(int value) {
+            DoublyNode newNode = new DoublyNode(value);
+            if (tail == null) {
+                head = newNode;
+                tail = newNode;
+            } else {
+                newNode.prev = tail;
+                tail.next = newNode;
+                tail = newNode;
+            }
+        }
+
+        public int removeFront() {
+            if (head == null) {
+                return -1;
+            }
+            int value = head.value;
+            head = head.next;
+            if (head == null) {
+                tail = null;
+            } else {
+                head.prev = null;
+            }
+            return value;
+        }
+
+        public int removeBack() {
+            if (tail == null) {
+                return -1;
+            }
+            int value = tail.value;
+            tail = tail.prev;
+            if (tail == null) {
+                head = null;
+            } else {
+                tail.next = null;
+            }
+            return value;
+        }
+
+        public String toString() {
+            if (head == null) {
+                return "[]";
+            }
+            StringBuilder result = new StringBuilder();
+            DoublyNode current = head;
+            while (current != null) {
+                result.append(current.value);
+                if (current.next != null) {
+                    result.append(" ");
+                }
+                current = current.next;
+            }
+            return result.toString();
+        }
+    }
+
+    // Helper class for operations
+    static class Operation {
+        String type;
+        Integer value;
+
+        Operation(String type, Integer value) {
+            this.type = type;
+            this.value = value;
+        }
+    }
+
+    // Tests deque operations
+    public void testDeque(List&lt;Operation&gt; operations) {
+        Deque deque = new Deque();
+        for (Operation op : operations) {
+            if (op.type.equals("addFront")) {
+                deque.addFront(op.value);
+                System.out.println("Added " + op.value + " at front");
+            } else if (op.type.equals("addBack")) {
+                deque.addBack(op.value);
+                System.out.println("Added " + op.value + " at back");
+            } else if (op.type.equals("removeFront")) {
+                int value = deque.removeFront();
+                System.out.println("Removed " + value + " from front");
+            } else if (op.type.equals("removeBack")) {
+                int value = deque.removeBack();
+                System.out.println("Removed " + value + " from back");
+            } else if (op.type.equals("print")) {
+                System.out.println("Deque: " + deque.toString());
+            }
+        }
+    }
+
+    // Main method to test deque implementation
+    public static void main(String[] args) {
+        DequeImplementation manager = new DequeImplementation();
+
+        // Test cases
+        List&lt;List&lt;Operation&gt;&gt; testCases = new ArrayList&lt;&gt;();
+        
+        // Test case 1: Normal operations
+        testCases.add(Arrays.asList(
+            new Operation("addFront", 1),
+            new Operation("addBack", 2),
+            new Operation("addFront", 3),
+            new Operation("print", null),
+            new Operation("removeFront", null),
+            new Operation("print", null),
+            new Operation("removeBack", null),
+            new Operation("print", null)
+        ));
+        
+        // Test case 2: Empty deque
+        testCases.add(Arrays.asList(
+            new Operation("removeFront", null),
+            new Operation("removeBack", null),
+            new Operation("print", null)
+        ));
+        
+        // Test case 3: Single element
+        testCases.add(Arrays.asList(
+            new Operation("addFront", 5),
+            new Operation("print", null),
+            new Operation("removeFront", null),
+            new Operation("print", null)
+        ));
+        
+        // Test case 4: Mixed operations with duplicates
+        testCases.add(Arrays.asList(
+            new Operation("addFront", 1),
+            new Operation("addBack", 1),
+            new Operation("addFront", 2),
+            new Operation("print", null),
+            new Operation("removeFront", null),
+            new Operation("removeBack", null),
+            new Operation("print", null)
+        ));
+
+        // Run test cases
+        for (int i = 0; i &lt; testCases.size(); i++) {
+            System.out.println("Test case " + (i + 1) + ":");
+            manager.testDeque(testCases.get(i));
+            System.out.println();
+        }
+    }
+}
+</code></pre>
+<h2 id="output"><a class="header" href="#output">Output</a></h2>
+<p>Running the <code>main</code> method produces:</p>
+<pre><code>Test case 1:
+Added 1 at front
+Added 2 at back
+Added 3 at front
+Deque: 3 1 2
+Removed 3 from front
+Deque: 1 2
+Removed 2 from back
+Deque: 1
+
+Test case 2:
+Removed -1 from front
+Removed -1 from back
+Deque: []
+
+Test case 3:
+Added 5 at front
+Deque: 5
+Removed 5 from front
+Deque: []
+
+Test case 4:
+Added 1 at front
+Added 1 at back
+Added 2 at front
+Deque: 2 1 1
+Removed 2 from front
+Removed 1 from back
+Deque: 1
+</code></pre>
+<p>Explanation:</p>
+<ul>
+<li>Test case 1: Adds 1 (front), 2 (back), 3 (front), prints "3 1 2", removes 3 (front), prints "1 2", removes 2 (back), prints "1".</li>
+<li>Test case 2: Removes from empty deque (returns -1), prints "[]".</li>
+<li>Test case 3: Adds 5 (front), prints "5", removes 5 (front), prints "[]".</li>
+<li>Test case 4: Adds 1 (front), 1 (back), 2 (front), prints "2 1 1", removes 2 (front), 1 (back), prints "1".</li>
+</ul>
+<h2 id="how-it-works"><a class="header" href="#how-it-works">How It Works</a></h2>
+<ul>
+<li><strong>DoublyNode</strong>: Stores an integer value, a <code>next</code> pointer, and a <code>prev</code> pointer.</li>
+<li><strong>Deque</strong>:
+<ul>
+<li><code>addFront</code>: Adds node at head, updates <code>prev</code> and <code>tail</code>, O(1).</li>
+<li><code>addBack</code>: Adds node at tail, updates <code>next</code> and <code>head</code>, O(1).</li>
+<li><code>removeFront</code>: Removes head, updates <code>head</code> and <code>tail</code>, returns value or -1, O(1).</li>
+<li><code>removeBack</code>: Removes tail, updates <code>tail</code> and <code>head</code>, returns value or -1, O(1).</li>
+<li><code>toString</code>: Traverses forward, returns space-separated string or "[]".</li>
+</ul>
+</li>
+<li><strong>testDeque</strong>: Executes operations, printing actions and results.</li>
+<li><strong>Example Trace (Test case 1)</strong>:
+<ul>
+<li>addFront(1): head=1↔null, tail=1.</li>
+<li>addBack(2): head=1↔2, tail=2.</li>
+<li>addFront(3): head=3↔1↔2, tail=2.</li>
+<li>print: "3 1 2".</li>
+<li>removeFront: Removes 3, head=1↔2, tail=2, returns 3.</li>
+<li>print: "1 2".</li>
+<li>removeBack: Removes 2, head=1, tail=1, returns 2.</li>
+<li>print: "1".</li>
+</ul>
+</li>
+<li><strong>Main Method</strong>: Tests normal operations, empty deque, single element, and duplicates.</li>
+</ul>
+<h2 id="complexity-analysis-table"><a class="header" href="#complexity-analysis-table">Complexity Analysis Table</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Operation</th><th>Time Complexity</th><th>Space Complexity</th></tr></thead><tbody>
+<tr><td>Add Front</td><td>O(1)</td><td>O(1)</td></tr>
+<tr><td>Add Back</td><td>O(1)</td><td>O(1)</td></tr>
+<tr><td>Remove Front</td><td>O(1)</td><td>O(1)</td></tr>
+<tr><td>Remove Back</td><td>O(1)</td><td>O(1)</td></tr>
+<tr><td>To String</td><td>O(n)</td><td>O(n)</td></tr>
+</tbody></table>
+</div>
+<p><em>Note</em>:</p>
+<ul>
+<li>n is the number of nodes in the deque.</li>
+<li>Time complexity: O(1) for addFront, addBack, removeFront, removeBack (constant-time operations); O(n) for toString (traverse list).</li>
+<li>Space complexity: O(1) for add/remove operations (constant pointers); O(n) for toString (StringBuilder).</li>
+<li>Worst case: O(n) time, O(n) space for output with large deques.</li>
+</ul>
+<blockquote>
+<p><strong>✅ Tip</strong>: Use a doubly linked list for a deque to enable O(1) operations at both ends by maintaining <code>head</code> and <code>tail</code> pointers. Test edge cases like empty deques and single-element deques to ensure robustness.</p>
+</blockquote>
+<blockquote>
+<p><strong>⚠ Warning</strong>: Always update both <code>head</code> and <code>tail</code> pointers correctly during add and remove operations to maintain deque integrity. Check for null pointers to handle empty deque cases.</p>
+</blockquote>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../problemStatements/ch03_03_01/BrowserHistorySimulator.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../../problemStatements/ch03_03_01/InsertAfterValue.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../problemStatements/ch03_03_01/BrowserHistorySimulator.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../../problemStatements/ch03_03_01/InsertAfterValue.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../../elasticlunr.min.js"></script>
+        <script src="../../mark.min.js"></script>
+        <script src="../../searcher.js"></script>
+
+        <script src="../../clipboard.min.js"></script>
+        <script src="../../highlight.js"></script>
+        <script src="../../book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="../../theme/ferris.js"></script>
+
+
+    </div>
+    </body>
+</html>

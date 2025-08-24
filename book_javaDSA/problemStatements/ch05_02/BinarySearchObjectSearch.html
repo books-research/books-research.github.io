@@ -1,0 +1,570 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>BinarySearchObjectSearch - Java Data Structures and Algorithms for Beginners</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../../favicon.svg">
+        <link rel="shortcut icon" href="../../favicon.png">
+        <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+        <link rel="stylesheet" href="../../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="../../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../../theme/ferris.css">
+        <link rel="stylesheet" href="../../theme/semantic-notes.css">
+        <link rel="stylesheet" href="../../theme/listing.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../../toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Java Data Structures and Algorithms for Beginners</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <style>
+body {
+  text-align: justify;
+}
+</style>
+<h1 id="binary-search-for-object-search"><a class="header" href="#binary-search-for-object-search">Binary Search for Object Search</a></h1>
+<h2 id="problem-statement"><a class="header" href="#problem-statement">Problem Statement</a></h2>
+<p>Write a Java program that extends the Binary Search algorithm to find a Student object by its <code>id</code> in a sorted array of Student objects, where the array is sorted by <code>id</code> in ascending order. The program should count the number of comparisons made during the search and test with a sample dataset, including arrays of different sizes (e.g., 10, 100, 1000) and various target <code>id</code> values (present, absent, middle element). The Student class should have fields <code>id</code> (integer) and <code>name</code> (string), and Binary Search will compare <code>id</code> values to locate the target. You can visualize this as searching for a student by their ID in a sorted roster, halving the search range with each comparison.</p>
+<p><strong>Input</strong>:</p>
+<ul>
+<li>A sorted array of Student objects (by <code>id</code> in ascending order) and a target <code>id</code> to find.
+<strong>Output</strong>: The index of the Student object with the target <code>id</code> (or -1 if not found), the number of comparisons made, and a string representation of the input array for verification.
+<strong>Constraints</strong>:</li>
+<li>The array length <code>n</code> is between 0 and 10^5.</li>
+<li>Student <code>id</code> values and target <code>id</code> are integers in the range [1, 10^9].</li>
+<li>The input array is sorted by <code>id</code> in ascending order.
+<strong>Example</strong>:</li>
+<li>Input: array = [Student(1, "Alice"), Student(3, "Bob"), Student(5, "Charlie"), Student(7, "David")], targetId = 3</li>
+<li>Output:
+<ul>
+<li>Input Array: [(1, Alice), (3, Bob), (5, Charlie), (7, David)]</li>
+<li>Target ID: 3</li>
+<li>Index: 1</li>
+<li>Comparisons: 2</li>
+</ul>
+</li>
+<li>Explanation: Binary Search finds the Student with <code>id=3</code> at index 1 after 2 comparisons.</li>
+<li>Input: array = [Student(1, "Alice"), Student(2, "Bob")], targetId = 4</li>
+<li>Output:
+<ul>
+<li>Input Array: [(1, Alice), (2, Bob)]</li>
+<li>Target ID: 4</li>
+<li>Index: -1</li>
+<li>Comparisons: 2</li>
+</ul>
+</li>
+<li>Explanation: Binary Search returns -1 as no Student with <code>id=4</code> is found after 2 comparisons.</li>
+</ul>
+<h2 id="pseudocode"><a class="header" href="#pseudocode">Pseudocode</a></h2>
+<pre><code>CLASS Student
+    DECLARE id as integer
+    DECLARE name as string
+    FUNCTION toString()
+        RETURN "(" + id + ", " + name + ")"
+    ENDFUNCTION
+ENDCLASS
+
+FUNCTION binarySearch(arr, targetId)
+    SET comparisons to 0
+    SET left to 0
+    SET right to length of arr - 1
+    WHILE left &lt;= right
+        SET mid to floor((left + right) / 2)
+        INCREMENT comparisons
+        IF arr[mid].id equals targetId THEN
+            RETURN mid, comparisons
+        ELSE IF arr[mid].id &lt; targetId THEN
+            SET left to mid + 1
+        ELSE
+            SET right to mid - 1
+        ENDIF
+    ENDWHILE
+    RETURN -1, comparisons
+ENDFUNCTION
+
+FUNCTION toString(arr)
+    CREATE result as new StringBuilder
+    APPEND "[" to result
+    FOR each student in arr
+        APPEND student.toString() to result
+        IF student is not last THEN
+            APPEND ", " to result
+        ENDIF
+    ENDFOR
+    APPEND "]" to result
+    RETURN result as string
+ENDFUNCTION
+
+FUNCTION main()
+    SET sizes to [10, 100, 1000]
+    FOR each size in sizes
+        SET testCases to array of (array, targetId) pairs
+        FOR each testCase in testCases
+            PRINT test case details
+            SET arr to testCase sorted Student array
+            SET targetId to testCase target
+            CALL binarySearch(arr, targetId) to get index, comparisons
+            PRINT input array, targetId, index, comparisons
+        ENDFOR
+    ENDFOR
+ENDFUNCTION
+</code></pre>
+<h2 id="algorithm-steps"><a class="header" href="#algorithm-steps">Algorithm Steps</a></h2>
+<ol>
+<li>Define <code>Student</code> class:
+a. Include <code>id</code> (integer) and <code>name</code> (string) fields.
+b. Provide a <code>toString</code> method to format as <code>(id, name)</code>.</li>
+<li>Define <code>binarySearch</code>:
+a. Initialize comparisons to 0, <code>left</code> to 0, <code>right</code> to n-1.
+b. While <code>left</code> &lt;= <code>right</code>:
+<ul>
+<li>Compute <code>mid</code> as the floor of <code>(left + right) / 2</code>.</li>
+<li>Increment comparisons and check if <code>arr[mid].id</code> equals <code>targetId</code>.</li>
+<li>If equal, return <code>mid</code> and comparisons.</li>
+<li>If <code>arr[mid].id</code> &lt; <code>targetId</code>, set <code>left</code> to <code>mid + 1</code>.</li>
+<li>If <code>arr[mid].id</code> &gt; <code>targetId</code>, set <code>right</code> to <code>mid - 1</code>.
+c. Return -1 and comparisons if not found.</li>
+</ul>
+</li>
+<li>Define <code>toString</code>:
+a. Convert array of Student objects to a string, limiting output for large arrays.</li>
+<li>In <code>main</code>, test with:
+a. Array sizes: 10, 100, 1000 (sorted by <code>id</code>).
+b. For each size, test:
+<ul>
+<li>Target <code>id</code> present in the middle (average case).</li>
+<li>Target <code>id</code> absent.</li>
+<li>Target <code>id</code> as the middle element (exact middle).
+c. Generate sorted Student arrays with unique <code>id</code> values using a fixed seed.</li>
+</ul>
+</li>
+</ol>
+<h2 id="java-implementation"><a class="header" href="#java-implementation">Java Implementation</a></h2>
+<pre><code class="language-java">import java.util.*;
+
+public class BinarySearchObjectSearch {
+    // Student class
+    static class Student {
+        int id;
+        String name;
+
+        Student(int id, String name) {
+            this.id = id;
+            this.name = name;
+        }
+
+        @Override
+        public String toString() {
+            return "(" + id + ", " + name + ")";
+        }
+    }
+
+    // Performs Binary Search on Student array by id
+    public int[] binarySearch(Student[] arr, int targetId) {
+        int comparisons = 0;
+        int left = 0;
+        int right = arr.length - 1;
+        while (left &lt;= right) {
+            int mid = left + (right - left) / 2; // Avoid overflow
+            comparisons++;
+            if (arr[mid].id == targetId) {
+                return new int[]{mid, comparisons};
+            } else if (arr[mid].id &lt; targetId) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+        return new int[]{-1, comparisons};
+    }
+
+    // Converts Student array to string
+    public String toString(Student[] arr) {
+        StringBuilder result = new StringBuilder("[");
+        int limit = Math.min(arr.length, 10); // Limit output for large arrays
+        for (int i = 0; i &lt; limit; i++) {
+            result.append(arr[i].toString());
+            if (i &lt; limit - 1) {
+                result.append(", ");
+            }
+        }
+        if (arr.length &gt; limit) {
+            result.append(", ...]");
+        } else {
+            result.append("]");
+        }
+        return result.toString();
+    }
+
+    // Generates sorted Student array
+    private Student[] generateStudentArray(int n) {
+        Random rand = new Random(42); // Fixed seed for reproducibility
+        Student[] arr = new Student[n];
+        String[] names = {"Alice", "Bob", "Charlie", "David", "Eve", "Frank", "Grace", "Hannah", "Ivy", "Jack"};
+        // Ensure unique IDs by using a sorted sequence
+        for (int i = 0; i &lt; n; i++) {
+            int id = i + 1; // IDs from 1 to n
+            String name = names[rand.nextInt(names.length)]; // Random name
+            arr[i] = new Student(id, name);
+        }
+        // Array is already sorted by ID
+        return arr;
+    }
+
+    // Helper class for test cases
+    static class TestCase {
+        Student[] arr;
+        int targetId;
+        String description;
+
+        TestCase(Student[] arr, int targetId, String description) {
+            this.arr = arr;
+            this.targetId = targetId;
+            this.description = description;
+        }
+    }
+
+    // Main method to test Binary Search on Student objects
+    public static void main(String[] args) {
+        BinarySearchObjectSearch searcher = new BinarySearchObjectSearch();
+        int[] sizes = {10, 100, 1000};
+
+        // Run test cases
+        for (int size : sizes) {
+            System.out.println("Array Size: " + size);
+            Student[] arr = searcher.generateStudentArray(size);
+            System.out.println("Input Array: " + searcher.toString(arr));
+            TestCase[] testCases = {
+                new TestCase(arr, arr[size / 2].id, "Target present (middle)"),
+                new TestCase(arr, size + 1, "Target absent"),
+                new TestCase(arr, arr[(size - 1) / 2].id, "Target middle element")
+            };
+
+            for (int i = 0; i &lt; testCases.length; i++) {
+                System.out.println("Test case " + (i + 1) + ": " + testCases[i].description);
+                Student[] sortedArr = testCases[i].arr.clone(); // Copy to preserve original
+                int targetId = testCases[i].targetId;
+                System.out.println("Target ID: " + targetId);
+                int[] result = searcher.binarySearch(sortedArr, targetId);
+                System.out.println("Index: " + result[0]);
+                System.out.println("Comparisons: " + result[1] + "\n");
+            }
+        }
+    }
+}
+</code></pre>
+<h2 id="output"><a class="header" href="#output">Output</a></h2>
+<p>Running the <code>main</code> method produces (example output, random names fixed by seed):</p>
+<pre><code>Array Size: 10
+Input Array: [(1, Charlie), (2, Alice), (3, Jack), (4, Ivy), (5, Eve), (6, Grace), (7, David), (8, Bob), (9, Hannah), (10, Eve)]
+Test case 1: Target present (middle)
+Target ID: 6
+Index: 5
+Comparisons: 2
+
+Test case 2: Target absent
+Target ID: 11
+Index: -1
+Comparisons: 4
+
+Test case 3: Target middle element
+Target ID: 5
+Index: 4
+Comparisons: 3
+
+Array Size: 100
+Input Array: [(1, Charlie), (2, Alice), (3, Jack), (4, Ivy), (5, Eve), (6, Grace), (7, David), (8, Bob), (9, Hannah), (10, Eve), ...]
+Test case 1: Target present (middle)
+Target ID: 51
+Index: 50
+Comparisons: 7
+
+Test case 2: Target absent
+Target ID: 101
+Index: -1
+Comparisons: 7
+
+Test case 3: Target middle element
+Target ID: 50
+Index: 49
+Comparisons: 7
+
+Array Size: 1000
+Input Array: [(1, Charlie), (2, Alice), (3, Jack), (4, Ivy), (5, Eve), (6, Grace), (7, David), (8, Bob), (9, Hannah), (10, Eve), ...]
+Test case 1: Target present (middle)
+Target ID: 501
+Index: 500
+Comparisons: 10
+
+Test case 2: Target absent
+Target ID: 1001
+Index: -1
+Comparisons: 10
+
+Test case 3: Target middle element
+Target ID: 500
+Index: 499
+Comparisons: 10
+</code></pre>
+<p>Explanation:</p>
+<ul>
+<li>Size 10: Finds <code>id=6</code> at index 5 (~2 comparisons), absent <code>id=11</code> (~4 comparisons), middle <code>id=5</code> at index 4 (~3 comparisons).</li>
+<li>Size 100: Finds <code>id=51</code> at index 50 (~7 comparisons), absent <code>id=101</code> (~7 comparisons), middle <code>id=50</code> at index 49 (~7 comparisons).</li>
+<li>Size 1000: Finds <code>id=501</code> at index 500 (~10 comparisons), absent <code>id=1001</code> (~10 comparisons), middle <code>id=500</code> at index 499 (~10 comparisons).</li>
+<li>Comparisons scale logarithmically (~log n) due to Binary Search’s efficiency.</li>
+</ul>
+<h2 id="how-it-works"><a class="header" href="#how-it-works">How It Works</a></h2>
+<ul>
+<li><strong>Student Class</strong>:
+<ul>
+<li>Stores <code>id</code> and <code>name</code>, with a <code>toString</code> method for output formatting.</li>
+</ul>
+</li>
+<li><strong>binarySearch</strong>:
+<ul>
+<li>Adapts Binary Search to compare <code>arr[mid].id</code> with <code>targetId</code>.</li>
+<li>Uses <code>left</code> and <code>right</code> pointers to halve the search range, incrementing comparisons.</li>
+<li>Returns <code>[index, comparisons]</code> or <code>[-1, comparisons]</code>.</li>
+</ul>
+</li>
+<li><strong>generateStudentArray</strong>:
+<ul>
+<li>Creates an array of Student objects with unique <code>id</code> values (1 to n) and random names.</li>
+</ul>
+</li>
+<li><strong>toString</strong>: Formats Student array, limiting to 10 elements.</li>
+<li><strong>Example Trace (Size 10, Target ID=6)</strong>:
+<ul>
+<li>Array: [(1, Charlie), (2, Alice), (3, Jack), (4, Ivy), (5, Eve), (6, Grace), (7, David), (8, Bob), (9, Hannah), (10, Eve)].</li>
+<li>Initial: left=0, right=9, mid=4, arr[4].id=5 &lt; 6, comparisons=1, left=5.</li>
+<li>Next: left=5, right=9, mid=7, arr[7].id=8 &gt; 6, comparisons=2, right=6.</li>
+<li>Next: left=5, right=6, mid=5, arr[5].id=6 = 6, comparisons=3, return [5, 3].</li>
+</ul>
+</li>
+<li><strong>Main Method</strong>: Tests sizes 10, 100, 1000 with present, absent, and middle <code>id</code> targets, displaying results and comparisons.</li>
+</ul>
+<h2 id="complexity-analysis-table"><a class="header" href="#complexity-analysis-table">Complexity Analysis Table</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Operation</th><th>Time Complexity</th><th>Space Complexity</th></tr></thead><tbody>
+<tr><td>binarySearch</td><td>O(log n)</td><td>O(1)</td></tr>
+<tr><td>toString</td><td>O(n)</td><td>O(n)</td></tr>
+<tr><td>generateStudentArray</td><td>O(n)</td><td>O(n)</td></tr>
+</tbody></table>
+</div>
+<p><em>Note</em>:</p>
+<ul>
+<li>n is the array length.</li>
+<li>Time complexity: O(log n) for binarySearch (halves search range); O(n) for toString and generateStudentArray (linear iteration).</li>
+<li>Space complexity: O(1) for binarySearch (constant extra space); O(n) for toString (string builder) and generateStudentArray (array storage).</li>
+<li>Binary Search remains efficient for object searches when sorted by a key.</li>
+</ul>
+<blockquote>
+<p><strong>✅ Tip</strong>: Binary Search can be extended to search for objects by a key (e.g., <code>id</code>) in sorted arrays, maintaining O(log n) efficiency. Ensure the array is sorted by the search key to achieve correct results.</p>
+</blockquote>
+<blockquote>
+<p><strong>⚠ Warning</strong>: The array must be sorted by the <code>id</code> field in ascending order. Incorrect sorting or duplicate <code>id</code> values may lead to unpredictable results. Use unique keys or handle duplicates explicitly if needed.</p>
+</blockquote>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../problemStatements/ch05_02/BinarySearchFirstLastOccurrence.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../../problemStatements/ch05_02/BinarySearchPerformanceAnalysis.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../problemStatements/ch05_02/BinarySearchFirstLastOccurrence.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../../problemStatements/ch05_02/BinarySearchPerformanceAnalysis.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../../elasticlunr.min.js"></script>
+        <script src="../../mark.min.js"></script>
+        <script src="../../searcher.js"></script>
+
+        <script src="../../clipboard.min.js"></script>
+        <script src="../../highlight.js"></script>
+        <script src="../../book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="../../theme/ferris.js"></script>
+
+
+    </div>
+    </body>
+</html>

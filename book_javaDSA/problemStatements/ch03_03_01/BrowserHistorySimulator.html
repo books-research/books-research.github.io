@@ -1,0 +1,646 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>BrowserHistorySimulator - Java Data Structures and Algorithms for Beginners</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../../favicon.svg">
+        <link rel="shortcut icon" href="../../favicon.png">
+        <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+        <link rel="stylesheet" href="../../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="../../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../../theme/ferris.css">
+        <link rel="stylesheet" href="../../theme/semantic-notes.css">
+        <link rel="stylesheet" href="../../theme/listing.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../../toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Java Data Structures and Algorithms for Beginners</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <style>
+body {
+  text-align: justify;
+}
+</style>
+<h1 id="browser-history-simulator"><a class="header" href="#browser-history-simulator">Browser History Simulator</a></h1>
+<h2 id="problem-statement"><a class="header" href="#problem-statement">Problem Statement</a></h2>
+<p>Write a Java program that simulates a browser’s navigation history using a doubly linked list. Each node in the list represents a webpage with a string URL. The program should support adding new pages (insert at tail), navigating back (delete the current tail and move to the previous page), and navigating forward (re-insert a previously deleted page). A <code>current</code> pointer tracks the current page, and forward navigation is only possible if pages were previously removed via back navigation. Test the implementation with sequences of operations, including adding pages, navigating back and forward, and handling edge cases like empty history or navigating beyond available pages. You can visualize this as managing a browser’s history where new pages are added to the end, going back removes the current page, and going forward restores a previously visited page.</p>
+<p><strong>Input</strong>:</p>
+<ul>
+<li>A sequence of operations, where each operation is:
+<ul>
+<li><code>visit(url)</code>: Add a new page (URL) at the tail, clear forward history.</li>
+<li><code>back()</code>: Move to the previous page, remove current page, return URL or "null" if not possible.</li>
+<li><code>forward()</code>: Move to the next page (re-insert removed page), return URL or "null" if not possible.</li>
+<li><code>printHistory()</code>: Print the current history from head to current page.
+<strong>Output</strong>: For each operation, print the action performed (e.g., "Visited URL", "Navigated back to URL", "Navigated forward to URL", or the current history). Return "null" for invalid back/forward navigations.
+<strong>Constraints</strong>:</li>
+</ul>
+</li>
+<li>The history size is between 0 and 10^5.</li>
+<li>URLs are non-empty strings of length up to 100 characters.</li>
+<li>The history may be empty or have no forward/backward pages.
+<strong>Example</strong>:</li>
+<li>Input: Operations = [visit("page1"), visit("page2"), visit("page3"), printHistory, back, printHistory, forward, printHistory]</li>
+<li>Output:
+<pre><code>Visited page1
+Visited page2
+Visited page3
+History: page1 page2 page3
+Navigated back to page2
+History: page1 page2
+Navigated forward to page3
+History: page1 page2 page3
+</code></pre>
+</li>
+<li>Input: Operations = [back, printHistory]</li>
+<li>Output:
+<pre><code>Navigated back to null
+History: []
+</code></pre>
+</li>
+</ul>
+<h2 id="pseudocode"><a class="header" href="#pseudocode">Pseudocode</a></h2>
+<pre><code>CLASS DoublyNode
+    SET url to string
+    SET next to DoublyNode (null by default)
+    SET prev to DoublyNode (null by default)
+ENDCLASS
+
+CLASS BrowserHistory
+    SET head to null
+    SET current to null
+
+    FUNCTION visit(url)
+        CREATE newNode as new DoublyNode(url)
+        IF head is null THEN
+            SET head to newNode
+            SET current to newNode
+        ELSE
+            SET current.next to newNode
+            SET newNode.prev to current
+            SET current to newNode
+        ENDIF
+    ENDFUNCTION
+
+    FUNCTION back()
+        IF current is null OR current.prev is null THEN
+            RETURN "null"
+        ENDIF
+        SET url to current.url
+        SET current to current.prev
+        SET current.next to null
+        RETURN url
+    ENDFUNCTION
+
+    FUNCTION forward(forwardList)
+        IF forwardList is empty THEN
+            RETURN "null"
+        ENDIF
+        SET url to forwardList.removeLast()
+        CREATE newNode as new DoublyNode(url)
+        SET newNode.prev to current
+        IF current is not null THEN
+            SET current.next to newNode
+        ELSE
+            SET head to newNode
+        ENDIF
+        SET current to newNode
+        RETURN url
+    ENDFUNCTION
+
+    FUNCTION toString()
+        IF head is null THEN
+            RETURN "[]"
+        ENDIF
+        CREATE result as new StringBuilder
+        SET temp to head
+        WHILE temp is not null AND temp is not current.next
+            APPEND temp.url to result
+            IF temp.next is not null AND temp.next is not current.next THEN
+                APPEND " " to result
+            ENDIF
+            SET temp to temp.next
+        ENDWHILE
+        RETURN result as string
+    ENDFUNCTION
+ENDCLASS
+
+FUNCTION testBrowserHistory(operations)
+    CREATE browser as new BrowserHistory
+    CREATE forwardList as new list
+    FOR each operation in operations
+        IF operation.type equals "visit" THEN
+            CLEAR forwardList
+            CALL browser.visit(operation.url)
+            PRINT visited url
+        ELSE IF operation.type equals "back" THEN
+            SET url to browser.back()
+            IF url is not "null" THEN
+                ADD url to forwardList
+            ENDIF
+            PRINT navigated back to url
+        ELSE IF operation.type equals "forward" THEN
+            SET url to browser.forward(forwardList)
+            PRINT navigated forward to url
+        ELSE IF operation.type equals "print" THEN
+            PRINT history using browser.toString
+        ENDIF
+    ENDFOR
+ENDFUNCTION
+
+FUNCTION main()
+    SET testCases to array of operation sequences
+    FOR each testCase in testCases
+        PRINT test case details
+        CALL testBrowserHistory(testCase)
+    ENDFOR
+ENDFUNCTION
+</code></pre>
+<h2 id="algorithm-steps"><a class="header" href="#algorithm-steps">Algorithm Steps</a></h2>
+<ol>
+<li>Define a <code>DoublyNode</code> class with:
+a. A string <code>url</code> for the webpage.
+b. A <code>next</code> pointer to the next node.
+c. A <code>prev</code> pointer to the previous node.</li>
+<li>Define a <code>BrowserHistory</code> class with:
+a. <code>head</code> and <code>current</code> pointers to track the list and current page.
+b. <code>visit</code>: Add new node at tail, clear forward history, update <code>current</code>.
+c. <code>back</code>: Move <code>current</code> to previous node, remove current tail, store URL for forward.
+d. <code>forward</code>: Re-insert last removed URL from forward list, update <code>current</code>.
+e. <code>toString</code>: Print history from head to current page.</li>
+<li>In <code>testBrowserHistory</code>:
+a. Create a <code>BrowserHistory</code> and a <code>forwardList</code> to store back-navigated URLs.
+b. For each operation:
+<ul>
+<li><code>visit</code>: Clear forward list, call <code>visit</code>, print action.</li>
+<li><code>back</code>: Call <code>back</code>, store URL in forward list, print URL.</li>
+<li><code>forward</code>: Call <code>forward</code> with forward list, print URL.</li>
+<li><code>print</code>: Call <code>toString</code>, print history.</li>
+</ul>
+</li>
+<li>In <code>main</code>, test with sequences including visits, back/forward navigations, and edge cases.</li>
+</ol>
+<h2 id="java-implementation"><a class="header" href="#java-implementation">Java Implementation</a></h2>
+<pre><code class="language-java">import java.util.*;
+
+public class BrowserHistorySimulator {
+    // Node class for the doubly linked list
+    static class DoublyNode {
+        String url;
+        DoublyNode next;
+        DoublyNode prev;
+
+        DoublyNode(String url) {
+            this.url = url;
+            this.next = null;
+            this.prev = null;
+        }
+    }
+
+    // BrowserHistory class to simulate navigation
+    static class BrowserHistory {
+        private DoublyNode head;
+        private DoublyNode current;
+
+        public void visit(String url) {
+            DoublyNode newNode = new DoublyNode(url);
+            if (head == null) {
+                head = newNode;
+                current = newNode;
+            } else {
+                current.next = newNode;
+                newNode.prev = current;
+                current = newNode;
+            }
+        }
+
+        public String back() {
+            if (current == null || current.prev == null) {
+                return "null";
+            }
+            String url = current.url;
+            current = current.prev;
+            current.next = null;
+            return url;
+        }
+
+        public String forward(List&lt;String&gt; forwardList) {
+            if (forwardList.isEmpty()) {
+                return "null";
+            }
+            String url = forwardList.remove(forwardList.size() - 1);
+            DoublyNode newNode = new DoublyNode(url);
+            newNode.prev = current;
+            if (current != null) {
+                current.next = newNode;
+            } else {
+                head = newNode;
+            }
+            current = newNode;
+            return url;
+        }
+
+        public String toString() {
+            if (head == null) {
+                return "[]";
+            }
+            StringBuilder result = new StringBuilder();
+            DoublyNode temp = head;
+            while (temp != null &amp;&amp; temp != current.next) {
+                result.append(temp.url);
+                if (temp.next != null &amp;&amp; temp.next != current.next) {
+                    result.append(" ");
+                }
+                temp = temp.next;
+            }
+            return result.toString();
+        }
+    }
+
+    // Helper class for operations
+    static class Operation {
+        String type;
+        String url;
+
+        Operation(String type, String url) {
+            this.type = type;
+            this.url = url;
+        }
+    }
+
+    // Tests browser history operations
+    public void testBrowserHistory(List&lt;Operation&gt; operations) {
+        BrowserHistory browser = new BrowserHistory();
+        List&lt;String&gt; forwardList = new ArrayList&lt;&gt;();
+        for (Operation op : operations) {
+            if (op.type.equals("visit")) {
+                forwardList.clear();
+                browser.visit(op.url);
+                System.out.println("Visited " + op.url);
+            } else if (op.type.equals("back")) {
+                String url = browser.back();
+                if (!url.equals("null")) {
+                    forwardList.add(url);
+                }
+                System.out.println("Navigated back to " + url);
+            } else if (op.type.equals("forward")) {
+                String url = browser.forward(forwardList);
+                System.out.println("Navigated forward to " + url);
+            } else if (op.type.equals("print")) {
+                System.out.println("History: " + browser.toString());
+            }
+        }
+    }
+
+    // Main method to test browser history simulator
+    public static void main(String[] args) {
+        BrowserHistorySimulator simulator = new BrowserHistorySimulator();
+
+        // Test cases
+        List&lt;List&lt;Operation&gt;&gt; testCases = new ArrayList&lt;&gt;();
+        
+        // Test case 1: Normal navigation
+        testCases.add(Arrays.asList(
+            new Operation("visit", "page1"),
+            new Operation("visit", "page2"),
+            new Operation("visit", "page3"),
+            new Operation("print", null),
+            new Operation("back", null),
+            new Operation("print", null),
+            new Operation("forward", null),
+            new Operation("print", null)
+        ));
+        
+        // Test case 2: Empty history
+        testCases.add(Arrays.asList(
+            new Operation("back", null),
+            new Operation("forward", null),
+            new Operation("print", null)
+        ));
+        
+        // Test case 3: Single page
+        testCases.add(Arrays.asList(
+            new Operation("visit", "page1"),
+            new Operation("print", null),
+            new Operation("back", null),
+            new Operation("print", null),
+            new Operation("forward", null),
+            new Operation("print", null)
+        ));
+        
+        // Test case 4: Multiple back/forward
+        testCases.add(Arrays.asList(
+            new Operation("visit", "page1"),
+            new Operation("visit", "page2"),
+            new Operation("visit", "page3"),
+            new Operation("back", null),
+            new Operation("back", null),
+            new Operation("forward", null),
+            new Operation("forward", null),
+            new Operation("print", null)
+        ));
+
+        // Run test cases
+        for (int i = 0; i &lt; testCases.size(); i++) {
+            System.out.println("Test case " + (i + 1) + ":");
+            simulator.testBrowserHistory(testCases.get(i));
+            System.out.println();
+        }
+    }
+}
+</code></pre>
+<h2 id="output"><a class="header" href="#output">Output</a></h2>
+<p>Running the <code>main</code> method produces:</p>
+<pre><code>Test case 1:
+Visited page1
+Visited page2
+Visited page3
+History: page1 page2 page3
+Navigated back to page3
+History: page1 page2
+Navigated forward to page3
+History: page1 page2 page3
+
+Test case 2:
+Navigated back to null
+Navigated forward to null
+History: []
+
+Test case 3:
+Visited page1
+History: page1
+Navigated back to null
+History: []
+Navigated forward to page1
+History: page1
+
+Test case 4:
+Visited page1
+Visited page2
+Visited page3
+Navigated back to page3
+Navigated back to page2
+Navigated forward to page3
+Navigated forward to page2
+History: page1 page2
+</code></pre>
+<p>Explanation:</p>
+<ul>
+<li>Test case 1: Visits page1, page2, page3, prints "page1 page2 page3", goes back (removes page3), prints "page1 page2", goes forward (restores page3), prints "page1 page2 page3".</li>
+<li>Test case 2: Attempts back/forward on empty history, prints "null" and "[]".</li>
+<li>Test case 3: Visits page1, prints "page1", goes back (removes page1), prints "[]", goes forward (restores page1), prints "page1".</li>
+<li>Test case 4: Visits page1, page2, page3, goes back twice (removes page3, page2), goes forward twice (restores page3, page2), prints "page1 page2".</li>
+</ul>
+<h2 id="how-it-works"><a class="header" href="#how-it-works">How It Works</a></h2>
+<ul>
+<li><strong>DoublyNode</strong>: Stores a string URL, a <code>next</code> pointer, and a <code>prev</code> pointer.</li>
+<li><strong>BrowserHistory</strong>:
+<ul>
+<li><code>visit</code>: Adds new node at tail, clears forward history, updates <code>current</code>.</li>
+<li><code>back</code>: Moves <code>current</code> to previous node, removes tail, stores URL for forward.</li>
+<li><code>forward</code>: Re-inserts last removed URL from forward list, updates <code>current</code>.</li>
+<li><code>toString</code>: Prints history from head to <code>current</code>, returns "[]" if empty.</li>
+</ul>
+</li>
+<li><strong>testBrowserHistory</strong>: Manages operations, uses <code>forwardList</code> to store back-navigated URLs.</li>
+<li><strong>Example Trace (Test case 1)</strong>:
+<ul>
+<li>visit("page1"): head=page1, current=page1.</li>
+<li>visit("page2"): head=page1↔page2, current=page2.</li>
+<li>visit("page3"): head=page1↔page2↔page3, current=page3.</li>
+<li>print: "page1 page2 page3".</li>
+<li>back: current=page2, forwardList=[page3], returns "page3".</li>
+<li>print: "page1 page2".</li>
+<li>forward: Re-inserts page3, current=page3, returns "page3".</li>
+<li>print: "page1 page2 page3".</li>
+</ul>
+</li>
+<li><strong>Main Method</strong>: Tests normal navigation, empty history, single page, and multiple back/forward operations.</li>
+</ul>
+<h2 id="complexity-analysis-table"><a class="header" href="#complexity-analysis-table">Complexity Analysis Table</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Operation</th><th>Time Complexity</th><th>Space Complexity</th></tr></thead><tbody>
+<tr><td>Visit</td><td>O(1)</td><td>O(1)</td></tr>
+<tr><td>Back</td><td>O(1)</td><td>O(1)</td></tr>
+<tr><td>Forward</td><td>O(1)</td><td>O(1)</td></tr>
+<tr><td>To String</td><td>O(n)</td><td>O(n)</td></tr>
+</tbody></table>
+</div>
+<p><em>Note</em>:</p>
+<ul>
+<li>n is the number of nodes in the history.</li>
+<li>Time complexity: O(1) for visit, back, forward (constant-time operations); O(n) for toString (traverse to current).</li>
+<li>Space complexity: O(1) for visit, back, forward (constant pointers); O(n) for toString (StringBuilder) and forwardList storage.</li>
+<li>Worst case: O(n) time, O(n) space for output or forward history with large lists.</li>
+</ul>
+<blockquote>
+<p><strong>✅ Tip</strong>: Use a doubly linked list with a <code>current</code> pointer to efficiently manage browser history. Clear the forward history on new visits to simulate browser behavior accurately.</p>
+</blockquote>
+<blockquote>
+<p><strong>⚠ Warning</strong>: Maintain the <code>current</code> pointer and forward list correctly to avoid losing navigation history. Handle edge cases like empty history or no forward pages.</p>
+</blockquote>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../problemStatements/ch03_03_01/BidirectionalTraversal.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../../problemStatements/ch03_03_01/DequeImplementation.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../problemStatements/ch03_03_01/BidirectionalTraversal.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../../problemStatements/ch03_03_01/DequeImplementation.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../../elasticlunr.min.js"></script>
+        <script src="../../mark.min.js"></script>
+        <script src="../../searcher.js"></script>
+
+        <script src="../../clipboard.min.js"></script>
+        <script src="../../highlight.js"></script>
+        <script src="../../book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="../../theme/ferris.js"></script>
+
+
+    </div>
+    </body>
+</html>

@@ -1,0 +1,447 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>StringPoolExperiment - Java Data Structures and Algorithms for Beginners</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../../favicon.svg">
+        <link rel="shortcut icon" href="../../favicon.png">
+        <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+        <link rel="stylesheet" href="../../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="../../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../../theme/ferris.css">
+        <link rel="stylesheet" href="../../theme/semantic-notes.css">
+        <link rel="stylesheet" href="../../theme/listing.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../../toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Java Data Structures and Algorithms for Beginners</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <style>
+body {
+  text-align: justify;
+}
+</style>
+<h1 id="string-pool-experiment"><a class="header" href="#string-pool-experiment">String Pool Experiment</a></h1>
+<h2 id="problem-statement"><a class="header" href="#problem-statement">Problem Statement</a></h2>
+<p>Write a Java program that demonstrates the Java string pool by comparing string literals, strings created with <code>new String()</code>, and interned strings using both the <code>==</code> operator (for reference equality) and the <code>equals()</code> method (for content equality). The program should analyze the memory usage implications and equality behavior of these strings, explaining how the string pool affects object references. Test the implementation with various cases, including identical literals, constructed strings, and interned strings, to highlight the differences in memory and equality. You can visualize this as exploring a shared library of strings where some books (strings) are reused to save space, while others are new copies, and checking if they’re the same book or just have the same content.</p>
+<p><strong>Input</strong>: None (the program defines strings for testing).
+<strong>Output</strong>: Results of <code>==</code> and <code>equals()</code> comparisons for different string creation methods, along with an explanation of memory usage and string pool behavior.
+<strong>Constraints</strong>:</p>
+<ul>
+<li>Strings contain printable ASCII characters.</li>
+<li>The program focuses on demonstrating string pool mechanics, not specific input constraints.
+<strong>Example</strong>:</li>
+<li>Strings: <code>s1 = "hello"</code>, <code>s2 = "hello"</code>, <code>s3 = new String("hello")</code>, <code>s4 = s3.intern()</code>.</li>
+<li>Output:
+<pre><code>s1 == s2: true (same string pool reference)
+s1.equals(s2): true (same content)
+s1 == s3: false (different objects)
+s1.equals(s3): true (same content)
+s1 == s4: true (s4 interned to string pool)
+s1.equals(s4): true (same content)
+</code></pre>
+</li>
+<li>Memory: Literals (<code>s1</code>, <code>s2</code>) share a single string pool object; <code>s3</code> creates a new object; <code>s4</code> reuses the pool object.</li>
+</ul>
+<h2 id="pseudocode"><a class="header" href="#pseudocode">Pseudocode</a></h2>
+<pre><code>FUNCTION demonstrateStringPool()
+    SET s1 to string literal "hello"
+    SET s2 to string literal "hello"
+    SET s3 to new String("hello")
+    SET s4 to s3.intern()
+    SET s5 to new String("hello")
+    SET s6 to string literal "world"
+    PRINT s1 == s2 and s1.equals(s2)
+    PRINT s1 == s3 and s1.equals(s3)
+    PRINT s1 == s4 and s1.equals(s4)
+    PRINT s3 == s5 and s3.equals(s5)
+    PRINT s1 == s6 and s1.equals(s6)
+    PRINT memory usage explanation
+ENDFUNCTION
+
+FUNCTION main()
+    CALL demonstrateStringPool()
+ENDFUNCTION
+</code></pre>
+<h2 id="algorithm-steps"><a class="header" href="#algorithm-steps">Algorithm Steps</a></h2>
+<ol>
+<li>Create strings using different methods:
+a. <code>s1</code>, <code>s2</code>: String literals (stored in the string pool).
+b. <code>s3</code>, <code>s5</code>: New String objects (created on the heap, not pooled).
+c. <code>s4</code>: Interned version of <code>s3</code> (references the string pool).
+d. <code>s6</code>: Different string literal for contrast.</li>
+<li>Compare strings using:
+a. <code>==</code> to check reference equality (are they the same object?).
+b. <code>equals()</code> to check content equality (are the characters the same?).</li>
+<li>Print comparison results for each pair.</li>
+<li>Explain memory usage:
+<ul>
+<li>String literals share a single object in the string pool.</li>
+<li><code>new String()</code> creates a new object on the heap.</li>
+<li><code>intern()</code> returns a reference to the string pool object.</li>
+</ul>
+</li>
+<li>In the <code>main</code> method, call the demonstration function and include test cases to show string pool behavior.</li>
+</ol>
+<h2 id="java-implementation"><a class="header" href="#java-implementation">Java Implementation</a></h2>
+<pre><code class="language-java">public class StringPoolExperiment {
+    // Demonstrates string pool behavior with comparisons
+    public void demonstrateStringPool() {
+        // String literals
+        String s1 = "hello";
+        String s2 = "hello";
+        // New String object
+        String s3 = new String("hello");
+        // Interned string
+        String s4 = s3.intern();
+        // Another new String object
+        String s5 = new String("hello");
+        // Different string literal
+        String s6 = "world";
+        // Empty string literal
+        String s7 = "";
+        String s8 = "";
+
+        // Comparisons
+        System.out.println("Test case 1: Literal vs Literal (s1 = \"hello\", s2 = \"hello\")");
+        System.out.println("s1 == s2: " + (s1 == s2) + " (same string pool reference)");
+        System.out.println("s1.equals(s2): " + s1.equals(s2) + " (same content)\n");
+
+        System.out.println("Test case 2: Literal vs New String (s1 = \"hello\", s3 = new String(\"hello\"))");
+        System.out.println("s1 == s3: " + (s1 == s3) + " (different objects)");
+        System.out.println("s1.equals(s3): " + s1.equals(s3) + " (same content)\n");
+
+        System.out.println("Test case 3: Literal vs Interned String (s1 = \"hello\", s4 = s3.intern())");
+        System.out.println("s1 == s4: " + (s1 == s4) + " (same string pool reference)");
+        System.out.println("s1.equals(s4): " + s1.equals(s4) + " (same content)\n");
+
+        System.out.println("Test case 4: New String vs New String (s3 = new String(\"hello\"), s5 = new String(\"hello\"))");
+        System.out.println("s3 == s5: " + (s3 == s5) + " (different objects)");
+        System.out.println("s3.equals(s5): " + s3.equals(s5) + " (same content)\n");
+
+        System.out.println("Test case 5: Literal vs Different Literal (s1 = \"hello\", s6 = \"world\")");
+        System.out.println("s1 == s6: " + (s1 == s6) + " (different string pool references)");
+        System.out.println("s1.equals(s6): " + s1.equals(s6) + " (different content)\n");
+
+        System.out.println("Test case 6: Empty Literal vs Empty Literal (s7 = \"\", s8 = \"\")");
+        System.out.println("s7 == s8: " + (s7 == s8) + " (same string pool reference)");
+        System.out.println("s7.equals(s8): " + s7.equals(s8) + " (same content)\n");
+
+        // Memory usage explanation
+        System.out.println("Memory Usage Analysis:");
+        System.out.println("- String literals (s1, s2) share a single object in the string pool, saving memory.");
+        System.out.println("- s3 and s5 create new objects on the heap, each with separate memory.");
+        System.out.println("- s4 (interned) reuses the string pool object, reducing memory usage.");
+        System.out.println("- s6 uses a different string pool object for \"world\".");
+        System.out.println("- Empty literals (s7, s8) share a single empty string in the pool.");
+        System.out.println("- Actual memory usage depends on JVM; string pool reduces duplication.");
+    }
+
+    // Main method to run the demonstration
+    public static void main(String[] args) {
+        StringPoolExperiment experiment = new StringPoolExperiment();
+        experiment.demonstrateStringPool();
+    }
+}
+</code></pre>
+<h2 id="output"><a class="header" href="#output">Output</a></h2>
+<p>Running the <code>main</code> method produces:</p>
+<pre><code>Test case 1: Literal vs Literal (s1 = "hello", s2 = "hello")
+s1 == s2: true (same string pool reference)
+s1.equals(s2): true (same content)
+
+Test case 2: Literal vs New String (s1 = "hello", s3 = new String("hello"))
+s1 == s3: false (different objects)
+s1.equals(s3): true (same content)
+
+Test case 3: Literal vs Interned String (s1 = "hello", s4 = s3.intern())
+s1 == s4: true (same string pool reference)
+s1.equals(s4): true (same content)
+
+Test case 4: New String vs New String (s3 = new String("hello"), s5 = new String("hello"))
+s3 == s5: false (different objects)
+s3.equals(s5): true (same content)
+
+Test case 5: Literal vs Different Literal (s1 = "hello", s6 = "world")
+s1 == s6: false (different string pool references)
+s1.equals(s6): false (different content)
+
+Test case 6: Empty Literal vs Empty Literal (s7 = "", s8 = "")
+s7 == s8: true (same string pool reference)
+s7.equals(s8): true (same content)
+
+Memory Usage Analysis:
+- String literals (s1, s2) share a single object in the string pool, saving memory.
+- s3 and s5 create new objects on the heap, each with separate memory.
+- s4 (interned) reuses the string pool object, reducing memory usage.
+- s6 uses a different string pool object for "world".
+- Empty literals (s7, s8) share a single empty string in the pool.
+- Actual memory usage depends on JVM; string pool reduces duplication.
+</code></pre>
+<p>Explanation:</p>
+<ul>
+<li>Test case 1: <code>s1</code> and <code>s2</code> (literals) reference the same string pool object, so <code>==</code> and <code>equals()</code> are true.</li>
+<li>Test case 2: <code>s3</code> (new String) is a separate heap object, so <code>s1 == s3</code> is false, but <code>equals()</code> is true.</li>
+<li>Test case 3: <code>s4</code> (interned) references the pool object, so <code>s1 == s4</code> is true.</li>
+<li>Test case 4: <code>s3</code> and <code>s5</code> are distinct heap objects, so <code>==</code> is false, but <code>equals()</code> is true.</li>
+<li>Test case 5: <code>s1</code> and <code>s6</code> are different pool objects, so both <code>==</code> and <code>equals()</code> are false.</li>
+<li>Test case 6: Empty literals share the same pool object, so both <code>==</code> and <code>equals()</code> are true.</li>
+</ul>
+<h2 id="how-it-works"><a class="header" href="#how-it-works">How It Works</a></h2>
+<ul>
+<li><strong>String Literals</strong>: Stored in the string pool, a part of the JVM’s heap where identical literals share a single object (e.g., <code>s1</code>, <code>s2</code> point to the same <code>"hello"</code>).</li>
+<li><strong>new String()</strong>: Creates a new object on the heap, even if the content exists in the pool (e.g., <code>s3</code>, <code>s5</code> are separate from <code>"hello"</code> in the pool).</li>
+<li><strong>intern()</strong>: Returns the string pool reference for the content, reusing the pool object if it exists (e.g., <code>s4</code> points to the same <code>"hello"</code> as <code>s1</code>).</li>
+<li><strong>== vs equals()</strong>:
+<ul>
+<li><code>==</code> checks if two references point to the same memory address.</li>
+<li><code>equals()</code> checks if the string contents are identical.</li>
+</ul>
+</li>
+<li><strong>Memory Usage</strong>:
+<ul>
+<li>Literals save memory by reusing pool objects.</li>
+<li><code>new String()</code> creates additional heap objects, increasing memory usage.</li>
+<li><code>intern()</code> reduces memory by reusing pool objects.</li>
+</ul>
+</li>
+<li><strong>Example Trace (Test case 1)</strong>:
+<ul>
+<li><code>s1 = "hello"</code>, <code>s2 = "hello"</code>: Both reference the same pool object.</li>
+<li><code>s1 == s2</code>: true (same reference).</li>
+<li><code>s1.equals(s2)</code>: true (same content).</li>
+</ul>
+</li>
+<li><strong>Main Method</strong>: Tests various combinations to show string pool behavior and memory implications.</li>
+</ul>
+<h2 id="complexity-analysis-table"><a class="header" href="#complexity-analysis-table">Complexity Analysis Table</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Operation</th><th>Time Complexity</th><th>Space Complexity</th></tr></thead><tbody>
+<tr><td>String Creation</td><td>O(1)</td><td>O(n)</td></tr>
+<tr><td>== Comparison</td><td>O(1)</td><td>O(1)</td></tr>
+<tr><td>equals() Comparison</td><td>O(n)</td><td>O(1)</td></tr>
+<tr><td>intern()</td><td>O(n)</td><td>O(1)</td></tr>
+<tr><td>Full Algorithm</td><td>O(n)</td><td>O(n)</td></tr>
+</tbody></table>
+</div>
+<p><em>Note</em>:</p>
+<ul>
+<li>n is the length of the longest string.</li>
+<li>String creation: O(1) for literals (pool lookup), O(n) for <code>new String()</code> (copying characters).</li>
+<li><code>==</code>: O(1), compares references.</li>
+<li><code>equals()</code>: O(n), compares each character.</li>
+<li><code>intern()</code>: O(n), may involve hash table lookup and string comparison.</li>
+<li>Space: O(n) for each new String object; literals reuse pool space.</li>
+<li>Full algorithm: O(n) time for comparisons and interning; O(n) space for new String objects.</li>
+</ul>
+<blockquote>
+<p><strong>✅ Tip</strong>: Use string literals for constant strings to leverage the string pool and save memory. Use <code>intern()</code> sparingly to reduce memory for dynamically created strings, but test thoroughly to understand its behavior.</p>
+</blockquote>
+<blockquote>
+<p><strong>⚠ Warning</strong>: Avoid using <code>==</code> to compare string contents, as it checks references, not values. Overusing <code>new String()</code> can increase memory usage unnecessarily due to duplicate objects.</p>
+</blockquote>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../problemStatements/ch03_02/StringCompression.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../../problemStatements/ch03_02/SubstringFrequency.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../problemStatements/ch03_02/StringCompression.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../../problemStatements/ch03_02/SubstringFrequency.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../../elasticlunr.min.js"></script>
+        <script src="../../mark.min.js"></script>
+        <script src="../../searcher.js"></script>
+
+        <script src="../../clipboard.min.js"></script>
+        <script src="../../highlight.js"></script>
+        <script src="../../book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="../../theme/ferris.js"></script>
+
+
+    </div>
+    </body>
+</html>

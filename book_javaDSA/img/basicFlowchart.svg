@@ -1,0 +1,59 @@
+<svg width="700" height="500" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .node { stroke: #333; stroke-width: 2; fill: #f9f9f9; font-family: sans-serif; }
+    .label { font-size: 14px; text-anchor: middle; dominant-baseline: middle; }
+    .arrow { stroke: #333; stroke-width: 2; marker-end: url(#arrowhead); }
+  </style>
+
+  <!-- Arrowhead Definition -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="10" refY="3.5"
+            orient="auto" markerUnits="strokeWidth">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#333" />
+    </marker>
+  </defs>
+
+  <!-- Start -->
+  <ellipse cx="350" cy="40" rx="60" ry="20" class="node" />
+  <text x="350" y="40" class="label">Start</text>
+
+  <!-- Input -->
+  <polygon points="290,80 410,80 390,120 270,120" class="node" />
+  <text x="350" y="100" class="label">Enter N</text>
+
+  <!-- Initialization -->
+  <rect x="290" y="140" width="120" height="40" class="node" rx="10" ry="10" />
+  <text x="350" y="160" class="label">i = 1</text>
+
+  <!-- Loop Condition -->
+  <rect x="290" y="200" width="120" height="40" class="node" rx="10" ry="10" />
+  <text x="350" y="220" class="label">i ≤ N?</text>
+
+  <!-- Decision: Even Check -->
+  <rect x="290" y="260" width="120" height="40" class="node" rx="10" ry="10" />
+  <text x="350" y="280" class="label">i % 2 == 0?</text>
+
+  <!-- Output -->
+  <polygon points="290,320 410,320 390,360 270,360" class="node" />
+  <text x="350" y="340" class="label">Print i</text>
+
+  <!-- Increment -->
+  <rect x="290" y="380" width="120" height="40" class="node" rx="10" ry="10" />
+  <text x="350" y="400" class="label">i++</text>
+
+  <!-- End -->
+  <ellipse cx="350" cy="460" rx="60" ry="20" class="node" />
+  <text x="350" y="460" class="label">End</text>
+
+  <!-- Arrows -->
+  <line x1="350" y1="60" x2="350" y2="80" class="arrow" />
+  <line x1="350" y1="120" x2="350" y2="140" class="arrow" />
+  <line x1="350" y1="180" x2="350" y2="200" class="arrow" />
+  <line x1="350" y1="240" x2="350" y2="260" class="arrow" />
+  <line x1="350" y1="300" x2="350" y2="320" class="arrow" />
+  <line x1="350" y1="360" x2="350" y2="380" class="arrow" />
+  <line x1="350" y1="420" x2="350" y2="200" class="arrow" /> <!-- Loop back -->
+  <line x1="410" y1="220" x2="500" y2="220" class="arrow" /> <!-- Exit loop -->
+  <line x1="500" y1="220" x2="500" y2="460" class="arrow" />
+  <line x1="500" y1="460" x2="410" y2="460" class="arrow" />
+</svg>

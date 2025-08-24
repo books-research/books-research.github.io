@@ -1,0 +1,433 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Trees - Java Data Structures and Algorithms for Beginners</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="theme/ferris.css">
+        <link rel="stylesheet" href="theme/semantic-notes.css">
+        <link rel="stylesheet" href="theme/listing.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Java Data Structures and Algorithms for Beginners</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <style>
+body {
+  text-align: justify;
+}
+</style>
+<h2 id="tree-data-structure"><a class="header" href="#tree-data-structure">Tree Data Structure</a></h2>
+<h3 id="definition-and-concepts"><a class="header" href="#definition-and-concepts">Definition and Concepts</a></h3>
+<p>A tree is a hierarchical data structure consisting of nodes connected by edges, with a single root node at the top and no cycles. Each node can have zero or more child nodes, and every node except the root has exactly one parent. In a Binary Search Tree (BST), which is a common type of tree, each node has at most two children (left and right), and the left subtree contains values less than the node’s value, while the right subtree contains values greater. Trees are used to represent hierarchical relationships and enable efficient searching, insertion, and deletion. You can visualize a tree as a family tree, where each person (node) has descendants (children) and an ancestor (parent).</p>
+<h3 id="why-use-it"><a class="header" href="#why-use-it">Why Use It?</a></h3>
+<p>Trees are used to organize data hierarchically, enabling efficient operations like searching, insertion, and deletion with an average time complexity of O(log n) in a balanced BST. They are ideal for applications requiring ordered data, dynamic updates, or hierarchical structures. Trees provide a natural way to represent relationships, such as organizational charts or file systems, and are foundational for advanced data structures like heaps and tries.</p>
+<h3 id="where-to-use-real-life-examples"><a class="header" href="#where-to-use-real-life-examples">Where to Use? (Real-Life Examples)</a></h3>
+<ul>
+<li><strong>File Systems</strong>: Operating systems use trees to represent directory structures, where folders are nodes and subfolders or files are children.</li>
+<li><strong>Database Indexing</strong>: Databases use trees (e.g., B-trees or BSTs) to index data, enabling fast searches and range queries.</li>
+<li><strong>Expression Parsing</strong>: Compilers use expression trees to represent mathematical expressions, such as <code>(2 + 3) * 4</code>, for evaluation.</li>
+<li><strong>Autocomplete Systems</strong>: Search engines use trie (a type of tree) to store words for efficient prefix-based suggestions.</li>
+</ul>
+<!-- ### SVG Diagram
+The diagram for a Binary Search Tree would depict a tree with a root node (e.g., value 50) and branches to left and right children (e.g., 30 and 70). The left subtree would contain smaller values (e.g., 20, 40), and the right subtree would contain larger values (e.g., 60, 80). Arrows would show an **insert** operation adding a new node (e.g., 25) to the left subtree and a **search** operation tracing the path to find a value. A caption would note: "In a BST, left subtree values are less than the node, and right subtree values are greater." -->
+<h3 id="explain-operations"><a class="header" href="#explain-operations">Explain Operations</a></h3>
+<ul>
+<li><strong>Insert</strong>: This operation adds a new node with a given value to the tree while maintaining the BST property. It has an average time complexity of O(log n) in a balanced tree.</li>
+<li><strong>Search</strong>: This operation finds a node with a given value by traversing left or right based on comparisons. It has an average time complexity of O(log n).</li>
+<li><strong>Delete</strong>: This operation removes a node with a given value, adjusting the tree to maintain the BST property. It has an average time complexity of O(log n).</li>
+<li><strong>Inorder Traversal</strong>: This operation visits nodes in sorted order (left, root, right). It has a time complexity of O(n).</li>
+<li><strong>isEmpty</strong>: This operation checks whether the tree is empty. It has a time complexity of O(1).</li>
+</ul>
+<h3 id="java-implementation"><a class="header" href="#java-implementation">Java Implementation</a></h3>
+<p>The following Java code implements a Binary Search Tree with basic operations.</p>
+<pre><code class="language-java">public class BinarySearchTree {
+    private class Node {
+        int value; // Value stored in the node
+        Node left; // Reference to the left child
+        Node right; // Reference to the right child
+
+        Node(int value) {
+            this.value = value;
+            this.left = null;
+            this.right = null;
+        }
+    }
+
+    private Node root; // Root of the BST
+    private int size; // Number of nodes in the tree
+
+    // Constructor to initialize an empty BST
+    public BinarySearchTree() {
+        root = null;
+        size = 0;
+    }
+
+    // Insert: Adds a new value to the BST
+    public void insert(int value) {
+        root = insertRec(root, value); // Recursively inserts the value
+        size++; // Increments the size
+    }
+
+    private Node insertRec(Node root, int value) {
+        if (root == null) { // If the subtree is empty, create a new node
+            return new Node(value);
+        }
+        if (value &lt; root.value) { // Inserts into left subtree if value is smaller
+            root.left = insertRec(root.left, value);
+        } else if (value &gt; root.value) { // Inserts into right subtree if value is larger
+            root.right = insertRec(root.right, value);
+        }
+        return root; // Returns unchanged root if value already exists
+    }
+
+    // Search: Checks if a value exists in the BST
+    public boolean search(int value) {
+        return searchRec(root, value); // Recursively searches for the value
+    }
+
+    private boolean searchRec(Node root, int value) {
+        if (root == null || root.value == value) { // Returns true if found, false if null
+            return root != null;
+        }
+        if (value &lt; root.value) { // Searches left subtree if value is smaller
+            return searchRec(root.left, value);
+        }
+        return searchRec(root.right, value); // Searches right subtree if value is larger
+    }
+
+    // Delete: Removes a value from the BST
+    public void delete(int value) {
+        root = deleteRec(root, value); // Recursively deletes the value
+        size--; // Decrements the size
+    }
+
+    private Node deleteRec(Node root, int value) {
+        if (root == null) { // If value not found, return null
+            return null;
+        }
+        if (value &lt; root.value) { // Deletes from left subtree if value is smaller
+            root.left = deleteRec(root.left, value);
+        } else if (value &gt; root.value) { // Deletes from right subtree if value is larger
+            root.right = deleteRec(root.right, value);
+        } else { // Node to delete found
+            if (root.left == null) { // Case 1: No left child, return right child
+                return root.right;
+            } else if (root.right == null) { // Case 2: No right child, return left child
+                return root.left;
+            }
+            // Case 3: Two children, replace with successor
+            root.value = findMin(root.right).value; // Replaces with minimum in right subtree
+            root.right = deleteRec(root.right, root.value); // Deletes the successor
+        }
+        return root;
+    }
+
+    // Helper method to find the minimum value node in a subtree
+    private Node findMin(Node root) {
+        while (root.left != null) {
+            root = root.left;
+        }
+        return root;
+    }
+
+    // Inorder Traversal: Prints nodes in sorted order
+    public void inorder() {
+        inorderRec(root); // Recursively traverses the tree
+        System.out.println(); // Adds newline after traversal
+    }
+
+    private void inorderRec(Node root) {
+        if (root != null) {
+            inorderRec(root.left); // Visits left subtree
+            System.out.print(root.value + " "); // Visits current node
+            inorderRec(root.right); // Visits right subtree
+        }
+    }
+
+    // isEmpty: Checks if the BST is empty
+    public boolean isEmpty() {
+        return size == 0;
+    }
+
+    // Size: Returns the number of nodes in the BST
+    public int size() {
+        return size;
+    }
+}
+</code></pre>
+<h3 id="how-it-works"><a class="header" href="#how-it-works">How It Works</a></h3>
+<ol>
+<li><strong>Initialization</strong>: The constructor initializes the <code>root</code> as null and <code>size</code> as 0, indicating an empty Binary Search Tree.</li>
+<li><strong>Insert Operation</strong>:
+<ul>
+<li>The method recursively traverses the tree based on the value: left if the value is smaller, right if larger.</li>
+<li>If an empty spot is found (null node), it creates a new node with the value.</li>
+<li>The <code>size</code> is incremented for each new node.</li>
+</ul>
+</li>
+<li><strong>Search Operation</strong>:
+<ul>
+<li>The method recursively traverses the tree, comparing the target value with the current node’s value.</li>
+<li>It returns true if the value is found or false if a null node is reached.</li>
+</ul>
+</li>
+<li><strong>Delete Operation</strong>:
+<ul>
+<li>The method finds the node to delete by traversing left or right based on the value.</li>
+<li>It handles three cases: no children (return null), one child (return the child), or two children (replace with the minimum value from the right subtree and delete that node).</li>
+<li>The <code>size</code> is decremented after deletion.</li>
+</ul>
+</li>
+<li><strong>Inorder Traversal</strong>: The method recursively visits the left subtree, the current node, and the right subtree, printing values in sorted order.</li>
+<li><strong>isEmpty Operation</strong>: The method returns true if <code>size</code> equals 0, indicating an empty tree, and false otherwise.</li>
+<li><strong>Size Operation</strong>: The method returns <code>size</code>, which represents the number of nodes in the tree.</li>
+<li><strong>FindMin Helper</strong>: This method finds the smallest value in a subtree by traversing left until a null left child is reached.</li>
+</ol>
+<h3 id="complexity-analysis-table"><a class="header" href="#complexity-analysis-table">Complexity Analysis Table</a></h3>
+<div class="table-wrapper"><table><thead><tr><th>Operation</th><th>Average Time Complexity</th><th>Worst-Case Time Complexity</th><th>Space Complexity</th></tr></thead><tbody>
+<tr><td>Insert</td><td>O(log n)</td><td>O(n)</td><td>O(log n)</td></tr>
+<tr><td>Search</td><td>O(log n)</td><td>O(n)</td><td>O(log n)</td></tr>
+<tr><td>Delete</td><td>O(log n)</td><td>O(n)</td><td>O(log n)</td></tr>
+<tr><td>Inorder Traversal</td><td>O(n)</td><td>O(n)</td><td>O(log n)</td></tr>
+<tr><td>isEmpty</td><td>O(1)</td><td>O(1)</td><td>O(1)</td></tr>
+<tr><td>Size</td><td>O(1)</td><td>O(1)</td><td>O(1)</td></tr>
+</tbody></table>
+</div>
+<p><em>Note</em>: Worst-case time complexity occurs in an unbalanced tree (e.g., a skewed tree resembling a linked list).</p>
+<h3 id="key-differences--notes"><a class="header" href="#key-differences--notes">Key Differences / Notes</a></h3>
+<ul>
+<li><strong>Binary Search Tree vs. Other Trees</strong>:
+<ul>
+<li>The implementation above is a BST, where nodes are ordered for efficient searching. Other trees include binary trees (no ordering), AVL trees (self-balancing), and B-trees (for databases).</li>
+<li>AVL and Red-Black trees maintain balance to ensure O(log n) operations, unlike a BST, which can degrade to O(n) if unbalanced.</li>
+</ul>
+</li>
+<li><strong>Balancing</strong>: The provided BST is not self-balancing, which can lead to poor performance if insertions are not random. Use AVL or Red-Black trees for guaranteed balance.</li>
+<li><strong>Thread Safety</strong>: The implementation is not thread-safe. For concurrent applications, use synchronized methods or Java’s <code>ConcurrentSkipListMap</code> for a tree-like structure.</li>
+<li><strong>Java’s Built-in Trees</strong>: Java provides <code>TreeMap</code> and <code>TreeSet</code> in <code>java.util</code>, which are implemented as Red-Black trees for balanced performance.</li>
+</ul>
+<blockquote>
+<p><strong>✅ Tip</strong>: Use a self-balancing tree like AVL or Red-Black for applications requiring consistent O(log n) performance, especially with frequent insertions or deletions.</p>
+</blockquote>
+<blockquote>
+<p><strong>⚠ Warning</strong>: An unbalanced BST can degrade to O(n) performance if insertions occur in sorted order, resembling a linked list. Always consider input patterns when using a BST.</p>
+</blockquote>
+<h3 id="exercises"><a class="header" href="#exercises">Exercises</a></h3>
+<ol>
+<li><strong>BST Validator</strong>: Write a Java program that checks if a given tree is a valid Binary Search Tree by ensuring all nodes follow the BST property. Test it with at least three different trees.</li>
+<li><strong>Height of BST</strong>: Extend the BST implementation to include a method that computes the height of the tree. Test it with balanced and unbalanced trees.</li>
+<li><strong>Range Sum Query</strong>: Create a program that uses the BST to find the sum of all values within a given range (e.g., between 20 and 60). Use inorder traversal to collect values.</li>
+<li><strong>Preorder and Postorder Traversals</strong>: Add methods to the BST implementation for preorder (root, left, right) and postorder (left, right, root) traversals. Print the results for a sample tree.</li>
+<li><strong>Lowest Common Ancestor</strong>: Implement a method to find the lowest common ancestor of two nodes in the BST. Test it with different pairs of values.</li>
+</ol>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="ch03_06.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="ch03_08.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="ch03_06.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="ch03_08.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="theme/ferris.js"></script>
+
+
+    </div>
+    </body>
+</html>

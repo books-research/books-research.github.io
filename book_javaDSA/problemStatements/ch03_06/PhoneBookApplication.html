@@ -1,0 +1,577 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>PhoneBookApplication - Java Data Structures and Algorithms for Beginners</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../../favicon.svg">
+        <link rel="shortcut icon" href="../../favicon.png">
+        <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+        <link rel="stylesheet" href="../../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="../../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../../theme/ferris.css">
+        <link rel="stylesheet" href="../../theme/semantic-notes.css">
+        <link rel="stylesheet" href="../../theme/listing.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../../toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Java Data Structures and Algorithms for Beginners</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <style>
+body {
+  text-align: justify;
+}
+</style>
+<h1 id="phone-book-application"><a class="header" href="#phone-book-application">Phone Book Application</a></h1>
+<h2 id="problem-statement"><a class="header" href="#problem-statement">Problem Statement</a></h2>
+<p>Write a Java program that implements a phone book using a hash table, with contact names as keys and phone numbers as values. The program should support operations to insert a contact (name and phone number), look up a phone number by name, and delete a contact by name. The hash table should handle case-sensitive names and return appropriate messages for operations on non-existent contacts or duplicate insertions. Test the implementation with sequences of operations, including cases with duplicate names, non-existent contacts, and empty phone books. You can visualize this as a digital phone book where you can add, find, or remove a person’s contact details quickly using their name.</p>
+<p><strong>Input</strong>:</p>
+<ul>
+<li>A sequence of operations, where each operation is:
+<ul>
+<li><code>insert(name, phoneNumber)</code>: Add a contact, return "Added" or "Name already exists".</li>
+<li><code>lookup(name)</code>: Return the phone number or "Not found" if the name doesn’t exist.</li>
+<li><code>delete(name)</code>: Remove the contact, return "Deleted" or "Not found".</li>
+<li><code>printPhoneBook()</code>: Print all contacts or "Empty" if none exist.
+<strong>Output</strong>: For each operation, print the action performed and its result (e.g., "Added John", "Found: 123-456-7890", "Deleted John", or "Empty").
+<strong>Constraints</strong>:</li>
+</ul>
+</li>
+<li>The phone book size is between 0 and 10^5 contacts.</li>
+<li>Names and phone numbers are non-empty strings of up to 100 characters.</li>
+<li>Names are case-sensitive (e.g., "John" and "john" are distinct).</li>
+<li>Phone numbers are strings (e.g., "123-456-7890", no specific format required).
+<strong>Example</strong>:</li>
+<li>Input: Operations = [insert("John", "123-456-7890"), insert("Jane", "987-654-3210"), lookup("John"), delete("Jane"), printPhoneBook]</li>
+<li>Output:
+<pre><code>Added John
+Added Jane
+Found: 123-456-7890
+Deleted Jane
+Phone Book: John: 123-456-7890
+</code></pre>
+</li>
+<li>Input: Operations = [lookup("John"), printPhoneBook]</li>
+<li>Output:
+<pre><code>Not found
+Empty
+</code></pre>
+</li>
+</ul>
+<h2 id="pseudocode"><a class="header" href="#pseudocode">Pseudocode</a></h2>
+<pre><code>CLASS PhoneBook
+    SET hashTable to new HashMap
+
+    FUNCTION insert(name, phoneNumber)
+        IF hashTable contains name THEN
+            RETURN "Name already exists"
+        ENDIF
+        SET hashTable[name] to phoneNumber
+        RETURN "Added " + name
+    ENDFUNCTION
+
+    FUNCTION lookup(name)
+        IF hashTable contains name THEN
+            RETURN "Found: " + hashTable[name]
+        ENDIF
+        RETURN "Not found"
+    ENDFUNCTION
+
+    FUNCTION delete(name)
+        IF hashTable contains name THEN
+            REMOVE hashTable[name]
+            RETURN "Deleted " + name
+        ENDIF
+        RETURN "Not found"
+    ENDFUNCTION
+
+    FUNCTION toString()
+        IF hashTable is empty THEN
+            RETURN "Empty"
+        ENDIF
+        CREATE result as new StringBuilder
+        FOR each entry in hashTable
+            APPEND entry.key and ": " and entry.value to result
+            IF not last entry THEN
+                APPEND ", " to result
+            ENDIF
+        ENDFOR
+        RETURN result as string
+    ENDFUNCTION
+ENDCLASS
+
+FUNCTION testPhoneBook(operations)
+    CREATE phoneBook as new PhoneBook
+    FOR each operation in operations
+        IF operation.type equals "insert" THEN
+            CALL phoneBook.insert(operation.name, operation.phoneNumber)
+            PRINT result
+        ELSE IF operation.type equals "lookup" THEN
+            CALL phoneBook.lookup(operation.name)
+            PRINT result
+        ELSE IF operation.type equals "delete" THEN
+            CALL phoneBook.delete(operation.name)
+            PRINT result
+        ELSE IF operation.type equals "print" THEN
+            PRINT "Phone Book: " + phoneBook.toString
+        ENDIF
+    ENFOR
+ENDFUNCTION
+
+FUNCTION main()
+    SET testCases to array of operation sequences
+    FOR each testCase in testCases
+        PRINT test case details
+        CALL testPhoneBook(testCase)
+    ENDFOR
+ENDFUNCTION
+</code></pre>
+<h2 id="algorithm-steps"><a class="header" href="#algorithm-steps">Algorithm Steps</a></h2>
+<ol>
+<li>Define a <code>PhoneBook</code> class with:
+a. A <code>HashMap&lt;String, String&gt;</code> to store name-phone number pairs.
+b. <code>insert</code>: Add contact if name doesn’t exist, return status.
+c. <code>lookup</code>: Return phone number or "Not found".
+d. <code>delete</code>: Remove contact by name, return status.
+e. <code>toString</code>: Return comma-separated string of contacts or "Empty".</li>
+<li>In <code>testPhoneBook</code>:
+a. Create a <code>PhoneBook</code> instance.
+b. For each operation:
+<ul>
+<li><code>insert</code>: Call <code>insert</code>, print result.</li>
+<li><code>lookup</code>: Call <code>lookup</code>, print result.</li>
+<li><code>delete</code>: Call <code>delete</code>, print result.</li>
+<li><code>print</code>: Call <code>toString</code>, print phone book.</li>
+</ul>
+</li>
+<li>In <code>main</code>, test with sequences including:
+a. Normal operations (insert, lookup, delete).
+b. Empty phone book operations.
+c. Duplicate name insertion.
+d. Lookup and delete non-existent contacts.
+e. Single contact operations.</li>
+</ol>
+<h2 id="java-implementation"><a class="header" href="#java-implementation">Java Implementation</a></h2>
+<pre><code class="language-java">import java.util.*;
+
+public class PhoneBookApplication {
+    // PhoneBook class to manage contacts
+    static class PhoneBook {
+        private HashMap&lt;String, String&gt; hashTable;
+
+        public PhoneBook() {
+            hashTable = new HashMap&lt;&gt;();
+        }
+
+        public String insert(String name, String phoneNumber) {
+            if (hashTable.containsKey(name)) {
+                return "Name already exists";
+            }
+            hashTable.put(name, phoneNumber);
+            return "Added " + name;
+        }
+
+        public String lookup(String name) {
+            if (hashTable.containsKey(name)) {
+                return "Found: " + hashTable.get(name);
+            }
+            return "Not found";
+        }
+
+        public String delete(String name) {
+            if (hashTable.containsKey(name)) {
+                hashTable.remove(name);
+                return "Deleted " + name;
+            }
+            return "Not found";
+        }
+
+        public String toString() {
+            if (hashTable.isEmpty()) {
+                return "Empty";
+            }
+            StringBuilder result = new StringBuilder();
+            int index = 0;
+            for (Map.Entry&lt;String, String&gt; entry : hashTable.entrySet()) {
+                result.append(entry.getKey()).append(": ").append(entry.getValue());
+                if (index &lt; hashTable.size() - 1) {
+                    result.append(", ");
+                }
+                index++;
+            }
+            return result.toString();
+        }
+    }
+
+    // Helper class for operations
+    static class Operation {
+        String type;
+        String name;
+        String phoneNumber;
+
+        Operation(String type, String name, String phoneNumber) {
+            this.type = type;
+            this.name = name;
+            this.phoneNumber = phoneNumber;
+        }
+    }
+
+    // Tests phone book operations
+    public void testPhoneBook(List&lt;Operation&gt; operations) {
+        PhoneBook phoneBook = new PhoneBook();
+        for (Operation op : operations) {
+            if (op.type.equals("insert")) {
+                System.out.println(phoneBook.insert(op.name, op.phoneNumber));
+            } else if (op.type.equals("lookup")) {
+                System.out.println(phoneBook.lookup(op.name));
+            } else if (op.type.equals("delete")) {
+                System.out.println(phoneBook.delete(op.name));
+            } else if (op.type.equals("print")) {
+                System.out.println("Phone Book: " + phoneBook.toString());
+            }
+        }
+    }
+
+    // Main method to test phone book
+    public static void main(String[] args) {
+        PhoneBookApplication manager = new PhoneBookApplication();
+
+        // Test cases
+        List&lt;List&lt;Operation&gt;&gt; testCases = new ArrayList&lt;&gt;();
+
+        // Test case 1: Normal operations
+        testCases.add(Arrays.asList(
+            new Operation("insert", "John", "123-456-7890"),
+            new Operation("insert", "Jane", "987-654-3210"),
+            new Operation("lookup", "John", null),
+            new Operation("delete", "Jane", null),
+            new Operation("print", null, null)
+        ));
+
+        // Test case 2: Empty phone book
+        testCases.add(Arrays.asList(
+            new Operation("lookup", "John", null),
+            new Operation("delete", "John", null),
+            new Operation("print", null, null)
+        ));
+
+        // Test case 3: Duplicate name
+        testCases.add(Arrays.asList(
+            new Operation("insert", "Alice", "111-222-3333"),
+            new Operation("insert", "Alice", "444-555-6666"),
+            new Operation("print", null, null)
+        ));
+
+        // Test case 4: Non-existent contact
+        testCases.add(Arrays.asList(
+            new Operation("insert", "Bob", "222-333-4444"),
+            new Operation("lookup", "Charlie", null),
+            new Operation("delete", "Charlie", null),
+            new Operation("print", null, null)
+        ));
+
+        // Test case 5: Single contact
+        testCases.add(Arrays.asList(
+            new Operation("insert", "Eve", "555-666-7777"),
+            new Operation("lookup", "Eve", null),
+            new Operation("delete", "Eve", null),
+            new Operation("print", null, null)
+        ));
+
+        // Run test cases
+        for (int i = 0; i &lt; testCases.size(); i++) {
+            System.out.println("Test case " + (i + 1) + ":");
+            manager.testPhoneBook(testCases.get(i));
+            System.out.println();
+        }
+    }
+}
+</code></pre>
+<h2 id="output"><a class="header" href="#output">Output</a></h2>
+<p>Running the <code>main</code> method produces:</p>
+<pre><code>Test case 1:
+Added John
+Added Jane
+Found: 123-456-7890
+Deleted Jane
+Phone Book: John: 123-456-7890
+
+Test case 2:
+Not found
+Not found
+Phone Book: Empty
+
+Test case 3:
+Added Alice
+Name already exists
+Phone Book: Alice: 111-222-3333
+
+Test case 4:
+Added Bob
+Not found
+Not found
+Phone Book: Bob: 222-333-4444
+
+Test case 5:
+Added Eve
+Found: 555-666-7777
+Deleted Eve
+Phone Book: Empty
+</code></pre>
+<p>Explanation:</p>
+<ul>
+<li>Test case 1: Adds John and Jane, looks up John, deletes Jane, prints remaining contact.</li>
+<li>Test case 2: Attempts lookup and delete on empty phone book, prints "Empty".</li>
+<li>Test case 3: Adds Alice, tries to add Alice again (fails), prints single contact.</li>
+<li>Test case 4: Adds Bob, tries lookup and delete for non-existent Charlie, prints Bob’s contact.</li>
+<li>Test case 5: Adds Eve, looks up Eve, deletes Eve, prints empty phone book.</li>
+</ul>
+<h2 id="how-it-works"><a class="header" href="#how-it-works">How It Works</a></h2>
+<ul>
+<li><strong>PhoneBook</strong>:
+<ul>
+<li>Uses <code>HashMap&lt;String, String&gt;</code> to store name-phone number pairs.</li>
+<li><code>insert</code>: Adds contact if name doesn’t exist, returns status.</li>
+<li><code>lookup</code>: Returns phone number or "Not found".</li>
+<li><code>delete</code>: Removes contact if name exists, returns status.</li>
+<li><code>toString</code>: Returns comma-separated string of contacts or "Empty".</li>
+</ul>
+</li>
+<li><strong>testPhoneBook</strong>: Executes operations, printing results.</li>
+<li><strong>Example Trace (Test case 1)</strong>:
+<ul>
+<li>insert("John", "123-456-7890"): hashTable={John:123-456-7890}, returns "Added John".</li>
+<li>insert("Jane", "987-654-3210"): hashTable={John:123-456-7890, Jane:987-654-3210}, returns "Added Jane".</li>
+<li>lookup("John"): Returns "Found: 123-456-7890".</li>
+<li>delete("Jane"): Removes Jane, hashTable={John:123-456-7890}, returns "Deleted Jane".</li>
+<li>print: Returns "John: 123-456-7890".</li>
+</ul>
+</li>
+<li><strong>Main Method</strong>: Tests normal operations, empty phone book, duplicate names, non-existent contacts, and single contact.</li>
+</ul>
+<h2 id="complexity-analysis-table"><a class="header" href="#complexity-analysis-table">Complexity Analysis Table</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Operation</th><th>Time Complexity</th><th>Space Complexity</th></tr></thead><tbody>
+<tr><td>Insert</td><td>O(1) average</td><td>O(1)</td></tr>
+<tr><td>Lookup</td><td>O(1) average</td><td>O(1)</td></tr>
+<tr><td>Delete</td><td>O(1) average</td><td>O(1)</td></tr>
+<tr><td>To String</td><td>O(n)</td><td>O(n)</td></tr>
+</tbody></table>
+</div>
+<p><em>Note</em>:</p>
+<ul>
+<li>n is the number of contacts in the phone book.</li>
+<li>Time complexity: O(1) average for insert, lookup, delete (HashMap operations); O(n) for toString (iterate all entries).</li>
+<li>Space complexity: O(1) for insert, lookup, delete (constant space); O(n) for toString (StringBuilder output).</li>
+<li>Worst case: O(n) time and space for toString with large phone books.</li>
+</ul>
+<blockquote>
+<p><strong>✅ Tip</strong>: Use a <code>HashMap</code> for fast O(1) average-case operations. Ensure names are treated case-sensitively to avoid confusion between similar names (e.g., "John" vs. "john").</p>
+</blockquote>
+<blockquote>
+<p><strong>⚠ Warning</strong>: Check for duplicate names before insertion to prevent overwriting existing contacts. Handle empty phone book cases to avoid null pointer issues during lookup or deletion.</p>
+</blockquote>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../problemStatements/ch03_06/CustomHashFunction.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../../problemStatements/ch03_06/TwoSumProblem.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../problemStatements/ch03_06/CustomHashFunction.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../../problemStatements/ch03_06/TwoSumProblem.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../../elasticlunr.min.js"></script>
+        <script src="../../mark.min.js"></script>
+        <script src="../../searcher.js"></script>
+
+        <script src="../../clipboard.min.js"></script>
+        <script src="../../highlight.js"></script>
+        <script src="../../book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="../../theme/ferris.js"></script>
+
+
+    </div>
+    </body>
+</html>

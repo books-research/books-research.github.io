@@ -1,0 +1,552 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>KthLargestElement - Java Data Structures and Algorithms for Beginners</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../../favicon.svg">
+        <link rel="shortcut icon" href="../../favicon.png">
+        <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+        <link rel="stylesheet" href="../../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="../../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../../theme/ferris.css">
+        <link rel="stylesheet" href="../../theme/semantic-notes.css">
+        <link rel="stylesheet" href="../../theme/listing.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../../toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Java Data Structures and Algorithms for Beginners</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <style>
+body {
+  text-align: justify;
+}
+</style>
+<h1 id="kth-largest-element"><a class="header" href="#kth-largest-element">Kth Largest Element</a></h1>
+<h2 id="problem-statement"><a class="header" href="#problem-statement">Problem Statement</a></h2>
+<p>Write a Java program that uses a priority queue to find the kth largest element in an array of integers. The program should enqueue elements into a min-heap of size k, maintaining the k largest elements, and return the root (smallest of the k largest) as the kth largest element. Test the implementation with at least three different arrays and k values, including edge cases like k=1, k equal to the array length, and arrays with duplicate elements. You can visualize this as sorting through a list of exam scores to find the kth highest score, keeping only the top k scores in a priority queue to efficiently track the kth largest.</p>
+<p><strong>Input</strong>:</p>
+<ul>
+<li>An array of integers (e.g., [3, 1, 4, 1, 5]).</li>
+<li>An integer k (1 ≤ k ≤ array length).
+<strong>Output</strong>: The kth largest element in the array (e.g., for k=2 in [3, 1, 4, 1, 5], output 4).
+<strong>Constraints</strong>:</li>
+<li>Array length is between 1 and 10^5.</li>
+<li>Elements are integers in the range [-10^9, 10^9].</li>
+<li>1 ≤ k ≤ array length.</li>
+<li>Assume k is valid for the input array.
+<strong>Example</strong>:</li>
+<li>Input: arr=[3, 1, 4, 1, 5], k=2</li>
+<li>Output: 4</li>
+<li>Explanation: The 2nd largest element is 4 (largest is 5, 2nd is 4).</li>
+<li>Input: arr=[1], k=1</li>
+<li>Output: 1</li>
+<li>Explanation: Only one element, so 1st largest is 1.</li>
+<li>Input: arr=[4, 4, 4], k=2</li>
+<li>Output: 4</li>
+<li>Explanation: All elements are 4, so 2nd largest is 4.</li>
+</ul>
+<h2 id="pseudocode"><a class="header" href="#pseudocode">Pseudocode</a></h2>
+<pre><code>CLASS MinPriorityQueue
+    SET array to new integer array of size capacity
+    SET size to 0
+    SET capacity to input capacity
+    
+    FUNCTION enqueue(number)
+        IF size equals capacity THEN
+            IF number &lt;= array[0] THEN
+                RETURN false
+            ENDIF
+            SET array[0] to number
+            CALL siftDown(0)
+            RETURN true
+        ENDIF
+        SET array[size] to number
+        CALL siftUp(size)
+        INCREMENT size
+        RETURN true
+    ENDFUNCTION
+    
+    FUNCTION siftUp(index)
+        WHILE index &gt; 0
+            SET parent to (index - 1) / 2
+            IF array[index] &gt;= array[parent] THEN
+                BREAK
+            ENDIF
+            SWAP array[index] and array[parent]
+            SET index to parent
+        ENDWHILE
+    ENDFUNCTION
+    
+    FUNCTION siftDown(index)
+        SET minIndex to index
+        WHILE true
+            SET left to 2 * index + 1
+            SET right to 2 * index + 2
+            IF left &lt; size AND array[left] &lt; array[minIndex] THEN
+                SET minIndex to left
+            ENDIF
+            IF right &lt; size AND array[right] &lt; array[minIndex] THEN
+                SET minIndex to right
+            ENDIF
+            IF minIndex equals index THEN
+                BREAK
+            ENDIF
+            SWAP array[index] and array[minIndex]
+            SET index to minIndex
+        ENDWHILE
+    ENDFUNCTION
+    
+    FUNCTION peek()
+        IF size equals 0 THEN
+            RETURN null
+        ENDIF
+        RETURN array[0]
+    ENDFUNCTION
+ENDCLASS
+
+FUNCTION findKthLargest(arr, k)
+    CREATE queue as new MinPriorityQueue with capacity k
+    FOR each number in arr
+        CALL queue.enqueue(number)
+    ENDFOR
+    RETURN queue.peek()
+ENDFUNCTION
+
+FUNCTION main()
+    SET testCases to array of (array, k) pairs
+    FOR each testCase in testCases
+        PRINT test case details
+        CALL findKthLargest(testCase.arr, testCase.k)
+        PRINT kth largest element
+    ENDFOR
+ENDFUNCTION
+</code></pre>
+<h2 id="algorithm-steps"><a class="header" href="#algorithm-steps">Algorithm Steps</a></h2>
+<ol>
+<li>Define a <code>MinPriorityQueue</code> class using a min-heap with:
+a. An array of fixed capacity k, with <code>size</code> to track elements.
+b. <code>enqueue</code>: If size &lt; k, add to end and sift up; if size = k and number &gt; root, replace root and sift down.
+c. <code>siftUp</code>: Move smaller number up to maintain min-heap property.
+d. <code>siftDown</code>: Move larger number down to maintain min-heap property.
+e. <code>peek</code>: Return root (smallest of k largest elements).</li>
+<li>In <code>findKthLargest</code>:
+a. Create a min-heap with capacity k.
+b. For each number in the array:
+<ul>
+<li>Enqueue to heap, maintaining k largest elements.
+c. Return the root (kth largest).</li>
+</ul>
+</li>
+<li>In <code>main</code>, test with at least three arrays and k values, including edge cases like k=1, k=length, and duplicates.</li>
+</ol>
+<h2 id="java-implementation"><a class="header" href="#java-implementation">Java Implementation</a></h2>
+<pre><code class="language-java">import java.util.*;
+
+public class KthLargestElement {
+    // Custom min-heap priority queue implementation
+    static class MinPriorityQueue {
+        private int[] array;
+        private int size;
+        private int capacity;
+
+        public MinPriorityQueue(int capacity) {
+            this.array = new int[capacity];
+            this.size = 0;
+            this.capacity = capacity;
+        }
+
+        public boolean enqueue(int number) {
+            if (size == capacity) {
+                if (number &lt;= array[0]) {
+                    return false; // Smaller than kth largest
+                }
+                array[0] = number; // Replace smallest
+                siftDown(0);
+                return true;
+            }
+            array[size] = number;
+            siftUp(size);
+            size++;
+            return true;
+        }
+
+        private void siftUp(int index) {
+            while (index &gt; 0) {
+                int parent = (index - 1) / 2;
+                if (array[index] &gt;= array[parent]) {
+                    break;
+                }
+                // Swap
+                int temp = array[index];
+                array[index] = array[parent];
+                array[parent] = temp;
+                index = parent;
+            }
+        }
+
+        private void siftDown(int index) {
+            int minIndex = index;
+            while (true) {
+                int left = 2 * index + 1;
+                int right = 2 * index + 2;
+                if (left &lt; size &amp;&amp; array[left] &lt; array[minIndex]) {
+                    minIndex = left;
+                }
+                if (right &lt; size &amp;&amp; array[right] &lt; array[minIndex]) {
+                    minIndex = right;
+                }
+                if (minIndex == index) {
+                    break;
+                }
+                // Swap
+                int temp = array[index];
+                array[index] = array[minIndex];
+                array[minIndex] = temp;
+                index = minIndex;
+            }
+        }
+
+        public Integer peek() {
+            if (size == 0) {
+                return null;
+            }
+            return array[0];
+        }
+    }
+
+    // Finds the kth largest element in the array
+    public int findKthLargest(int[] arr, int k) {
+        MinPriorityQueue queue = new MinPriorityQueue(k);
+        for (int num : arr) {
+            queue.enqueue(num);
+        }
+        return queue.peek();
+    }
+
+    // Helper class for test cases
+    static class TestCase {
+        int[] arr;
+        int k;
+
+        TestCase(int[] arr, int k) {
+            this.arr = arr;
+            this.k = k;
+        }
+    }
+
+    // Main method to test kth largest element
+    public static void main(String[] args) {
+        KthLargestElement finder = new KthLargestElement();
+
+        // Test cases
+        List&lt;TestCase&gt; testCases = new ArrayList&lt;&gt;();
+        
+        // Test case 1: Normal array
+        testCases.add(new TestCase(new int[]{3, 1, 4, 1, 5}, 2));
+        
+        // Test case 2: Single element
+        testCases.add(new TestCase(new int[]{1}, 1));
+        
+        // Test case 3: Duplicates
+        testCases.add(new TestCase(new int[]{4, 4, 4}, 2));
+        
+        // Test case 4: k equals array length
+        testCases.add(new TestCase(new int[]{7, 2, 9, 4, 6}, 5));
+
+        // Run test cases
+        for (int i = 0; i &lt; testCases.size(); i++) {
+            TestCase test = testCases.get(i);
+            System.out.println("Test case " + (i + 1) + ":");
+            System.out.println("Array: " + Arrays.toString(test.arr));
+            System.out.println("k: " + test.k);
+            int result = finder.findKthLargest(test.arr, test.k);
+            System.out.println("Kth largest element: " + result + "\n");
+        }
+    }
+}
+</code></pre>
+<h2 id="output"><a class="header" href="#output">Output</a></h2>
+<p>Running the <code>main</code> method produces:</p>
+<pre><code>Test case 1:
+Array: [3, 1, 4, 1, 5]
+k: 2
+Kth largest element: 4
+
+Test case 2:
+Array: [1]
+k: 1
+Kth largest element: 1
+
+Test case 3:
+Array: [4, 4, 4]
+k: 2
+Kth largest element: 4
+
+Test case 4:
+Array: [7, 2, 9, 4, 6]
+k: 5
+Kth largest element: 2
+</code></pre>
+<p>Explanation:</p>
+<ul>
+<li>Test case 1: In [3, 1, 4, 1, 5], k=2, the 2nd largest is 4 (largest is 5).</li>
+<li>Test case 2: In [1], k=1, the 1st largest is 1.</li>
+<li>Test case 3: In [4, 4, 4], k=2, the 2nd largest is 4 (all elements equal).</li>
+<li>Test case 4: In [7, 2, 9, 4, 6], k=5, the 5th largest is 2 (smallest element).</li>
+</ul>
+<h2 id="how-it-works"><a class="header" href="#how-it-works">How It Works</a></h2>
+<ul>
+<li><strong>MinPriorityQueue</strong>:
+<ul>
+<li>Uses a min-heap array to maintain the k largest elements, with smallest at root.</li>
+<li><code>enqueue</code>: If size &lt; k, adds number and sifts up; if size = k and number &gt; root, replaces root and sifts down.</li>
+<li><code>siftUp</code>: Moves smaller number up to maintain min-heap.</li>
+<li><code>siftDown</code>: Moves larger number down to maintain min-heap.</li>
+<li><code>peek</code>: Returns root (kth largest).</li>
+</ul>
+</li>
+<li><strong>findKthLargest</strong>:
+<ul>
+<li>Creates a min-heap of size k.</li>
+<li>Enqueues each array element, keeping only the k largest.</li>
+<li>Returns the root (kth largest).</li>
+</ul>
+</li>
+<li><strong>Example Trace (Test case 1)</strong>:
+<ul>
+<li>arr=[3, 1, 4, 1, 5], k=2.</li>
+<li>Enqueue 3: heap=[3], size=1.</li>
+<li>Enqueue 1: heap=[1,3], size=2.</li>
+<li>Enqueue 4: heap=[1,3], replace 1 with 4, heap=[3,4], size=2.</li>
+<li>Enqueue 1: heap=[3,4] (1 &lt; 3, ignored).</li>
+<li>Enqueue 5: heap=[3,4], replace 3 with 5, heap=[4,5], size=2.</li>
+<li>Peek: Returns 4 (2nd largest).</li>
+</ul>
+</li>
+<li><strong>Main Method</strong>: Tests normal array, single element, duplicates, and k=length.</li>
+</ul>
+<h2 id="complexity-analysis-table"><a class="header" href="#complexity-analysis-table">Complexity Analysis Table</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Operation</th><th>Time Complexity</th><th>Space Complexity</th></tr></thead><tbody>
+<tr><td>Enqueue</td><td>O(log k)</td><td>O(1)</td></tr>
+<tr><td>Find Kth Largest</td><td>O(n log k)</td><td>O(k)</td></tr>
+</tbody></table>
+</div>
+<p><em>Note</em>:</p>
+<ul>
+<li>n is the array length, k is the input k.</li>
+<li>Time complexity: O(log k) for each enqueue (heap operations); O(n log k) for n elements.</li>
+<li>Space complexity: O(k) for the min-heap of size k.</li>
+<li>Worst case: O(n log k) time for large n, O(k) space.</li>
+</ul>
+<blockquote>
+<p><strong>✅ Tip</strong>: Use a min-heap of size k to efficiently find the kth largest element, as it discards smaller elements early. Test with edge cases like k=1 or k=length to ensure correctness.</p>
+</blockquote>
+<blockquote>
+<p><strong>⚠ Warning</strong>: Ensure k is valid (1 ≤ k ≤ array length) to avoid errors. Handle duplicates carefully, as they may affect the heap’s behavior.</p>
+</blockquote>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../problemStatements/ch03_05_01/DijkstrasAlgorithm.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../../problemStatements/ch03_05_01/MergeKSortedLists.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../problemStatements/ch03_05_01/DijkstrasAlgorithm.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../../problemStatements/ch03_05_01/MergeKSortedLists.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../../elasticlunr.min.js"></script>
+        <script src="../../mark.min.js"></script>
+        <script src="../../searcher.js"></script>
+
+        <script src="../../clipboard.min.js"></script>
+        <script src="../../highlight.js"></script>
+        <script src="../../book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="../../theme/ferris.js"></script>
+
+
+    </div>
+    </body>
+</html>

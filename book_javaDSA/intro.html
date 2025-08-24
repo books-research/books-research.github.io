@@ -1,0 +1,314 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Introduction - Java Data Structures and Algorithms for Beginners</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="theme/ferris.css">
+        <link rel="stylesheet" href="theme/semantic-notes.css">
+        <link rel="stylesheet" href="theme/listing.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Java Data Structures and Algorithms for Beginners</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <style>
+body {
+  text-align: justify;
+}
+</style>
+<h2 id="introduction"><a class="header" href="#introduction">Introduction</a></h2>
+<p>Welcome to <em>Java Data Structures and Algorithms for Beginners</em>, an introductory guide to one of the most important topics in computer science — <strong>data structures</strong> — using the Java programming language.</p>
+<blockquote>
+<p>This book, <strong>Java Data Structures and Algorithms for Beginners</strong>, is designed for students, new programmers, and anyone starting their journey into understanding how data structures work in Java. It aims to simplify concepts while providing practical examples you can run and explore.</p>
+</blockquote>
+<p>Data structures form the backbone of efficient software. They allow you to store, organize, and manipulate data in ways that make programs faster, more reliable, and easier to maintain. Whether you’re creating a simple to-do app or building a large-scale web service, understanding the right data structure for the job is essential.</p>
+<p>Java provides a rich collection of <strong>built-in data structures</strong> in its standard library, from basic arrays to advanced collections like <code>HashMap</code> and <code>TreeSet</code>. This book will take you step-by-step from the very basics to slightly more advanced topics, with a strong focus on <strong>clear explanations and practical coding examples</strong>.</p>
+<h3 id="who-this-book-is-for"><a class="header" href="#who-this-book-is-for">Who This Book Is For</a></h3>
+<p>This book is ideal for:</p>
+<h3 id="students"><a class="header" href="#students">Students</a></h3>
+<p>If you are learning Java or preparing for university/diploma-level programming courses, this book will give you a solid understanding of arrays, lists, stacks, queues, trees, graphs, and more.</p>
+<h3 id="beginner-java-developers"><a class="header" href="#beginner-java-developers">Beginner Java Developers</a></h3>
+<p>If you know the Java syntax but feel confused when it comes to selecting or implementing the right data structure, this book will help you build confidence.</p>
+<h3 id="programming-enthusiasts"><a class="header" href="#programming-enthusiasts">Programming Enthusiasts</a></h3>
+<p>Even if Java isn’t your main programming language, the concepts you learn here are transferable to many other languages like Python, C++, or Rust.</p>
+<h3 id="job-seekers"><a class="header" href="#job-seekers">Job Seekers</a></h3>
+<p>If you are preparing for interviews, this book will serve as a gentle starting point before diving into more challenging algorithmic problems.</p>
+<h3 id="how-to-use-this-book"><a class="header" href="#how-to-use-this-book">How to Use This Book</a></h3>
+<p>We recommend reading the chapters in sequence, as each chapter builds upon concepts introduced earlier. However, you can also jump to specific topics when needed.</p>
+<p>You’ll find <strong>two types of chapters</strong> in this book:</p>
+<ol>
+<li><strong>Concept Chapters</strong> – Explain a data structure’s purpose, how it works internally, its operations, and time complexity.</li>
+<li><strong>Practical Chapters</strong> – Show you how to implement the data structure in Java, with examples and small exercises.</li>
+</ol>
+<h3 id="chapter-overview"><a class="header" href="#chapter-overview">Chapter Overview</a></h3>
+<p>This book is designed to guide beginners through <strong>Java Data Structures and Algorithms (DSA)</strong> step-by-step.<br />
+Here’s a quick overview of what each chapter covers:</p>
+<h3 id="1-getting-started-with-data-structures-algorithms-and-complexity"><a class="header" href="#1-getting-started-with-data-structures-algorithms-and-complexity">1️⃣ Getting Started with Data Structures, Algorithms, and Complexity</a></h3>
+<p>Learn the basics of <strong>what DSA is</strong>, why it’s important, and how it affects the efficiency of your programs.<br />
+We’ll also cover <strong>pseudocode</strong>, <strong>complexity analysis</strong>, and <strong>Big-O notation</strong> so you can evaluate algorithm performance.</p>
+<h3 id="2-recursion"><a class="header" href="#2-recursion">2️⃣ Recursion</a></h3>
+<p>Understand the concept of <strong>recursion</strong>, where a function calls itself to solve smaller subproblems.<br />
+You’ll learn:</p>
+<ul>
+<li>How recursion works</li>
+<li>Real-world examples like <strong>factorials</strong></li>
+<li>Difference between <strong>recursion and iteration</strong></li>
+<li><strong>Tail recursion</strong> and when to use it</li>
+</ul>
+<h3 id="3-core-data-structures"><a class="header" href="#3-core-data-structures">3️⃣ Core Data Structures</a></h3>
+<p>Dive into the most important data structures:</p>
+<ul>
+<li><strong>Arrays</strong> – store data in a fixed-size list</li>
+<li><strong>Strings</strong> – work with text</li>
+<li><strong>Linked Lists</strong> – dynamic lists with connected nodes</li>
+<li><strong>Stacks &amp; Queues</strong> – process data in LIFO/FIFO order</li>
+<li><strong>Hashing</strong> – fast data lookup</li>
+<li><strong>Trees &amp; Graphs</strong> – store and connect data in hierarchical and network structures</li>
+</ul>
+<h3 id="4-sorting-algorithms"><a class="header" href="#4-sorting-algorithms">4️⃣ Sorting Algorithms</a></h3>
+<p>Learn how to arrange data efficiently:</p>
+<ul>
+<li><strong>Bubble Sort</strong> – simple but slow</li>
+<li><strong>Selection Sort</strong> – select smallest/largest repeatedly</li>
+<li><strong>Insertion Sort</strong> – build sorted lists step-by-step</li>
+<li><strong>Merge Sort</strong> – efficient divide-and-conquer approach</li>
+</ul>
+<h3 id="5-searching-algorithms"><a class="header" href="#5-searching-algorithms">5️⃣ Searching Algorithms</a></h3>
+<p>Discover how to find data in a collection:</p>
+<ul>
+<li><strong>Linear Search</strong> – check every element</li>
+<li><strong>Binary Search</strong> – fast search in sorted lists</li>
+</ul>
+<h3 id="6-problem-solving-with-dsa"><a class="header" href="#6-problem-solving-with-dsa">6️⃣ Problem Solving with DSA</a></h3>
+<p>Practice solving real coding challenges:</p>
+<ul>
+<li>Array problems</li>
+<li>String problems</li>
+<li>Linked list problems</li>
+<li>Stack &amp; queue problems</li>
+</ul>
+<h3 id="-appendix"><a class="header" href="#-appendix">📎 Appendix</a></h3>
+<p>Extra resources to help you:</p>
+<ul>
+<li><strong>Glossary of terms</strong></li>
+<li><strong>Pseudocode symbols</strong></li>
+<li><strong>Flowchart symbols</strong></li>
+<li><strong>Java code templates</strong> for quick development</li>
+</ul>
+<h3 id="practice-oriented-learning"><a class="header" href="#practice-oriented-learning">Practice-Oriented Learning</a></h3>
+<blockquote>
+<p>This book takes a hands-on, practical approach to understanding data structure concepts for beginners. Rather than focusing only on theory, each chapter pairs clear explanations with step-by-step Java code examples, followed by small exercises you can try yourself. By actively implementing and experimenting with arrays, stacks, queues, and other structures, you’ll develop a stronger intuition for how they work and when to use them—turning abstract ideas into real programming skills.</p>
+</blockquote>
+<p>By the time you finish this book, you’ll not only know how each Java data structure works but also <strong>when and why to use it</strong> — a skill that will make your programs more efficient and your problem-solving sharper.</p>
+<p>Let’s begin your journey into the world of Java Data Structures and Algorithms!</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="welcome.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="ch01_0.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="welcome.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="ch01_0.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="theme/ferris.js"></script>
+
+
+    </div>
+    </body>
+</html>

@@ -1,0 +1,370 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Selection Sort - Java Data Structures and Algorithms for Beginners</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="theme/ferris.css">
+        <link rel="stylesheet" href="theme/semantic-notes.css">
+        <link rel="stylesheet" href="theme/listing.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Java Data Structures and Algorithms for Beginners</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <style>
+body {
+  text-align: justify;
+}
+</style>
+<h2 id="selection-sort"><a class="header" href="#selection-sort">Selection Sort</a></h2>
+<h3 id="definition-and-concepts"><a class="header" href="#definition-and-concepts">Definition and Concepts</a></h3>
+<p>Selection Sort is a simple, in-place sorting algorithm that divides an array into a sorted and an unsorted portion. In each iteration, the algorithm selects the smallest (or largest, for descending order) element from the unsorted portion and places it at the beginning of the sorted portion. You can visualize Selection Sort as repeatedly finding the smallest element in the remaining unsorted section of the array and swapping it with the first element of that section. In Java, Selection Sort is typically implemented on arrays due to their direct index-based access, which facilitates efficient comparisons and swaps. Selection Sort is not stable, meaning it may change the relative order of equal elements, but it is in-place, requiring minimal extra memory.</p>
+<h3 id="key-points"><a class="header" href="#key-points">Key Points:</a></h3>
+<ul>
+<li>Selection Sort selects the minimum element from the unsorted portion and places it at the start of the sorted portion.</li>
+<li>Each iteration reduces the size of the unsorted portion by one, growing the sorted portion.</li>
+<li>The algorithm is simple to implement but inefficient for large datasets due to its quadratic time complexity.</li>
+<li>It performs a fixed number of swaps, which can be advantageous in scenarios where swaps are costly.</li>
+</ul>
+<h3 id="why-use-it"><a class="header" href="#why-use-it">Why Use It?</a></h3>
+<p>Selection Sort is used primarily for educational purposes because its logic is intuitive and easy for beginners to grasp, making it a good introduction to sorting algorithms alongside Bubble Sort. It is suitable for small datasets where simplicity is prioritized over performance. Selection Sort minimizes the number of swaps compared to other quadratic algorithms like Bubble Sort, making it useful when write operations are expensive (e.g., in certain memory systems). However, for large datasets, more efficient algorithms like Quick Sort or Merge Sort are preferred.</p>
+<h3 id="where-to-use-real-life-examples"><a class="header" href="#where-to-use-real-life-examples">Where to Use? (Real-Life Examples)</a></h3>
+<ul>
+<li><strong>Teaching Sorting</strong>: Selection Sort is used in classrooms to teach sorting concepts due to its straightforward mechanism of selecting the minimum element.</li>
+<li><strong>Small Data Sorting</strong>: Embedded systems with limited resources use Selection Sort to sort small lists, such as configuration settings, where simplicity is key.</li>
+<li><strong>Write-Constrained Environments</strong>: Applications with costly write operations, such as flash memory, use Selection Sort to minimize swaps.</li>
+<li><strong>Prototyping</strong>: Developers use Selection Sort in prototypes to quickly sort small datasets for testing, leveraging its ease of implementation.</li>
+</ul>
+<!-- ### Diagram
+diagram for Selection Sort illustrating the process with the array [5, 3, 8, 1, 9].
+<div style="text-align:center;">
+    <img src="img/selection_sort_diagram.svg" alt="seSort" style="max-width:500px; height:auto;"/>
+</div> -->
+<h3 id="explain-operations"><a class="header" href="#explain-operations">Explain Operations</a></h3>
+<ul>
+<li><strong>Find Minimum</strong>: This operation scans the unsorted portion of the array to find the index of the smallest element. It has a time complexity of O(n) for n elements in the unsorted portion.</li>
+<li><strong>Swap</strong>: This operation exchanges the minimum element with the first element of the unsorted portion. It has a time complexity of O(1).</li>
+<li><strong>Iteration</strong>: This operation represents one pass through the array, finding the minimum and performing one swap. It has a time complexity of O(n) due to the minimum search.</li>
+<li><strong>Full Algorithm</strong>: This operation runs n-1 iterations to sort the entire array, where n is the array length. It has a time complexity of O(n²).</li>
+</ul>
+<h3 id="java-implementation"><a class="header" href="#java-implementation">Java Implementation</a></h3>
+<p>The following Java code implements Selection Sort for an array of integers, designed to be clear and beginner-friendly.</p>
+<pre><code class="language-java">public class SelectionSort {
+    // Selection Sort: Sorts an array in ascending order
+    public void selectionSort(int[] arr) {
+        if (arr == null || arr.length &lt;= 1) {
+            return; // No sorting needed for null or single-element arrays
+        }
+        int n = arr.length;
+        for (int i = 0; i &lt; n - 1; i++) { // Iterate over unsorted portion
+            int minIndex = i; // Assume first element is minimum
+            for (int j = i + 1; j &lt; n; j++) { // Search for minimum in unsorted portion
+                if (arr[j] &lt; arr[minIndex]) {
+                    minIndex = j; // Update minimum index
+                }
+            }
+            if (minIndex != i) { // Swap if a smaller element was found
+                int temp = arr[i];
+                arr[i] = arr[minIndex];
+                arr[minIndex] = temp;
+            }
+        }
+    }
+}
+</code></pre>
+<h3 id="how-it-works"><a class="header" href="#how-it-works">How It Works</a></h3>
+<ol>
+<li><strong>Check Input</strong>:
+<ul>
+<li>The <code>selectionSort</code> method checks if the input array is null or has one or fewer elements. If so, it returns immediately, as no sorting is needed.</li>
+</ul>
+</li>
+<li><strong>Outer Loop (Iterations)</strong>:
+<ul>
+<li>The outer loop iterates <code>n-1</code> times, where <code>n</code> is the array length, as each iteration places one element in its final position, growing the sorted portion.</li>
+<li>For example, in an array of 5 elements, 4 iterations are sufficient to sort the array.</li>
+</ul>
+</li>
+<li><strong>Inner Loop (Find Minimum)</strong>:
+<ul>
+<li>The inner loop scans the unsorted portion (from index <code>i+1</code> to <code>n-1</code>) to find the index of the smallest element, updating <code>minIndex</code> when a smaller element is found.</li>
+<li>For example, in the array <code>[5, 3, 8, 1, 9]</code>, the first iteration finds the minimum 1 at index 3.</li>
+</ul>
+</li>
+<li><strong>Swap</strong>:
+<ul>
+<li>If the minimum element is not already at index <code>i</code>, the algorithm swaps the element at <code>minIndex</code> with the element at index <code>i</code> using a temporary variable.</li>
+<li>For example, swapping 5 (at index 0) with 1 (at index 3) results in <code>[1, 3, 8, 5, 9]</code>.</li>
+</ul>
+</li>
+<li><strong>Result</strong>:
+<ul>
+<li>After all iterations, the array is sorted in ascending order. For example, <code>[5, 3, 8, 1, 9]</code> becomes <code>[1, 3, 5, 8, 9]</code>.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity-analysis-table"><a class="header" href="#complexity-analysis-table">Complexity Analysis Table</a></h3>
+<div class="table-wrapper"><table><thead><tr><th>Operation</th><th>Time Complexity</th><th>Space Complexity</th></tr></thead><tbody>
+<tr><td>Find Minimum</td><td>O(n)</td><td>O(1)</td></tr>
+<tr><td>Swap</td><td>O(1)</td><td>O(1)</td></tr>
+<tr><td>Iteration</td><td>O(n)</td><td>O(1)</td></tr>
+<tr><td>Full Algorithm</td><td>O(n²) (best/average/worst)</td><td>O(1)</td></tr>
+</tbody></table>
+</div>
+<p><em>Note</em>:</p>
+<ul>
+<li>n is the number of elements in the array.</li>
+<li>The time complexity is O(n²) for all cases (best, average, worst) because the algorithm always performs n-1 iterations, each scanning up to n elements to find the minimum.</li>
+<li>Space complexity is O(1) as Selection Sort is in-place, using only a few variables for indexing and swapping.</li>
+</ul>
+<h3 id="key-differences--notes"><a class="header" href="#key-differences--notes">Key Differences / Notes</a></h3>
+<ul>
+<li><strong>Selection Sort vs. Bubble Sort</strong>:
+<ul>
+<li>Selection Sort minimizes swaps by performing one swap per iteration, while Bubble Sort may perform multiple swaps per pass.</li>
+<li>Both have O(n²) time complexity, but Selection Sort is less adaptive to nearly sorted data, as it always scans the entire unsorted portion.</li>
+</ul>
+</li>
+<li><strong>Selection Sort vs. Other Sorting Algorithms</strong>:
+<ul>
+<li>Selection Sort is less efficient than Quick Sort (O(n log n) average) or Merge Sort (O(n log n)), which are preferred for large datasets.</li>
+<li>It is not stable, unlike Bubble Sort or Merge Sort, as it may swap equal elements out of order.</li>
+</ul>
+</li>
+<li><strong>Suitability for Data Structures</strong>:
+<ul>
+<li>Selection Sort is most efficient for arrays due to O(1) access and swap operations.</li>
+<li>It is less practical for linked lists or other structures due to inefficient access patterns, which is why this implementation focuses on arrays.</li>
+</ul>
+</li>
+<li><strong>Fixed Swaps</strong>:
+<ul>
+<li>Selection Sort performs at most n-1 swaps, making it advantageous when swaps are more costly than comparisons.</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p><strong>✅ Tip</strong>: Use Selection Sort for small arrays or when minimizing swaps is important, such as in systems where write operations are expensive. Test the implementation with edge cases like empty, single-element, or duplicate-filled arrays to ensure correctness.</p>
+</blockquote>
+<blockquote>
+<p><strong>⚠ Warning</strong>: Avoid using Selection Sort for large datasets due to its O(n²) time complexity, which is inefficient compared to algorithms like Quick Sort or Merge Sort. Always validate array bounds to prevent <code>ArrayIndexOutOfBoundsException</code>.</p>
+</blockquote>
+<h3 id="exercises"><a class="header" href="#exercises">Exercises</a></h3>
+<ol>
+<li><strong>Basic Selection Sort</strong>: Implement Selection Sort for an array of integers and test it with various inputs (e.g., unsorted, sorted, reversed, duplicates). Count the number of swaps performed.</li>
+<li><strong>Descending Order</strong>: Modify the Selection Sort implementation to sort an array in descending order by selecting the maximum element instead. Test with different array sizes.</li>
+<li><strong>Performance Analysis</strong>: Write a program that measures the execution time of Selection Sort for arrays of increasing sizes (e.g., 10, 100, 1000 elements). Compare performance across different input cases.</li>
+<li><strong>String Array Sorting</strong>: Extend the Selection Sort implementation to sort an array of strings lexicographically. Test with strings of varying lengths and cases.</li>
+<li><strong>Minimum Swap Count</strong>: Enhance the Selection Sort implementation to track and return the number of swaps performed. Test with nearly sorted and fully unsorted arrays.</li>
+</ol>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="ch04_01.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="ch04_03.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="ch04_01.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="ch04_03.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="theme/ferris.js"></script>
+
+
+    </div>
+    </body>
+</html>

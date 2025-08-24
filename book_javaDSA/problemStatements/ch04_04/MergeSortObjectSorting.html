@@ -1,0 +1,573 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>MergeSortObjectSorting - Java Data Structures and Algorithms for Beginners</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../../favicon.svg">
+        <link rel="shortcut icon" href="../../favicon.png">
+        <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+        <link rel="stylesheet" href="../../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="../../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../../theme/ferris.css">
+        <link rel="stylesheet" href="../../theme/semantic-notes.css">
+        <link rel="stylesheet" href="../../theme/listing.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../../toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Java Data Structures and Algorithms for Beginners</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <style>
+body {
+  text-align: justify;
+}
+</style>
+<h1 id="merge-sort-for-object-sorting"><a class="header" href="#merge-sort-for-object-sorting">Merge Sort for Object Sorting</a></h1>
+<h2 id="problem-statement"><a class="header" href="#problem-statement">Problem Statement</a></h2>
+<p>Write a Java program that extends the Merge Sort implementation to sort an array of objects, specifically <code>Student</code> objects with a <code>grade</code> field, in ascending order based on a custom comparator that compares grades. The program should test the implementation with a sample dataset containing <code>Student</code> objects with varied grades, including duplicates and edge cases like empty arrays, verifying that the output is correctly sorted. Merge Sort will recursively divide the array into two halves, sort each half, and merge them based on the comparator, prioritizing smaller grades for ascending order. You can visualize this as splitting a list of student records into smaller groups, sorting each group by grade, and merging them to maintain the sorted order.</p>
+<p><strong>Input</strong>:</p>
+<ul>
+<li>An array of <code>Student</code> objects, each with a <code>name</code> (String) and <code>grade</code> (double) field.
+<strong>Output</strong>: The sorted array (by grade in ascending order) and a string representation of the input and sorted arrays for verification.
+<strong>Constraints</strong>:</li>
+<li>The array length <code>n</code> is between 0 and 10^5.</li>
+<li>Grades are doubles in the range [0.0, 100.0].
+<strong>Example</strong>:</li>
+<li>Input: array = [Student("Alice", 85.5), Student("Bob", 92.0), Student("Charlie", 78.5)]</li>
+<li>Output:
+<ul>
+<li>Input Array: [Student(name=Alice, grade=85.5), Student(name=Bob, grade=92.0), Student(name=Charlie, grade=78.5)]</li>
+<li>Sorted Array: [Student(name=Charlie, grade=78.5), Student(name=Alice, grade=85.5), Student(name=Bob, grade=92.0)]</li>
+</ul>
+</li>
+<li>Explanation: Merge Sort divides, sorts, and merges to produce an ascending order array by grade.</li>
+<li>Input: array = [Student("Eve", 90.0), Student("Eve", 90.0)]</li>
+<li>Output:
+<ul>
+<li>Input Array: [Student(name=Eve, grade=90.0), Student(name=Eve, grade=90.0)]</li>
+<li>Sorted Array: [Student(name=Eve, grade=90.0), Student(name=Eve, grade=90.0)]</li>
+</ul>
+</li>
+<li>Explanation: Duplicate grades are preserved in order due to Merge Sort’s stability.</li>
+</ul>
+<h2 id="pseudocode"><a class="header" href="#pseudocode">Pseudocode</a></h2>
+<pre><code>FUNCTION mergeSort(arr, left, right, comparator)
+    IF left &lt; right THEN
+        SET mid to floor((left + right) / 2)
+        CALL mergeSort(arr, left, mid, comparator)
+        CALL mergeSort(arr, mid + 1, right, comparator)
+        CALL merge(arr, left, mid, right, comparator)
+    ENDIF
+ENDFUNCTION
+
+FUNCTION merge(arr, left, mid, right, comparator)
+    SET n1 to mid - left + 1
+    SET n2 to right - mid
+    CREATE leftArr as array of size n1
+    CREATE rightArr as array of size n2
+    FOR i from 0 to n1-1
+        SET leftArr[i] to arr[left + i]
+    ENDFOR
+    FOR i from 0 to n2-1
+        SET rightArr[i] to arr[mid + 1 + i]
+    ENDFOR
+    SET i to 0, j to 0, k to left
+    WHILE i &lt; n1 AND j &lt; n2
+        IF comparator.compare(leftArr[i], rightArr[j]) &lt;= 0 THEN
+            SET arr[k] to leftArr[i]
+            INCREMENT i
+        ELSE
+            SET arr[k] to rightArr[j]
+            INCREMENT j
+        ENDIF
+        INCREMENT k
+    ENDWHILE
+    WHILE i &lt; n1
+        SET arr[k] to leftArr[i]
+        INCREMENT i
+        INCREMENT k
+    ENDWHILE
+    WHILE j &lt; n2
+        SET arr[k] to rightArr[j]
+        INCREMENT j
+        INCREMENT k
+    ENDWHILE
+ENDFUNCTION
+
+FUNCTION toString(arr)
+    CREATE result as new StringBuilder
+    APPEND "[" to result
+    FOR each element in arr
+        APPEND element.toString() to result
+        IF element is not last THEN
+            APPEND ", " to result
+        ENDIF
+    ENDFOR
+    APPEND "]" to result
+    RETURN result as string
+ENDFUNCTION
+
+FUNCTION main()
+    SET testCases to array of Student arrays
+    SET gradeComparator to new Comparator comparing Student grades
+    FOR each testCase in testCases
+        PRINT test case details
+        CREATE copy of testCase array
+        CALL mergeSort(copy, 0, length-1, gradeComparator)
+        PRINT input array, sorted array
+    ENDFOR
+ENDFUNCTION
+</code></pre>
+<h2 id="algorithm-steps"><a class="header" href="#algorithm-steps">Algorithm Steps</a></h2>
+<ol>
+<li>Define <code>Student</code> class:
+a. Fields: <code>name</code> (String), <code>grade</code> (double).
+b. Include <code>toString</code> for readable output.</li>
+<li>Define <code>mergeSort</code> (generic):
+a. Accept an array of type <code>T</code>, left, right indices, and a <code>Comparator&lt;T&gt;</code>.
+b. If left &lt; right, divide array at mid, recursively sort halves, and merge using <code>merge</code>.</li>
+<li>Define <code>merge</code> (generic):
+a. Create temporary arrays for left and right halves.
+b. Use comparator to merge elements in ascending order (<code>comparator.compare(leftArr[i], rightArr[j]) &lt;= 0</code>).
+c. Copy remaining elements from either half.</li>
+<li>Define <code>toString</code>:
+a. Convert array to a string, e.g., "[Student(name=Alice, grade=85.5), ...]".</li>
+<li>In <code>main</code>, test with:
+a. Mixed grades (n=5).
+b. Duplicate grades (n=4).
+c. Empty array (n=0).
+d. Single-element array (n=1).
+e. Sorted grades (n=6).</li>
+</ol>
+<h2 id="java-implementation"><a class="header" href="#java-implementation">Java Implementation</a></h2>
+<pre><code class="language-java">import java.util.*;
+
+public class MergeSortObjectSorting {
+    // Student class
+    static class Student {
+        String name;
+        double grade;
+
+        Student(String name, double grade) {
+            this.name = name;
+            this.grade = grade;
+        }
+
+        @Override
+        public String toString() {
+            return "Student(name=" + name + ", grade=" + grade + ")";
+        }
+    }
+
+    // Performs Merge Sort with custom comparator
+    public &lt;T&gt; void mergeSort(T[] arr, int left, int right, Comparator&lt;T&gt; comparator) {
+        if (left &lt; right) {
+            int mid = left + (right - left) / 2;
+            mergeSort(arr, left, mid, comparator);
+            mergeSort(arr, mid + 1, right, comparator);
+            merge(arr, left, mid, right, comparator);
+        }
+    }
+
+    // Merges two sorted subarrays using comparator
+    private &lt;T&gt; void merge(T[] arr, int left, int mid, int right, Comparator&lt;T&gt; comparator) {
+        int n1 = mid - left + 1;
+        int n2 = right - mid;
+        @SuppressWarnings("unchecked")
+        T[] leftArr = (T[]) new Object[n1];
+        @SuppressWarnings("unchecked")
+        T[] rightArr = (T[]) new Object[n2];
+
+        // Copy data to temporary arrays
+        for (int i = 0; i &lt; n1; i++) {
+            leftArr[i] = arr[left + i];
+        }
+        for (int i = 0; i &lt; n2; i++) {
+            rightArr[i] = arr[mid + 1 + i];
+        }
+
+        // Merge in ascending order
+        int i = 0, j = 0, k = left;
+        while (i &lt; n1 &amp;&amp; j &lt; n2) {
+            if (comparator.compare(leftArr[i], rightArr[j]) &lt;= 0) {
+                arr[k] = leftArr[i];
+                i++;
+            } else {
+                arr[k] = rightArr[j];
+                j++;
+            }
+            k++;
+        }
+
+        // Copy remaining elements
+        while (i &lt; n1) {
+            arr[k] = leftArr[i];
+            i++;
+            k++;
+        }
+        while (j &lt; n2) {
+            arr[k] = rightArr[j];
+            j++;
+            k++;
+        }
+    }
+
+    // Converts array to string
+    public &lt;T&gt; String toString(T[] arr) {
+        StringBuilder result = new StringBuilder("[");
+        for (int i = 0; i &lt; arr.length; i++) {
+            result.append(arr[i].toString());
+            if (i &lt; arr.length - 1) {
+                result.append(", ");
+            }
+        }
+        result.append("]");
+        return result.toString();
+    }
+
+    // Helper class for test cases
+    static class TestCase {
+        Student[] arr;
+        String description;
+
+        TestCase(Student[] arr, String description) {
+            this.arr = arr;
+            this.description = description;
+        }
+    }
+
+    // Main method to test object sorting
+    public static void main(String[] args) {
+        MergeSortObjectSorting sorter = new MergeSortObjectSorting();
+
+        // Comparator for sorting by grade
+        Comparator&lt;Student&gt; gradeComparator = (s1, s2) -&gt; Double.compare(s1.grade, s2.grade);
+
+        // Test cases
+        TestCase[] testCases = {
+            new TestCase(new Student[]{
+                new Student("Alice", 85.5),
+                new Student("Bob", 92.0),
+                new Student("Charlie", 78.5),
+                new Student("David", 95.0),
+                new Student("Eve", 88.0)
+            }, "Mixed grades (n=5)"),
+            new TestCase(new Student[]{
+                new Student("Frank", 90.0),
+                new Student("Grace", 90.0),
+                new Student("Hannah", 90.0),
+                new Student("Ivy", 90.0)
+            }, "Duplicate grades (n=4)"),
+            new TestCase(new Student[]{}, "Empty (n=0)"),
+            new TestCase(new Student[]{new Student("Jack", 75.0)}, "Single element (n=1)"),
+            new TestCase(new Student[]{
+                new Student("Kate", 70.0),
+                new Student("Liam", 75.0),
+                new Student("Mia", 80.0),
+                new Student("Noah", 85.0),
+                new Student("Olivia", 90.0),
+                new Student("Peter", 95.0)
+            }, "Sorted grades (n=6)")
+        };
+
+        // Run test cases
+        for (int i = 0; i &lt; testCases.length; i++) {
+            System.out.println("Test case " + (i + 1) + ": " + testCases[i].description);
+            Student[] arr = testCases[i].arr.clone(); // Copy to preserve original
+            System.out.println("Input Array: " + sorter.toString(arr));
+            sorter.mergeSort(arr, 0, arr.length - 1, gradeComparator);
+            System.out.println("Sorted Array: " + sorter.toString(arr) + "\n");
+        }
+    }
+}
+</code></pre>
+<h2 id="output"><a class="header" href="#output">Output</a></h2>
+<p>Running the <code>main</code> method produces:</p>
+<pre><code>Test case 1: Mixed grades (n=5)
+Input Array: [Student(name=Alice, grade=85.5), Student(name=Bob, grade=92.0), Student(name=Charlie, grade=78.5), Student(name=David, grade=95.0), Student(name=Eve, grade=88.0)]
+Sorted Array: [Student(name=Charlie, grade=78.5), Student(name=Alice, grade=85.5), Student(name=Eve, grade=88.0), Student(name=Bob, grade=92.0), Student(name=David, grade=95.0)]
+
+Test case 2: Duplicate grades (n=4)
+Input Array: [Student(name=Frank, grade=90.0), Student(name=Grace, grade=90.0), Student(name=Hannah, grade=90.0), Student(name=Ivy, grade=90.0)]
+Sorted Array: [Student(name=Frank, grade=90.0), Student(name=Grace, grade=90.0), Student(name=Hannah, grade=90.0), Student(name=Ivy, grade=90.0)]
+
+Test case 3: Empty (n=0)
+Input Array: []
+Sorted Array: []
+
+Test case 4: Single element (n=1)
+Input Array: [Student(name=Jack, grade=75.0)]
+Sorted Array: [Student(name=Jack, grade=75.0)]
+
+Test case 5: Sorted grades (n=6)
+Input Array: [Student(name=Kate, grade=70.0), Student(name=Liam, grade=75.0), Student(name=Mia, grade=80.0), Student(name=Noah, grade=85.0), Student(name=Olivia, grade=90.0), Student(name=Peter, grade=95.0)]
+Sorted Array: [Student(name=Kate, grade=70.0), Student(name=Liam, grade=75.0), Student(name=Mia, grade=80.0), Student(name=Noah, grade=85.0), Student(name=Olivia, grade=90.0), Student(name=Peter, grade=95.0)]
+</code></pre>
+<p>Explanation:</p>
+<ul>
+<li>Test case 1: Mixed grades (n=5) are sorted by grade in ascending order.</li>
+<li>Test case 2: Duplicate grades (n=4, all 90.0) are sorted, preserving order due to stability.</li>
+<li>Test case 3: Empty array (n=0) remains empty.</li>
+<li>Test case 4: Single-element array (n=1) is trivially sorted.</li>
+<li>Test case 5: Already sorted by grade (n=6) remains unchanged.</li>
+</ul>
+<h2 id="how-it-works"><a class="header" href="#how-it-works">How It Works</a></h2>
+<ul>
+<li><strong>Student Class</strong>:
+<ul>
+<li>Contains <code>name</code> (String) and <code>grade</code> (double).</li>
+<li>Includes <code>toString</code> for readable output.</li>
+</ul>
+</li>
+<li><strong>mergeSort</strong>:
+<ul>
+<li>Uses generics with <code>Comparator&lt;T&gt;</code> to sort any object type.</li>
+<li>Recursively divides the array and merges using the comparator.</li>
+</ul>
+</li>
+<li><strong>merge</strong>:
+<ul>
+<li>Creates temporary arrays for left and right halves.</li>
+<li>Merges elements based on comparator (<code>comparator.compare(leftArr[i], rightArr[j]) &lt;= 0</code>), ensuring stability.</li>
+<li>Copies remaining elements.</li>
+</ul>
+</li>
+<li><strong>toString</strong>: Formats array as a string, handling <code>Student</code> objects.</li>
+<li><strong>Example Trace (Test case 1)</strong>:
+<ul>
+<li>Array: [Alice(85.5), Bob(92.0), Charlie(78.5), David(95.0), Eve(88.0)].</li>
+<li>Divide: [Alice(85.5), Bob(92.0), Charlie(78.5)] and [David(95.0), Eve(88.0)].</li>
+<li>Divide: [Alice(85.5)] and [Bob(92.0), Charlie(78.5)]; [David(95.0)] and [Eve(88.0)].</li>
+<li>Merge: [Bob(92.0), Charlie(78.5)] → [Charlie(78.5), Bob(92.0)].</li>
+<li>Merge: [Alice(85.5)], [Charlie(78.5), Bob(92.0)] → [Charlie(78.5), Alice(85.5), Bob(92.0)].</li>
+<li>Merge: [David(95.0)], [Eve(88.0)] → [Eve(88.0), David(95.0)].</li>
+<li>Merge: [Charlie(78.5), Alice(85.5), Bob(92.0)], [Eve(88.0), David(95.0)] → [Charlie(78.5), Alice(85.5), Eve(88.0), Bob(92.0), David(95.0)].</li>
+</ul>
+</li>
+<li><strong>Main Method</strong>: Tests mixed grades, duplicates, empty, single-element, and sorted arrays using a grade comparator.</li>
+</ul>
+<h2 id="complexity-analysis-table"><a class="header" href="#complexity-analysis-table">Complexity Analysis Table</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Operation</th><th>Time Complexity</th><th>Space Complexity</th></tr></thead><tbody>
+<tr><td>mergeSort</td><td>O(n log n)</td><td>O(n)</td></tr>
+<tr><td>merge</td><td>O(n)</td><td>O(n)</td></tr>
+<tr><td>toString</td><td>O(n)</td><td>O(n)</td></tr>
+</tbody></table>
+</div>
+<p><em>Note</em>:</p>
+<ul>
+<li>n is the array length.</li>
+<li>Time complexity: O(n log n) for mergeSort in all cases (divide: log n levels, merge: O(n) per level); O(n) for toString.</li>
+<li>Space complexity: O(n) for mergeSort (temporary arrays); O(n) for toString (string builder).</li>
+<li>Comparator comparisons depend on the field (e.g., double for grades), but complexity remains O(n log n).</li>
+</ul>
+<blockquote>
+<p><strong>✅ Tip</strong>: Use a <code>Comparator</code> to make Merge Sort flexible for sorting objects by any field. Ensure stability by using <code>&lt;=</code> in the merge step to preserve the order of equal elements.</p>
+</blockquote>
+<blockquote>
+<p><strong>⚠ Warning</strong>: Ensure the comparator is consistent to avoid sorting errors. Use <code>@SuppressWarnings("unchecked")</code> for generic array creation in Java, and clone input arrays to preserve the original order for display.</p>
+</blockquote>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../problemStatements/ch04_04/DescendingMergeSort.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../../problemStatements/ch04_04/MergeSortPerformanceAnalysis.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../problemStatements/ch04_04/DescendingMergeSort.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../../problemStatements/ch04_04/MergeSortPerformanceAnalysis.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../../elasticlunr.min.js"></script>
+        <script src="../../mark.min.js"></script>
+        <script src="../../searcher.js"></script>
+
+        <script src="../../clipboard.min.js"></script>
+        <script src="../../highlight.js"></script>
+        <script src="../../book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="../../theme/ferris.js"></script>
+
+
+    </div>
+    </body>
+</html>

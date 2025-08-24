@@ -1,0 +1,528 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Appendix-Java Code Templates - Java Data Structures and Algorithms for Beginners</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="theme/ferris.css">
+        <link rel="stylesheet" href="theme/semantic-notes.css">
+        <link rel="stylesheet" href="theme/listing.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Java Data Structures and Algorithms for Beginners</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <style>
+body {
+  text-align: justify;
+}
+</style>
+<h1 id="appendix-java-code-templates"><a class="header" href="#appendix-java-code-templates">Appendix: Java Code Templates</a></h1>
+<h2 id="introduction"><a class="header" href="#introduction">Introduction</a></h2>
+<p>This appendix provides reusable Java code templates for common data structures and algorithms (DSAs) covered in the "Java Data Structures and Algorithms for Beginners" curriculum, with a focus on the Binary Search chapter and other core topics such as arrays, linked lists, stacks, queues, hashing, trees, graphs, and sorting and searching algorithms. These templates are designed to be beginner-friendly, modular, and adaptable for use in the problem statements and exercises, enabling students to quickly implement and test solutions. Each template includes comments for clarity and usage notes to guide implementation, aligning with the learning platform’s goal of providing hands-on education with embedded compilers and visualizations. By using these templates, students can focus on understanding algorithmic logic and adapting code to specific problem requirements, such as those in the Binary Search exercises.</p>
+<h2 id="java-code-templates"><a class="header" href="#java-code-templates">Java Code Templates</a></h2>
+<p>Below are Java code templates for key data structures and algorithms, with examples drawn from the Binary Search chapter and other curriculum topics. Each template is complete, commented, and ready to be adapted for specific use cases.</p>
+<h3 id="1-iterative-binary-search"><a class="header" href="#1-iterative-binary-search">1. Iterative Binary Search</a></h3>
+<p><strong>Description</strong>: A template for iterative Binary Search to find a target integer in a sorted array, returning the index or -1 if not found. Used in Basic Binary Search (<code>artifact_id="850a19d5-b136-4ecc-9dc6-53e9a8fcc6bc"</code>) and Performance Analysis (<code>artifact_id="4b5c6d7e-8f9a-4b0c-9d1e-3f4a5b6c7d8e"</code>).
+<strong>Usage Notes</strong>: Ensure the input array is sorted in ascending order. Modify to return additional data (e.g., comparisons) or adapt for objects by changing the comparison logic.</p>
+<pre><code class="language-java">public class BinarySearch {
+    // Iterative Binary Search for a target in a sorted array
+    public int binarySearch(int[] arr, int target) {
+        int left = 0;
+        int right = arr.length - 1;
+        while (left &lt;= right) {
+            int mid = left + (right - left) / 2; // Avoid overflow
+            if (arr[mid] == target) {
+                return mid; // Target found
+            } else if (arr[mid] &lt; target) {
+                left = mid + 1; // Search right half
+            } else {
+                right = mid - 1; // Search left half
+            }
+        }
+        return -1; // Target not found
+    }
+
+    // Example usage
+    public static void main(String[] args) {
+        BinarySearch searcher = new BinarySearch();
+        int[] arr = {1, 3, 5, 7, 9}; // Sorted array
+        int target = 7;
+        int result = searcher.binarySearch(arr, target);
+        System.out.println("Index of " + target + ": " + result); // Output: Index of 7: 3
+    }
+}
+</code></pre>
+<h3 id="2-recursive-binary-search"><a class="header" href="#2-recursive-binary-search">2. Recursive Binary Search</a></h3>
+<p><strong>Description</strong>: A template for recursive Binary Search, used in Recursive Implementation (<code>artifact_id="311f97d4-8924-4798-9267-d8e029502590"</code>). Calls itself on a smaller range until the target is found or the range is invalid.
+<strong>Usage Notes</strong>: Ensure the array is sorted. Add parameters for tracking comparisons or modify for object searches.</p>
+<pre><code class="language-java">public class RecursiveBinarySearch {
+    // Recursive Binary Search
+    public int binarySearch(int[] arr, int target, int left, int right) {
+        if (left &gt; right) {
+            return -1; // Target not found
+        }
+        int mid = left + (right - left) / 2; // Avoid overflow
+        if (arr[mid] == target) {
+            return mid; // Target found
+        } else if (arr[mid] &lt; target) {
+            return binarySearch(arr, target, mid + 1, right); // Search right half
+        } else {
+            return binarySearch(arr, target, left, mid - 1); // Search left half
+        }
+    }
+
+    // Wrapper method for easier calling
+    public int binarySearch(int[] arr, int target) {
+        return binarySearch(arr, target, 0, arr.length - 1);
+    }
+
+    // Example usage
+    public static void main(String[] args) {
+        RecursiveBinarySearch searcher = new RecursiveBinarySearch();
+        int[] arr = {1, 3, 5, 7, 9}; // Sorted array
+        int target = 7;
+        int result = searcher.binarySearch(arr, target);
+        System.out.println("Index of " + target + ": " + result); // Output: Index of 7: 3
+    }
+}
+</code></pre>
+<h3 id="3-linear-search"><a class="header" href="#3-linear-search">3. Linear Search</a></h3>
+<p><strong>Description</strong>: A template for Linear Search to find a target integer in an array, used in Linear Search exercises (<code>ch05_01</code>). Iterates through the array sequentially.
+<strong>Usage Notes</strong>: Works on sorted or unsorted arrays. Can be modified to count comparisons or find multiple occurrences.</p>
+<pre><code class="language-java">public class LinearSearch {
+    // Linear Search for a target in an array
+    public int linearSearch(int[] arr, int target) {
+        for (int i = 0; i &lt; arr.length; i++) {
+            if (arr[i] == target) {
+                return i; // Target found
+            }
+        }
+        return -1; // Target not found
+    }
+
+    // Example usage
+    public static void main(String[] args) {
+        LinearSearch searcher = new LinearSearch();
+        int[] arr = {4, 2, 7, 1, 9};
+        int target = 7;
+        int result = searcher.linearSearch(arr, target);
+        System.out.println("Index of " + target + ": " + result); // Output: Index of 7: 2
+    }
+}
+</code></pre>
+<h3 id="4-array"><a class="header" href="#4-array">4. Array</a></h3>
+<p><strong>Description</strong>: A template for creating and manipulating arrays, used in Array exercises (<code>ch03_01</code>). Supports initialization and basic operations.
+<strong>Usage Notes</strong>: Adapt for specific tasks like reversal or sorting. Ensure bounds checking to avoid errors.</p>
+<pre><code class="language-java">public class ArrayOperations {
+    // Create and initialize an array
+    public int[] createArray(int size) {
+        int[] arr = new int[size];
+        for (int i = 0; i &lt; size; i++) {
+            arr[i] = i + 1; // Example: Fill with 1, 2, ..., size
+        }
+        return arr;
+    }
+
+    // Print array
+    public void printArray(int[] arr) {
+        System.out.print("[");
+        for (int i = 0; i &lt; arr.length; i++) {
+            System.out.print(arr[i]);
+            if (i &lt; arr.length - 1) {
+                System.out.print(", ");
+            }
+        }
+        System.out.println("]");
+    }
+
+    // Example usage
+    public static void main(String[] args) {
+        ArrayOperations ops = new ArrayOperations();
+        int[] arr = ops.createArray(5);
+        ops.printArray(arr); // Output: [1, 2, 3, 4, 5]
+    }
+}
+</code></pre>
+<h3 id="5-linked-list"><a class="header" href="#5-linked-list">5. Linked List</a></h3>
+<p><strong>Description</strong>: A template for a singly linked list, used in Linked List exercises (<code>ch03_03</code>). Includes node structure and basic operations.
+<strong>Usage Notes</strong>: Extend for doubly or circular linked lists. Add methods for specific tasks like reversal or cycle detection.</p>
+<pre><code class="language-java">public class LinkedList {
+    // Node class
+    class Node {
+        int data;
+        Node next;
+        Node(int data) {
+            this.data = data;
+            this.next = null;
+        }
+    }
+
+    private Node head;
+
+    // Insert at the end
+    public void insert(int data) {
+        Node newNode = new Node(data);
+        if (head == null) {
+            head = newNode;
+        } else {
+            Node current = head;
+            while (current.next != null) {
+                current = current.next;
+            }
+            current.next = newNode;
+        }
+    }
+
+    // Print list
+    public void printList() {
+        Node current = head;
+        System.out.print("[");
+        while (current != null) {
+            System.out.print(current.data);
+            if (current.next != null) {
+                System.out.print(", ");
+            }
+            current = current.next;
+        }
+        System.out.println("]");
+    }
+
+    // Example usage
+    public static void main(String[] args) {
+        LinkedList list = new LinkedList();
+        list.insert(1);
+        list.insert(2);
+        list.insert(3);
+        list.printList(); // Output: [1, 2, 3]
+    }
+}
+</code></pre>
+<h3 id="6-stack"><a class="header" href="#6-stack">6. Stack</a></h3>
+<p><strong>Description</strong>: A template for a stack using an array, used in Stack exercises (<code>ch03_04</code>). Follows Last-In-First-Out (LIFO) order.
+<strong>Usage Notes</strong>: Adjust capacity for dynamic resizing or use a linked list for flexibility.</p>
+<pre><code class="language-java">public class Stack {
+    private int[] arr;
+    private int top;
+    private int capacity;
+
+    // Initialize stack
+    public Stack(int size) {
+        arr = new int[size];
+        capacity = size;
+        top = -1;
+    }
+
+    // Push element
+    public void push(int data) {
+        if (top &gt;= capacity - 1) {
+            System.out.println("Stack Overflow");
+            return;
+        }
+        arr[++top] = data;
+    }
+
+    // Pop element
+    public int pop() {
+        if (top &lt; 0) {
+            System.out.println("Stack Underflow");
+            return -1;
+        }
+        return arr[top--];
+    }
+
+    // Example usage
+    public static void main(String[] args) {
+        Stack stack = new Stack(5);
+        stack.push(1);
+        stack.push(2);
+        System.out.println("Popped: " + stack.pop()); // Output: Popped: 2
+    }
+}
+</code></pre>
+<h3 id="7-queue"><a class="header" href="#7-queue">7. Queue</a></h3>
+<p><strong>Description</strong>: A template for a queue using an array, used in Queue exercises (<code>ch03_05</code>). Follows First-In-First-Out (FIFO) order.
+<strong>Usage Notes</strong>: Modify for circular queues or priority queues. Add bounds checking for robustness.</p>
+<pre><code class="language-java">public class Queue {
+    private int[] arr;
+    private int front;
+    private int rear;
+    private int capacity;
+
+    // Initialize queue
+    public Queue(int size) {
+        arr = new int[size];
+        capacity = size;
+        front = 0;
+        rear = -1;
+    }
+
+    // Enqueue element
+    public void enqueue(int data) {
+        if (rear &gt;= capacity - 1) {
+            System.out.println("Queue Full");
+            return;
+        }
+        arr[++rear] = data;
+    }
+
+    // Dequeue element
+    public int dequeue() {
+        if (front &gt; rear) {
+            System.out.println("Queue Empty");
+            return -1;
+        }
+        return arr[front++];
+    }
+
+    // Example usage
+    public static void main(String[] args) {
+        Queue queue = new Queue(5);
+        queue.enqueue(1);
+        queue.enqueue(2);
+        System.out.println("Dequeued: " + queue.dequeue()); // Output: Dequeued: 1
+    }
+}
+</code></pre>
+<h3 id="8-bubble-sort"><a class="header" href="#8-bubble-sort">8. Bubble Sort</a></h3>
+<p><strong>Description</strong>: A template for Bubble Sort, used in Bubble Sort exercises (<code>ch04_01</code>). Repeatedly swaps adjacent elements if out of order.
+<strong>Usage Notes</strong>: Optimize with a flag for early termination or adapt for descending order.</p>
+<pre><code class="language-java">public class BubbleSort {
+    // Bubble Sort for ascending order
+    public void bubbleSort(int[] arr) {
+        int n = arr.length;
+        for (int i = 0; i &lt; n - 1; i++) {
+            for (int j = 0; j &lt; n - i - 1; j++) {
+                if (arr[j] &gt; arr[j + 1]) {
+                    // Swap elements
+                    int temp = arr[j];
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = temp;
+                }
+            }
+        }
+    }
+
+    // Example usage
+    public static void main(String[] args) {
+        BubbleSort sorter = new BubbleSort();
+        int[] arr = {5, 3, 8, 1, 2};
+        sorter.bubbleSort(arr);
+        System.out.print("Sorted: [");
+        for (int i = 0; i &lt; arr.length; i++) {
+            System.out.print(arr[i]);
+            if (i &lt; arr.length - 1) {
+                System.out.print(", ");
+            }
+        }
+        System.out.println("]"); // Output: Sorted: [1, 2, 3, 5, 8]
+    }
+}
+</code></pre>
+<h2 id="-tip-or-warning-box"><a class="header" href="#-tip-or-warning-box">✅ Tip or Warning Box</a></h2>
+<p><strong>✅ Tip</strong>: Use these templates as starting points for DSA exercises. Modify them to fit specific problem requirements, such as adding comparison counters for Binary Search or implementing custom object sorting. Test each template with the provided main method to ensure correctness.</p>
+<p><strong>⚠ Warning</strong>: Always verify input constraints (e.g., sorted arrays for Binary Search, array bounds for stacks/queues) before using these templates. Incorrect usage, such as applying Binary Search to an unsorted array, will produce invalid results.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="appendix_pseudocode_symbols.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="appendix_pseudocode_symbols.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="theme/ferris.js"></script>
+
+
+    </div>
+    </body>
+</html>

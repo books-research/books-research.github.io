@@ -1,0 +1,64 @@
+<svg width="500" height="300" xmlns="http://www.w3.org/2000/svg">
+  <!-- Initial array: [5, 3, 8, 1, 9] -->
+  <rect x="50" y="30" width="40" height="40" stroke="black" fill="white"/>
+  <text x="65" y="55" font-size="20" text-anchor="middle">5</text>
+  <text x="65" y="25" font-size="12" text-anchor="middle">0</text>
+  <rect x="110" y="30" width="40" height="40" stroke="black" fill="white"/>
+  <text x="125" y="55" font-size="20" text-anchor="middle">3</text>
+  <text x="125" y="25" font-size="12" text-anchor="middle">1</text>
+  <rect x="170" y="30" width="40" height="40" stroke="black" fill="white"/>
+  <text x="185" y="55" font-size="20" text-anchor="middle">8</text>
+  <text x="185" y="25" font-size="12" text-anchor="middle">2</text>
+  <rect x="230" y="30" width="40" height="40" stroke="black" fill="white"/>
+  <text x="245" y="55" font-size="20" text-anchor="middle">1</text>
+  <text x="245" y="25" font-size="12" text-anchor="middle">3</text>
+  <rect x="290" y="30" width="40" height="40" stroke="black" fill="white"/>
+  <text x="305" y="55" font-size="20" text-anchor="middle">9</text>
+  <text x="305" y="25" font-size="12" text-anchor="middle">4</text>
+  <text x="190" y="15" font-size="14" text-anchor="middle">Initial Array</text>
+
+  <!-- Iteration: Finding minimum (1 at index 3) and swapping with 5 (index 0) -->
+  <!-- Arrow selecting minimum (1 at index 3) -->
+  <path d="M245 90 L245 75" stroke="red" stroke-width="3" marker-end="url(#arrowhead-red)"/>
+  <text x="245" y="100" font-size="14" text-anchor="middle" fill="red">Min (1)</text>
+  <!-- Arrows showing swap between 5 (index 0) and 1 (index 3) -->
+  <path d="M65 110 L225 110" stroke="blue" stroke-width="3" marker-end="url(#arrowhead)"/>
+  <path d="M225 120 L65 120" stroke="blue" stroke-width="3" marker-end="url(#arrowhead)"/>
+  <text x="145" y="130" font-size="14" text-anchor="middle" fill="blue">Swap 5 ↔ 1</text>
+
+  <!-- Resulting array after iteration: [1, 3, 8, 5, 9] -->
+  <rect x="50" y="160" width="40" height="40" stroke="black" fill="lightgreen"/>
+  <text x="65" y="185" font-size="20" text-anchor="middle">1</text>
+  <text x="65" y="155" font-size="12" text-anchor="middle">0</text>
+  <rect x="110" y="160" width="40" height="40" stroke="black" fill="white"/>
+  <text x="125" y="185" font-size="20" text-anchor="middle">3</text>
+  <text x="125" y="155" font-size="12" text-anchor="middle">1</text>
+  <rect x="170" y="160" width="40" height="40" stroke="black" fill="white"/>
+  <text x="185" y="185" font-size="20" text-anchor="middle">8</text>
+  <text x="185" y="155" font-size="12" text-anchor="middle">2</text>
+  <rect x="230" y="160" width="40" height="40" stroke="black" fill="white"/>
+  <text x="245" y="185" font-size="20" text-anchor="middle">5</text>
+  <text x="245" y="155" font-size="12" text-anchor="middle">3</text>
+  <rect x="290" y="160" width="40" height="40" stroke="black" fill="white"/>
+  <text x="305" y="185" font-size="20" text-anchor="middle">9</text>
+  <text x="305" y="155" font-size="12" text-anchor="middle">4</text>
+  <text x="190" y="145" font-size="14" text-anchor="middle">After Swapping Min</text>
+
+  <!-- Arrows definition -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="blue"/>
+    </marker>
+    <marker id="arrowhead-red" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="red"/>
+    </marker>
+  </defs>
+
+  <!-- Caption -->
+  <text x="50" y="240" font-size="12" text-anchor="start">
+    Selection Sort finds the minimum element in the unsorted portion and
+  </text>
+  <text x="50" y="255" font-size="12" text-anchor="start">
+    swaps it with the first element, building the sorted portion iteratively.
+  </text>
+</svg>

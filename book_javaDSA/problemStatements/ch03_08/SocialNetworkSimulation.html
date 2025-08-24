@@ -1,0 +1,624 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>SocialNetworkSimulation - Java Data Structures and Algorithms for Beginners</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../../favicon.svg">
+        <link rel="shortcut icon" href="../../favicon.png">
+        <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+        <link rel="stylesheet" href="../../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="../../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../../theme/ferris.css">
+        <link rel="stylesheet" href="../../theme/semantic-notes.css">
+        <link rel="stylesheet" href="../../theme/listing.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../../toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Java Data Structures and Algorithms for Beginners</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <style>
+body {
+  text-align: justify;
+}
+</style>
+<h1 id="social-network-simulation"><a class="header" href="#social-network-simulation">Social Network Simulation</a></h1>
+<h2 id="problem-statement"><a class="header" href="#problem-statement">Problem Statement</a></h2>
+<p>Write a Java program that simulates a social network using an undirected weighted graph. The program should allow adding users (vertices), forming friendships (weighted edges, where weights represent interaction strength), and finding mutual friends between two users using Depth-First Search (DFS). Mutual friends are users directly connected to both input users. The program should reuse the weighted graph implementation with an adjacency list and test with various scenarios, including users with mutual friends, no mutual friends, empty graphs, and isolated users. You can visualize this as a social media platform where users connect with friends, and you query who is friends with both of two selected users, like finding common contacts in a network.</p>
+<p><strong>Input</strong>:</p>
+<ul>
+<li>An undirected weighted graph with vertices as integers (0 to n-1, representing users).</li>
+<li>Operations to add users (vertices), add friendships (edges with weights), and query mutual friends (pairs of users [u, v]).
+<strong>Output</strong>: Confirmation of user and friendship additions, a list of mutual friends’ IDs for queried pairs, or an empty list if none, and a string representation of the graph’s adjacency list for clarity.
+<strong>Constraints</strong>:</li>
+<li>The number of vertices <code>n</code> is between 0 and 10^5.</li>
+<li>Edges are triplets [u, v, weight] where 0 ≤ u, v &lt; n, and weight is a positive integer in [1, 10^9].</li>
+<li>The graph is undirected (friendship [u, v, weight] implies [v, u, weight]).
+<strong>Example</strong>:</li>
+<li>Input: Add users 0, 1, 2, 3; Add friendships [0, 1, 5], [1, 2, 3], [2, 3, 7], [0, 2, 4]; Query mutual friends [0, 2]</li>
+<li>Output:
+<ul>
+<li>Added users and friendships successfully</li>
+<li>Mutual friends of 0 and 2: [1]</li>
+<li>"Adjacency List: {0=[(1, 5), (2, 4)], 1=[(0, 5), (2, 3)], 2=[(1, 3), (3, 7), (0, 4)], 3=[(2, 7)]}"</li>
+</ul>
+</li>
+<li>Explanation: User 1 is a mutual friend of users 0 and 2 (directly connected to both).</li>
+<li>Input: Add users 0, 1, 2; Add friendships [0, 1, 5]; Query mutual friends [0, 2]</li>
+<li>Output:
+<ul>
+<li>Added users and friendships successfully</li>
+<li>Mutual friends of 0 and 2: []</li>
+<li>"Adjacency List: {0=[(1, 5)], 1=[(0, 5)], 2=[]}"</li>
+</ul>
+</li>
+<li>Explanation: No mutual friends between 0 and 2.</li>
+</ul>
+<h2 id="pseudocode"><a class="header" href="#pseudocode">Pseudocode</a></h2>
+<pre><code>CLASS Edge
+    SET destination to integer
+    SET weight to integer
+ENDCLASS
+
+FUNCTION createGraph(n)
+    CREATE adjList as new HashMap
+    FOR i from 0 to n-1
+        SET adjList[i] to empty list
+    ENDFOR
+    RETURN adjList
+ENDFUNCTION
+
+FUNCTION addFriendship(adjList, u, v, weight)
+    IF u not in adjList OR v not in adjList THEN
+        RETURN false
+    ENDIF
+    CREATE edge1 as new Edge(v, weight)
+    CREATE edge2 as new Edge(u, weight)
+    ADD edge1 to adjList[u]
+    ADD edge2 to adjList[v]
+    RETURN true
+ENDFUNCTION
+
+FUNCTION getFriends(vertex, adjList, visited)
+    CREATE friends as new list
+    FUNCTION dfs(node)
+        SET visited[node] to true
+        FOR each edge in adjList[node]
+            IF NOT visited[edge.destination] THEN
+                ADD edge.destination to friends
+                CALL dfs(edge.destination)
+            ENDIF
+        ENDFOR
+    ENDFUNCTION
+    SET visited[vertex] to true
+    FOR each edge in adjList[vertex]
+        ADD edge.destination to friends
+    ENDFOR
+    RETURN friends
+ENDFUNCTION
+
+FUNCTION findMutualFriends(adjList, u, v)
+    IF u not in adjList OR v not in adjList THEN
+        RETURN empty list
+    ENDIF
+    CREATE visited1 as boolean array, initialized to false
+    CREATE visited2 as boolean array, initialized to false
+    SET friends1 to getFriends(u, adjList, visited1)
+    SET friends2 to getFriends(v, adjList, visited2)
+    CREATE mutual as new list
+    FOR each friend in friends1
+        IF friend in friends2 THEN
+            ADD friend to mutual
+        ENDIF
+    ENDFOR
+    RETURN mutual
+ENDFUNCTION
+
+FUNCTION toString(adjList)
+    CREATE result as new StringBuilder
+    APPEND "Adjacency List: {" to result
+    FOR each vertex in adjList
+        APPEND vertex and "=" to result
+        APPEND "[" to result
+        FOR each edge in adjList[vertex]
+            APPEND "(" and edge.destination and ", " and edge.weight and ")" to result
+            IF edge is not last THEN
+                APPEND ", " to result
+            ENDIF
+        ENDFOR
+        APPEND "]" to result
+        IF vertex is not last THEN
+            APPEND ", " to result
+        ENDIF
+    ENDFOR
+    APPEND "}" to result
+    RETURN result as string
+ENDFUNCTION
+
+FUNCTION main()
+    SET testCases to array of (n, edges, queries) triples
+    FOR each testCase in testCases
+        PRINT test case details
+        SET adjList to createGraph(testCase.n)
+        FOR each edge [u, v, weight] in testCase.edges
+            CALL addFriendship(adjList, u, v, weight)
+        ENDFOR
+        FOR each query [u, v] in testCase.queries
+            CALL findMutualFriends(adjList, u, v)
+            PRINT mutual friends
+        ENDFOR
+        PRINT graph using toString
+    ENDFOR
+ENDFUNCTION
+</code></pre>
+<h2 id="algorithm-steps"><a class="header" href="#algorithm-steps">Algorithm Steps</a></h2>
+<ol>
+<li>Reuse the <code>Edge</code> class with:
+a. <code>destination</code> (integer for target vertex).
+b. <code>weight</code> (integer for friendship strength).</li>
+<li>Define <code>createGraph</code>:
+a. Create a HashMap <code>adjList</code> mapping vertices to lists of <code>Edge</code> objects.
+b. Initialize empty lists for vertices 0 to n-1.</li>
+<li>Define <code>addFriendship</code>:
+a. Validate that users u and v exist.
+b. Add bidirectional edges <code>Edge(v, weight)</code> to u’s list and <code>Edge(u, weight)</code> to v’s list.</li>
+<li>Define <code>getFriends</code>:
+a. Use DFS to collect direct neighbors of a vertex (friends).
+b. Mark visited vertices to avoid cycles.</li>
+<li>Define <code>findMutualFriends</code>:
+a. Validate that users u and v exist.
+b. Get friends of u and v using DFS.
+c. Return the intersection of their friend lists.</li>
+<li>Define <code>toString</code>:
+a. Convert adjacency list to a string, e.g., "{0=[(1, 5), (2, 4)], ...}".</li>
+<li>In <code>main</code>, test with:
+a. A graph with mutual friends.
+b. A graph with no mutual friends.
+c. An empty graph.
+d. A single user.</li>
+</ol>
+<h2 id="java-implementation"><a class="header" href="#java-implementation">Java Implementation</a></h2>
+<pre><code class="language-java">import java.util.*;
+
+public class SocialNetworkSimulation {
+    // Edge class to store destination and weight
+    static class Edge {
+        int destination;
+        int weight;
+
+        Edge(int destination, int weight) {
+            this.destination = destination;
+            this.weight = weight;
+        }
+
+        @Override
+        public String toString() {
+            return "(" + destination + ", " + weight + ")";
+        }
+    }
+
+    // Creates adjacency list for n users
+    private Map&lt;Integer, List&lt;Edge&gt;&gt; createGraph(int n) {
+        Map&lt;Integer, List&lt;Edge&gt;&gt; adjList = new HashMap&lt;&gt;();
+        for (int i = 0; i &lt; n; i++) {
+            adjList.put(i, new ArrayList&lt;&gt;());
+        }
+        return adjList;
+    }
+
+    // Adds a friendship (weighted edge) between users u and v
+    public boolean addFriendship(Map&lt;Integer, List&lt;Edge&gt;&gt; adjList, int u, int v, int weight) {
+        if (!adjList.containsKey(u) || !adjList.containsKey(v)) {
+            return false;
+        }
+        adjList.get(u).add(new Edge(v, weight));
+        adjList.get(v).add(new Edge(u, weight)); // Undirected graph
+        return true;
+    }
+
+    // Gets friends of a vertex using DFS (direct neighbors only for mutual friends)
+    private List&lt;Integer&gt; getFriends(int vertex, Map&lt;Integer, List&lt;Edge&gt;&gt; adjList, boolean[] visited) {
+        List&lt;Integer&gt; friends = new ArrayList&lt;&gt;();
+        visited[vertex] = true;
+        for (Edge edge : adjList.get(vertex)) {
+            friends.add(edge.destination);
+        }
+        return friends;
+    }
+
+    // Finds mutual friends between users u and v
+    public List&lt;Integer&gt; findMutualFriends(Map&lt;Integer, List&lt;Edge&gt;&gt; adjList, int u, int v) {
+        List&lt;Integer&gt; mutual = new ArrayList&lt;&gt;();
+        if (!adjList.containsKey(u) || !adjList.containsKey(v)) {
+            return mutual;
+        }
+        boolean[] visited1 = new boolean[adjList.size()];
+        boolean[] visited2 = new boolean[adjList.size()];
+        List&lt;Integer&gt; friends1 = getFriends(u, adjList, visited1);
+        List&lt;Integer&gt; friends2 = getFriends(v, adjList, visited2);
+        for (int friend : friends1) {
+            if (friends2.contains(friend)) {
+                mutual.add(friend);
+            }
+        }
+        Collections.sort(mutual); // For consistent output
+        return mutual;
+    }
+
+    // Converts graph to string (adjacency list)
+    public String toString(Map&lt;Integer, List&lt;Edge&gt;&gt; adjList) {
+        StringBuilder result = new StringBuilder("Adjacency List: {");
+        List&lt;Integer&gt; vertices = new ArrayList&lt;&gt;(adjList.keySet());
+        Collections.sort(vertices); // For consistent output
+        for (int i = 0; i &lt; vertices.size(); i++) {
+            int vertex = vertices.get(i);
+            result.append(vertex).append("=[");
+            List&lt;Edge&gt; edges = adjList.get(vertex);
+            for (int j = 0; j &lt; edges.size(); j++) {
+                result.append(edges.get(j));
+                if (j &lt; edges.size() - 1) {
+                    result.append(", ");
+                }
+            }
+            result.append("]");
+            if (i &lt; vertices.size() - 1) {
+                result.append(", ");
+            }
+        }
+        result.append("}");
+        return result.toString();
+    }
+
+    // Helper class for test cases
+    static class TestCase {
+        int n;
+        int[][] edges;
+        int[][] queries;
+
+        TestCase(int n, int[][] edges, int[][] queries) {
+            this.n = n;
+            this.edges = edges;
+            this.queries = queries;
+        }
+    }
+
+    // Main method to test social network simulation
+    public static void main(String[] args) {
+        SocialNetworkSimulation network = new SocialNetworkSimulation();
+
+        // Test cases
+        TestCase[] testCases = {
+            // Graph with mutual friends
+            new TestCase(
+                4,
+                new int[][]{{0, 1, 5}, {1, 2, 3}, {2, 3, 7}, {0, 2, 4}},
+                new int[][]{{0, 2}}
+            ),
+            // Graph with no mutual friends
+            new TestCase(
+                3,
+                new int[][]{{0, 1, 5}},
+                new int[][]{{0, 2}}
+            ),
+            // Empty graph
+            new TestCase(
+                0,
+                new int[][]{},
+                new int[][]{{0, 1}}
+            ),
+            // Single user
+            new TestCase(
+                1,
+                new int[][]{},
+                new int[][]{{0, 0}}
+            )
+        };
+
+        // Run test cases
+        for (int i = 0; i &lt; testCases.length; i++) {
+            System.out.println("Test case " + (i + 1) + ":");
+            System.out.println("Vertices (Users): " + testCases[i].n);
+            System.out.println("Friendships: " + Arrays.deepToString(testCases[i].edges));
+            Map&lt;Integer, List&lt;Edge&gt;&gt; adjList = network.createGraph(testCases[i].n);
+            System.out.print("Added users");
+            if (testCases[i].edges.length &gt; 0) {
+                System.out.print(" and friendships");
+                for (int[] edge : testCases[i].edges) {
+                    network.addFriendship(adjList, edge[0], edge[1], edge[2]);
+                }
+            }
+            System.out.println(" successfully");
+            System.out.println("Queries:");
+            for (int[] query : testCases[i].queries) {
+                int u = query[0], v = query[1];
+                List&lt;Integer&gt; mutual = network.findMutualFriends(adjList, u, v);
+                System.out.println("Mutual friends of " + u + " and " + v + ": " + mutual);
+            }
+            System.out.println(network.toString(adjList) + "\n");
+        }
+    }
+}
+</code></pre>
+<h2 id="output"><a class="header" href="#output">Output</a></h2>
+<p>Running the <code>main</code> method produces:</p>
+<pre><code>Test case 1:
+Vertices (Users): 4
+Friendships: [[0, 1, 5], [1, 2, 3], [2, 3, 7], [0, 2, 4]]
+Added users and friendships successfully
+Queries:
+Mutual friends of 0 and 2: [1]
+Adjacency List: {0=[(1, 5), (2, 4)], 1=[(0, 5), (2, 3)], 2=[(1, 3), (3, 7), (0, 4)], 3=[(2, 7)]}
+
+Test case 2:
+Vertices (Users): 3
+Friendships: [[0, 1, 5]]
+Added users and friendships successfully
+Queries:
+Mutual friends of 0 and 2: []
+Adjacency List: {0=[(1, 5)], 1=[(0, 5)], 2=[]}
+
+Test case 3:
+Vertices (Users): 0
+Friendships: []
+Added users successfully
+Queries:
+Mutual friends of 0 and 1: []
+Adjacency List: {}
+
+Test case 4:
+Vertices (Users): 1
+Friendships: []
+Added users successfully
+Queries:
+Mutual friends of 0 and 0: []
+Adjacency List: {0=[]}
+</code></pre>
+<p>Explanation:</p>
+<ul>
+<li>Test case 1: Users 0 and 2 have mutual friend 1 (connected to both).</li>
+<li>Test case 2: Users 0 and 2 have no mutual friends (2 is isolated).</li>
+<li>Test case 3: Empty graph, no mutual friends.</li>
+<li>Test case 4: Single user, no mutual friends with self.</li>
+</ul>
+<h2 id="how-it-works"><a class="header" href="#how-it-works">How It Works</a></h2>
+<ul>
+<li><strong>Edge</strong>: Stores destination vertex and weight (friendship strength).</li>
+<li><strong>createGraph</strong>: Initializes adjacency list for n users.</li>
+<li><strong>addFriendship</strong>: Adds bidirectional weighted edges if users exist.</li>
+<li><strong>getFriends</strong>: Uses DFS to collect direct neighbors (friends), marking visited to avoid cycles.</li>
+<li><strong>findMutualFriends</strong>: Finds intersection of friends’ lists for two users.</li>
+<li><strong>toString</strong>: Formats adjacency list with edge weights, sorting vertices.</li>
+<li><strong>Example Trace (Test case 1)</strong>:
+<ul>
+<li>Add users 0–3, friendships (0, 1, 5), (1, 2, 3), (2, 3, 7), (0, 2, 4).</li>
+<li>Query (0, 2): Friends of 0 = [1, 2], friends of 2 = [1, 3, 0], intersection = [1].</li>
+</ul>
+</li>
+<li><strong>Main Method</strong>: Tests mutual friends, no mutual friends, empty graph, and single user.</li>
+</ul>
+<h2 id="complexity-analysis-table"><a class="header" href="#complexity-analysis-table">Complexity Analysis Table</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Operation</th><th>Time Complexity</th><th>Space Complexity</th></tr></thead><tbody>
+<tr><td>createGraph</td><td>O(n)</td><td>O(n)</td></tr>
+<tr><td>addFriendship</td><td>O(1)</td><td>O(1)</td></tr>
+<tr><td>findMutualFriends</td><td>O(d_u + d_v) average</td><td>O(n)</td></tr>
+<tr><td>toString</td><td>O(n log n + e)</td><td>O(n + e)</td></tr>
+</tbody></table>
+</div>
+<p><em>Note</em>:</p>
+<ul>
+<li>n is the number of vertices, e is the number of edges, d_u and d_v are degrees of vertices u and v.</li>
+<li>Time complexity: O(n) for createGraph (initialize lists); O(1) for addFriendship (add edges); O(d_u + d_v) average for findMutualFriends (collect and intersect neighbors); O(n log n + e) for toString (sorting vertices).</li>
+<li>Space complexity: O(n) for createGraph (empty lists); O(1) for addFriendship; O(n) for findMutualFriends (visited arrays and friend lists); O(n + e) for toString (adjacency list).</li>
+<li>Worst case: O(n + e) time and space for dense graphs.</li>
+</ul>
+<blockquote>
+<p><strong>✅ Tip</strong>: Use DFS to collect direct neighbors for mutual friend queries, but limit to one level for efficiency. Store weights to represent friendship strength, enabling future extensions like weighted friend recommendations.</p>
+</blockquote>
+<blockquote>
+<p><strong>⚠ Warning</strong>: Validate user IDs before adding friendships or querying mutual friends to avoid accessing undefined adjacency lists. Ensure DFS avoids cycles by tracking visited vertices.</p>
+</blockquote>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../problemStatements/ch03_08/ShortestPathUnweighted.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../../problemStatements/ch03_08/WeightedGraphExtension.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../problemStatements/ch03_08/ShortestPathUnweighted.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../../problemStatements/ch03_08/WeightedGraphExtension.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../../elasticlunr.min.js"></script>
+        <script src="../../mark.min.js"></script>
+        <script src="../../searcher.js"></script>
+
+        <script src="../../clipboard.min.js"></script>
+        <script src="../../highlight.js"></script>
+        <script src="../../book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="../../theme/ferris.js"></script>
+
+
+    </div>
+    </body>
+</html>

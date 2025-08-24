@@ -1,0 +1,662 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>DijkstrasAlgorithm - Java Data Structures and Algorithms for Beginners</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../../favicon.svg">
+        <link rel="shortcut icon" href="../../favicon.png">
+        <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+        <link rel="stylesheet" href="../../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="../../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../../theme/ferris.css">
+        <link rel="stylesheet" href="../../theme/semantic-notes.css">
+        <link rel="stylesheet" href="../../theme/listing.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../../toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Java Data Structures and Algorithms for Beginners</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <style>
+body {
+  text-align: justify;
+}
+</style>
+<h1 id="dijkstras-algorithm"><a class="header" href="#dijkstras-algorithm">Dijkstra’s Algorithm</a></h1>
+<h2 id="problem-statement"><a class="header" href="#problem-statement">Problem Statement</a></h2>
+<p>Write a Java program that implements Dijkstra’s algorithm for a weighted graph using a priority queue. Represent the graph as an adjacency list, where each edge has a non-negative weight, and compute the shortest path distances from a source node to all other nodes. The program should handle directed graphs and print the shortest distances for each reachable node. Test the implementation with various graph structures, including connected, sparse, and dense graphs, as well as edge cases like single nodes or unreachable nodes. You can visualize this as finding the shortest driving routes from a starting city to all other cities, using a priority queue to always explore the closest unvisited city next.</p>
+<p><strong>Input</strong>:</p>
+<ul>
+<li>Number of nodes <code>n</code> (1 ≤ n ≤ 10^5).</li>
+<li>List of edges as triples [u, v, w] (node u to node v with weight w, w ≥ 0).</li>
+<li>Source node for shortest paths (0 ≤ source &lt; n).
+<strong>Output</strong>: A string of node indices and their shortest distances from the source (e.g., "0:0 1:3 2:5"), or "INF" for unreachable nodes.
+<strong>Constraints</strong>:</li>
+<li>Nodes are integers from 0 to n-1.</li>
+<li>Edge weights are non-negative integers (0 ≤ w ≤ 10^9).</li>
+<li>The graph may be disconnected; unreachable nodes have distance "INF".</li>
+<li>Assume the input graph is valid (no negative weights).
+<strong>Example</strong>:</li>
+<li>Input: n=4, edges=[[0,1,1], [0,2,4], [1,2,2], [1,3,6]], source=0</li>
+<li>Output: "0:0 1:1 2:3 3:7"</li>
+<li>Explanation: Shortest paths from node 0: 0→1 (1), 0→1→2 (1+2=3), 0→1→3 (1+6=7).</li>
+<li>Input: n=3, edges=[[0,1,2]], source=2</li>
+<li>Output: "0:INF 1:INF 2:0"</li>
+<li>Explanation: Node 2 cannot reach 0 or 1; only 2 is reachable (distance 0).</li>
+</ul>
+<h2 id="pseudocode"><a class="header" href="#pseudocode">Pseudocode</a></h2>
+<pre><code>CLASS NodeDistance
+    SET node to integer
+    SET distance to long
+ENDCLASS
+
+CLASS MinPriorityQueue
+    SET array to new NodeDistance array of size 1000
+    SET size to 0
+    
+    FUNCTION enqueue(node, distance)
+        IF size equals array length THEN
+            RETURN false
+        ENDIF
+        SET array[size] to new NodeDistance(node, distance)
+        CALL siftUp(size)
+        INCREMENT size
+        RETURN true
+    ENDFUNCTION
+    
+    FUNCTION siftUp(index)
+        WHILE index &gt; 0
+            SET parent to (index - 1) / 2
+            IF array[index].distance &gt;= array[parent].distance THEN
+                BREAK
+            ENDIF
+            SWAP array[index] and array[parent]
+            SET index to parent
+        ENDWHILE
+    ENDFUNCTION
+    
+    FUNCTION dequeue()
+        IF size equals 0 THEN
+            RETURN null
+        ENDIF
+        SET result to array[0]
+        SET array[0] to array[size - 1]
+        DECREMENT size
+        IF size &gt; 0 THEN
+            CALL siftDown(0)
+        ENDIF
+        RETURN result
+    ENDFUNCTION
+    
+    FUNCTION siftDown(index)
+        SET minIndex to index
+        WHILE true
+            SET left to 2 * index + 1
+            SET right to 2 * index + 2
+            IF left &lt; size AND array[left].distance &lt; array[minIndex].distance THEN
+                SET minIndex to left
+            ENDIF
+            IF right &lt; size AND array[right].distance &lt; array[minIndex].distance THEN
+                SET minIndex to right
+            ENDIF
+            IF minIndex equals index THEN
+                BREAK
+            ENDIF
+            SWAP array[index] and array[minIndex]
+            SET index to minIndex
+        ENDWHILE
+    ENDFUNCTION
+ENDCLASS
+
+FUNCTION dijkstra(n, edges, source)
+    CREATE adjList as new list of lists of (node, weight) pairs for n nodes
+    FOR each edge [u, v, w] in edges
+        ADD (v, w) to adjList[u]
+    ENDFOR
+    CREATE distances as array of size n, initialized to INF
+    SET distances[source] to 0
+    CREATE queue as new MinPriorityQueue
+    ENQUEUE (source, 0) to queue
+    CREATE visited as boolean array of size n, initialized to false
+    WHILE queue is not empty
+        SET nodeDist to queue.dequeue()
+        SET node to nodeDist.node
+        SET dist to nodeDist.distance
+        IF visited[node] THEN
+            CONTINUE
+        ENDIF
+        SET visited[node] to true
+        FOR each (neighbor, weight) in adjList[node]
+            IF dist + weight &lt; distances[neighbor] THEN
+                SET distances[neighbor] to dist + weight
+                ENQUEUE (neighbor, dist + weight) to queue
+            ENDIF
+        ENDFOR
+    ENDWHILE
+    CREATE result as new StringBuilder
+    FOR i from 0 to n-1
+        IF distances[i] equals INF THEN
+            APPEND i + ":INF" to result
+        ELSE
+            APPEND i + ":" + distances[i] to result
+        ENDIF
+        IF i &lt; n-1 THEN
+            APPEND " " to result
+        ENDIF
+    ENDFOR
+    RETURN result as string
+ENDFUNCTION
+
+FUNCTION main()
+    SET testCases to array of graphs (n, edges, source)
+    FOR each testCase in testCases
+        PRINT test case details
+        CALL dijkstra(testCase.n, testCase.edges, testCase.source)
+        PRINT shortest distances
+    ENDFOR
+ENDFUNCTION
+</code></pre>
+<h2 id="algorithm-steps"><a class="header" href="#algorithm-steps">Algorithm Steps</a></h2>
+<ol>
+<li>Define a <code>NodeDistance</code> class to store a node index and its tentative distance.</li>
+<li>Define a <code>MinPriorityQueue</code> class using a min-heap with:
+a. An array to store <code>NodeDistance</code> objects, prioritized by distance.
+b. <code>enqueue</code>: Add node-distance pair, sift up to maintain min-heap.
+c. <code>siftUp</code>: Move smaller distance up.
+d. <code>dequeue</code>: Remove root (smallest distance), sift down.
+e. <code>siftDown</code>: Move larger distance down.</li>
+<li>In <code>dijkstra</code>:
+a. Build adjacency list from edges (directed: add u→v,w).
+b. Initialize distances to INF, except source (0).
+c. Enqueue source with distance 0.
+d. While queue is not empty:
+<ul>
+<li>Dequeue node with smallest distance.</li>
+<li>Skip if visited.</li>
+<li>Mark node visited.</li>
+<li>Update neighbors’ distances if shorter path found, enqueue them.
+e. Format distances as string (INF for unreachable).</li>
+</ul>
+</li>
+<li>In <code>main</code>, test with different graph structures and edge cases.</li>
+</ol>
+<h2 id="java-implementation"><a class="header" href="#java-implementation">Java Implementation</a></h2>
+<pre><code class="language-java">import java.util.*;
+
+public class DijkstrasAlgorithm {
+    // Class to store node and distance pair
+    static class NodeDistance {
+        int node;
+        long distance;
+
+        NodeDistance(int node, long distance) {
+            this.node = node;
+            this.distance = distance;
+        }
+    }
+
+    // Custom min-heap priority queue for node-distance pairs
+    static class MinPriorityQueue {
+        private NodeDistance[] array;
+        private int size;
+        private static final int DEFAULT_SIZE = 1000;
+
+        public MinPriorityQueue() {
+            array = new NodeDistance[DEFAULT_SIZE];
+            size = 0;
+        }
+
+        public boolean enqueue(int node, long distance) {
+            if (size == array.length) {
+                return false; // Queue full
+            }
+            array[size] = new NodeDistance(node, distance);
+            siftUp(size);
+            size++;
+            return true;
+        }
+
+        private void siftUp(int index) {
+            while (index &gt; 0) {
+                int parent = (index - 1) / 2;
+                if (array[index].distance &gt;= array[parent].distance) {
+                    break;
+                }
+                // Swap
+                NodeDistance temp = array[index];
+                array[index] = array[parent];
+                array[parent] = temp;
+                index = parent;
+            }
+        }
+
+        public NodeDistance dequeue() {
+            if (size == 0) {
+                return null; // Queue empty
+            }
+            NodeDistance result = array[0];
+            array[0] = array[size - 1];
+            size--;
+            if (size &gt; 0) {
+                siftDown(0);
+            }
+            return result;
+        }
+
+        private void siftDown(int index) {
+            int minIndex = index;
+            while (true) {
+                int left = 2 * index + 1;
+                int right = 2 * index + 2;
+                if (left &lt; size &amp;&amp; array[left].distance &lt; array[minIndex].distance) {
+                    minIndex = left;
+                }
+                if (right &lt; size &amp;&amp; array[right].distance &lt; array[minIndex].distance) {
+                    minIndex = right;
+                }
+                if (minIndex == index) {
+                    break;
+                }
+                // Swap
+                NodeDistance temp = array[index];
+                array[index] = array[minIndex];
+                array[minIndex] = temp;
+                index = minIndex;
+            }
+        }
+    }
+
+    // Dijkstra’s algorithm to find shortest paths
+    public String dijkstra(int n, int[][] edges, int source) {
+        // Build adjacency list
+        List&lt;List&lt;int[]&gt;&gt; adjList = new ArrayList&lt;&gt;();
+        for (int i = 0; i &lt; n; i++) {
+            adjList.add(new ArrayList&lt;&gt;());
+        }
+        for (int[] edge : edges) {
+            adjList.get(edge[0]).add(new int[]{edge[1], edge[2]}); // Directed: u -&gt; v, weight
+        }
+
+        // Initialize distances and priority queue
+        long[] distances = new long[n];
+        Arrays.fill(distances, Long.MAX_VALUE);
+        distances[source] = 0;
+        MinPriorityQueue queue = new MinPriorityQueue();
+        queue.enqueue(source, 0);
+        boolean[] visited = new boolean[n];
+
+        // Process nodes
+        while (true) {
+            NodeDistance nodeDist = queue.dequeue();
+            if (nodeDist == null) break;
+            int node = nodeDist.node;
+            long dist = nodeDist.distance;
+
+            if (visited[node]) continue;
+            visited[node] = true;
+
+            for (int[] neighbor : adjList.get(node)) {
+                int v = neighbor[0];
+                long w = neighbor[1];
+                if (dist + w &lt; distances[v]) {
+                    distances[v] = dist + w;
+                    queue.enqueue(v, dist + w);
+                }
+            }
+        }
+
+        // Format output
+        StringBuilder result = new StringBuilder();
+        for (int i = 0; i &lt; n; i++) {
+            if (distances[i] == Long.MAX_VALUE) {
+                result.append(i).append(":INF");
+            } else {
+                result.append(i).append(":").append(distances[i]);
+            }
+            if (i &lt; n - 1) result.append(" ");
+        }
+        return result.toString();
+    }
+
+    // Helper class for test cases
+    static class GraphTestCase {
+        int n;
+        int[][] edges;
+        int source;
+
+        GraphTestCase(int n, int[][] edges, int source) {
+            this.n = n;
+            this.edges = edges;
+            this.source = source;
+        }
+    }
+
+    // Main method to test Dijkstra’s algorithm
+    public static void main(String[] args) {
+        DijkstrasAlgorithm dijkstra = new DijkstrasAlgorithm();
+
+        // Test cases
+        List&lt;GraphTestCase&gt; testCases = new ArrayList&lt;&gt;();
+        
+        // Test case 1: Connected graph
+        testCases.add(new GraphTestCase(
+            4,
+            new int[][]{{0,1,1}, {0,2,4}, {1,2,2}, {1,3,6}},
+            0
+        ));
+        
+        // Test case 2: Unreachable nodes
+        testCases.add(new GraphTestCase(
+            3,
+            new int[][]{{0,1,2}},
+            2
+        ));
+        
+        // Test case 3: Single node
+        testCases.add(new GraphTestCase(
+            1,
+            new int[][]{},
+            0
+        ));
+        
+        // Test case 4: Dense graph
+        testCases.add(new GraphTestCase(
+            4,
+            new int[][]{{0,1,1}, {0,2,5}, {0,3,10}, {1,2,3}, {1,3,3}, {2,3,2}},
+            0
+        ));
+
+        // Run test cases
+        for (int i = 0; i &lt; testCases.size(); i++) {
+            GraphTestCase test = testCases.get(i);
+            System.out.println("Test case " + (i + 1) + ": n=" + test.n + ", source=" + test.source);
+            System.out.println("Edges: " + Arrays.deepToString(test.edges));
+            String result = dijkstra.dijkstra(test.n, test.edges, test.source);
+            System.out.println("Shortest distances: " + result + "\n");
+        }
+    }
+}
+</code></pre>
+<h2 id="output"><a class="header" href="#output">Output</a></h2>
+<p>Running the <code>main</code> method produces:</p>
+<pre><code>Test case 1: n=4, source=0
+Edges: [[0, 1, 1], [0, 2, 4], [1, 2, 2], [1, 3, 6]]
+Shortest distances: 0:0 1:1 2:3 3:7
+
+Test case 2: n=3, source=2
+Edges: [[0, 1, 2]]
+Shortest distances: 0:INF 1:INF 2:0
+
+Test case 3: n=1, source=0
+Edges: []
+Shortest distances: 0:0
+
+Test case 4: n=4, source=0
+Edges: [[0, 1, 1], [0, 2, 5], [0, 3, 10], [1, 2, 3], [1, 3, 3], [2, 3, 2]]
+Shortest distances: 0:0 1:1 2:4 3:4
+</code></pre>
+<p>Explanation:</p>
+<ul>
+<li>Test case 1: From source 0, shortest paths: 0→1 (1), 0→1→2 (1+2=3), 0→1→3 (1+6=7).</li>
+<li>Test case 2: From source 2, no outgoing edges, so only 2 has distance 0; others are INF.</li>
+<li>Test case 3: Single node 0 has distance 0.</li>
+<li>Test case 4: From source 0, shortest paths: 0→1 (1), 0→1→2 (1+3=4), 0→1→3 (1+3=4).</li>
+</ul>
+<h2 id="how-it-works"><a class="header" href="#how-it-works">How It Works</a></h2>
+<ul>
+<li><strong>NodeDistance</strong>: Stores a node and its tentative distance.</li>
+<li><strong>MinPriorityQueue</strong>:
+<ul>
+<li>Uses a min-heap to prioritize nodes with smaller distances.</li>
+<li><code>enqueue</code>: Adds node-distance pair, sifts up.</li>
+<li><code>dequeue</code>: Removes smallest-distance node, sifts down.</li>
+</ul>
+</li>
+<li><strong>dijkstra</strong>:
+<ul>
+<li>Builds adjacency list from edges (directed).</li>
+<li>Initializes distances to INF, source to 0.</li>
+<li>Enqueues source with distance 0.</li>
+<li>Processes nodes in order of increasing distance, updating neighbors’ distances if shorter.</li>
+<li>Uses visited array to avoid reprocessing nodes.</li>
+<li>Formats distances (INF for unreachable).</li>
+</ul>
+</li>
+<li><strong>Example Trace (Test case 1)</strong>:
+<ul>
+<li>n=4, edges=[[0,1,1], [0,2,4], [1,2,2], [1,3,6]], source=0.</li>
+<li>Adjacency list: [0: [(1,1),(2,4)], 1: [(2,2),(3,6)], 2: [], 3: []].</li>
+<li>Initialize: distances=[0,INF,INF,INF], enqueue (0,0).</li>
+<li>Dequeue (0,0): Update 1:1, 2:4, enqueue (1,1),(2,4).</li>
+<li>Dequeue (1,1): Update 2:3 (1+2), 3:7 (1+6), enqueue (2,3),(3,7).</li>
+<li>Dequeue (2,3): No updates.</li>
+<li>Dequeue (3,7): No updates.</li>
+<li>Result: "0:0 1:1 2:3 3:7".</li>
+</ul>
+</li>
+<li><strong>Main Method</strong>: Tests connected graph, unreachable nodes, single node, and dense graph.</li>
+</ul>
+<h2 id="complexity-analysis-table"><a class="header" href="#complexity-analysis-table">Complexity Analysis Table</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Operation</th><th>Time Complexity</th><th>Space Complexity</th></tr></thead><tbody>
+<tr><td>Enqueue/Dequeue</td><td>O(log V)</td><td>O(1)</td></tr>
+<tr><td>Dijkstra</td><td>O((V + E) log V)</td><td>O(V + E)</td></tr>
+</tbody></table>
+</div>
+<p><em>Note</em>:</p>
+<ul>
+<li>V is the number of vertices, E is the number of edges.</li>
+<li>Time complexity: O(log V) for enqueue/dequeue; O((V + E) log V) for processing each node and edge with heap operations.</li>
+<li>Space complexity: O(V) for queue, distances, and visited array; O(E) for adjacency list.</li>
+<li>Worst case: O((V + E) log V) time, O(V + E) space for dense graphs.</li>
+</ul>
+<blockquote>
+<p><strong>✅ Tip</strong>: Use a min-heap priority queue in Dijkstra’s algorithm to efficiently select the node with the smallest tentative distance. Test with sparse and dense graphs to verify correctness.</p>
+</blockquote>
+<blockquote>
+<p><strong>⚠ Warning</strong>: Ensure edge weights are non-negative, as Dijkstra’s algorithm does not handle negative weights. Use a visited array to avoid reprocessing nodes in cyclic graphs.</p>
+</blockquote>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../problemStatements/ch03_05/TicketCounterSimulation.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../../problemStatements/ch03_05_01/KthLargestElement.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../problemStatements/ch03_05/TicketCounterSimulation.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../../problemStatements/ch03_05_01/KthLargestElement.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../../elasticlunr.min.js"></script>
+        <script src="../../mark.min.js"></script>
+        <script src="../../searcher.js"></script>
+
+        <script src="../../clipboard.min.js"></script>
+        <script src="../../highlight.js"></script>
+        <script src="../../book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="../../theme/ferris.js"></script>
+
+
+    </div>
+    </body>
+</html>

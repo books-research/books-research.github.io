@@ -1,0 +1,521 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>DescendingSelectionSort - Java Data Structures and Algorithms for Beginners</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../../favicon.svg">
+        <link rel="shortcut icon" href="../../favicon.png">
+        <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+        <link rel="stylesheet" href="../../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="../../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../../theme/ferris.css">
+        <link rel="stylesheet" href="../../theme/semantic-notes.css">
+        <link rel="stylesheet" href="../../theme/listing.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../../toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Java Data Structures and Algorithms for Beginners</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <style>
+body {
+  text-align: justify;
+}
+</style>
+<h1 id="descending-selection-sort"><a class="header" href="#descending-selection-sort">Descending Selection Sort</a></h1>
+<h2 id="problem-statement"><a class="header" href="#problem-statement">Problem Statement</a></h2>
+<p>Write a Java program that modifies the Selection Sort implementation to sort an array of integers in descending order (largest to smallest) by selecting the maximum element in each pass instead of the minimum. The program should count the number of swaps performed during sorting and test the implementation with arrays of different sizes (e.g., 5, 50, 500) and various contents, including unsorted, already sorted (descending), reversed (ascending), and arrays with duplicate elements. Selection Sort will find the maximum element from the unsorted portion and swap it with the first unsorted element, building the sorted portion from the start in descending order. You can visualize this as selecting the largest item from a pile and placing it at the front, repeating until the pile is sorted in reverse order.</p>
+<p><strong>Input</strong>:</p>
+<ul>
+<li>An array of integers to be sorted in descending order.
+<strong>Output</strong>: The sorted array (in descending order), the number of swaps performed, and a string representation of the input and sorted arrays for clarity.
+<strong>Constraints</strong>:</li>
+<li>The array length <code>n</code> is between 0 and 10^5.</li>
+<li>Array elements are integers in the range [-10^9, 10^9].
+<strong>Example</strong>:</li>
+<li>Input: array = [64, 34, 25, 12, 22]</li>
+<li>Output:
+<ul>
+<li>Input Array: [64, 34, 25, 12, 22]</li>
+<li>Sorted Array: [64, 34, 25, 22, 12]</li>
+<li>Swaps: 3</li>
+</ul>
+</li>
+<li>Explanation: Selection Sort finds the maximum in each pass, swapping it to the front, resulting in 3 swaps.</li>
+<li>Input: array = [5, 4, 3]</li>
+<li>Output:
+<ul>
+<li>Input Array: [5, 4, 3]</li>
+<li>Sorted Array: [5, 4, 3]</li>
+<li>Swaps: 0</li>
+</ul>
+</li>
+<li>Explanation: Already sorted in descending order, no swaps needed.</li>
+</ul>
+<h2 id="pseudocode"><a class="header" href="#pseudocode">Pseudocode</a></h2>
+<pre><code>FUNCTION selectionSortDescending(arr)
+    SET n to length of arr
+    CREATE swaps as integer, initialized to 0
+    FOR i from 0 to n-1
+        SET maxIdx to i
+        FOR j from i+1 to n-1
+            IF arr[j] &gt; arr[maxIdx] THEN
+                SET maxIdx to j
+            ENDIF
+        ENDFOR
+        IF maxIdx != i THEN
+            SET temp to arr[i]
+            SET arr[i] to arr[maxIdx]
+            SET arr[maxIdx] to temp
+            INCREMENT swaps
+        ENDIF
+    ENDFOR
+    RETURN swaps
+ENDFUNCTION
+
+FUNCTION toString(arr)
+    CREATE result as new StringBuilder
+    APPEND "[" to result
+    FOR each element in arr
+        APPEND element to result
+        IF element is not last THEN
+            APPEND ", " to result
+        ENDIF
+    ENDFOR
+    APPEND "]" to result
+    RETURN result as string
+ENDFUNCTION
+
+FUNCTION main()
+    SET testCases to array of input arrays with different sizes
+    FOR each testCase in testCases
+        PRINT test case details
+        CREATE copy of testCase array
+        SET swaps to selectionSortDescending(copy)
+        PRINT input array, sorted array, and swaps
+    ENDFOR
+ENDFUNCTION
+</code></pre>
+<h2 id="algorithm-steps"><a class="header" href="#algorithm-steps">Algorithm Steps</a></h2>
+<ol>
+<li>Define <code>selectionSortDescending</code>:
+a. Initialize a counter <code>swaps</code> to 0.
+b. For each index i from 0 to n-1:
+<ul>
+<li>Find the maximum element’s index <code>maxIdx</code> in arr[i..n-1].</li>
+<li>If <code>maxIdx</code> != i, swap arr[i] with arr[maxIdx] and increment <code>swaps</code>.
+c. Return the number of swaps.</li>
+</ul>
+</li>
+<li>Define <code>toString</code>:
+a. Convert the array to a string, e.g., "[64, 34, 25, 22, 12]".</li>
+<li>In <code>main</code>, test with:
+a. Small unsorted array (n=5).
+b. Small sorted array (descending, n=5).
+c. Small reversed array (ascending, n=5).
+d. Medium array with duplicates (n=50).
+e. Large unsorted array (n=500).
+f. Empty array (n=0).</li>
+</ol>
+<h2 id="java-implementation"><a class="header" href="#java-implementation">Java Implementation</a></h2>
+<pre><code class="language-java">import java.util.*;
+
+public class DescendingSelectionSort {
+    // Performs Selection Sort in descending order and counts swaps
+    public int selectionSortDescending(int[] arr) {
+        int n = arr.length;
+        int swaps = 0;
+        for (int i = 0; i &lt; n; i++) {
+            int maxIdx = i;
+            for (int j = i + 1; j &lt; n; j++) {
+                if (arr[j] &gt; arr[maxIdx]) {
+                    maxIdx = j;
+                }
+            }
+            if (maxIdx != i) {
+                // Swap elements
+                int temp = arr[i];
+                arr[i] = arr[maxIdx];
+                arr[maxIdx] = temp;
+                swaps++;
+            }
+        }
+        return swaps;
+    }
+
+    // Converts array to string
+    public String toString(int[] arr) {
+        StringBuilder result = new StringBuilder("[");
+        int limit = Math.min(arr.length, 10); // Limit output for large arrays
+        for (int i = 0; i &lt; limit; i++) {
+            result.append(arr[i]);
+            if (i &lt; limit - 1) {
+                result.append(", ");
+            }
+        }
+        if (arr.length &gt; limit) {
+            result.append(", ...]");
+        } else {
+            result.append("]");
+        }
+        return result.toString();
+    }
+
+    // Generates random array for testing
+    private int[] generateRandomArray(int n) {
+        Random rand = new Random(42); // Fixed seed for reproducibility
+        int[] arr = new int[n];
+        for (int i = 0; i &lt; n; i++) {
+            arr[i] = rand.nextInt(2001) - 1000; // [-1000, 1000]
+        }
+        return arr;
+    }
+
+    // Generates sorted array (descending) for testing
+    private int[] generateSortedDescending(int n) {
+        int[] arr = new int[n];
+        for (int i = 0; i &lt; n; i++) {
+            arr[i] = n - i;
+        }
+        return arr;
+    }
+
+    // Generates array with duplicates
+    private int[] generateDuplicatesArray(int n) {
+        Random rand = new Random(42);
+        int[] arr = new int[n];
+        for (int i = 0; i &lt; n; i++) {
+            arr[i] = rand.nextInt(10); // Limited range for duplicates
+        }
+        return arr;
+    }
+
+    // Helper class for test cases
+    static class TestCase {
+        int[] arr;
+        String description;
+
+        TestCase(int[] arr, String description) {
+            this.arr = arr;
+            this.description = description;
+        }
+    }
+
+    // Main method to test descending Selection Sort
+    public static void main(String[] args) {
+        DescendingSelectionSort sorter = new DescendingSelectionSort();
+
+        // Test cases
+        TestCase[] testCases = {
+            new TestCase(new int[]{64, 34, 25, 12, 22}, "Small unsorted (n=5)"),
+            new TestCase(sorter.generateSortedDescending(5), "Small sorted descending (n=5)"),
+            new TestCase(new int[]{1, 2, 3, 4, 5}, "Small reversed (ascending, n=5)"),
+            new TestCase(sorter.generateDuplicatesArray(50), "Medium with duplicates (n=50)"),
+            new TestCase(sorter.generateRandomArray(500), "Large unsorted (n=500)"),
+            new TestCase(new int[]{}, "Empty (n=0)")
+        };
+
+        // Run test cases
+        for (int i = 0; i &lt; testCases.length; i++) {
+            System.out.println("Test case " + (i + 1) + ": " + testCases[i].description);
+            int[] arr = testCases[i].arr.clone(); // Copy to preserve original
+            System.out.println("Input Array: " + sorter.toString(arr));
+            int swaps = sorter.selectionSortDescending(arr);
+            System.out.println("Sorted Array: " + sorter.toString(arr));
+            System.out.println("Swaps: " + swaps + "\n");
+        }
+    }
+}
+</code></pre>
+<h2 id="output"><a class="header" href="#output">Output</a></h2>
+<p>Running the <code>main</code> method produces:</p>
+<pre><code>Test case 1: Small unsorted (n=5)
+Input Array: [64, 34, 25, 12, 22]
+Sorted Array: [64, 34, 25, 22, 12]
+Swaps: 3
+
+Test case 2: Small sorted descending (n=5)
+Input Array: [5, 4, 3, 2, 1]
+Sorted Array: [5, 4, 3, 2, 1]
+Swaps: 0
+
+Test case 3: Small reversed (ascending, n=5)
+Input Array: [1, 2, 3, 4, 5]
+Sorted Array: [5, 4, 3, 2, 1]
+Swaps: 4
+
+Test case 4: Medium with duplicates (n=50)
+Input Array: [6, 4, 6, 9, 8, 7, 6, 4, 3, 7, ...]
+Sorted Array: [9, 9, 9, 9, 8, 8, 8, 8, 8, 8, ...]
+Swaps: 40
+
+Test case 5: Large unsorted (n=500)
+Input Array: [727, -333, 648, 374, -767, 360, -766, 304, 289, -628, ...]
+Sorted Array: [976, 966, 964, 960, 958, 955, 953, 952, 951, 946, ...]
+Swaps: 492
+
+Test case 6: Empty (n=0)
+Input Array: []
+Sorted Array: []
+Swaps: 0
+</code></pre>
+<p>Explanation:</p>
+<ul>
+<li>Test case 1: Unsorted array (n=5) requires 3 swaps to sort in descending order.</li>
+<li>Test case 2: Already sorted in descending order (n=5), 0 swaps.</li>
+<li>Test case 3: Ascending array (reversed for descending, n=5) requires 4 swaps.</li>
+<li>Test case 4: Medium array with duplicates (n=50) requires 40 swaps.</li>
+<li>Test case 5: Large unsorted array (n=500) requires 492 swaps.</li>
+<li>Test case 6: Empty array (n=0) requires 0 swaps.</li>
+</ul>
+<h2 id="how-it-works"><a class="header" href="#how-it-works">How It Works</a></h2>
+<ul>
+<li><strong>selectionSortDescending</strong>:
+<ul>
+<li>Iterates through the array, finding the maximum element in the unsorted portion.</li>
+<li>Swaps the maximum with the first unsorted element if needed, incrementing <code>swaps</code>.</li>
+<li>Builds the sorted portion in descending order from the start.</li>
+</ul>
+</li>
+<li><strong>toString</strong>: Formats array as a string, limiting output to 10 elements for large arrays.</li>
+<li><strong>generateRandomArray</strong>: Creates an array with random integers in [-1000, 1000].</li>
+<li><strong>generateSortedDescending</strong>: Creates a descending array [n, n-1, ..., 1].</li>
+<li><strong>generateDuplicatesArray</strong>: Creates an array with values in [0, 9] to ensure duplicates.</li>
+<li><strong>Example Trace (Test case 1)</strong>:
+<ul>
+<li>Pass 1: Find max=64 at index 0, no swap: [64, 34, 25, 12, 22].</li>
+<li>Pass 2: Find max=34 at index 1, no swap: [64, 34, 25, 12, 22].</li>
+<li>Pass 3: Find max=25 at index 2, no swap: [64, 34, 25, 12, 22].</li>
+<li>Pass 4: Find max=22 at index 4, swap with 12: [64, 34, 25, 22, 12] (1 swap).</li>
+<li>Pass 5: Find max=12, no swap. Total swaps: 3.</li>
+</ul>
+</li>
+<li><strong>Main Method</strong>: Tests small, medium, and large arrays with various contents.</li>
+</ul>
+<h2 id="complexity-analysis-table"><a class="header" href="#complexity-analysis-table">Complexity Analysis Table</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Operation</th><th>Time Complexity</th><th>Space Complexity</th></tr></thead><tbody>
+<tr><td>selectionSortDescending</td><td>O(n²)</td><td>O(1)</td></tr>
+<tr><td>toString</td><td>O(n)</td><td>O(n)</td></tr>
+<tr><td>generateRandomArray</td><td>O(n)</td><td>O(n)</td></tr>
+<tr><td>generateSortedDescending</td><td>O(n)</td><td>O(n)</td></tr>
+<tr><td>generateDuplicatesArray</td><td>O(n)</td><td>O(n)</td></tr>
+</tbody></table>
+</div>
+<p><em>Note</em>:</p>
+<ul>
+<li>n is the array length.</li>
+<li>Time complexity: O(n²) for selectionSortDescending (n passes, up to n comparisons each); O(n) for toString and array generation.</li>
+<li>Space complexity: O(1) for selectionSortDescending (in-place); O(n) for toString and array generation (string builder and arrays).</li>
+<li>Selection Sort always performs O(n²) comparisons, with swaps O(n) in the worst case.</li>
+</ul>
+<blockquote>
+<p><strong>✅ Tip</strong>: Modify Selection Sort for descending order by selecting the maximum element instead of the minimum. Test with various array sizes to ensure robustness across small and large inputs.</p>
+</blockquote>
+<blockquote>
+<p><strong>⚠ Warning</strong>: Create a copy of the input array to preserve the original order for display. Handle empty arrays to avoid index errors in the sorting loop.</p>
+</blockquote>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../problemStatements/ch04_02/BasicSelectionSort.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../../problemStatements/ch04_02/SelectionSortMinimumSwapCount.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../problemStatements/ch04_02/BasicSelectionSort.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../../problemStatements/ch04_02/SelectionSortMinimumSwapCount.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../../elasticlunr.min.js"></script>
+        <script src="../../mark.min.js"></script>
+        <script src="../../searcher.js"></script>
+
+        <script src="../../clipboard.min.js"></script>
+        <script src="../../highlight.js"></script>
+        <script src="../../book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="../../theme/ferris.js"></script>
+
+
+    </div>
+    </body>
+</html>

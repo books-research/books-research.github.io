@@ -1,0 +1,536 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>ShortestPathUnweighted - Java Data Structures and Algorithms for Beginners</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../../favicon.svg">
+        <link rel="shortcut icon" href="../../favicon.png">
+        <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+        <link rel="stylesheet" href="../../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="../../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../../theme/ferris.css">
+        <link rel="stylesheet" href="../../theme/semantic-notes.css">
+        <link rel="stylesheet" href="../../theme/listing.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../../toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Java Data Structures and Algorithms for Beginners</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <style>
+body {
+  text-align: justify;
+}
+</style>
+<h1 id="shortest-path-unweighted"><a class="header" href="#shortest-path-unweighted">Shortest Path (Unweighted)</a></h1>
+<h2 id="problem-statement"><a class="header" href="#problem-statement">Problem Statement</a></h2>
+<p>Write a Java program that extends an unweighted undirected graph implementation to find the shortest path between two vertices using Breadth-First Search (BFS). The shortest path is the sequence of vertices with the minimum number of edges from the source to the target vertex. The program should use an adjacency list representation, return the path as a list of vertices, and test with various graphs and vertex pairs, including cases where a path exists, no path exists, and edge cases like empty or single-vertex graphs. You can visualize this as finding the fewest roads to travel between two cities in a network, where each road has the same length.</p>
+<p><strong>Input</strong>:</p>
+<ul>
+<li>An undirected unweighted graph represented by an adjacency list, with vertices as integers (0 to n-1).</li>
+<li>The number of vertices <code>n</code>, a list of edges (pairs of vertices), and two vertices <code>source</code> and <code>target</code>.
+<strong>Output</strong>: A list of integers representing the shortest path from source to target, or an empty list if no path exists, and a string representation of the graph’s adjacency list for clarity.
+<strong>Constraints</strong>:</li>
+<li>The number of vertices <code>n</code> is between 0 and 10^5.</li>
+<li>Edges are pairs of integers [u, v] where 0 ≤ u, v &lt; n.</li>
+<li>Source and target are integers in [0, n-1].</li>
+<li>The graph is undirected (edge [u, v] implies [v, u]).
+<strong>Example</strong>:</li>
+<li>Input: n = 5, edges = [[0, 1], [1, 2], [2, 3], [3, 4], [1, 4]], source = 0, target = 4</li>
+<li>Output: Path = [0, 1, 4], "Adjacency List: {0=[1], 1=[0, 2, 4], 2=[1, 3], 3=[2, 4], 4=[3, 1]}"</li>
+<li>Explanation: Shortest path from 0 to 4 is 0→1→4 (2 edges).</li>
+<li>Input: n = 5, edges = [[0, 1], [2, 3]], source = 0, target = 3</li>
+<li>Output: Path = [], "Adjacency List: {0=[1], 1=[0], 2=[3], 3=[2], 4=[]}"</li>
+<li>Explanation: No path exists from 0 to 3.</li>
+<li>Input: n = 0, edges = [], source = 0, target = 0</li>
+<li>Output: Path = [], "Adjacency List: {}"</li>
+<li>Explanation: Empty graph, no path exists.</li>
+</ul>
+<h2 id="pseudocode"><a class="header" href="#pseudocode">Pseudocode</a></h2>
+<pre><code>FUNCTION createGraph(n, edges)
+    CREATE adjList as new HashMap
+    FOR i from 0 to n-1
+        SET adjList[i] to empty list
+    ENDFOR
+    FOR each edge [u, v] in edges
+        ADD v to adjList[u]
+        ADD u to adjList[v]
+    ENDFOR
+    RETURN adjList
+ENDFUNCTION
+
+FUNCTION shortestPath(adjList, n, source, target)
+    IF n is 0 OR source &gt;= n OR target &gt;= n THEN
+        RETURN empty list
+    ENDIF
+    CREATE visited as boolean array of size n, initialized to false
+    CREATE parent as integer array of size n, initialized to -1
+    CREATE queue as new Queue
+    ADD source to queue
+    SET visited[source] to true
+    WHILE queue is not empty
+        SET current to queue.dequeue
+        IF current equals target THEN
+            CREATE path as new list
+            SET node to target
+            WHILE node is not -1
+                PREPEND node to path
+                SET node to parent[node]
+            ENDWHILE
+            RETURN path
+        ENDIF
+        FOR each neighbor in adjList[current]
+            IF NOT visited[neighbor] THEN
+                SET visited[neighbor] to true
+                SET parent[neighbor] to current
+                ADD neighbor to queue
+            ENDIF
+        ENDFOR
+    ENDWHILE
+    RETURN empty list
+ENDFUNCTION
+
+FUNCTION toString(adjList)
+    CREATE result as new StringBuilder
+    APPEND "Adjacency List: {" to result
+    FOR each vertex in adjList
+        APPEND vertex and "=" and adjList[vertex] to result
+        IF vertex is not last THEN
+            APPEND ", " to result
+        ENDIF
+    ENDFOR
+    APPEND "}" to result
+    RETURN result as string
+ENDFUNCTION
+
+FUNCTION main()
+    SET testCases to array of (n, edges, source, target) pairs
+    FOR each testCase in testCases
+        PRINT test case details
+        SET adjList to createGraph(testCase.n, testCase.edges)
+        CALL shortestPath(adjList, testCase.n, testCase.source, testCase.target)
+        PRINT path and graph using toString
+    ENDFOR
+ENDFUNCTION
+</code></pre>
+<h2 id="algorithm-steps"><a class="header" href="#algorithm-steps">Algorithm Steps</a></h2>
+<ol>
+<li>Reuse <code>createGraph</code>:
+a. Create a HashMap <code>adjList</code> mapping vertices to lists of neighbors.
+b. Initialize empty lists for vertices 0 to n-1.
+c. Add edges bidirectionally (u→v, v→u).</li>
+<li>Define <code>shortestPath</code>:
+a. If n = 0 or source/target ≥ n, return empty list.
+b. Use BFS:
+<ul>
+<li>Initialize a queue with source, mark source as visited, set parent array.</li>
+<li>Dequeue vertex, if it’s target, reconstruct path using parent array.</li>
+<li>For each unvisited neighbor, mark visited, set parent, enqueue.
+c. If target not reached, return empty list.</li>
+</ul>
+</li>
+<li>Define <code>toString</code>:
+a. Convert adjacency list to a string, e.g., "{0=[1], 1=[0, 2], ...}".</li>
+<li>In <code>main</code>, test with:
+a. A graph with a valid path.
+b. A graph with no path between vertices.
+c. An empty graph.
+d. A single-vertex graph.</li>
+</ol>
+<h2 id="java-implementation"><a class="header" href="#java-implementation">Java Implementation</a></h2>
+<pre><code class="language-java">import java.util.*;
+
+public class ShortestPathUnweighted {
+    // Creates adjacency list representation of the graph
+    private Map&lt;Integer, List&lt;Integer&gt;&gt; createGraph(int n, int[][] edges) {
+        Map&lt;Integer, List&lt;Integer&gt;&gt; adjList = new HashMap&lt;&gt;();
+        for (int i = 0; i &lt; n; i++) {
+            adjList.put(i, new ArrayList&lt;&gt;());
+        }
+        for (int[] edge : edges) {
+            int u = edge[0], v = edge[1];
+            adjList.get(u).add(v);
+            adjList.get(v).add(u); // Undirected graph
+        }
+        return adjList;
+    }
+
+    // Finds shortest path from source to target using BFS
+    public List&lt;Integer&gt; shortestPath(Map&lt;Integer, List&lt;Integer&gt;&gt; adjList, int n, int source, int target) {
+        List&lt;Integer&gt; path = new ArrayList&lt;&gt;();
+        if (n == 0 || source &gt;= n || target &gt;= n) {
+            return path;
+        }
+        boolean[] visited = new boolean[n];
+        int[] parent = new int[n];
+        Arrays.fill(parent, -1);
+        Queue&lt;Integer&gt; queue = new LinkedList&lt;&gt;();
+        queue.offer(source);
+        visited[source] = true;
+
+        while (!queue.isEmpty()) {
+            int current = queue.poll();
+            if (current == target) {
+                // Reconstruct path
+                int node = target;
+                while (node != -1) {
+                    path.add(0, node);
+                    node = parent[node];
+                }
+                return path;
+            }
+            for (int neighbor : adjList.get(current)) {
+                if (!visited[neighbor]) {
+                    visited[neighbor] = true;
+                    parent[neighbor] = current;
+                    queue.offer(neighbor);
+                }
+            }
+        }
+        return path; // Empty if no path exists
+    }
+
+    // Converts graph to string (adjacency list)
+    public String toString(Map&lt;Integer, List&lt;Integer&gt;&gt; adjList) {
+        StringBuilder result = new StringBuilder("Adjacency List: {");
+        List&lt;Integer&gt; vertices = new ArrayList&lt;&gt;(adjList.keySet());
+        Collections.sort(vertices); // For consistent output
+        for (int i = 0; i &lt; vertices.size(); i++) {
+            int vertex = vertices.get(i);
+            result.append(vertex).append("=").append(adjList.get(vertex));
+            if (i &lt; vertices.size() - 1) {
+                result.append(", ");
+            }
+        }
+        result.append("}");
+        return result.toString();
+    }
+
+    // Helper class for test cases
+    static class TestCase {
+        int n;
+        int[][] edges;
+        int source, target;
+
+        TestCase(int n, int[][] edges, int source, int target) {
+            this.n = n;
+            this.edges = edges;
+            this.source = source;
+            this.target = target;
+        }
+    }
+
+    // Main method to test shortest path
+    public static void main(String[] args) {
+        ShortestPathUnweighted pathFinder = new ShortestPathUnweighted();
+
+        // Test cases
+        TestCase[] testCases = {
+            // Valid path: 0-1-4
+            new TestCase(5, new int[][]{{0, 1}, {1, 2}, {2, 3}, {3, 4}, {1, 4}}, 0, 4),
+            // No path: 0 and 3 disconnected
+            new TestCase(5, new int[][]{{0, 1}, {2, 3}}, 0, 3),
+            // Empty graph
+            new TestCase(0, new int[][]{}, 0, 0),
+            // Single vertex
+            new TestCase(1, new int[][]{}, 0, 0)
+        };
+
+        // Run test cases
+        for (int i = 0; i &lt; testCases.length; i++) {
+            System.out.println("Test case " + (i + 1) + ":");
+            System.out.println("Vertices: " + testCases[i].n);
+            System.out.println("Edges: " + Arrays.deepToString(testCases[i].edges));
+            System.out.println("Source: " + testCases[i].source + ", Target: " + testCases[i].target);
+            Map&lt;Integer, List&lt;Integer&gt;&gt; adjList = pathFinder.createGraph(testCases[i].n, testCases[i].edges);
+            List&lt;Integer&gt; path = pathFinder.shortestPath(adjList, testCases[i].n, testCases[i].source, testCases[i].target);
+            System.out.println("Path: " + path);
+            System.out.println(pathFinder.toString(adjList) + "\n");
+        }
+    }
+}
+</code></pre>
+<h2 id="output"><a class="header" href="#output">Output</a></h2>
+<p>Running the <code>main</code> method produces:</p>
+<pre><code>Test case 1:
+Vertices: 5
+Edges: [[0, 1], [1, 2], [2, 3], [3, 4], [1, 4]]
+Source: 0, Target: 4
+Path: [0, 1, 4]
+Adjacency List: {0=[1], 1=[0, 2, 4], 2=[1, 3], 3=[2, 4], 4=[3, 1]}
+
+Test case 2:
+Vertices: 5
+Edges: [[0, 1], [2, 3]]
+Source: 0, Target: 3
+Path: []
+Adjacency List: {0=[1], 1=[0], 2=[3], 3=[2], 4=[]}
+
+Test case 3:
+Vertices: 0
+Edges: []
+Source: 0, Target: 0
+Path: []
+Adjacency List: {}
+
+Test case 4:
+Vertices: 1
+Edges: []
+Source: 0, Target: 0
+Path: [0]
+Adjacency List: {0=[]}
+</code></pre>
+<p>Explanation:</p>
+<ul>
+<li>Test case 1: Shortest path from 0 to 4 is 0→1→4 (2 edges).</li>
+<li>Test case 2: No path exists from 0 to 3 (disconnected components).</li>
+<li>Test case 3: Empty graph, no path exists.</li>
+<li>Test case 4: Source and target are same (0), path is [0].</li>
+</ul>
+<h2 id="how-it-works"><a class="header" href="#how-it-works">How It Works</a></h2>
+<ul>
+<li><strong>createGraph</strong>: Builds an adjacency list using a HashMap, adding undirected edges (u→v, v→u).</li>
+<li><strong>shortestPath</strong>:
+<ul>
+<li>Returns empty list for invalid inputs (n = 0 or source/target ≥ n).</li>
+<li>Uses BFS: enqueues source, marks visited, tracks parents.</li>
+<li>If target reached, reconstructs path by backtracking through parent array.</li>
+<li>Returns empty list if no path found.</li>
+</ul>
+</li>
+<li><strong>toString</strong>: Formats adjacency list as a string, sorting vertices for consistency.</li>
+<li><strong>Example Trace (Test case 1)</strong>:
+<ul>
+<li>BFS from 0: Enqueue 0, visit 1, enqueue 1.</li>
+<li>Dequeue 1, visit 2, 4, enqueue 2, 4 (parent[2]=1, parent[4]=1).</li>
+<li>Dequeue 2, visit 3, enqueue 3 (parent[3]=2).</li>
+<li>Dequeue 4, target reached, reconstruct: 4→1→0, reverse to [0, 1, 4].</li>
+</ul>
+</li>
+<li><strong>Main Method</strong>: Tests valid path, no path, empty graph, and single vertex.</li>
+</ul>
+<h2 id="complexity-analysis-table"><a class="header" href="#complexity-analysis-table">Complexity Analysis Table</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Operation</th><th>Time Complexity</th><th>Space Complexity</th></tr></thead><tbody>
+<tr><td>createGraph</td><td>O(n + e)</td><td>O(n + e)</td></tr>
+<tr><td>shortestPath</td><td>O(n + e)</td><td>O(n)</td></tr>
+<tr><td>toString</td><td>O(n log n + e)</td><td>O(n + e)</td></tr>
+</tbody></table>
+</div>
+<p><em>Note</em>:</p>
+<ul>
+<li>n is the number of vertices, e is the number of edges.</li>
+<li>Time complexity: O(n + e) for createGraph (initialize lists and add edges); O(n + e) for shortestPath (BFS visits each vertex and edge once); O(n log n + e) for toString (sorting vertices).</li>
+<li>Space complexity: O(n + e) for createGraph and toString (adjacency list); O(n) for shortestPath (visited array, parent array, queue).</li>
+<li>Worst case: O(n + e) time and space for dense graphs.</li>
+</ul>
+<blockquote>
+<p><strong>✅ Tip</strong>: Use BFS for finding the shortest path in unweighted graphs, as it explores vertices level by level. Store parent information to reconstruct the path efficiently.</p>
+</blockquote>
+<blockquote>
+<p><strong>⚠ Warning</strong>: Validate source and target vertices to ensure they are within the graph’s bounds. Handle cases where no path exists by returning an empty list.</p>
+</blockquote>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../problemStatements/ch03_08/GraphConnectivity.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../../problemStatements/ch03_08/SocialNetworkSimulation.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../problemStatements/ch03_08/GraphConnectivity.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../../problemStatements/ch03_08/SocialNetworkSimulation.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../../elasticlunr.min.js"></script>
+        <script src="../../mark.min.js"></script>
+        <script src="../../searcher.js"></script>
+
+        <script src="../../clipboard.min.js"></script>
+        <script src="../../highlight.js"></script>
+        <script src="../../book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="../../theme/ferris.js"></script>
+
+
+    </div>
+    </body>
+</html>

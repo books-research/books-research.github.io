@@ -1,0 +1,432 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Doubly Linked Lists - Java Data Structures and Algorithms for Beginners</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="theme/ferris.css">
+        <link rel="stylesheet" href="theme/semantic-notes.css">
+        <link rel="stylesheet" href="theme/listing.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Java Data Structures and Algorithms for Beginners</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <style>
+body {
+  text-align: justify;
+}
+</style>
+<h2 id="doubly-linked-list-data-structure"><a class="header" href="#doubly-linked-list-data-structure">Doubly Linked List Data Structure</a></h2>
+<h3 id="definition-and-concepts"><a class="header" href="#definition-and-concepts">Definition and Concepts</a></h3>
+<p>A doubly linked list is a linear data structure consisting of a sequence of nodes, where each node contains data, a reference to the next node, and a reference to the previous node. Unlike a singly linked list, which only allows traversal in one direction, a doubly linked list enables bidirectional traversal, making operations like deletion and insertion at both ends more efficient. The first node (head) has a null previous reference, and the last node (tail) has a null next reference. You can visualize a doubly linked list as a chain of boxes, where each box holds a value and arrows point to both the next and previous boxes. This structure is ideal for applications requiring frequent insertions, deletions, or reverse traversal.</p>
+<h3 id="why-use-it"><a class="header" href="#why-use-it">Why Use It?</a></h3>
+<p>A doubly linked list is used when you need a dynamic data structure that supports efficient insertions and deletions at both the head and tail, as well as bidirectional traversal. It provides more flexibility than a singly linked list by allowing navigation in both directions, which is useful for applications like undo/redo functionality or browsing history. Although it uses more memory due to the additional previous pointers, it offers O(1) time complexity for operations at the head and tail, making it suitable for dynamic datasets.</p>
+<h3 id="where-to-use-real-life-examples"><a class="header" href="#where-to-use-real-life-examples">Where to Use? (Real-Life Examples)</a></h3>
+<ul>
+<li><strong>Undo/Redo Functionality</strong>: Text editors use doubly linked lists to track actions, allowing users to move forward (redo) or backward (undo) through the action history.</li>
+<li><strong>Browser Navigation</strong>: Web browsers use doubly linked lists to manage browsing history, enabling users to navigate back and forward between visited pages.</li>
+<li><strong>Music or Video Playlists</strong>: Media players use doubly linked lists to manage playlists, allowing users to move to the next or previous song efficiently.</li>
+<li><strong>Deque Implementation</strong>: Doubly linked lists are used to implement double-ended queues (deques), supporting insertions and deletions at both ends.</li>
+</ul>
+<!-- ### SVG Diagram
+The diagram for a doubly linked list would depict a sequence of rectangular nodes, each containing a value (e.g., 10, 20, 30) with arrows pointing to both the next and previous nodes. The first node would be labeled "Head" with a null previous arrow, and the last node would be labeled "Tail" with a null next arrow. Arrows would illustrate an **insert at tail** operation adding a new node (e.g., 40) and a **delete at head** operation removing the head node. A caption would note: "Each node in a doubly linked list contains a value, a next pointer, and a previous pointer, enabling bidirectional traversal." -->
+<h3 id="explain-operations"><a class="header" href="#explain-operations">Explain Operations</a></h3>
+<ul>
+<li><strong>Insert at Head</strong>: This operation adds a new node at the beginning of the list. It has a time complexity of O(1).</li>
+<li><strong>Insert at Tail</strong>: This operation adds a new node at the end of the list. It has a time complexity of O(1) if a tail pointer is maintained.</li>
+<li><strong>Delete at Head</strong>: This operation removes the first node. It has a time complexity of O(1).</li>
+<li><strong>Delete at Tail</strong>: This operation removes the last node. It has a time complexity of O(1) if a tail pointer is maintained.</li>
+<li><strong>Search</strong>: This operation finds a node with a given value. It has a time complexity of O(n).</li>
+<li><strong>isEmpty</strong>: This operation checks whether the doubly linked list is empty. It has a time complexity of O(1).</li>
+<li><strong>Size</strong>: This operation returns the number of nodes in the doubly linked list. It has a time complexity of O(1) if maintained.</li>
+</ul>
+<h3 id="java-implementation"><a class="header" href="#java-implementation">Java Implementation</a></h3>
+<p>The following Java code implements a doubly linked list with basic operations, maintaining both head and tail pointers for efficiency.</p>
+<pre><code class="language-java">public class DoublyLinkedList {
+    private class Node {
+        int value; // Value stored in the node
+        Node next; // Reference to the next node
+        Node prev; // Reference to the previous node
+
+        Node(int value) {
+            this.value = value;
+            this.next = null;
+            this.prev = null;
+        }
+    }
+
+    private Node head; // Head of the doubly linked list
+    private Node tail; // Tail of the doubly linked list
+    private int size; // Number of nodes in the doubly linked list
+
+    // Constructor to initialize an empty doubly linked list
+    public DoublyLinkedList() {
+        head = null;
+        tail = null;
+        size = 0;
+    }
+
+    // Insert at Head: Adds a new node at the beginning
+    public void insertAtHead(int value) {
+        Node newNode = new Node(value); // Creates a new node
+        if (isEmpty()) { // If list is empty, sets both head and tail
+            head = newNode;
+            tail = newNode;
+        } else {
+            newNode.next = head; // Points new node to current head
+            head.prev = newNode; // Points current head back to new node
+            head = newNode; // Updates head to new node
+        }
+        size++; // Increments size
+    }
+
+    // Insert at Tail: Adds a new node at the end
+    public void insertAtTail(int value) {
+        Node newNode = new Node(value); // Creates a new node
+        if (isEmpty()) { // If list is empty, sets both head and tail
+            head = newNode;
+            tail = newNode;
+        } else {
+            tail.next = newNode; // Points current tail to new node
+            newNode.prev = tail; // Points new node back to current tail
+            tail = newNode; // Updates tail to new node
+        }
+        size++; // Increments size
+    }
+
+    // Delete at Head: Removes the first node
+    public void deleteAtHead() {
+        if (isEmpty()) { // Checks if the list is empty
+            throw new IllegalStateException("The doubly linked list is empty.");
+        }
+        head = head.next; // Moves head to the next node
+        if (head == null) { // If list becomes empty, updates tail
+            tail = null;
+        } else {
+            head.prev = null; // Sets new head's previous to null
+        }
+        size--; // Decrements size
+    }
+
+    // Delete at Tail: Removes the last node
+    public void deleteAtTail() {
+        if (isEmpty()) { // Checks if the list is empty
+            throw new IllegalStateException("The doubly linked list is empty.");
+        }
+        tail = tail.prev; // Moves tail to the previous node
+        if (tail == null) { // If list becomes empty, updates head
+            head = null;
+        } else {
+            tail.next = null; // Sets new tail's next to null
+        }
+        size--; // Decrements size
+    }
+
+    // Search: Checks if a value exists in the doubly linked list
+    public boolean search(int value) {
+        Node current = head;
+        while (current != null) { // Traverses the list
+            if (current.value == value) {
+                return true; // Returns true if value is found
+            }
+            current = current.next;
+        }
+        return false; // Returns false if value is not found
+    }
+
+    // isEmpty: Checks if the doubly linked list is empty
+    public boolean isEmpty() {
+        return size == 0;
+    }
+
+    // Size: Returns the number of nodes in the doubly linked list
+    public int size() {
+        return size;
+    }
+}
+</code></pre>
+<h3 id="how-it-works"><a class="header" href="#how-it-works">How It Works</a></h3>
+<ol>
+<li><strong>Initialization</strong>: The constructor initializes <code>head</code> and <code>tail</code> as null and <code>size</code> as 0, indicating an empty doubly linked list.</li>
+<li><strong>Insert at Head</strong>:
+<ul>
+<li>The method creates a new node with the given value.</li>
+<li>If the list is empty, it sets both <code>head</code> and <code>tail</code> to the new node.</li>
+<li>Otherwise, it links the new node to the current <code>head</code>, updates the <code>head</code>’s previous pointer, sets <code>head</code> to the new node, and increments <code>size</code>.</li>
+</ul>
+</li>
+<li><strong>Insert at Tail</strong>:
+<ul>
+<li>The method creates a new node.</li>
+<li>If the list is empty, it sets both <code>head</code> and <code>tail</code> to the new node.</li>
+<li>Otherwise, it links the current <code>tail</code> to the new node, sets the new node’s previous pointer to the <code>tail</code>, updates <code>tail</code> to the new node, and increments <code>size</code>.</li>
+</ul>
+</li>
+<li><strong>Delete at Head</strong>:
+<ul>
+<li>The method checks if the list is empty. If not, it moves <code>head</code> to the next node, sets the new <code>head</code>’s previous pointer to null (if not null), updates <code>tail</code> if the list becomes empty, and decrements <code>size</code>. If empty, it throws an exception.</li>
+</ul>
+</li>
+<li><strong>Delete at Tail</strong>:
+<ul>
+<li>The method checks if the list is empty. If not, it moves <code>tail</code> to the previous node, sets the new <code>tail</code>’s next pointer to null (if not null), updates <code>head</code> if the list becomes empty, and decrements <code>size</code>. If empty, it throws an exception.</li>
+</ul>
+</li>
+<li><strong>Search Operation</strong>: The method traverses the list from <code>head</code> to <code>tail</code>, returning true if the value is found and false if the end (null) is reached.</li>
+<li><strong>isEmpty Operation</strong>: The method returns true if <code>size</code> equals 0, indicating an empty list, and false otherwise.</li>
+<li><strong>Size Operation</strong>: The method returns <code>size</code>, which tracks the number of nodes.</li>
+</ol>
+<h3 id="complexity-analysis-table"><a class="header" href="#complexity-analysis-table">Complexity Analysis Table</a></h3>
+<div class="table-wrapper"><table><thead><tr><th>Operation</th><th>Time Complexity</th><th>Space Complexity</th></tr></thead><tbody>
+<tr><td>Insert at Head</td><td>O(1)</td><td>O(1)</td></tr>
+<tr><td>Insert at Tail</td><td>O(1)</td><td>O(1)</td></tr>
+<tr><td>Delete at Head</td><td>O(1)</td><td>O(1)</td></tr>
+<tr><td>Delete at Tail</td><td>O(1)</td><td>O(1)</td></tr>
+<tr><td>Search</td><td>O(n)</td><td>O(1)</td></tr>
+<tr><td>isEmpty</td><td>O(1)</td><td>O(1)</td></tr>
+<tr><td>Size</td><td>O(1)</td><td>O(1)</td></tr>
+</tbody></table>
+</div>
+<p><em>Note</em>: n is the number of nodes in the doubly linked list.</p>
+<h3 id="key-differences--notes"><a class="header" href="#key-differences--notes">Key Differences / Notes</a></h3>
+<ul>
+<li><strong>Doubly vs. Singly Linked List</strong>:
+<ul>
+<li>The implementation above is a doubly linked list, which allows O(1) insertions and deletions at both head and tail due to the <code>tail</code> pointer and bidirectional links.</li>
+<li>A singly linked list only has next pointers, making tail operations O(n) unless a tail pointer is maintained, but it uses less memory.</li>
+</ul>
+</li>
+<li><strong>Doubly Linked List vs. Array</strong>:
+<ul>
+<li>Doubly linked lists support dynamic sizing and O(1) operations at both ends but have O(n) access and search times.</li>
+<li>Arrays offer O(1) random access but require contiguous memory and have O(n) insertions/deletions in the middle.</li>
+</ul>
+</li>
+<li><strong>Thread Safety</strong>: The implementation is not thread-safe. For concurrent applications, use Java’s <code>ConcurrentLinkedDeque</code> or synchronize access.</li>
+<li><strong>Java’s Built-in Doubly Linked List</strong>: Java provides <code>LinkedList</code> in <code>java.util</code>, which is a doubly linked list implementing both List and Deque interfaces.</li>
+</ul>
+<blockquote>
+<p><strong>✅ Tip</strong>: Use a doubly linked list when you need efficient insertions and deletions at both ends or bidirectional traversal, such as in navigation systems or deques.</p>
+</blockquote>
+<blockquote>
+<p><strong>⚠ Warning</strong>: Doubly linked lists use more memory than singly linked lists due to the additional previous pointers. Ensure memory constraints are considered for large datasets.</p>
+</blockquote>
+<h3 id="exercises"><a class="header" href="#exercises">Exercises</a></h3>
+<ol>
+<li><strong>Reverse a Doubly Linked List</strong>: Write a Java program that reverses the doubly linked list using the implementation above. Test it with lists of varying sizes.</li>
+<li><strong>Bidirectional Traversal</strong>: Extend the implementation to include methods for printing the list in both forward (head to tail) and backward (tail to head) directions. Test with a sample list.</li>
+<li><strong>Insert After Value</strong>: Add a method to insert a new node after the first occurrence of a given value. Test it with cases where the value exists and does not exist.</li>
+<li><strong>Deque Implementation</strong>: Use the doubly linked list to implement a double-ended queue (deque) with methods for adding and removing elements at both ends. Test with a sequence of operations.</li>
+<li><strong>Browser History Simulator</strong>: Create a program that simulates a browser’s navigation history using the doubly linked list. Allow users to add pages (insert at tail), navigate back (delete at tail), and navigate forward (re-insert).</li>
+</ol>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="ch03_03.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="ch03_03_02.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="ch03_03.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="ch03_03_02.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="theme/ferris.js"></script>
+
+
+    </div>
+    </body>
+</html>

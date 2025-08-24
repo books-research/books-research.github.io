@@ -1,0 +1,384 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Jagged Array - Java Data Structures and Algorithms for Beginners</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="theme/ferris.css">
+        <link rel="stylesheet" href="theme/semantic-notes.css">
+        <link rel="stylesheet" href="theme/listing.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Java Data Structures and Algorithms for Beginners</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <style>
+body {
+  text-align: justify;
+}
+</style>
+<h2 id="jagged-array"><a class="header" href="#jagged-array">Jagged Array</a></h2>
+<h3 id="definition-and-concepts"><a class="header" href="#definition-and-concepts">Definition and Concepts</a></h3>
+<p>A jagged array in Java is an array of arrays where each sub-array can have a different length, unlike a regular (rectangular) two-dimensional array where all rows have the same number of columns. Also known as a ragged array, it is a collection of one-dimensional arrays stored in a single array, where each element is itself an array of varying sizes. You can visualize a jagged array as a table where each row can have a different number of columns, providing flexibility in memory allocation. In Java, jagged arrays are implemented by creating an array of references to other arrays, allowing dynamic sizing for each row. This structure is useful when data sizes vary across rows, optimizing memory usage compared to fixed-size rectangular arrays.</p>
+<h3 id="why-use-it"><a class="header" href="#why-use-it">Why Use It?</a></h3>
+<p>Jagged arrays are used to efficiently store and manipulate data when the number of elements in each row varies, reducing memory waste compared to rectangular arrays. They provide flexibility in handling irregular datasets, such as matrices with uneven dimensions or collections of variable-length lists. Jagged arrays are ideal for applications where memory efficiency is critical, and the data structure naturally aligns with varying row lengths. They also simplify operations like adding or removing elements in specific rows without affecting others.</p>
+<h3 id="where-to-use-real-life-examples"><a class="header" href="#where-to-use-real-life-examples">Where to Use? (Real-Life Examples)</a></h3>
+<ul>
+<li><strong>Sparse Matrix Representation</strong>: Scientific computing applications use jagged arrays to store sparse matrices, where most elements are zero, to save memory by only storing non-zero elements per row.</li>
+<li><strong>Graph Adjacency Lists</strong>: Graph algorithms use jagged arrays to represent adjacency lists, where each vertex has a list of neighbors with varying lengths.</li>
+<li><strong>Text Processing</strong>: Natural language processing applications use jagged arrays to store sentences of different lengths from a document.</li>
+<li><strong>Dynamic Data Storage</strong>: Database applications use jagged arrays to store query results with variable numbers of fields per record.</li>
+</ul>
+<!-- ### SVG Diagram
+The diagram for a jagged array would depict a structure with rows of different lengths. The main array would be shown as a vertical column of boxes, each pointing to a one-dimensional array of varying sizes (e.g., row 0: [1, 2], row 1: [3, 4, 5, 6], row 2: [7]). Arrows would illustrate an **access** operation (e.g., retrieving element `arr[1][2] = 5`) and an **initialization** operation for a row (e.g., allocating `arr[2] = new int[]{7}`). A caption would note: "A jagged array in Java consists of arrays of different lengths, allowing flexible memory allocation for irregular data." -->
+<h3 id="explain-operations"><a class="header" href="#explain-operations">Explain Operations</a></h3>
+<ul>
+<li><strong>Initialization</strong>: This operation creates a jagged array by allocating the main array and then allocating each sub-array with a specific length. It has a time complexity of O(1) for the main array and O(n) for sub-arrays, where n is the total number of elements.</li>
+<li><strong>Access Element</strong>: This operation retrieves an element at a specific row and column index. It has a time complexity of O(1).</li>
+<li><strong>Modify Element</strong>: This operation updates an element at a specific row and column index. It has a time complexity of O(1).</li>
+<li><strong>Add Row</strong>: This operation adds a new row by allocating a new sub-array and assigning it to the main array. It has a time complexity of O(n) for the sub-array allocation, where n is the row length.</li>
+<li><strong>Get Row Length</strong>: This operation returns the length of a specific row. It has a time complexity of O(1).</li>
+</ul>
+<h3 id="java-implementation"><a class="header" href="#java-implementation">Java Implementation</a></h3>
+<p>The following Java code demonstrates common operations on a jagged array, including initialization, access, modification, adding a row, and getting row length.</p>
+<pre><code class="language-java">public class JaggedArrayExamples {
+    // Initialize: Creates a jagged array with specified row lengths
+    public int[][] initializeJaggedArray(int[] rowLengths) {
+        int[][] jaggedArray = new int[rowLengths.length][]; // Allocates main array
+        for (int i = 0; i &lt; rowLengths.length; i++) {
+            jaggedArray[i] = new int[rowLengths[i]]; // Allocates each sub-array
+        }
+        return jaggedArray;
+    }
+
+    // Access Element: Retrieves an element at [row][col]
+    public int accessElement(int[][] jaggedArray, int row, int col) {
+        if (row &lt; 0 || row &gt;= jaggedArray.length || col &lt; 0 || col &gt;= jaggedArray[row].length) {
+            throw new IllegalArgumentException("Invalid row or column index.");
+        }
+        return jaggedArray[row][col]; // Returns element at specified position
+    }
+
+    // Modify Element: Updates an element at [row][col]
+    public void modifyElement(int[][] jaggedArray, int row, int col, int value) {
+        if (row &lt; 0 || row &gt;= jaggedArray.length || col &lt; 0 || col &gt;= jaggedArray[row].length) {
+            throw new IllegalArgumentException("Invalid row or column index.");
+        }
+        jaggedArray[row][col] = value; // Updates element at specified position
+    }
+
+    // Add Row: Adds a new row to the jagged array
+    public int[][] addRow(int[][] jaggedArray, int[] newRow) {
+        int[][] newJaggedArray = new int[jaggedArray.length + 1][]; // Creates new main array
+        for (int i = 0; i &lt; jaggedArray.length; i++) {
+            newJaggedArray[i] = jaggedArray[i]; // Copies existing rows
+        }
+        newJaggedArray[jaggedArray.length] = newRow; // Adds new row
+        return newJaggedArray;
+    }
+
+    // Get Row Length: Returns the length of a specific row
+    public int getRowLength(int[][] jaggedArray, int row) {
+        if (row &lt; 0 || row &gt;= jaggedArray.length) {
+            throw new IllegalArgumentException("Invalid row index.");
+        }
+        return jaggedArray[row].length; // Returns length of specified row
+    }
+}
+</code></pre>
+<h3 id="how-it-works"><a class="header" href="#how-it-works">How It Works</a></h3>
+<ol>
+<li><strong>Initialization</strong>:
+<ul>
+<li>The <code>initializeJaggedArray</code> method creates a main array of size equal to <code>rowLengths.length</code> and allocates each sub-array with the length specified in <code>rowLengths</code>.</li>
+<li>For example, <code>initializeJaggedArray(new int[]{2, 4, 1})</code> creates a jagged array with three rows of lengths 2, 4, and 1.</li>
+</ul>
+</li>
+<li><strong>Access Element</strong>:
+<ul>
+<li>The <code>accessElement</code> method uses <code>jaggedArray[row][col]</code> to retrieve the element at the specified position after validating indices.</li>
+<li>For example, <code>accessElement(jaggedArray, 1, 2)</code> returns the element at row 1, column 2.</li>
+</ul>
+</li>
+<li><strong>Modify Element</strong>:
+<ul>
+<li>The <code>modifyElement</code> method updates <code>jaggedArray[row][col]</code> with the given <code>value</code> after validating indices.</li>
+<li>For example, <code>modifyElement(jaggedArray, 1, 2, 5)</code> sets the element at row 1, column 2 to 5.</li>
+</ul>
+</li>
+<li><strong>Add Row</strong>:
+<ul>
+<li>The <code>addRow</code> method creates a new main array with one additional slot, copies existing rows, and assigns the <code>newRow</code> to the last slot.</li>
+<li>For example, <code>addRow(jaggedArray, new int[]{7, 8})</code> adds a new row <code>[7, 8]</code> to the jagged array.</li>
+</ul>
+</li>
+<li><strong>Get Row Length</strong>:
+<ul>
+<li>The <code>getRowLength</code> method returns <code>jaggedArray[row].length</code> after validating the row index.</li>
+<li>For example, <code>getRowLength(jaggedArray, 1)</code> returns the length of row 1.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity-analysis-table"><a class="header" href="#complexity-analysis-table">Complexity Analysis Table</a></h3>
+<div class="table-wrapper"><table><thead><tr><th>Operation</th><th>Time Complexity</th><th>Space Complexity</th></tr></thead><tbody>
+<tr><td>Initialization</td><td>O(n)</td><td>O(n)</td></tr>
+<tr><td>Access Element</td><td>O(1)</td><td>O(1)</td></tr>
+<tr><td>Modify Element</td><td>O(1)</td><td>O(1)</td></tr>
+<tr><td>Add Row</td><td>O(m)</td><td>O(m)</td></tr>
+<tr><td>Get Row Length</td><td>O(1)</td><td>O(1)</td></tr>
+</tbody></table>
+</div>
+<p><em>Note</em>:</p>
+<ul>
+<li>n is the total number of elements across all sub-arrays for initialization.</li>
+<li>m is the number of rows in the jagged array for the add row operation.</li>
+<li>Space complexity accounts for the memory allocated for the arrays.</li>
+</ul>
+<h3 id="key-differences--notes"><a class="header" href="#key-differences--notes">Key Differences / Notes</a></h3>
+<ul>
+<li><strong>Jagged Array vs. Rectangular Array</strong>:
+<ul>
+<li>Jagged arrays allow rows of different lengths, saving memory for irregular data, while rectangular arrays (<code>int[][]</code>) have fixed row and column sizes.</li>
+<li>Jagged arrays are implemented as arrays of arrays, while rectangular arrays are contiguous 2D structures.</li>
+</ul>
+</li>
+<li><strong>Memory Efficiency</strong>:
+<ul>
+<li>Jagged arrays are more memory-efficient for sparse or irregular data, as unused elements are not allocated, unlike rectangular arrays.</li>
+</ul>
+</li>
+<li><strong>Dynamic Resizing</strong>:
+<ul>
+<li>Adding rows requires creating a new main array, as Java arrays are fixed-size. Use <code>ArrayList&lt;int[]&gt;</code> for dynamic resizing if needed.</li>
+</ul>
+</li>
+<li><strong>Use in Algorithms</strong>:
+<ul>
+<li>Jagged arrays are commonly used in graph algorithms (e.g., adjacency lists) and dynamic programming with variable-sized rows.</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p><strong>✅ Tip</strong>: Use jagged arrays when dealing with irregular data, such as sparse matrices or adjacency lists, to optimize memory usage. Initialize row lengths based on the specific needs of each row to avoid unnecessary allocation.</p>
+</blockquote>
+<blockquote>
+<p><strong>⚠ Warning</strong>: Be cautious when accessing elements in a jagged array, as each row has a different length. Always validate column indices to avoid <code>ArrayIndexOutOfBoundsException</code>. Avoid frequent row additions, as they require creating a new main array, which is costly.</p>
+</blockquote>
+<h3 id="exercises"><a class="header" href="#exercises">Exercises</a></h3>
+<ol>
+<li><strong>Sparse Matrix Sum</strong>: Write a Java program that uses a jagged array to represent a sparse matrix and computes the sum of all non-zero elements. Test with matrices of varying row lengths.</li>
+<li><strong>Adjacency List Representation</strong>: Implement a graph using a jagged array as an adjacency list. Add edges and print the neighbors of each vertex. Test with a sample graph.</li>
+<li><strong>Row Sorting</strong>: Create a program that sorts each row of a jagged array independently. Test with a jagged array containing rows of different lengths.</li>
+<li><strong>Dynamic Row Addition</strong>: Write a program that allows users to add rows to a jagged array interactively, specifying row lengths and elements. Test with multiple additions.</li>
+<li><strong>Jagged Array Transpose</strong>: Implement a program that transposes a jagged array (converting rows to columns) into another jagged array. Test with irregular input arrays.</li>
+</ol>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="ch03_01_01.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="ch03_02.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="ch03_01_01.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="ch03_02.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="theme/ferris.js"></script>
+
+
+    </div>
+    </body>
+</html>

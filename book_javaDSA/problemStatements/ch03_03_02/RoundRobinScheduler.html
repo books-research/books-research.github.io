@@ -1,0 +1,641 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>RoundRobinScheduler - Java Data Structures and Algorithms for Beginners</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../../favicon.svg">
+        <link rel="shortcut icon" href="../../favicon.png">
+        <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+        <link rel="stylesheet" href="../../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="../../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../../theme/ferris.css">
+        <link rel="stylesheet" href="../../theme/semantic-notes.css">
+        <link rel="stylesheet" href="../../theme/listing.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../../toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Java Data Structures and Algorithms for Beginners</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <style>
+body {
+  text-align: justify;
+}
+</style>
+<h1 id="round-robin-scheduler"><a class="header" href="#round-robin-scheduler">Round-Robin Scheduler</a></h1>
+<h2 id="problem-statement"><a class="header" href="#problem-statement">Problem Statement</a></h2>
+<p>Write a Java program that simulates a round-robin scheduler using a circular linked list. Each node in the list represents a task with a string name. The scheduler should support adding tasks (insert at tail), cycling to the next task (move head to next node), and removing the current task (delete head), maintaining the circular structure. The program should track the current task (head) and handle operations in a round-robin fashion, where cycling moves to the next task in sequence. Test the implementation with sequences of operations, including adding tasks, cycling through them, removing tasks, and handling edge cases like empty lists and single-task lists. You can visualize this as a circular queue of tasks in a CPU scheduler, where tasks are processed one after another in a loop, and completed tasks are removed.</p>
+<p><strong>Input</strong>:</p>
+<ul>
+<li>A sequence of operations, where each operation is:
+<ul>
+<li><code>addTask(task)</code>: Add a task (string) at the tail of the list.</li>
+<li><code>cycle()</code>: Move to the next task, return its name or "null" if empty.</li>
+<li><code>removeTask()</code>: Remove the current task (head), return its name or "null" if empty.</li>
+<li><code>printTasks()</code>: Print the list of tasks from the current head until just before it cycles.
+<strong>Output</strong>: For each operation, print the action performed (e.g., "Added task", "Cycled to task", "Removed task", or the task list). Return "null" for cycle or remove on an empty list.
+<strong>Constraints</strong>:</li>
+</ul>
+</li>
+<li>The list size is between 0 and 10^5.</li>
+<li>Task names are non-empty strings of length up to 100 characters.</li>
+<li>The list may be empty.
+<strong>Example</strong>:</li>
+<li>Input: Operations = [addTask("Task1"), addTask("Task2"), addTask("Task3"), printTasks, cycle, printTasks, removeTask, printTasks]</li>
+<li>Output:
+<pre><code>Added Task1
+Added Task2
+Added Task3
+Tasks: Task1 Task2 Task3
+Cycled to Task2
+Tasks: Task2 Task3 Task1
+Removed Task2
+Tasks: Task3 Task1
+</code></pre>
+</li>
+<li>Input: Operations = [cycle, printTasks]</li>
+<li>Output:
+<pre><code>Cycled to null
+Tasks: []
+</code></pre>
+</li>
+</ul>
+<h2 id="pseudocode"><a class="header" href="#pseudocode">Pseudocode</a></h2>
+<pre><code>CLASS Node
+    SET task to string
+    SET next to Node (null by default)
+ENDCLASS
+
+CLASS RoundRobinScheduler
+    SET head to null
+
+    FUNCTION addTask(task)
+        CREATE newNode as new Node(task)
+        IF head is null THEN
+            SET head to newNode
+            SET newNode.next to head
+        ELSE
+            SET current to head
+            WHILE current.next is not head
+                SET current to current.next
+            ENDWHILE
+            SET current.next to newNode
+            SET newNode.next to head
+        ENDIF
+    ENDFUNCTION
+
+    FUNCTION cycle()
+        IF head is null THEN
+            RETURN "null"
+        ENDIF
+        SET head to head.next
+        RETURN head.task
+    ENDFUNCTION
+
+    FUNCTION removeTask()
+        IF head is null THEN
+            RETURN "null"
+        ENDIF
+        IF head.next is head THEN
+            SET task to head.task
+            SET head to null
+            RETURN task
+        ENDIF
+        SET task to head.task
+        SET current to head
+        WHILE current.next is not head
+            SET current to current.next
+        ENDWHILE
+        SET current.next to head.next
+        SET head to head.next
+        RETURN task
+    ENDFUNCTION
+
+    FUNCTION toString()
+        IF head is null THEN
+            RETURN "[]"
+        ENDIF
+        CREATE result as new StringBuilder
+        SET current to head
+        SET visited as new Set
+        WHILE current is not null AND current not in visited
+            ADD current to visited
+            APPEND current.task to result
+            IF current.next is not head THEN
+                APPEND " " to result
+            ENDIF
+            SET current to current.next
+        ENDWHILE
+        RETURN result as string
+    ENDFUNCTION
+ENDCLASS
+
+FUNCTION testScheduler(operations)
+    CREATE scheduler as new RoundRobinScheduler
+    FOR each operation in operations
+        IF operation.type equals "addTask" THEN
+            CALL scheduler.addTask(operation.task)
+            PRINT added task
+        ELSE IF operation.type equals "cycle" THEN
+            SET task to scheduler.cycle()
+            PRINT cycled to task
+        ELSE IF operation.type equals "removeTask" THEN
+            SET task to scheduler.removeTask()
+            PRINT removed task
+        ELSE IF operation.type equals "print" THEN
+            PRINT tasks using scheduler.toString
+        ENDIF
+    ENDFOR
+ENDFUNCTION
+
+FUNCTION main()
+    SET testCases to array of operation sequences
+    FOR each testCase in testCases
+        PRINT test case details
+        CALL testScheduler(testCase)
+    ENDFOR
+ENDFUNCTION
+</code></pre>
+<h2 id="algorithm-steps"><a class="header" href="#algorithm-steps">Algorithm Steps</a></h2>
+<ol>
+<li>Define a <code>Node</code> class with:
+a. A string <code>task</code> for the task name.
+b. A <code>next</code> pointer to the next node.</li>
+<li>Define a <code>RoundRobinScheduler</code> class with:
+a. A <code>head</code> pointer to track the current task.
+b. <code>addTask</code>: Add node at tail, connect to head to maintain cycle.
+c. <code>cycle</code>: Move head to next node, return task name or "null".
+d. <code>removeTask</code>: Remove head, update cycle, return task name or "null".
+e. <code>toString</code>: Print tasks from head until cycle, return "[]" if empty.</li>
+<li>In <code>testScheduler</code>:
+a. Create a <code>RoundRobinScheduler</code>.
+b. For each operation:
+<ul>
+<li><code>addTask</code>: Call <code>addTask</code>, print action.</li>
+<li><code>cycle</code>: Call <code>cycle</code>, print task name.</li>
+<li><code>removeTask</code>: Call <code>removeTask</code>, print task name.</li>
+<li><code>print</code>: Call <code>toString</code>, print task list.</li>
+</ul>
+</li>
+<li>In <code>main</code>, test with sequences including adds, cycles, removes, and edge cases.</li>
+</ol>
+<h2 id="java-implementation"><a class="header" href="#java-implementation">Java Implementation</a></h2>
+<pre><code class="language-java">import java.util.*;
+
+public class RoundRobinScheduler {
+    // Node class for the circular linked list
+    static class Node {
+        String task;
+        Node next;
+
+        Node(String task) {
+            this.task = task;
+            this.next = null;
+        }
+    }
+
+    // RoundRobinScheduler class to simulate task scheduling
+    static class Scheduler {
+        private Node head;
+
+        public void addTask(String task) {
+            Node newNode = new Node(task);
+            if (head == null) {
+                head = newNode;
+                newNode.next = head;
+            } else {
+                Node current = head;
+                while (current.next != head) {
+                    current = current.next;
+                }
+                current.next = newNode;
+                newNode.next = head;
+            }
+        }
+
+        public String cycle() {
+            if (head == null) {
+                return "null";
+            }
+            head = head.next;
+            return head.task;
+        }
+
+        public String removeTask() {
+            if (head == null) {
+                return "null";
+            }
+            String task = head.task;
+            if (head.next == head) {
+                head = null;
+                return task;
+            }
+            Node current = head;
+            while (current.next != head) {
+                current = current.next;
+            }
+            current.next = head.next;
+            head = head.next;
+            return task;
+        }
+
+        public String toString() {
+            if (head == null) {
+                return "[]";
+            }
+            StringBuilder result = new StringBuilder();
+            Node current = head;
+            Set&lt;Node&gt; visited = new HashSet&lt;&gt;();
+            while (current != null &amp;&amp; !visited.contains(current)) {
+                visited.add(current);
+                result.append(current.task);
+                if (current.next != head) {
+                    result.append(" ");
+                }
+                current = current.next;
+            }
+            return result.toString();
+        }
+    }
+
+    // Helper class for operations
+    static class Operation {
+        String type;
+        String task;
+
+        Operation(String type, String task) {
+            this.type = type;
+            this.task = task;
+        }
+    }
+
+    // Tests round-robin scheduler operations
+    public void testScheduler(List&lt;Operation&gt; operations) {
+        Scheduler scheduler = new Scheduler();
+        for (Operation op : operations) {
+            if (op.type.equals("addTask")) {
+                scheduler.addTask(op.task);
+                System.out.println("Added " + op.task);
+            } else if (op.type.equals("cycle")) {
+                String task = scheduler.cycle();
+                System.out.println("Cycled to " + task);
+            } else if (op.type.equals("removeTask")) {
+                String task = scheduler.removeTask();
+                System.out.println("Removed " + task);
+            } else if (op.type.equals("print")) {
+                System.out.println("Tasks: " + scheduler.toString());
+            }
+        }
+    }
+
+    // Main method to test round-robin scheduler
+    public static void main(String[] args) {
+        RoundRobinScheduler manager = new RoundRobinScheduler();
+
+        // Test cases
+        List&lt;List&lt;Operation&gt;&gt; testCases = new ArrayList&lt;&gt;();
+        
+        // Test case 1: Normal operations
+        testCases.add(Arrays.asList(
+            new Operation("addTask", "Task1"),
+            new Operation("addTask", "Task2"),
+            new Operation("addTask", "Task3"),
+            new Operation("print", null),
+            new Operation("cycle", null),
+            new Operation("print", null),
+            new Operation("removeTask", null),
+            new Operation("print", null)
+        ));
+        
+        // Test case 2: Empty list
+        testCases.add(Arrays.asList(
+            new Operation("cycle", null),
+            new Operation("removeTask", null),
+            new Operation("print", null)
+        ));
+        
+        // Test case 3: Single task
+        testCases.add(Arrays.asList(
+            new Operation("addTask", "Task1"),
+            new Operation("print", null),
+            new Operation("cycle", null),
+            new Operation("print", null),
+            new Operation("removeTask", null),
+            new Operation("print", null)
+        ));
+        
+        // Test case 4: Multiple cycles and removes
+        testCases.add(Arrays.asList(
+            new Operation("addTask", "Task1"),
+            new Operation("addTask", "Task2"),
+            new Operation("addTask", "Task3"),
+            new Operation("cycle", null),
+            new Operation("cycle", null),
+            new Operation("print", null),
+            new Operation("removeTask", null),
+            new Operation("print", null)
+        ));
+
+        // Run test cases
+        for (int i = 0; i &lt; testCases.size(); i++) {
+            System.out.println("Test case " + (i + 1) + ":");
+            manager.testScheduler(testCases.get(i));
+            System.out.println();
+        }
+    }
+}
+</code></pre>
+<h2 id="output"><a class="header" href="#output">Output</a></h2>
+<p>Running the <code>main</code> method produces:</p>
+<pre><code>Test case 1:
+Added Task1
+Added Task2
+Added Task3
+Tasks: Task1 Task2 Task3
+Cycled to Task2
+Tasks: Task2 Task3 Task1
+Removed Task2
+Tasks: Task3 Task1
+
+Test case 2:
+Cycled to null
+Removed null
+Tasks: []
+
+Test case 3:
+Added Task1
+Tasks: Task1
+Cycled to Task1
+Tasks: Task1
+Removed Task1
+Tasks: []
+
+Test case 4:
+Added Task1
+Added Task2
+Added Task3
+Cycled to Task2
+Cycled to Task3
+Tasks: Task3 Task1 Task2
+Removed Task3
+Tasks: Task1 Task2
+</code></pre>
+<p>Explanation:</p>
+<ul>
+<li>Test case 1: Adds Task1, Task2, Task3, prints "Task1 Task2 Task3", cycles to Task2, prints "Task2 Task3 Task1", removes Task2, prints "Task3 Task1".</li>
+<li>Test case 2: Cycles and removes on empty list, prints "null" and "[]".</li>
+<li>Test case 3: Adds Task1, prints "Task1", cycles to Task1, prints "Task1", removes Task1, prints "[]".</li>
+<li>Test case 4: Adds Task1, Task2, Task3, cycles twice to Task3, prints "Task3 Task1 Task2", removes Task3, prints "Task1 Task2".</li>
+</ul>
+<h2 id="how-it-works"><a class="header" href="#how-it-works">How It Works</a></h2>
+<ul>
+<li><strong>Node</strong>: Stores a string task name and a <code>next</code> pointer.</li>
+<li><strong>Scheduler</strong>:
+<ul>
+<li><code>addTask</code>: Adds node at tail, connects to head, O(n).</li>
+<li><code>cycle</code>: Moves head to next node, returns task or "null", O(1).</li>
+<li><code>removeTask</code>: Removes head, updates cycle, returns task or "null", O(n).</li>
+<li><code>toString</code>: Traverses from head, uses Set to prevent cycling, returns space-separated string or "[]".</li>
+</ul>
+</li>
+<li><strong>testScheduler</strong>: Executes operations, printing actions and results.</li>
+<li><strong>Example Trace (Test case 1)</strong>:
+<ul>
+<li>addTask("Task1"): head=Task1→Task1.</li>
+<li>addTask("Task2"): head=Task1→Task2→Task1.</li>
+<li>addTask("Task3"): head=Task1→Task2→Task3→Task1.</li>
+<li>print: "Task1 Task2 Task3".</li>
+<li>cycle: head=Task2, returns "Task2".</li>
+<li>print: "Task2 Task3 Task1".</li>
+<li>removeTask: Removes Task2, head=Task3→Task1→Task3, returns "Task2".</li>
+<li>print: "Task3 Task1".</li>
+</ul>
+</li>
+<li><strong>Main Method</strong>: Tests normal operations, empty list, single task, and multiple cycles/removes.</li>
+</ul>
+<h2 id="complexity-analysis-table"><a class="header" href="#complexity-analysis-table">Complexity Analysis Table</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Operation</th><th>Time Complexity</th><th>Space Complexity</th></tr></thead><tbody>
+<tr><td>Add Task</td><td>O(n)</td><td>O(1)</td></tr>
+<tr><td>Cycle</td><td>O(1)</td><td>O(1)</td></tr>
+<tr><td>Remove Task</td><td>O(n)</td><td>O(1)</td></tr>
+<tr><td>To String</td><td>O(n)</td><td>O(n)</td></tr>
+</tbody></table>
+</div>
+<p><em>Note</em>:</p>
+<ul>
+<li>n is the number of nodes in the list.</li>
+<li>Time complexity: O(n) for addTask and removeTask (traverse to tail); O(1) for cycle; O(n) for toString (traverse list).</li>
+<li>Space complexity: O(1) for addTask, cycle, removeTask (constant pointers); O(n) for toString (StringBuilder and Set).</li>
+<li>Worst case: O(n) time, O(n) space for output with large lists.</li>
+</ul>
+<blockquote>
+<p><strong>✅ Tip</strong>: Use a circular linked list to naturally model the round-robin cycling behavior. Maintain the head pointer to track the current task and ensure the tail connects to the head for circularity.</p>
+</blockquote>
+<blockquote>
+<p><strong>⚠ Warning</strong>: Update <code>next</code> pointers carefully during task removal to maintain the circular structure. Handle edge cases like empty lists and single-task lists to avoid null pointer issues.</p>
+</blockquote>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../problemStatements/ch03_03_02/RotateCircularLinkedList.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../../problemStatements/ch03_03_02/SplitCircularLinkedList.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../problemStatements/ch03_03_02/RotateCircularLinkedList.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../../problemStatements/ch03_03_02/SplitCircularLinkedList.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../../elasticlunr.min.js"></script>
+        <script src="../../mark.min.js"></script>
+        <script src="../../searcher.js"></script>
+
+        <script src="../../clipboard.min.js"></script>
+        <script src="../../highlight.js"></script>
+        <script src="../../book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="../../theme/ferris.js"></script>
+
+
+    </div>
+    </body>
+</html>

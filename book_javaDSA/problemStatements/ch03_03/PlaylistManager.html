@@ -1,0 +1,617 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>PlaylistManager - Java Data Structures and Algorithms for Beginners</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../../favicon.svg">
+        <link rel="shortcut icon" href="../../favicon.png">
+        <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+        <link rel="stylesheet" href="../../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="../../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../../theme/ferris.css">
+        <link rel="stylesheet" href="../../theme/semantic-notes.css">
+        <link rel="stylesheet" href="../../theme/listing.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../../toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Java Data Structures and Algorithms for Beginners</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <style>
+body {
+  text-align: justify;
+}
+</style>
+<h1 id="playlist-manager"><a class="header" href="#playlist-manager">Playlist Manager</a></h1>
+<h2 id="problem-statement"><a class="header" href="#problem-statement">Problem Statement</a></h2>
+<p>Write a Java program that simulates a music playlist using a singly linked list. Each node in the list represents a song with a string name. The program should allow users to add songs (insert at the head or tail of the list), remove songs (delete by value, removing the first occurrence), and print the playlist. Test the implementation with various sequences of operations, including adding and removing songs, handling empty playlists, and dealing with duplicate song names. You can visualize this as managing a playlist where songs are added to the beginning or end, removed by name, and displayed as a sequence of song titles.</p>
+<p><strong>Input</strong>:</p>
+<ul>
+<li>A sequence of operations, where each operation is:
+<ul>
+<li>Add at head: Insert a song name at the start of the playlist.</li>
+<li>Add at tail: Insert a song name at the end of the playlist.</li>
+<li>Remove: Delete the first occurrence of a song by name.</li>
+<li>Print: Display the current playlist.
+<strong>Output</strong>: For each operation, print the action performed (e.g., "Added song at head", "Removed song", or the playlist as a string). If a song to remove is not found, print an appropriate message.
+<strong>Constraints</strong>:</li>
+</ul>
+</li>
+<li>The playlist size is between 0 and 10^5.</li>
+<li>Song names are non-empty strings of length up to 100 characters.</li>
+<li>The playlist may be empty or contain duplicate song names.
+<strong>Example</strong>:</li>
+<li>Input: Operations = [addHead("Song1"), addTail("Song2"), addHead("Song3"), print, remove("Song2"), print]</li>
+<li>Output:
+<pre><code>Added Song1 at head
+Added Song2 at tail
+Added Song3 at head
+Playlist: Song3 Song1 Song2
+Removed Song2
+Playlist: Song3 Song1
+</code></pre>
+</li>
+<li>Input: Operations = [remove("Song1"), print]</li>
+<li>Output:
+<pre><code>Song Song1 not found
+Playlist: []
+</code></pre>
+</li>
+</ul>
+<h2 id="pseudocode"><a class="header" href="#pseudocode">Pseudocode</a></h2>
+<pre><code>CLASS Node
+    SET song to string
+    SET next to Node (null by default)
+ENDCLASS
+
+CLASS PlaylistManager
+    SET head to null
+
+    FUNCTION addHead(song)
+        CREATE newNode as new Node(song)
+        SET newNode.next to head
+        SET head to newNode
+    ENDFUNCTION
+
+    FUNCTION addTail(song)
+        CREATE newNode as new Node(song)
+        IF head is null THEN
+            SET head to newNode
+            RETURN
+        ENDIF
+        SET current to head
+        WHILE current.next is not null
+            SET current to current.next
+        ENDWHILE
+        SET current.next to newNode
+    ENDFUNCTION
+
+    FUNCTION removeSong(song)
+        IF head is null THEN
+            RETURN false
+        ENDIF
+        IF head.song equals song THEN
+            SET head to head.next
+            RETURN true
+        ENDIF
+        SET current to head
+        WHILE current.next is not null
+            IF current.next.song equals song THEN
+                SET current.next to current.next.next
+                RETURN true
+            ENDIF
+            SET current to current.next
+        ENDWHILE
+        RETURN false
+    ENDFUNCTION
+
+    FUNCTION toString()
+        IF head is null THEN
+            RETURN "[]"
+        ENDIF
+        CREATE result as new StringBuilder
+        SET current to head
+        WHILE current is not null
+            APPEND current.song to result
+            IF current.next is not null THEN
+                APPEND " " to result
+            ENDIF
+            SET current to current.next
+        ENDWHILE
+        RETURN result as string
+    ENDFUNCTION
+ENDCLASS
+
+FUNCTION testPlaylist(operations)
+    CREATE playlist as new PlaylistManager
+    FOR each operation in operations
+        IF operation.type equals "addHead" THEN
+            CALL playlist.addHead(operation.song)
+            PRINT added song at head
+        ELSE IF operation.type equals "addTail" THEN
+            CALL playlist.addTail(operation.song)
+            PRINT added song at tail
+        ELSE IF operation.type equals "remove" THEN
+            IF playlist.removeSong(operation.song) THEN
+                PRINT removed song
+            ELSE
+                PRINT song not found
+            ENDIF
+        ELSE IF operation.type equals "print" THEN
+            PRINT playlist using toString
+        ENDIF
+    ENDFOR
+ENDFUNCTION
+
+FUNCTION main()
+    SET testCases to array of operation sequences
+    FOR each testCase in testCases
+        PRINT test case details
+        CALL testPlaylist(testCase)
+    ENDFOR
+ENDFUNCTION
+</code></pre>
+<h2 id="algorithm-steps"><a class="header" href="#algorithm-steps">Algorithm Steps</a></h2>
+<ol>
+<li>Define a <code>Node</code> class with:
+a. A string <code>song</code> for the song name.
+b. A <code>next</code> pointer to the next node.</li>
+<li>Define a <code>PlaylistManager</code> class with:
+a. <code>addHead</code>: Insert a new node with the song at the start.
+b. <code>addTail</code>: Traverse to the end and append a new node.
+c. <code>removeSong</code>: Remove the first node with the given song name, return true if found.
+d. <code>toString</code>: Convert the playlist to a space-separated string.</li>
+<li>In <code>testPlaylist</code>:
+a. Create a <code>PlaylistManager</code>.
+b. For each operation:
+<ul>
+<li>Add at head: Call <code>addHead</code>, print action.</li>
+<li>Add at tail: Call <code>addTail</code>, print action.</li>
+<li>Remove: Call <code>removeSong</code>, print success or failure.</li>
+<li>Print: Call <code>toString</code>, print playlist.</li>
+</ul>
+</li>
+<li>In <code>main</code>, test with sequences including adds, removes, empty playlists, and duplicates.</li>
+</ol>
+<h2 id="java-implementation"><a class="header" href="#java-implementation">Java Implementation</a></h2>
+<pre><code class="language-java">import java.util.*;
+
+public class PlaylistManager {
+    // Node class for the linked list
+    static class Node {
+        String song;
+        Node next;
+
+        Node(String song) {
+            this.song = song;
+            this.next = null;
+        }
+    }
+
+    // PlaylistManager class to manage songs
+    static class Playlist {
+        private Node head;
+
+        public void addHead(String song) {
+            Node newNode = new Node(song);
+            newNode.next = head;
+            head = newNode;
+        }
+
+        public void addTail(String song) {
+            Node newNode = new Node(song);
+            if (head == null) {
+                head = newNode;
+                return;
+            }
+            Node current = head;
+            while (current.next != null) {
+                current = current.next;
+            }
+            current.next = newNode;
+        }
+
+        public boolean removeSong(String song) {
+            if (head == null) {
+                return false;
+            }
+            if (head.song.equals(song)) {
+                head = head.next;
+                return true;
+            }
+            Node current = head;
+            while (current.next != null) {
+                if (current.next.song.equals(song)) {
+                    current.next = current.next.next;
+                    return true;
+                }
+                current = current.next;
+            }
+            return false;
+        }
+
+        public String toString() {
+            if (head == null) {
+                return "[]";
+            }
+            StringBuilder result = new StringBuilder();
+            Node current = head;
+            while (current != null) {
+                result.append(current.song);
+                if (current.next != null) {
+                    result.append(" ");
+                }
+                current = current.next;
+            }
+            return result.toString();
+        }
+    }
+
+    // Helper class for operations
+    static class Operation {
+        String type;
+        String song;
+
+        Operation(String type, String song) {
+            this.type = type;
+            this.song = song;
+        }
+    }
+
+    // Tests playlist operations
+    public void testPlaylist(List&lt;Operation&gt; operations) {
+        Playlist playlist = new Playlist();
+        for (Operation op : operations) {
+            if (op.type.equals("addHead")) {
+                playlist.addHead(op.song);
+                System.out.println("Added " + op.song + " at head");
+            } else if (op.type.equals("addTail")) {
+                playlist.addTail(op.song);
+                System.out.println("Added " + op.song + " at tail");
+            } else if (op.type.equals("remove")) {
+                if (playlist.removeSong(op.song)) {
+                    System.out.println("Removed " + op.song);
+                } else {
+                    System.out.println("Song " + op.song + " not found");
+                }
+            } else if (op.type.equals("print")) {
+                System.out.println("Playlist: " + playlist.toString());
+            }
+        }
+    }
+
+    // Main method to test playlist manager
+    public static void main(String[] args) {
+        PlaylistManager manager = new PlaylistManager();
+
+        // Test cases
+        List&lt;List&lt;Operation&gt;&gt; testCases = new ArrayList&lt;&gt;();
+        
+        // Test case 1: Normal operations
+        testCases.add(Arrays.asList(
+            new Operation("addHead", "Song1"),
+            new Operation("addTail", "Song2"),
+            new Operation("addHead", "Song3"),
+            new Operation("print", null),
+            new Operation("remove", "Song2"),
+            new Operation("print", null)
+        ));
+        
+        // Test case 2: Empty playlist
+        testCases.add(Arrays.asList(
+            new Operation("remove", "Song1"),
+            new Operation("print", null)
+        ));
+        
+        // Test case 3: Single song
+        testCases.add(Arrays.asList(
+            new Operation("addHead", "Song1"),
+            new Operation("print", null),
+            new Operation("remove", "Song1"),
+            new Operation("print", null)
+        ));
+        
+        // Test case 4: Duplicates
+        testCases.add(Arrays.asList(
+            new Operation("addHead", "Song1"),
+            new Operation("addTail", "Song1"),
+            new Operation("addHead", "Song2"),
+            new Operation("print", null),
+            new Operation("remove", "Song1"),
+            new Operation("print", null)
+        ));
+
+        // Run test cases
+        for (int i = 0; i &lt; testCases.size(); i++) {
+            System.out.println("Test case " + (i + 1) + ":");
+            manager.testPlaylist(testCases.get(i));
+            System.out.println();
+        }
+    }
+}
+</code></pre>
+<h2 id="output"><a class="header" href="#output">Output</a></h2>
+<p>Running the <code>main</code> method produces:</p>
+<pre><code>Test case 1:
+Added Song1 at head
+Added Song2 at tail
+Added Song3 at head
+Playlist: Song3 Song1 Song2
+Removed Song2
+Playlist: Song3 Song1
+
+Test case 2:
+Song Song1 not found
+Playlist: []
+
+Test case 3:
+Added Song1 at head
+Playlist: Song1
+Removed Song1
+Playlist: []
+
+Test case 4:
+Added Song1 at head
+Added Song1 at tail
+Added Song2 at head
+Playlist: Song2 Song1 Song1
+Removed Song1
+Playlist: Song2 Song1
+</code></pre>
+<p>Explanation:</p>
+<ul>
+<li>Test case 1: Adds Song1 (head), Song2 (tail), Song3 (head), prints "Song3 Song1 Song2", removes Song2, prints "Song3 Song1".</li>
+<li>Test case 2: Attempts to remove Song1 from empty playlist, prints not found, prints "[]".</li>
+<li>Test case 3: Adds Song1, prints "Song1", removes Song1, prints "[]".</li>
+<li>Test case 4: Adds Song1 (head), Song1 (tail), Song2 (head), prints "Song2 Song1 Song1", removes first Song1, prints "Song2 Song1".</li>
+</ul>
+<h2 id="how-it-works"><a class="header" href="#how-it-works">How It Works</a></h2>
+<ul>
+<li><strong>Node</strong>: Stores a string song name and a next pointer.</li>
+<li><strong>Playlist</strong>:
+<ul>
+<li><code>addHead</code>: Inserts new node at the start in O(1).</li>
+<li><code>addTail</code>: Traverses to end, appends node in O(n).</li>
+<li><code>removeSong</code>: Removes first occurrence of song, returns true if found, O(n).</li>
+<li><code>toString</code>: Returns space-separated song names, "[]" for empty.</li>
+</ul>
+</li>
+<li><strong>testPlaylist</strong>: Executes operations, printing actions and results.</li>
+<li><strong>Example Trace (Test case 1)</strong>:
+<ul>
+<li>addHead("Song1"): head=Song1→null.</li>
+<li>addTail("Song2"): head=Song1→Song2.</li>
+<li>addHead("Song3"): head=Song3→Song1→Song2.</li>
+<li>print: "Song3 Song1 Song2".</li>
+<li>remove("Song2"): head=Song3→Song1.</li>
+<li>print: "Song3 Song1".</li>
+</ul>
+</li>
+<li><strong>Main Method</strong>: Tests normal operations, empty playlist, single song, and duplicates.</li>
+</ul>
+<h2 id="complexity-analysis-table"><a class="header" href="#complexity-analysis-table">Complexity Analysis Table</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Operation</th><th>Time Complexity</th><th>Space Complexity</th></tr></thead><tbody>
+<tr><td>Add Head</td><td>O(1)</td><td>O(1)</td></tr>
+<tr><td>Add Tail</td><td>O(n)</td><td>O(1)</td></tr>
+<tr><td>Remove Song</td><td>O(n)</td><td>O(1)</td></tr>
+<tr><td>To String</td><td>O(n)</td><td>O(n)</td></tr>
+</tbody></table>
+</div>
+<p><em>Note</em>:</p>
+<ul>
+<li>n is the number of nodes in the playlist.</li>
+<li>Time complexity: O(1) for addHead; O(n) for addTail and removeSong (traverse list); O(n) for toString (traverse list).</li>
+<li>Space complexity: O(1) for operations (constant pointers); O(n) for toString (StringBuilder).</li>
+<li>Worst case: O(n) time, O(n) space for output with large playlists.</li>
+</ul>
+<blockquote>
+<p><strong>✅ Tip</strong>: Use a linked list for flexible playlist management, with head insertion for quick additions and tail insertion for appending. Test with duplicates to ensure correct removal of the first occurrence.</p>
+</blockquote>
+<blockquote>
+<p><strong>⚠ Warning</strong>: Handle empty playlist cases to avoid null pointer exceptions. Ensure removal checks all nodes to find the target song.</p>
+</blockquote>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../problemStatements/ch03_03/MiddleElementFinder.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../../problemStatements/ch03_03/ReverseLinkedList.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../problemStatements/ch03_03/MiddleElementFinder.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../../problemStatements/ch03_03/ReverseLinkedList.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../../elasticlunr.min.js"></script>
+        <script src="../../mark.min.js"></script>
+        <script src="../../searcher.js"></script>
+
+        <script src="../../clipboard.min.js"></script>
+        <script src="../../highlight.js"></script>
+        <script src="../../book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="../../theme/ferris.js"></script>
+
+
+    </div>
+    </body>
+</html>

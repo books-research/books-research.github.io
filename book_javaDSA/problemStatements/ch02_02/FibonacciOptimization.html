@@ -1,0 +1,445 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>FibonacciOptimization - Java Data Structures and Algorithms for Beginners</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../../favicon.svg">
+        <link rel="shortcut icon" href="../../favicon.png">
+        <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+        <link rel="stylesheet" href="../../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="../../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../../theme/ferris.css">
+        <link rel="stylesheet" href="../../theme/semantic-notes.css">
+        <link rel="stylesheet" href="../../theme/listing.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../../toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Java Data Structures and Algorithms for Beginners</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <style>
+body {
+  text-align: justify;
+}
+</style>
+<h1 id="fibonacci-optimization"><a class="header" href="#fibonacci-optimization">Fibonacci Optimization</a></h1>
+<h2 id="problem-statement"><a class="header" href="#problem-statement">Problem Statement</a></h2>
+<p>Write a Java program that computes the nth Fibonacci number using a recursive approach with memoization (using a HashMap to cache results) and an iterative approach. The program should return the nth Fibonacci number and compare the performance of both methods for large inputs. Test the program with various inputs, including edge cases like (n = 0) and (n = 1). You can visualize this as calculating the number of rabbits in a population after (n) months, where each month’s population depends on the previous two, with memoization or iteration to optimize the process.</p>
+<p><strong>Input</strong>: A non-negative integer (n) (e.g., (n = 6)).
+<strong>Output</strong>: A long integer representing the nth Fibonacci number (e.g., 8 for (n = 6)).
+<strong>Constraints</strong>:</p>
+<ul>
+<li>(0 \leq n \leq 50) (to avoid overflow with <code>long</code>).</li>
+<li>The input is a non-negative integer.
+<strong>Example</strong>:</li>
+<li>Input: (n = 6)</li>
+<li>Output: 8</li>
+<li>Explanation: The Fibonacci sequence is 0, 1, 1, 2, 3, 5, 8, ..., so the 6th Fibonacci number is 8.</li>
+<li>Input: (n = 0)</li>
+<li>Output: 0</li>
+<li>Explanation: The 0th Fibonacci number is defined as 0.</li>
+</ul>
+<h2 id="pseudocode"><a class="header" href="#pseudocode">Pseudocode</a></h2>
+<pre><code>FUNCTION fibonacciMemo(n, memo)
+    IF n &lt; 0 THEN
+        RETURN -1
+    ENDIF
+    IF n equals 0 THEN
+        RETURN 0
+    ENDIF
+    IF n equals 1 THEN
+        RETURN 1
+    ENDIF
+    IF n exists in memo THEN
+        RETURN memo[n]
+    ENDIF
+    SET result to fibonacciMemo(n - 1, memo) + fibonacciMemo(n - 2, memo)
+    SET memo[n] to result
+    RETURN result
+ENDFUNCTION
+
+FUNCTION fibonacciIterative(n)
+    IF n &lt; 0 THEN
+        RETURN -1
+    ENDIF
+    IF n equals 0 THEN
+        RETURN 0
+    ENDIF
+    IF n equals 1 THEN
+        RETURN 1
+    ENDIF
+    SET prev to 0
+    SET current to 1
+    FOR i from 2 to n
+        SET next to prev + current
+        SET prev to current
+        SET current to next
+    ENDFOR
+    RETURN current
+ENDFUNCTION
+
+FUNCTION mainFibonacci(n)
+    CREATE empty HashMap memo
+    CALL fibonacciMemo(n, memo)
+    CALL fibonacciIterative(n)
+    RETURN results
+ENDFUNCTION
+</code></pre>
+<h2 id="algorithm-steps"><a class="header" href="#algorithm-steps">Algorithm Steps</a></h2>
+<ol>
+<li>For the recursive approach with memoization:
+a. Check if (n) is negative. If so, return -1, as Fibonacci is undefined for negative numbers.
+b. Define a recursive helper function that takes (n) and a HashMap for memoization as parameters.
+c. Implement base cases: if (n = 0), return 0; if (n = 1), return 1.
+d. Check if the Fibonacci number for (n) is in the HashMap. If so, return the cached result.
+e. Compute the Fibonacci number as the sum of the results for (n - 1) and (n - 2) using recursive calls.
+f. Store the result in the HashMap and return it.</li>
+<li>For the iterative approach:
+a. Check if (n) is negative. If so, return -1.
+b. Implement base cases: if (n = 0), return 0; if (n = 1), return 1.
+c. Initialize variables <code>prev</code> (F(0) = 0) and <code>current</code> (F(1) = 1).
+d. Iterate from (i = 2) to (n), computing each Fibonacci number as <code>prev + current</code>, updating <code>prev</code> and <code>current</code> accordingly.
+e. Return the final Fibonacci number.</li>
+<li>In the main function, create a HashMap for memoization, call both methods, and compare their performance for large inputs.</li>
+</ol>
+<h2 id="java-implementation"><a class="header" href="#java-implementation">Java Implementation</a></h2>
+<pre><code class="language-java">import java.util.HashMap;
+
+public class FibonacciOptimization {
+    // Computes nth Fibonacci number using recursion with memoization
+    public long fibonacciMemo(int n) {
+        // Check for invalid input
+        if (n &lt; 0) {
+            return -1;
+        }
+        // Create HashMap for memoization
+        HashMap&lt;Integer, Long&gt; memo = new HashMap&lt;&gt;();
+        // Call recursive helper function
+        return fibonacciMemoHelper(n, memo);
+    }
+
+    // Helper function for recursive Fibonacci with memoization
+    private long fibonacciMemoHelper(int n, HashMap&lt;Integer, Long&gt; memo) {
+        // Base case: F(0) = 0
+        if (n == 0) {
+            return 0;
+        }
+        // Base case: F(1) = 1
+        if (n == 1) {
+            return 1;
+        }
+        // Check if result is in memo
+        if (memo.containsKey(n)) {
+            return memo.get(n);
+        }
+        // Recursive case: F(n) = F(n-1) + F(n-2)
+        long result = fibonacciMemoHelper(n - 1, memo) + fibonacciMemoHelper(n - 2, memo);
+        // Cache result in memo
+        memo.put(n, result);
+        return result;
+    }
+
+    // Computes nth Fibonacci number using iteration
+    public long fibonacciIterative(int n) {
+        // Check for invalid input
+        if (n &lt; 0) {
+            return -1;
+        }
+        // Base case: F(0) = 0
+        if (n == 0) {
+            return 0;
+        }
+        // Base case: F(1) = 1
+        if (n == 1) {
+            return 1;
+        }
+        // Initialize variables for F(0) and F(1)
+        long prev = 0;
+        long current = 1;
+        // Iterate to compute F(n)
+        for (int i = 2; i &lt;= n; i++) {
+            long next = prev + current;
+            prev = current;
+            current = next;
+        }
+        // Return nth Fibonacci number
+        return current;
+    }
+}
+</code></pre>
+<h2 id="output"><a class="header" href="#output">Output</a></h2>
+<p>For the input (n = 6), both methods output:</p>
+<pre><code>8
+</code></pre>
+<p>Explanation: The Fibonacci sequence is 0, 1, 1, 2, 3, 5, 8, so the 6th Fibonacci number is 8.</p>
+<p>For the input (n = 0), both methods output:</p>
+<pre><code>0
+</code></pre>
+<p>Explanation: The 0th Fibonacci number is defined as 0.</p>
+<p>For the input (n = 10), both methods output:</p>
+<pre><code>55
+</code></pre>
+<p>Explanation: The 10th Fibonacci number is 55.</p>
+<h2 id="how-it-works"><a class="header" href="#how-it-works">How It Works</a></h2>
+<ul>
+<li><strong>Recursive Approach with Memoization</strong>:
+<ul>
+<li><strong>Step 1</strong>: The <code>fibonacciMemo</code> method checks if (n &lt; 0). For (n = 6), it creates a HashMap and calls <code>fibonacciMemoHelper</code>.</li>
+<li><strong>Step 2</strong>: In <code>fibonacciMemoHelper</code>:
+<ul>
+<li>For (n = 6): Not in memo, compute F(5) + F(4).</li>
+<li>For (n = 5): Not in memo, compute F(4) + F(3).</li>
+<li>For (n = 4): Not in memo, compute F(3) + F(2).</li>
+<li>For (n = 3): Not in memo, compute F(2) + F(1).</li>
+<li>For (n = 2): Not in memo, compute F(1) + F(0) = 1 + 0 = 1.</li>
+<li>For (n = 1): Base case, return 1.</li>
+<li>For (n = 0): Base case, return 0.</li>
+<li>Unwind: Cache F(2) = 1, F(3) = 2, F(4) = 3, F(5) = 5, F(6) = 8.</li>
+</ul>
+</li>
+<li><strong>Example Trace</strong>: For (n = 6), computes F(6) = F(5) + F(4) = 5 + 3 = 8, caching each result.</li>
+</ul>
+</li>
+<li><strong>Iterative Approach</strong>:
+<ul>
+<li><strong>Step 1</strong>: The <code>fibonacciIterative</code> method checks if (n &lt; 0). For (n = 6), initializes <code>prev = 0</code>, <code>current = 1</code>.</li>
+<li><strong>Step 2</strong>: Iterates from (i = 2) to 6:
+<ul>
+<li>(i = 2): <code>next = 0 + 1 = 1</code>, <code>prev = 1</code>, <code>current = 1</code>.</li>
+<li>(i = 3): <code>next = 1 + 1 = 2</code>, <code>prev = 1</code>, <code>current = 2</code>.</li>
+<li>(i = 4): <code>next = 1 + 2 = 3</code>, <code>prev = 2</code>, <code>current = 3</code>.</li>
+<li>(i = 5): <code>next = 2 + 3 = 5</code>, <code>prev = 3</code>, <code>current = 5</code>.</li>
+<li>(i = 6): <code>next = 3 + 5 = 8</code>, <code>prev = 5</code>, <code>current = 8</code>.</li>
+</ul>
+</li>
+<li><strong>Example Trace</strong>: For (n = 6), computes 0, 1, 1, 2, 3, 5, 8, returning 8.</li>
+</ul>
+</li>
+<li><strong>Performance Comparison</strong>: Memoized recursive is O(n) time, much faster than O(2^n) for naive recursion, and comparable to iterative O(n) time. Iterative uses O(1) space, while memoized uses O(n) space for the HashMap and call stack, making iterative more efficient for very large (n).</li>
+</ul>
+<h2 id="complexity-analysis-table"><a class="header" href="#complexity-analysis-table">Complexity Analysis Table</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Operation</th><th>Time Complexity</th><th>Space Complexity</th></tr></thead><tbody>
+<tr><td>Recursive Call (Memoized)</td><td>O(n)</td><td>O(n)</td></tr>
+<tr><td>Iteration</td><td>O(n)</td><td>O(1)</td></tr>
+<tr><td>Full Algorithm (Memoized)</td><td>O(n)</td><td>O(n)</td></tr>
+<tr><td>Full Algorithm (Iterative)</td><td>O(n)</td><td>O(1)</td></tr>
+</tbody></table>
+</div>
+<p><em>Note</em>:</p>
+<ul>
+<li>n is the input integer.</li>
+<li>Time complexity: O(n) for memoized recursive, as each Fibonacci number is computed once and cached; O(n) for iterative, as it performs n iterations.</li>
+<li>Space complexity: O(n) for memoized recursive due to the HashMap and call stack; O(1) for iterative, using only a few variables.</li>
+<li>Best, average, and worst cases are O(n) for both.</li>
+</ul>
+<blockquote>
+<p><strong>✅ Tip</strong>: Use the iterative approach for large (n) to minimize space usage, or memoization for recursive solutions to avoid exponential time complexity. Test with large inputs (e.g., (n = 50)) to compare performance and verify results.</p>
+</blockquote>
+<blockquote>
+<p><strong>⚠ Warning</strong>: Without memoization, recursive Fibonacci has O(2^n) time complexity, making it impractical for large (n). Ensure inputs are within constraints ((n \leq 50)) to avoid overflow with <code>long</code>.</p>
+</blockquote>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../problemStatements/ch02_0/TowerOfHanoi.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../../problemStatements/ch02_02/LinkedListTraversal.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../problemStatements/ch02_0/TowerOfHanoi.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../../problemStatements/ch02_02/LinkedListTraversal.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../../elasticlunr.min.js"></script>
+        <script src="../../mark.min.js"></script>
+        <script src="../../searcher.js"></script>
+
+        <script src="../../clipboard.min.js"></script>
+        <script src="../../highlight.js"></script>
+        <script src="../../book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="../../theme/ferris.js"></script>
+
+
+    </div>
+    </body>
+</html>

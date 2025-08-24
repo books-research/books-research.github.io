@@ -1,0 +1,90 @@
+<!-- Singly Circular Linked List (3 nodes) – Enhanced Inline SVG -->
+<svg width="600" height="320" viewBox="0 0 600 320" xmlns="http://www.w3.org/2000/svg"
+     role="img" aria-label="Singly circular linked list with three nodes containing values 10, 20, 30 and next pointers forming a loop">
+  <defs>
+    <!-- Arrowhead for forward pointers -->
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#4b5563"/>
+    </marker>
+    <style>
+      :root {
+        --stroke: #4b5563;
+        --text: #111827;
+        --panel: #dbeafe;
+        --panel-dark: #1f2937;
+        --panel-dark-stroke: #9ca3af;
+      }
+      text { font-family: 'Arial', sans-serif; fill: var(--text); }
+      .node { fill: var(--panel); stroke: var(--stroke); stroke-width: 2; rx: 12; ry: 12; }
+      .sep { stroke: var(--stroke); stroke-width: 1.5; }
+      .link { stroke: var(--stroke); stroke-width: 2.5; fill: none; marker-end: url(#arrow); }
+      .label, .data { fill: var(--text); }
+      .node:hover { filter: url(#drop-shadow); opacity: 0.9; }
+      @media (prefers-color-scheme: dark) {
+        text { fill: #d1d5db; }
+        .node { fill: var(--panel-dark); stroke: var(--panel-dark-stroke); }
+        .sep, .link { stroke: var(--panel-dark-stroke); }
+      }
+    </style>
+    <!-- Drop shadow for hover effect -->
+    <filter id="drop-shadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="3"/>
+      <feOffset dx="2" dy="2" result="offsetblur"/>
+      <feComponentTransfer>
+        <feFuncA type="linear" slope="0.5"/>
+      </feComponentTransfer>
+      <feMerge>
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Title -->
+  <text x="300" y="30" text-anchor="middle" font-size="24" font-weight="bold" class="label">Singly Circular Linked List</text>
+
+  <!-- Node 1 (top center-left) -->
+  <g transform="translate(120,80)" role="group" aria-label="Node A with data 10">
+    <rect class="node" x="0" y="0" width="140" height="80"></rect>
+    <line class="sep" x1="70" y1="0" x2="70" y2="80"></line>
+    <text x="35" y="-8" text-anchor="middle" font-size="12" font-weight="500" class="label">data</text>
+    <text x="105" y="-8" text-anchor="middle" font-size="12" font-weight="500" class="label">next</text>
+    <text x="35" y="50" text-anchor="middle" font-size="26" font-weight="600" class="data">10</text>
+    <text x="70" y="-20" text-anchor="middle" font-size="14" font-weight="500" class="label">node A</text>
+  </g>
+
+  <!-- Node 2 (top center-right) -->
+  <g transform="translate(320,80)" role="group" aria-label="Node B with data 20">
+    <rect class="node" x="0" y="0" width="140" height="80"></rect>
+    <line class="sep" x1="70" y1="0" x2="70" y2="80"></line>
+    <text x="35" y="-8" text-anchor="middle" font-size="12" font-weight="500" class="label">data</text>
+    <text x="105" y="-8" text-anchor="middle" font-size="12" font-weight="500" class="label">next</text>
+    <text x="35" y="50" text-anchor="middle" font-size="26" font-weight="600" class="data">20</text>
+    <text x="70" y="-20" text-anchor="middle" font-size="14" font-weight="500" class="label">node B</text>
+  </g>
+
+  <!-- Node 3 (bottom center) -->
+  <g transform="translate(220,190)" role="group" aria-label="Node C with data 30">
+    <rect class="node" x="0" y="0" width="140" height="80"></rect>
+    <line class="sep" x1="70" y1="0" x2="70" y2="80"></line>
+    <text x="35" y="-8" text-anchor="middle" font-size="12" font-weight="500" class="label">data</text>
+    <text x="105" y="-8" text-anchor="middle" font-size="12" font-weight="500" class="label">next</text>
+    <text x="35" y="50" text-anchor="middle" font-size="26" font-weight="600" class="data">30</text>
+    <text x="70" y="-20" text-anchor="middle" font-size="14" font-weight="500" class="label">node C</text>
+  </g>
+
+  <!-- Next pointers (curved paths) -->
+  <!-- A -> B -->
+  <path class="link" d="M 260 120 C 280 120, 300 120, 320 120" />
+  <!-- B -> C -->
+  <path class="link" d="M 460 120 C 480 150, 420 170, 360 205" />
+  <!-- C -> A -->
+  <path class="link" d="M 300 270 C 200 270, 160 160, 260 120" />
+
+  <!-- Head and Tail labels -->
+  <text x="100" y="120" font-size="14" font-weight="500" class="label">head →</text>
+  <text x="360" y="270" font-size="14" font-weight="500" class="label">← (tail points to head)</text>
+
+  <!-- Small note -->
+  <text x="300" y="300" text-anchor="middle" font-size="14" font-weight="500" class="label">Arrows show `next` pointers forming a loop</text>
+</svg>

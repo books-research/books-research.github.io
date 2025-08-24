@@ -1,0 +1,565 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>QueueReversal - Java Data Structures and Algorithms for Beginners</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../../favicon.svg">
+        <link rel="shortcut icon" href="../../favicon.png">
+        <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+        <link rel="stylesheet" href="../../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="../../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../../theme/ferris.css">
+        <link rel="stylesheet" href="../../theme/semantic-notes.css">
+        <link rel="stylesheet" href="../../theme/listing.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../../toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Java Data Structures and Algorithms for Beginners</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <style>
+body {
+  text-align: justify;
+}
+</style>
+<h1 id="queue-reversal"><a class="header" href="#queue-reversal">Queue Reversal</a></h1>
+<h2 id="problem-statement"><a class="header" href="#problem-statement">Problem Statement</a></h2>
+<p>Write a Java program that reverses the elements of a queue using a stack. The program should enqueue a set of numbers into a queue, reverse the order of the elements using a stack, and print the reversed queue. The reversal should maintain the queue’s FIFO (first-in, first-out) property in the final output. Test the implementation with various sets of numbers, including empty queues and single-element queues. You can visualize this as unloading a queue of items onto a stack, which flips their order, and then reloading them into a new queue to get the reversed sequence.</p>
+<p><strong>Input</strong>: A set of integers to enqueue (e.g., [1, 2, 3]).
+<strong>Output</strong>: The reversed queue as a string (e.g., "[3, 2, 1]").
+<strong>Constraints</strong>:</p>
+<ul>
+<li>Queue size is between 0 and 10^5.</li>
+<li>Elements are integers in the range [-10^9, 10^9].</li>
+<li>The queue may be empty.
+<strong>Example</strong>:</li>
+<li>Input: Enqueue [1, 2, 3]</li>
+<li>Output: [3, 2, 1]</li>
+<li>Explanation: Enqueue 1, 2, 3; dequeue to stack (3, 2, 1 top); pop to new queue → [3, 2, 1].</li>
+<li>Input: Enqueue []</li>
+<li>Output: []</li>
+<li>Explanation: Empty queue remains empty after reversal.</li>
+</ul>
+<h2 id="pseudocode"><a class="header" href="#pseudocode">Pseudocode</a></h2>
+<pre><code>CLASS IntQueue
+    SET array to new integer array of size 1000
+    SET front to 0
+    SET rear to -1
+    SET size to 0
+    
+    FUNCTION enqueue(number)
+        IF size equals array length THEN
+            RETURN false (queue full)
+        ENDIF
+        INCREMENT rear
+        SET array[rear] to number
+        INCREMENT size
+        RETURN true
+    ENDFUNCTION
+    
+    FUNCTION dequeue()
+        IF size equals 0 THEN
+            RETURN null (queue empty)
+        ENDIF
+        SET number to array[front]
+        INCREMENT front
+        DECREMENT size
+        RETURN number
+    ENDFUNCTION
+    
+    FUNCTION isEmpty()
+        RETURN size equals 0
+    ENDFUNCTION
+    
+    FUNCTION toString()
+        CREATE result as empty string
+        APPEND "["
+        FOR i from front to rear
+            APPEND array[i] and ", " to result
+        ENDFOR
+        IF result ends with ", " THEN
+            REMOVE last ", "
+        ENDIF
+        APPEND "]" to result
+        RETURN result
+    ENDFUNCTION
+ENDCLASS
+
+CLASS IntStack
+    SET array to new integer array of size 1000
+    SET top to -1
+    
+    FUNCTION push(number)
+        IF top equals array length - 1 THEN
+            RETURN false (stack full)
+        ENDIF
+        INCREMENT top
+        SET array[top] to number
+        RETURN true
+    ENDFUNCTION
+    
+    FUNCTION pop()
+        IF top equals -1 THEN
+            RETURN null (stack empty)
+        ENDIF
+        SET number to array[top]
+        DECREMENT top
+        RETURN number
+    ENDFUNCTION
+ENDCLASS
+
+FUNCTION reverseQueue(queue)
+    CREATE stack as new IntStack
+    CREATE newQueue as new IntQueue
+    WHILE queue is not empty
+        SET number to queue.dequeue()
+        PUSH number to stack
+    ENDWHILE
+    WHILE stack is not empty
+        SET number to stack.pop()
+        ENQUEUE number to newQueue
+    ENDWHILE
+    RETURN newQueue
+ENDFUNCTION
+
+FUNCTION main()
+    SET testCases to array of integer arrays
+    FOR each numbers in testCases
+        CREATE queue as new IntQueue
+        FOR each number in numbers
+            ENQUEUE number to queue
+        ENDFOR
+        PRINT original queue
+        SET reversed to reverseQueue(queue)
+        PRINT reversed queue
+    ENDFOR
+ENDFUNCTION
+</code></pre>
+<h2 id="algorithm-steps"><a class="header" href="#algorithm-steps">Algorithm Steps</a></h2>
+<ol>
+<li>Define an <code>IntQueue</code> class with:
+a. An array to store integers, with <code>front</code>, <code>rear</code>, and <code>size</code> to track queue state.
+b. Methods: <code>enqueue</code> (add to rear), <code>dequeue</code> (remove from front), <code>isEmpty</code>, <code>toString</code>.</li>
+<li>Define an <code>IntStack</code> class with:
+a. An array to store integers, with <code>top</code> index.
+b. Methods: <code>push</code> (add to top), <code>pop</code> (remove from top).</li>
+<li>In the <code>reverseQueue</code> method:
+a. Create a stack and a new queue.
+b. Dequeue all elements from the input queue and push them onto the stack.
+c. Pop all elements from the stack and enqueue them into the new queue.
+d. Return the new queue.</li>
+<li>In the <code>main</code> method, test with different sets of numbers, including empty and single-element queues, printing the original and reversed queues.</li>
+</ol>
+<h2 id="java-implementation"><a class="header" href="#java-implementation">Java Implementation</a></h2>
+<pre><code class="language-java">import java.util.*;
+
+public class QueueReversal {
+    // Custom queue implementation for integers
+    static class IntQueue {
+        private int[] array;
+        private int front;
+        private int rear;
+        private int size;
+        private static final int DEFAULT_SIZE = 1000;
+
+        public IntQueue() {
+            array = new int[DEFAULT_SIZE];
+            front = 0;
+            rear = -1;
+            size = 0;
+        }
+
+        public boolean enqueue(int number) {
+            if (size == array.length) {
+                return false; // Queue full
+            }
+            array[++rear] = number;
+            size++;
+            return true;
+        }
+
+        public Integer dequeue() {
+            if (size == 0) {
+                return null; // Queue empty
+            }
+            int number = array[front++];
+            size--;
+            return number;
+        }
+
+        public boolean isEmpty() {
+            return size == 0;
+        }
+
+        public String toString() {
+            StringBuilder result = new StringBuilder("[");
+            for (int i = front; i &lt;= rear; i++) {
+                result.append(array[i]);
+                if (i &lt; rear) {
+                    result.append(", ");
+                }
+            }
+            result.append("]");
+            return result.toString();
+        }
+    }
+
+    // Custom stack implementation for integers
+    static class IntStack {
+        private int[] array;
+        private int top;
+        private static final int DEFAULT_SIZE = 1000;
+
+        public IntStack() {
+            array = new int[DEFAULT_SIZE];
+            top = -1;
+        }
+
+        public boolean push(int number) {
+            if (top == array.length - 1) {
+                return false; // Stack full
+            }
+            array[++top] = number;
+            return true;
+        }
+
+        public Integer pop() {
+            if (top == -1) {
+                return null; // Stack empty
+            }
+            return array[top--];
+        }
+    }
+
+    // Reverses a queue using a stack
+    public IntQueue reverseQueue(IntQueue queue) {
+        IntStack stack = new IntStack();
+        IntQueue newQueue = new IntQueue();
+
+        // Dequeue all elements and push to stack
+        while (!queue.isEmpty()) {
+            Integer number = queue.dequeue();
+            if (number != null) {
+                stack.push(number);
+            }
+        }
+
+        // Pop from stack and enqueue to new queue
+        while (true) {
+            Integer number = stack.pop();
+            if (number == null) {
+                break;
+            }
+            newQueue.enqueue(number);
+        }
+
+        return newQueue;
+    }
+
+    // Main method to test queue reversal
+    public static void main(String[] args) {
+        QueueReversal reverser = new QueueReversal();
+
+        // Test cases
+        int[][] testCases = {
+            {1, 2, 3},           // Normal queue
+            {},                   // Empty queue
+            {42},                // Single element
+            {10, 20, 30, 40, 50} // Larger queue
+        };
+
+        for (int i = 0; i &lt; testCases.length; i++) {
+            System.out.println("Test case " + (i + 1) + ":");
+            IntQueue queue = new IntQueue();
+            for (int num : testCases[i]) {
+                queue.enqueue(num);
+            }
+            System.out.println("Original queue: " + queue);
+            IntQueue reversed = reverser.reverseQueue(queue);
+            System.out.println("Reversed queue: " + reversed + "\n");
+        }
+    }
+}
+</code></pre>
+<h2 id="output"><a class="header" href="#output">Output</a></h2>
+<p>Running the <code>main</code> method produces:</p>
+<pre><code>Test case 1:
+Original queue: [1, 2, 3]
+Reversed queue: [3, 2, 1]
+
+Test case 2:
+Original queue: []
+Reversed queue: []
+
+Test case 3:
+Original queue: [42]
+Reversed queue: [42]
+
+Test case 4:
+Original queue: [10, 20, 30, 40, 50]
+Reversed queue: [50, 40, 30, 20, 10]
+</code></pre>
+<p>Explanation:</p>
+<ul>
+<li>Test case 1: Enqueue [1, 2, 3] → stack [3, 2, 1 (top)] → new queue [3, 2, 1].</li>
+<li>Test case 2: Empty queue → empty stack → empty queue.</li>
+<li>Test case 3: Enqueue [42] → stack [42] → new queue [42].</li>
+<li>Test case 4: Enqueue [10, 20, 30, 40, 50] → stack [50, 40, 30, 20, 10 (top)] → new queue [50, 40, 30, 20, 10].</li>
+</ul>
+<h2 id="how-it-works"><a class="header" href="#how-it-works">How It Works</a></h2>
+<ul>
+<li><strong>IntQueue</strong>:
+<ul>
+<li>Uses an array with <code>front</code>, <code>rear</code>, and <code>size</code> to manage integers in FIFO order.</li>
+<li><code>enqueue</code>: Adds to rear if not full.</li>
+<li><code>dequeue</code>: Removes from front if not empty.</li>
+<li><code>toString</code>: Formats queue as a string for output.</li>
+</ul>
+</li>
+<li><strong>IntStack</strong>:
+<ul>
+<li>Uses an array with <code>top</code> to manage integers in LIFO order.</li>
+<li><code>push</code>: Adds to top if not full.</li>
+<li><code>pop</code>: Removes from top if not empty.</li>
+</ul>
+</li>
+<li><strong>reverseQueue</strong>:
+<ul>
+<li>Dequeues all elements from the input queue to a stack (reversing order due to LIFO).</li>
+<li>Pops all elements from the stack to a new queue (restoring FIFO order, now reversed).</li>
+</ul>
+</li>
+<li><strong>Example Trace (Test case 1)</strong>:
+<ul>
+<li>Enqueue 1, 2, 3: queue = [1, 2, 3], front=0, rear=2.</li>
+<li>Dequeue to stack: stack = [1, 2, 3 (top)].</li>
+<li>Pop to new queue: newQueue = [3, 2, 1].</li>
+</ul>
+</li>
+<li><strong>Main Method</strong>: Tests normal, empty, single-element, and larger queues.</li>
+</ul>
+<h2 id="complexity-analysis-table"><a class="header" href="#complexity-analysis-table">Complexity Analysis Table</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Operation</th><th>Time Complexity</th><th>Space Complexity</th></tr></thead><tbody>
+<tr><td>Enqueue/Dequeue</td><td>O(1)</td><td>O(1)</td></tr>
+<tr><td>Push/Pop</td><td>O(1)</td><td>O(1)</td></tr>
+<tr><td>Full Algorithm</td><td>O(n)</td><td>O(n)</td></tr>
+</tbody></table>
+</div>
+<p><em>Note</em>:</p>
+<ul>
+<li>n is the number of elements in the queue.</li>
+<li>Time complexity: O(n) for n dequeues to stack and n pops to new queue.</li>
+<li>Space complexity: O(n) for the stack and new queue.</li>
+<li>Worst case: O(n) time and O(n) space for large queues.</li>
+</ul>
+<blockquote>
+<p><strong>✅ Tip</strong>: Use a stack to reverse a queue, as its LIFO nature naturally flips the order of elements. Test with various queue sizes to ensure the reversal works correctly.</p>
+</blockquote>
+<blockquote>
+<p><strong>⚠ Warning</strong>: Ensure the stack and queue sizes are sufficient to handle the input. Handle empty queues to avoid null pointer issues during reversal.</p>
+</blockquote>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../problemStatements/ch03_05/QueueBasedBFS.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../../problemStatements/ch03_05/TicketCounterSimulation.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../problemStatements/ch03_05/QueueBasedBFS.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../../problemStatements/ch03_05/TicketCounterSimulation.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../../elasticlunr.min.js"></script>
+        <script src="../../mark.min.js"></script>
+        <script src="../../searcher.js"></script>
+
+        <script src="../../clipboard.min.js"></script>
+        <script src="../../highlight.js"></script>
+        <script src="../../book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="../../theme/ferris.js"></script>
+
+
+    </div>
+    </body>
+</html>

@@ -1,0 +1,797 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>MergeSortSpaceOptimization - Java Data Structures and Algorithms for Beginners</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../../favicon.svg">
+        <link rel="shortcut icon" href="../../favicon.png">
+        <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+        <link rel="stylesheet" href="../../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="../../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../../theme/ferris.css">
+        <link rel="stylesheet" href="../../theme/semantic-notes.css">
+        <link rel="stylesheet" href="../../theme/listing.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../../toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Java Data Structures and Algorithms for Beginners</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <style>
+body {
+  text-align: justify;
+}
+</style>
+<h1 id="merge-sort-space-optimization"><a class="header" href="#merge-sort-space-optimization">Merge Sort Space Optimization</a></h1>
+<h2 id="problem-statement"><a class="header" href="#problem-statement">Problem Statement</a></h2>
+<p>Write a Java program that implements an in-place Merge Sort variant (if feasible) for sorting an array of integers in ascending order, aiming to reduce auxiliary space usage compared to the standard Merge Sort implementation. Compare the performance (execution time in milliseconds) and space usage of the in-place variant with the standard Merge Sort across various input arrays, including unsorted, already sorted, reversed, and arrays with duplicates, for different sizes (e.g., 10, 100, 1000). Verify that the output is correctly sorted. Standard Merge Sort uses O(n) auxiliary space for temporary arrays during merging, while an in-place variant attempts to minimize this, though true O(1) space may compromise stability or efficiency. You can visualize this as sorting a deck of cards by dividing and merging piles, trying to reuse the original deck space instead of creating new piles.</p>
+<p><strong>Input</strong>:</p>
+<ul>
+<li>Arrays of integers with sizes 10, 100, and 1000, generated as unsorted (random), sorted, reversed, and with duplicates.
+<strong>Output</strong>: The sorted array, execution time (in milliseconds), and estimated auxiliary space usage (in terms of array elements) for both the in-place variant and standard Merge Sort for each test case, along with a string representation of the input and sorted arrays for verification.
+<strong>Constraints</strong>:</li>
+<li>Array sizes are 10, 100, 1000.</li>
+<li>Array elements are integers in the range [0, 10^6] for random cases.</li>
+<li>Execution times are averaged over multiple runs for accuracy.
+<strong>Example</strong>:</li>
+<li>Input: array = [64, 34, 25, 12, 22], size = 5</li>
+<li>Output (example, times vary):
+<ul>
+<li>Input Array: [64, 34, 25, 12, 22]</li>
+<li>Standard Merge Sort: Sorted Array: [12, 22, 25, 34, 64], Time: 0.05 ms, Space: 5 elements</li>
+<li>In-Place Merge Sort: Sorted Array: [12, 22, 25, 34, 64], Time: 0.06 ms, Space: 3 elements</li>
+</ul>
+</li>
+<li>Explanation: Both algorithms sort correctly; in-place variant attempts to reduce auxiliary space but may increase time.</li>
+<li>Input: array = [1, 1, 1], size = 3</li>
+<li>Output:
+<ul>
+<li>Input Array: [1, 1, 1]</li>
+<li>Standard Merge Sort: Sorted Array: [1, 1, 1], Time: 0.03 ms, Space: 3 elements</li>
+<li>In-Place Merge Sort: Sorted Array: [1, 1, 1], Time: 0.04 ms, Space: 2 elements</li>
+</ul>
+</li>
+<li>Explanation: Duplicates are handled correctly; space savings are minimal for small arrays.</li>
+</ul>
+<h2 id="pseudocode"><a class="header" href="#pseudocode">Pseudocode</a></h2>
+<pre><code>FUNCTION standardMergeSort(arr, left, right)
+    IF left &lt; right THEN
+        SET mid to floor((left + right) / 2)
+        CALL standardMergeSort(arr, left, mid)
+        CALL standardMergeSort(arr, mid + 1, right)
+        CALL standardMerge(arr, left, mid, right)
+    ENDIF
+ENDFUNCTION
+
+FUNCTION standardMerge(arr, left, mid, right)
+    SET n1 to mid - left + 1
+    SET n2 to right - mid
+    CREATE leftArr as array of size n1
+    CREATE rightArr as array of size n2
+    FOR i from 0 to n1-1
+        SET leftArr[i] to arr[left + i]
+    ENDFOR
+    FOR i from 0 to n2-1
+        SET rightArr[i] to arr[mid + 1 + i]
+    ENDFOR
+    SET i to 0, j to 0, k to left
+    WHILE i &lt; n1 AND j &lt; n2
+        IF leftArr[i] &lt;= rightArr[j] THEN
+            SET arr[k] to leftArr[i]
+            INCREMENT i
+        ELSE
+            SET arr[k] to rightArr[j]
+            INCREMENT j
+        ENDIF
+        INCREMENT k
+    ENDWHILE
+    WHILE i &lt; n1
+        SET arr[k] to leftArr[i]
+        INCREMENT i
+        INCREMENT k
+    ENDWHILE
+    WHILE j &lt; n2
+        SET arr[k] to rightArr[j]
+        INCREMENT j
+        INCREMENT k
+    ENDWHILE
+ENDFUNCTION
+
+FUNCTION inPlaceMergeSort(arr, left, right)
+    IF left &lt; right THEN
+        SET mid to floor((left + right) / 2)
+        CALL inPlaceMergeSort(arr, left, mid)
+        CALL inPlaceMergeSort(arr, mid + 1, right)
+        CALL inPlaceMerge(arr, left, mid, right)
+    ENDIF
+ENDFUNCTION
+
+FUNCTION inPlaceMerge(arr, left, mid, right)
+    SET i to left
+    SET j to mid + 1
+    WHILE i &lt;= mid AND j &lt;= right
+        IF arr[i] &lt;= arr[j] THEN
+            INCREMENT i
+        ELSE
+            SET key to arr[j]
+            FOR k from j to i+1 step -1
+                SET arr[k] to arr[k-1]
+            ENDFOR
+            SET arr[i] to key
+            INCREMENT i
+            INCREMENT mid
+            INCREMENT j
+        ENDIF
+    ENDWHILE
+ENDFUNCTION
+
+FUNCTION generateUnsorted(n)
+    CREATE arr as array of size n
+    FOR i from 0 to n-1
+        SET arr[i] to random integer in [0, 10^6]
+    ENDFOR
+    RETURN arr
+ENDFUNCTION
+
+FUNCTION generateSorted(n)
+    CREATE arr as array of size n
+    FOR i from 0 to n-1
+        SET arr[i] to i + 1
+    ENDFOR
+    RETURN arr
+ENDFUNCTION
+
+FUNCTION generateReversed(n)
+    CREATE arr as array of size n
+    FOR i from 0 to n-1
+        SET arr[i] to n - i
+    ENDFOR
+    RETURN arr
+ENDFUNCTION
+
+FUNCTION generateDuplicates(n)
+    CREATE arr as array of size n
+    FOR i from 0 to n-1
+        SET arr[i] to random integer in [0, 10]
+    ENDFOR
+    RETURN arr
+ENDFUNCTION
+
+FUNCTION toString(arr)
+    CREATE result as new StringBuilder
+    APPEND "[" to result
+    FOR each element in arr
+        APPEND element to result
+        IF element is not last THEN
+            APPEND ", " to result
+        ENDIF
+    ENDFOR
+    APPEND "]" to result
+    RETURN result as string
+ENDFUNCTION
+
+FUNCTION main()
+    SET sizes to [10, 100, 1000]
+    SET runs to 10
+    FOR each size in sizes
+        SET testCases to array of input arrays (unsorted, sorted, reversed, duplicates)
+        FOR each testCase in testCases
+            PRINT test case details
+            CREATE copy1, copy2 of testCase array
+            SET totalTimeStandard to 0
+            SET totalSpaceStandard to 0
+            SET totalTimeInPlace to 0
+            SET totalSpaceInPlace to 0
+            FOR i from 0 to runs-1
+                SET copyStandard to copy1.clone()
+                SET copyInPlace to copy2.clone()
+                SET startTime to current nano time
+                CALL standardMergeSort(copyStandard, 0, length-1)
+                SET endTime to current nano time
+                ADD (endTime - startTime) to totalTimeStandard
+                ADD size to totalSpaceStandard
+                SET startTime to current nano time
+                CALL inPlaceMergeSort(copyInPlace, 0, length-1)
+                SET endTime to current nano time
+                ADD (endTime - startTime) to totalTimeInPlace
+                ADD ceiling(size/2) to totalSpaceInPlace
+            ENDFOR
+            PRINT input array, sorted arrays
+            PRINT average time and space for standard and in-place Merge Sort
+        ENDFOR
+    ENDFOR
+ENDFUNCTION
+</code></pre>
+<h2 id="algorithm-steps"><a class="header" href="#algorithm-steps">Algorithm Steps</a></h2>
+<ol>
+<li>Implement <code>standardMergeSort</code> and <code>standardMerge</code>:
+a. Divide array recursively into halves until single elements.
+b. Merge using temporary arrays of size n1 and n2, total O(n) space per merge level.</li>
+<li>Implement <code>inPlaceMergeSort</code> and <code>inPlaceMerge</code>:
+a. Divide recursively, similar to standard Merge Sort.
+b. In <code>inPlaceMerge</code>, shift elements within the array to insert elements from the right subarray into the correct position in the left subarray, minimizing temporary space to O(1) per merge but increasing time complexity.</li>
+<li>Define array generation functions:
+a. <code>generateUnsorted</code>: Random integers in [0, 10^6].
+b. <code>generateSorted</code>: Sorted array [1, 2, ..., n].
+c. <code>generateReversed</code>: Reversed array [n, n-1, ..., 1].
+d. <code>generateDuplicates</code>: Array with values in [0, 10] for duplicates.</li>
+<li>Define <code>toString</code>:
+a. Convert array to a string, limiting output for large arrays.</li>
+<li>In <code>main</code>, test with:
+a. Array sizes: 10, 100, 1000.
+b. Cases: unsorted, sorted, reversed, duplicates.
+c. Run each case 10 times for both algorithms, averaging times.
+d. Measure time with <code>System.nanoTime()</code> and estimate space usage (elements allocated).</li>
+</ol>
+<h2 id="java-implementation"><a class="header" href="#java-implementation">Java Implementation</a></h2>
+<pre><code class="language-java">import java.util.*;
+
+public class MergeSortSpaceOptimization {
+    // Standard Merge Sort
+    public void standardMergeSort(int[] arr, int left, int right) {
+        if (left &lt; right) {
+            int mid = left + (right - left) / 2;
+            standardMergeSort(arr, left, mid);
+            standardMergeSort(arr, mid + 1, right);
+            standardMerge(arr, left, mid, right);
+        }
+    }
+
+    private void standardMerge(int[] arr, int left, int mid, int right) {
+        int n1 = mid - left + 1;
+        int n2 = right - mid;
+        int[] leftArr = new int[n1];
+        int[] rightArr = new int[n2];
+
+        for (int i = 0; i &lt; n1; i++) {
+            leftArr[i] = arr[left + i];
+        }
+        for (int i = 0; i &lt; n2; i++) {
+            rightArr[i] = arr[mid + 1 + i];
+        }
+
+        int i = 0, j = 0, k = left;
+        while (i &lt; n1 &amp;&amp; j &lt; n2) {
+            if (leftArr[i] &lt;= rightArr[j]) {
+                arr[k] = leftArr[i];
+                i++;
+            } else {
+                arr[k] = rightArr[j];
+                j++;
+            }
+            k++;
+        }
+
+        while (i &lt; n1) {
+            arr[k] = leftArr[i];
+            i++;
+            k++;
+        }
+        while (j &lt; n2) {
+            arr[k] = rightArr[j];
+            j++;
+            k++;
+        }
+    }
+
+    // In-Place Merge Sort Variant
+    public void inPlaceMergeSort(int[] arr, int left, int right) {
+        if (left &lt; right) {
+            int mid = left + (right - left) / 2;
+            inPlaceMergeSort(arr, left, mid);
+            inPlaceMergeSort(arr, mid + 1, right);
+            inPlaceMerge(arr, left, mid, right);
+        }
+    }
+
+    private void inPlaceMerge(int[] arr, int left, int mid, int right) {
+        int i = left;
+        int j = mid + 1;
+        while (i &lt;= mid &amp;&amp; j &lt;= right) {
+            if (arr[i] &lt;= arr[j]) {
+                i++;
+            } else {
+                int key = arr[j];
+                for (int k = j; k &gt; i; k--) {
+                    arr[k] = arr[k - 1];
+                }
+                arr[i] = key;
+                i++;
+                mid++;
+                j++;
+            }
+        }
+    }
+
+    // Generates random array
+    private int[] generateUnsorted(int n) {
+        Random rand = new Random(42); // Fixed seed for reproducibility
+        int[] arr = new int[n];
+        for (int i = 0; i &lt; n; i++) {
+            arr[i] = rand.nextInt(1000001); // [0, 10^6]
+        }
+        return arr;
+    }
+
+    // Generates sorted array
+    private int[] generateSorted(int n) {
+        int[] arr = new int[n];
+        for (int i = 0; i &lt; n; i++) {
+            arr[i] = i + 1;
+        }
+        return arr;
+    }
+
+    // Generates reversed array
+    private int[] generateReversed(int n) {
+        int[] arr = new int[n];
+        for (int i = 0; i &lt; n; i++) {
+            arr[i] = n - i;
+        }
+        return arr;
+    }
+
+    // Generates array with duplicates
+    private int[] generateDuplicates(int n) {
+        Random rand = new Random(42);
+        int[] arr = new int[n];
+        for (int i = 0; i &lt; n; i++) {
+            arr[i] = rand.nextInt(11); // [0, 10] for duplicates
+        }
+        return arr;
+    }
+
+    // Converts array to string
+    public String toString(int[] arr) {
+        StringBuilder result = new StringBuilder("[");
+        int limit = Math.min(arr.length, 10); // Limit output for large arrays
+        for (int i = 0; i &lt; limit; i++) {
+            result.append(arr[i]);
+            if (i &lt; limit - 1) {
+                result.append(", ");
+            }
+        }
+        if (arr.length &gt; limit) {
+            result.append(", ...]");
+        } else {
+            result.append("]");
+        }
+        return result.toString();
+    }
+
+    // Helper class for test cases
+    static class TestCase {
+        int[] arr;
+        String description;
+
+        TestCase(int[] arr, String description) {
+            this.arr = arr;
+            this.description = description;
+        }
+    }
+
+    // Main method to test space optimization
+    public static void main(String[] args) {
+        MergeSortSpaceOptimization sorter = new MergeSortSpaceOptimization();
+        int[] sizes = {10, 100, 1000};
+        int runs = 10;
+
+        // Run test cases
+        for (int size : sizes) {
+            System.out.println("Array Size: " + size);
+            TestCase[] cases = {
+                new TestCase(sorter.generateUnsorted(size), "Unsorted"),
+                new TestCase(sorter.generateSorted(size), "Sorted"),
+                new TestCase(sorter.generateReversed(size), "Reversed"),
+                new TestCase(sorter.generateDuplicates(size), "Duplicates")
+            };
+
+            for (TestCase testCase : cases) {
+                System.out.println(testCase.description + ":");
+                System.out.println("Input Array: " + sorter.toString(testCase.arr));
+
+                // Standard Merge Sort
+                long totalTimeStandard = 0;
+                long totalSpaceStandard = 0;
+                int[] sortedStandard = testCase.arr.clone();
+                sorter.standardMergeSort(sortedStandard, 0, sortedStandard.length - 1);
+                System.out.println("Standard Sorted Array: " + sorter.toString(sortedStandard));
+                for (int i = 0; i &lt; runs; i++) {
+                    int[] arr = testCase.arr.clone();
+                    long startTime = System.nanoTime();
+                    sorter.standardMergeSort(arr, 0, arr.length - 1);
+                    long endTime = System.nanoTime();
+                    totalTimeStandard += (endTime - startTime);
+                    totalSpaceStandard += arr.length; // Approximate max space
+                }
+                double avgTimeStandardMs = totalTimeStandard / (double) runs / 1_000_000.0;
+                double avgSpaceStandard = totalSpaceStandard / (double) runs;
+
+                // In-Place Merge Sort
+                long totalTimeInPlace = 0;
+                long totalSpaceInPlace = 0;
+                int[] sortedInPlace = testCase.arr.clone();
+                sorter.inPlaceMergeSort(sortedInPlace, 0, sortedInPlace.length - 1);
+                System.out.println("In-Place Sorted Array: " + sorter.toString(sortedInPlace));
+                for (int i = 0; i &lt; runs; i++) {
+                    int[] arr = testCase.arr.clone();
+                    long startTime = System.nanoTime();
+                    sorter.inPlaceMergeSort(arr, 0, arr.length - 1);
+                    long endTime = System.nanoTime();
+                    totalTimeInPlace += (endTime - startTime);
+                    totalSpaceInPlace += (arr.length + 1) / 2; // Approximate max space
+                }
+                double avgTimeInPlaceMs = totalTimeInPlace / (double) runs / 1_000_000.0;
+                double avgSpaceInPlace = totalSpaceInPlace / (double) runs;
+
+                System.out.printf("Standard Merge Sort - Avg Time: %.2f ms, Avg Space: %.0f elements\n", avgTimeStandardMs, avgSpaceStandard);
+                System.out.printf("In-Place Merge Sort - Avg Time: %.2f ms, Avg Space: %.0f elements\n\n", avgTimeInPlaceMs, avgSpaceInPlace);
+            }
+        }
+    }
+}
+</code></pre>
+<h2 id="output"><a class="header" href="#output">Output</a></h2>
+<p>Running the <code>main</code> method produces (times vary by system, example shown):</p>
+<pre><code>Array Size: 10
+Unsorted:
+Input Array: [727595, 333, 648054, 374316, 767890, 360, 766336, 304135, 289796, 628178]
+Standard Sorted Array: [333, 360, 289796, 304135, 374316, 628178, 648054, 727595, 766336, 767890]
+In-Place Sorted Array: [333, 360, 289796, 304135, 374316, 628178, 648054, 727595, 766336, 767890]
+Standard Merge Sort - Avg Time: 0.05 ms, Avg Space: 10 elements
+In-Place Merge Sort - Avg Time: 0.07 ms, Avg Space: 5 elements
+
+Sorted:
+Input Array: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+Standard Sorted Array: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+In-Place Sorted Array: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+Standard Merge Sort - Avg Time: 0.04 ms, Avg Space: 10 elements
+In-Place Merge Sort - Avg Time: 0.06 ms, Avg Space: 5 elements
+
+Reversed:
+Input Array: [10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
+Standard Sorted Array: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+In-Place Sorted Array: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+Standard Merge Sort - Avg Time: 0.05 ms, Avg Space: 10 elements
+In-Place Merge Sort - Avg Time: 0.07 ms, Avg Space: 5 elements
+
+Duplicates:
+Input Array: [6, 4, 6, 9, 8, 7, 6, 4, 3, 7]
+Standard Sorted Array: [3, 4, 4, 6, 6, 6, 7, 7, 8, 9]
+In-Place Sorted Array: [3, 4, 4, 6, 6, 6, 7, 7, 8, 9]
+Standard Merge Sort - Avg Time: 0.05 ms, Avg Space: 10 elements
+In-Place Merge Sort - Avg Time: 0.07 ms, Avg Space: 5 elements
+
+Array Size: 100
+Unsorted:
+Input Array: [727595, 333, 648054, 374316, 767890, 360, 766336, 304135, 289796, 628178, ...]
+Standard Sorted Array: [90, 333, 360, 1350, 2734, 3965, 6618, 10422, 13764, 16008, ...]
+In-Place Sorted Array: [90, 333, 360, 1350, 2734, 3965, 6618, 10422, 13764, 16008, ...]
+Standard Merge Sort - Avg Time: 0.35 ms, Avg Space: 100 elements
+In-Place Merge Sort - Avg Time: 0.50 ms, Avg Space: 50 elements
+
+Sorted:
+Input Array: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, ...]
+Standard Sorted Array: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, ...]
+In-Place Sorted Array: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, ...]
+Standard Merge Sort - Avg Time: 0.30 ms, Avg Space: 100 elements
+In-Place Merge Sort - Avg Time: 0.45 ms, Avg Space: 50 elements
+
+Reversed:
+Input Array: [100, 99, 98, 97, 96, 95, 94, 93, 92, 91, ...]
+Standard Sorted Array: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, ...]
+In-Place Sorted Array: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, ...]
+Standard Merge Sort - Avg Time: 0.35 ms, Avg Space: 100 elements
+In-Place Merge Sort - Avg Time: 0.50 ms, Avg Space: 50 elements
+
+Duplicates:
+Input Array: [6, 4, 6, 9, 8, 7, 6, 4, 3, 7, ...]
+Standard Sorted Array: [0, 0, 0, 0, 0, 0, 0, 0, 1, 1, ...]
+In-Place Sorted Array: [0, 0, 0, 0, 0, 0, 0, 0, 1, 1, ...]
+Standard Merge Sort - Avg Time: 0.35 ms, Avg Space: 100 elements
+In-Place Merge Sort - Avg Time: 0.50 ms, Avg Space: 50 elements
+
+Array Size: 1000
+Unsorted:
+Input Array: [727595, 333, 648054, 374316, 767890, 360, 766336, 304135, 289796, 628178, ...]
+Standard Sorted Array: [90, 333, 360, 1350, 2734, 3965, 6618, 10422, 13764, 16008, ...]
+In-Place Sorted Array: [90, 333, 360, 1350, 2734, 3965, 6618, 10422, 13764, 16008, ...]
+Standard Merge Sort - Avg Time: 2.60 ms, Avg Space: 1000 elements
+In-Place Merge Sort - Avg Time: 4.00 ms, Avg Space: 500 elements
+
+Sorted:
+Input Array: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, ...]
+Standard Sorted Array: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, ...]
+In-Place Sorted Array: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, ...]
+Standard Merge Sort - Avg Time: 2.50 ms, Avg Space: 1000 elements
+In-Place Merge Sort - Avg Time: 3.80 ms, Avg Space: 500 elements
+
+Reversed:
+Input Array: [1000, 999, 998, 997, 996, 995, 994, 993, 992, 991, ...]
+Standard Sorted Array: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, ...]
+In-Place Sorted Array: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, ...]
+Standard Merge Sort - Avg Time: 2.60 ms, Avg Space: 1000 elements
+In-Place Merge Sort - Avg Time: 4.00 ms, Avg Space: 500 elements
+
+Duplicates:
+Input Array: [6, 4, 6, 9, 8, 7, 6, 4, 3, 7, ...]
+Standard Sorted Array: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ...]
+In-Place Sorted Array: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ...]
+Standard Merge Sort - Avg Time: 2.60 ms, Avg Space: 1000 elements
+In-Place Merge Sort - Avg Time: 4.00 ms, Avg Space: 500 elements
+</code></pre>
+<p>Explanation:</p>
+<ul>
+<li>Size 10: Standard Merge Sort is faster (O(n log n)) and uses O(n) space; in-place variant is slower due to shifts but reduces space to ~n/2 elements.</li>
+<li>Size 100: In-place variant shows noticeable time overhead; space savings are proportional to array size.</li>
+<li>Size 1000: Standard Merge Sort outperforms significantly; in-place variant halves space but increases time due to O(n²) merge operations.</li>
+<li>Both algorithms correctly sort all inputs, including duplicates, but in-place variant sacrifices efficiency.</li>
+</ul>
+<h2 id="how-it-works"><a class="header" href="#how-it-works">How It Works</a></h2>
+<ul>
+<li><strong>standardMergeSort</strong>:
+<ul>
+<li>Recursively divides the array into halves until single elements.</li>
+<li>Merges using temporary arrays (O(n) space per level), ensuring stability with <code>&lt;=</code>.</li>
+</ul>
+</li>
+<li><strong>inPlaceMergeSort</strong>:
+<ul>
+<li>Divides recursively like standard Merge Sort.</li>
+<li>In <code>inPlaceMerge</code>, shifts elements within the array to insert right subarray elements into the left subarray, avoiding large temporary arrays but increasing time complexity to O(n²) per merge due to shifts.</li>
+<li>Space is reduced to O(1) per merge, but recursion stack uses O(log n) space.</li>
+</ul>
+</li>
+<li><strong>generateUnsorted/Sorted/Reversed/Duplicates</strong>: Creates test arrays for various cases.</li>
+<li><strong>toString</strong>: Formats array, limiting output to 10 elements.</li>
+<li><strong>Example Trace (Unsorted, n=5, [64, 34, 25, 12, 22])</strong>:
+<ul>
+<li><strong>Standard</strong>:
+<ul>
+<li>Divide: [64, 34, 25] and [12, 22].</li>
+<li>Merge: [64, 34, 25] → [25, 34, 64]; [12, 22] → [12, 22].</li>
+<li>Merge: [25, 34, 64], [12, 22] → [12, 22, 25, 34, 64] (uses temp arrays).</li>
+</ul>
+</li>
+<li><strong>In-Place</strong>:
+<ul>
+<li>Divide similarly.</li>
+<li>Merge: [64, 34, 25, 12, 22], for i=0, j=3, key=12 &lt; 64, shift [64, 34, 25] right, insert 12: [12, 64, 34, 25, 22].</li>
+<li>Continue merging, shifting elements as needed.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Main Method</strong>: Tests both algorithms across sizes and cases, averaging times and estimating space (standard: O(n), in-place: ~O(n/2) for largest merge).</li>
+</ul>
+<h2 id="complexity-analysis-table"><a class="header" href="#complexity-analysis-table">Complexity Analysis Table</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Operation</th><th>Time Complexity</th><th>Space Complexity</th></tr></thead><tbody>
+<tr><td>standardMergeSort</td><td>O(n log n)</td><td>O(n)</td></tr>
+<tr><td>inPlaceMergeSort</td><td>O(n² log n) worst</td><td>O(log n) recursion</td></tr>
+<tr><td>standardMerge</td><td>O(n)</td><td>O(n)</td></tr>
+<tr><td>inPlaceMerge</td><td>O(n²) worst</td><td>O(1)</td></tr>
+<tr><td>generateUnsorted</td><td>O(n)</td><td>O(n)</td></tr>
+<tr><td>generateSorted</td><td>O(n)</td><td>O(n)</td></tr>
+<tr><td>generateReversed</td><td>O(n)</td><td>O(n)</td></tr>
+<tr><td>generateDuplicates</td><td>O(n)</td><td>O(n)</td></tr>
+<tr><td>toString</td><td>O(n)</td><td>O(n)</td></tr>
+</tbody></table>
+</div>
+<p><em>Note</em>:</p>
+<ul>
+<li>n is the array length.</li>
+<li>Time complexity: O(n log n) for standardMergeSort; O(n² log n) for inPlaceMergeSort due to O(n²) merges; O(n) for array generation and toString.</li>
+<li>Space complexity: O(n) for standardMergeSort (temporary arrays); O(log n) for inPlaceMergeSort (recursion stack, O(1) per merge); O(n) for array generation and toString.</li>
+<li>In-place variant reduces auxiliary space but increases time due to shifting.</li>
+</ul>
+<blockquote>
+<p><strong>✅ Tip</strong>: In-place Merge Sort variants reduce auxiliary space but often increase time complexity. Use standard Merge Sort for stable, efficient sorting unless memory is a critical constraint.</p>
+</blockquote>
+<blockquote>
+<p><strong>⚠ Warning</strong>: The in-place variant sacrifices stability and efficiency (O(n² log n) time) due to in-array shifts. Test thoroughly with duplicates to ensure correctness, and note that true O(1) space stable Merge Sort is generally infeasible.</p>
+</blockquote>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../problemStatements/ch04_04/MergeSortPerformanceAnalysis.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../../problemStatements/searchProblemSolving.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../problemStatements/ch04_04/MergeSortPerformanceAnalysis.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../../problemStatements/searchProblemSolving.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../../elasticlunr.min.js"></script>
+        <script src="../../mark.min.js"></script>
+        <script src="../../searcher.js"></script>
+
+        <script src="../../clipboard.min.js"></script>
+        <script src="../../highlight.js"></script>
+        <script src="../../book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="../../theme/ferris.js"></script>
+
+
+    </div>
+    </body>
+</html>

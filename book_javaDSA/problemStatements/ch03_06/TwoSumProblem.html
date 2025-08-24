@@ -1,0 +1,409 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>TwoSumProblem - Java Data Structures and Algorithms for Beginners</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../../favicon.svg">
+        <link rel="shortcut icon" href="../../favicon.png">
+        <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+        <link rel="stylesheet" href="../../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="../../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../../theme/ferris.css">
+        <link rel="stylesheet" href="../../theme/semantic-notes.css">
+        <link rel="stylesheet" href="../../theme/listing.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../../toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Java Data Structures and Algorithms for Beginners</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <style>
+body {
+  text-align: justify;
+}
+</style>
+<h1 id="two-sum-problem"><a class="header" href="#two-sum-problem">Two Sum Problem</a></h1>
+<h2 id="problem-statement"><a class="header" href="#problem-statement">Problem Statement</a></h2>
+<p>Write a Java program that uses a hash table to solve the Two Sum problem: given an array of integers and a target sum, find two numbers in the array that add up to the target sum and return their indices. The hash table should store numbers as keys and their indices as values. The solution should assume each input has at most one valid pair of indices and that no number can be used twice. Test the implementation with different arrays and target sums, including cases with no solution, valid solutions, and edge cases like empty arrays or arrays with fewer than two elements. You can visualize this as searching a list of numbers to find a pair of puzzle pieces that fit together to match a specific total.</p>
+<p><strong>Input</strong>:</p>
+<ul>
+<li>An array of integers and a target sum (integer).
+<strong>Output</strong>: An array of two integers representing the indices of the two numbers that sum to the target, or an empty array if no solution exists.
+<strong>Constraints</strong>:</li>
+<li>The array length is between 0 and 10^5.</li>
+<li>Array elements and the target sum are integers in the range [-10^9, 10^9].</li>
+<li>Each input has at most one valid solution.</li>
+<li>The same element cannot be used twice.
+<strong>Example</strong>:</li>
+<li>Input: Array = [2, 7, 11, 15], Target = 9</li>
+<li>Output: [0, 1]</li>
+<li>Explanation: 2 + 7 = 9, indices 0 and 1.</li>
+<li>Input: Array = [3, 2, 4], Target = 8</li>
+<li>Output: []</li>
+<li>Explanation: No pair sums to 8.</li>
+<li>Input: Array = [], Target = 5</li>
+<li>Output: []</li>
+<li>Explanation: Empty array, no solution.</li>
+</ul>
+<h2 id="pseudocode"><a class="header" href="#pseudocode">Pseudocode</a></h2>
+<pre><code>FUNCTION twoSum(numbers, target)
+    CREATE hashTable as new HashMap
+    FOR i from 0 to numbers length - 1
+        SET complement to target - numbers[i]
+        IF hashTable contains complement THEN
+            RETURN array of [hashTable[complement], i]
+        ENDIF
+        SET hashTable[numbers[i]] to i
+    ENDFOR
+    RETURN empty array
+ENDFUNCTION
+
+FUNCTION main()
+    SET testCases to array of (numbers, target) pairs
+    FOR each testCase in testCases
+        PRINT test case details
+        CALL twoSum(testCase.numbers, testCase.target)
+        PRINT result
+    ENDFOR
+ENDFUNCTION
+</code></pre>
+<h2 id="algorithm-steps"><a class="header" href="#algorithm-steps">Algorithm Steps</a></h2>
+<ol>
+<li>Define <code>twoSum</code>:
+a. Create a <code>HashMap&lt;Integer, Integer&gt;</code> to store numbers and their indices.
+b. For each number at index i:
+<ul>
+<li>Compute complement = target - number.</li>
+<li>If complement exists in hash table, return [hashTable[complement], i].</li>
+<li>Otherwise, add number and its index to hash table.
+c. If no solution is found, return empty array.</li>
+</ul>
+</li>
+<li>In <code>main</code>, test with:
+a. Arrays with a valid solution.
+b. Arrays with no solution.
+c. Empty array.
+d. Array with one element.
+e. Array with duplicate numbers.</li>
+</ol>
+<h2 id="java-implementation"><a class="header" href="#java-implementation">Java Implementation</a></h2>
+<pre><code class="language-java">import java.util.*;
+
+public class TwoSumProblem {
+    // Solves the Two Sum problem using a hash table
+    public int[] twoSum(int[] numbers, int target) {
+        HashMap&lt;Integer, Integer&gt; hashTable = new HashMap&lt;&gt;();
+        for (int i = 0; i &lt; numbers.length; i++) {
+            int complement = target - numbers[i];
+            if (hashTable.containsKey(complement)) {
+                return new int[] {hashTable.get(complement), i};
+            }
+            hashTable.put(numbers[i], i);
+        }
+        return new int[] {};
+    }
+
+    // Main method to test Two Sum
+    public static void main(String[] args) {
+        TwoSumProblem solver = new TwoSumProblem();
+
+        // Test cases
+        Object[] testCases = {
+            new Object[] {new int[] {2, 7, 11, 15}, 9},    // Valid solution
+            new Object[] {new int[] {3, 2, 4}, 8},         // No solution
+            new Object[] {new int[] {}, 5},                // Empty array
+            new Object[] {new int[] {1}, 2},               // Single element
+            new Object[] {new int[] {3, 3}, 6}             // Duplicate numbers
+        };
+
+        // Run test cases
+        for (int i = 0; i &lt; testCases.length; i++) {
+            int[] numbers = (int[]) ((Object[]) testCases[i])[0];
+            int target = (int) ((Object[]) testCases[i])[1];
+            System.out.println("Test case " + (i + 1) + ":");
+            System.out.println("Input array: " + Arrays.toString(numbers));
+            System.out.println("Target sum: " + target);
+            int[] result = solver.twoSum(numbers, target);
+            System.out.println("Result: " + Arrays.toString(result) + "\n");
+        }
+    }
+}
+</code></pre>
+<h2 id="output"><a class="header" href="#output">Output</a></h2>
+<p>Running the <code>main</code> method produces:</p>
+<pre><code>Test case 1:
+Input array: [2, 7, 11, 15]
+Target sum: 9
+Result: [0, 1]
+
+Test case 2:
+Input array: [3, 2, 4]
+Target sum: 8
+Result: []
+
+Test case 3:
+Input array: []
+Target sum: 5
+Result: []
+
+Test case 4:
+Input array: [1]
+Target sum: 2
+Result: []
+
+Test case 5:
+Input array: [3, 3]
+Target sum: 6
+Result: [0, 1]
+</code></pre>
+<p>Explanation:</p>
+<ul>
+<li>Test case 1: 2 + 7 = 9, returns indices [0, 1].</li>
+<li>Test case 2: No pair sums to 8, returns [].</li>
+<li>Test case 3: Empty array, returns [].</li>
+<li>Test case 4: Single element, no pair possible, returns [].</li>
+<li>Test case 5: 3 + 3 = 6, returns indices [0, 1].</li>
+</ul>
+<h2 id="how-it-works"><a class="header" href="#how-it-works">How It Works</a></h2>
+<ul>
+<li><strong>twoSum</strong>:
+<ul>
+<li>Uses a <code>HashMap&lt;Integer, Integer&gt;</code> to store numbers and their indices.</li>
+<li>For each number, checks if complement (target - number) exists in hash table.</li>
+<li>If found, returns indices of complement and current number.</li>
+<li>Otherwise, adds current number and index to hash table.</li>
+<li>Returns empty array if no solution is found.</li>
+</ul>
+</li>
+<li><strong>Example Trace (Test case 1)</strong>:
+<ul>
+<li>Input: [2, 7, 11, 15], target=9.</li>
+<li>i=0: complement=9-2=7, hashTable={}, add {2:0}.</li>
+<li>i=1: complement=9-7=2, hashTable={2:0}, return [0, 1].</li>
+</ul>
+</li>
+<li><strong>Main Method</strong>: Tests valid solution, no solution, empty array, single element, and duplicates.</li>
+</ul>
+<h2 id="complexity-analysis-table"><a class="header" href="#complexity-analysis-table">Complexity Analysis Table</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Operation</th><th>Time Complexity</th><th>Space Complexity</th></tr></thead><tbody>
+<tr><td>Two Sum</td><td>O(n)</td><td>O(n)</td></tr>
+</tbody></table>
+</div>
+<p><em>Note</em>:</p>
+<ul>
+<li>n is the length of the input array.</li>
+<li>Time complexity: O(n) for single pass through array; HashMap operations (put, get) are O(1) average case.</li>
+<li>Space complexity: O(n) for storing up to n numbers in HashMap.</li>
+<li>Worst case: O(n) time and space when all numbers are processed.</li>
+</ul>
+<blockquote>
+<p><strong>✅ Tip</strong>: Use a single-pass approach with a hash table to achieve O(n) time complexity, storing numbers and indices to quickly find the complement.</p>
+</blockquote>
+<blockquote>
+<p><strong>⚠ Warning</strong>: Ensure the solution handles edge cases like empty arrays or arrays with fewer than two elements. Avoid using the same element twice by checking the complement before adding the current number.</p>
+</blockquote>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../problemStatements/ch03_06/PhoneBookApplication.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../../problemStatements/ch03_06/WordFrequencyCounter.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../problemStatements/ch03_06/PhoneBookApplication.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../../problemStatements/ch03_06/WordFrequencyCounter.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../../elasticlunr.min.js"></script>
+        <script src="../../mark.min.js"></script>
+        <script src="../../searcher.js"></script>
+
+        <script src="../../clipboard.min.js"></script>
+        <script src="../../highlight.js"></script>
+        <script src="../../book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="../../theme/ferris.js"></script>
+
+
+    </div>
+    </body>
+</html>

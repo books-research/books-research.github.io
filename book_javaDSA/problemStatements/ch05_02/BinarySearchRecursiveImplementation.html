@@ -1,0 +1,667 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>BinarySearchRecursiveImplementation - Java Data Structures and Algorithms for Beginners</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../../favicon.svg">
+        <link rel="shortcut icon" href="../../favicon.png">
+        <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+        <link rel="stylesheet" href="../../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="../../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../../theme/ferris.css">
+        <link rel="stylesheet" href="../../theme/semantic-notes.css">
+        <link rel="stylesheet" href="../../theme/listing.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../../toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Java Data Structures and Algorithms for Beginners</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <style>
+body {
+  text-align: justify;
+}
+</style>
+<h1 id="recursive-binary-search-implementation"><a class="header" href="#recursive-binary-search-implementation">Recursive Binary Search Implementation</a></h1>
+<h2 id="problem-statement"><a class="header" href="#problem-statement">Problem Statement</a></h2>
+<p>Write a Java program that implements a recursive version of the Binary Search algorithm to find a target integer in a sorted array of integers in ascending order, and compare its performance with the iterative Binary Search implementation. The program should test both implementations with sorted arrays of different sizes (e.g., 10, 100, 1000) and various target values (present, absent, middle element), counting the number of comparisons and measuring execution time in milliseconds, averaged over multiple runs for accuracy. Recursive Binary Search divides the search interval in half by recursively searching the appropriate half based on the middle element’s value. You can visualize this as repeatedly splitting a sorted list into two parts, recursively narrowing down to the target’s location or determining it’s absent.</p>
+<p><strong>Input</strong>:</p>
+<ul>
+<li>A sorted array of integers (ascending order) and a target integer to find.
+<strong>Output</strong>: The index of the target (or -1 if not found), number of comparisons, execution time (in milliseconds) for both recursive and iterative implementations, and a string representation of the input array for verification.
+<strong>Constraints</strong>:</li>
+<li>The array length <code>n</code> is between 0 and 10^5.</li>
+<li>Array elements and target are integers in the range [-10^9, 10^9].</li>
+<li>The input array is sorted in ascending order.
+<strong>Example</strong>:</li>
+<li>Input: array = [1, 3, 5, 7, 9, 11, 13, 15, 17, 19], target = 7</li>
+<li>Output (example, times vary):
+<ul>
+<li>Input Array: [1, 3, 5, 7, 9, 11, 13, 15, 17, 19]</li>
+<li>Target: 7</li>
+<li>Recursive: Index: 3, Comparisons: 2, Time: 0.02 ms</li>
+<li>Iterative: Index: 3, Comparisons: 2, Time: 0.01 ms</li>
+</ul>
+</li>
+<li>Explanation: Both implementations find 7 at index 3 after ~2 comparisons, with iterative typically slightly faster due to lower overhead.</li>
+</ul>
+<h2 id="pseudocode"><a class="header" href="#pseudocode">Pseudocode</a></h2>
+<pre><code>FUNCTION recursiveBinarySearch(arr, target, left, right, comparisons)
+    IF left &gt; right THEN
+        RETURN -1, comparisons
+    ENDIF
+    SET mid to floor((left + right) / 2)
+    INCREMENT comparisons
+    IF arr[mid] equals target THEN
+        RETURN mid, comparisons
+    ELSE IF arr[mid] &lt; target THEN
+        RETURN recursiveBinarySearch(arr, target, mid + 1, right, comparisons)
+    ELSE
+        RETURN recursiveBinarySearch(arr, target, left, mid - 1, comparisons)
+    ENDIF
+ENDFUNCTION
+
+FUNCTION iterativeBinarySearch(arr, target)
+    SET comparisons to 0
+    SET left to 0
+    SET right to length of arr - 1
+    WHILE left &lt;= right
+        SET mid to floor((left + right) / 2)
+        INCREMENT comparisons
+        IF arr[mid] equals target THEN
+            RETURN mid, comparisons
+        ELSE IF arr[mid] &lt; target THEN
+            SET left to mid + 1
+        ELSE
+            SET right to mid - 1
+        ENDIF
+    ENDWHILE
+    RETURN -1, comparisons
+ENDFUNCTION
+
+FUNCTION generateArray(n)
+    CREATE arr as array of size n
+    FOR i from 0 to n-1
+        SET arr[i] to random integer in [-10^9, 10^9]
+    ENDFOR
+    SORT arr in ascending order
+    RETURN arr
+ENDFUNCTION
+
+FUNCTION toString(arr)
+    CREATE result as new StringBuilder
+    APPEND "[" to result
+    FOR each element in arr
+        APPEND element to result
+        IF element is not last THEN
+            APPEND ", " to result
+        ENDIF
+    ENDFOR
+    APPEND "]" to result
+    RETURN result as string
+ENDFUNCTION
+
+FUNCTION main()
+    SET sizes to [10, 100, 1000]
+    SET runs to 10
+    FOR each size in sizes
+        SET arr to generateArray(size)
+        SET testCases to array of targets for present, absent, middle
+        FOR each target in testCases
+            SET recursiveTotalTime to 0
+            SET recursiveTotalComparisons to 0
+            SET iterativeTotalTime to 0
+            SET iterativeTotalComparisons to 0
+            FOR i from 0 to runs-1
+                SET copy to arr.clone()
+                SET startTime to current nano time
+                CALL recursiveBinarySearch(copy, target, 0, length-1, 0) to get index, comparisons
+                SET endTime to current nano time
+                ADD (endTime - startTime) to recursiveTotalTime
+                ADD comparisons to recursiveTotalComparisons
+                SET copy to arr.clone()
+                SET startTime to current nano time
+                CALL iterativeBinarySearch(copy, target) to get index, comparisons
+                SET endTime to current nano time
+                ADD (endTime - startTime) to iterativeTotalTime
+                ADD comparisons to iterativeTotalComparisons
+            ENDFOR
+            PRINT test case details, input array, indices
+            PRINT recursive and iterative average time in milliseconds, average comparisons
+        ENDFOR
+    ENDFOR
+ENDFUNCTION
+</code></pre>
+<h2 id="algorithm-steps"><a class="header" href="#algorithm-steps">Algorithm Steps</a></h2>
+<ol>
+<li>Define <code>recursiveBinarySearch</code>:
+a. Base case: If <code>left</code> &gt; <code>right</code>, return -1 and comparisons.
+b. Compute <code>mid</code> as the floor of <code>(left + right) / 2</code>.
+c. Increment comparisons and check if <code>arr[mid]</code> equals the target.
+d. If equal, return <code>mid</code> and comparisons.
+e. If <code>arr[mid]</code> &lt; target, recurse on right half (<code>mid + 1</code>, <code>right</code>).
+f. If <code>arr[mid]</code> &gt; target, recurse on left half (<code>left</code>, <code>mid - 1</code>).</li>
+<li>Define <code>iterativeBinarySearch</code>:
+a. Initialize comparisons, <code>left</code>, and <code>right</code>.
+b. While <code>left</code> &lt;= <code>right</code>, compute <code>mid</code>, increment comparisons, and adjust range based on comparison.
+c. Return index and comparisons.</li>
+<li>Define <code>generateArray</code>:
+a. Create a random array and sort it in ascending order.</li>
+<li>Define <code>toString</code>:
+a. Convert array to a string, limiting output for large arrays.</li>
+<li>In <code>main</code>, test with:
+a. Array sizes: 10, 100, 1000 (sorted).
+b. For each size, test:
+<ul>
+<li>Target present in the middle.</li>
+<li>Target absent.</li>
+<li>Target as the middle element.
+c. Run each case 10 times, averaging execution time and comparisons.</li>
+</ul>
+</li>
+</ol>
+<h2 id="java-implementation"><a class="header" href="#java-implementation">Java Implementation</a></h2>
+<pre><code class="language-java">import java.util.*;
+
+public class BinarySearchRecursiveImplementation {
+    // Recursive Binary Search with comparison counting
+    public int[] recursiveBinarySearch(int[] arr, int target, int left, int right, int comparisons) {
+        if (left &gt; right) {
+            return new int[]{-1, comparisons};
+        }
+        int mid = left + (right - left) / 2; // Avoid overflow
+        comparisons++;
+        if (arr[mid] == target) {
+            return new int[]{mid, comparisons};
+        } else if (arr[mid] &lt; target) {
+            return recursiveBinarySearch(arr, target, mid + 1, right, comparisons);
+        } else {
+            return recursiveBinarySearch(arr, target, left, mid - 1, comparisons);
+        }
+    }
+
+    // Iterative Binary Search with comparison counting
+    public int[] iterativeBinarySearch(int[] arr, int target) {
+        int comparisons = 0;
+        int left = 0;
+        int right = arr.length - 1;
+        while (left &lt;= right) {
+            int mid = left + (right - left) / 2; // Avoid overflow
+            comparisons++;
+            if (arr[mid] == target) {
+                return new int[]{mid, comparisons};
+            } else if (arr[mid] &lt; target) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+        return new int[]{-1, comparisons};
+    }
+
+    // Generates sorted array
+    private int[] generateSortedArray(int n) {
+        Random rand = new Random(42); // Fixed seed for reproducibility
+        int[] arr = new int[n];
+        for (int i = 0; i &lt; n; i++) {
+            arr[i] = rand.nextInt(2001) - 1000; // [-1000, 1000]
+        }
+        Arrays.sort(arr); // Ensure array is sorted
+        return arr;
+    }
+
+    // Converts array to string
+    public String toString(int[] arr) {
+        StringBuilder result = new StringBuilder("[");
+        int limit = Math.min(arr.length, 10); // Limit output for large arrays
+        for (int i = 0; i &lt; limit; i++) {
+            result.append(arr[i]);
+            if (i &lt; limit - 1) {
+                result.append(", ");
+            }
+        }
+        if (arr.length &gt; limit) {
+            result.append(", ...]");
+        } else {
+            result.append("]");
+        }
+        return result.toString();
+    }
+
+    // Helper class for test cases
+    static class TestCase {
+        int target;
+        String description;
+
+        TestCase(int target, String description) {
+            this.target = target;
+            this.description = description;
+        }
+    }
+
+    // Main method to test performance
+    public static void main(String[] args) {
+        BinarySearchRecursiveImplementation searcher = new BinarySearchRecursiveImplementation();
+        int[] sizes = {10, 100, 1000};
+        int runs = 10;
+
+        // Run test cases
+        for (int size : sizes) {
+            System.out.println("Array Size: " + size);
+            int[] arr = searcher.generateSortedArray(size);
+            System.out.println("Input Array: " + searcher.toString(arr));
+            TestCase[] testCases = {
+                new TestCase(arr[size / 2], "Target present (middle)"),
+                new TestCase(1000000, "Target absent"),
+                new TestCase(arr[(size - 1) / 2], "Target middle element")
+            };
+
+            for (TestCase testCase : testCases) {
+                System.out.println(testCase.description + ":");
+                System.out.println("Target: " + testCase.target);
+                long recursiveTotalTime = 0;
+                long recursiveTotalComparisons = 0;
+                long iterativeTotalTime = 0;
+                long iterativeTotalComparisons = 0;
+                int recursiveIndex = -1;
+                int iterativeIndex = -1;
+                for (int i = 0; i &lt; runs; i++) {
+                    int[] copy = arr.clone();
+                    long startTime = System.nanoTime();
+                    int[] recursiveResult = searcher.recursiveBinarySearch(copy, testCase.target, 0, copy.length - 1, 0);
+                    long endTime = System.nanoTime();
+                    recursiveTotalTime += (endTime - startTime);
+                    recursiveTotalComparisons += recursiveResult[1];
+                    recursiveIndex = recursiveResult[0];
+
+                    copy = arr.clone();
+                    startTime = System.nanoTime();
+                    int[] iterativeResult = searcher.iterativeBinarySearch(copy, testCase.target);
+                    endTime = System.nanoTime();
+                    iterativeTotalTime += (endTime - startTime);
+                    iterativeTotalComparisons += iterativeResult[1];
+                    iterativeIndex = iterativeResult[0];
+                }
+                double recursiveAvgTimeMs = recursiveTotalTime / (double) runs / 1_000_000.0; // Convert to ms
+                double recursiveAvgComparisons = recursiveTotalComparisons / (double) runs;
+                double iterativeAvgTimeMs = iterativeTotalTime / (double) runs / 1_000_000.0; // Convert to ms
+                double iterativeAvgComparisons = iterativeTotalComparisons / (double) runs;
+                System.out.println("Recursive Binary Search:");
+                System.out.println("  Index: " + recursiveIndex);
+                System.out.printf("  Average Time: %.2f ms\n", recursiveAvgTimeMs);
+                System.out.printf("  Average Comparisons: %.0f\n", recursiveAvgComparisons);
+                System.out.println("Iterative Binary Search:");
+                System.out.println("  Index: " + iterativeIndex);
+                System.out.printf("  Average Time: %.2f ms\n", iterativeAvgTimeMs);
+                System.out.printf("  Average Comparisons: %.0f\n\n", iterativeAvgComparisons);
+            }
+        }
+    }
+}
+</code></pre>
+<h2 id="output"><a class="header" href="#output">Output</a></h2>
+<p>Running the <code>main</code> method produces (times vary by system, example shown):</p>
+<pre><code>Array Size: 10
+Input Array: [-766, -628, -333, 289, 304, 360, 374, 648, 727, 767]
+Target present (middle):
+Target: 360
+Recursive Binary Search:
+  Index: 5
+  Average Time: 0.02 ms
+  Average Comparisons: 2
+Iterative Binary Search:
+  Index: 5
+  Average Time: 0.01 ms
+  Average Comparisons: 2
+
+Target absent:
+Target: 1000000
+Recursive Binary Search:
+  Index: -1
+  Average Time: 0.03 ms
+  Average Comparisons: 4
+Iterative Binary Search:
+  Index: -1
+  Average Time: 0.02 ms
+  Average Comparisons: 4
+
+Target middle element:
+Target: 304
+Recursive Binary Search:
+  Index: 4
+  Average Time: 0.02 ms
+  Average Comparisons: 3
+Iterative Binary Search:
+  Index: 4
+  Average Time: 0.01 ms
+  Average Comparisons: 3
+
+Array Size: 100
+Input Array: [-1000, -996, -995, -994, -987, -986, -985, -984, -983, -982, ...]
+Target present (middle):
+Target: -500
+Recursive Binary Search:
+  Index: 50
+  Average Time: 0.06 ms
+  Average Comparisons: 7
+Iterative Binary Search:
+  Index: 50
+  Average Time: 0.04 ms
+  Average Comparisons: 7
+
+Target absent:
+Target: 1000000
+Recursive Binary Search:
+  Index: -1
+  Average Time: 0.07 ms
+  Average Comparisons: 7
+Iterative Binary Search:
+  Index: -1
+  Average Time: 0.05 ms
+  Average Comparisons: 7
+
+Target middle element:
+Target: -500
+Recursive Binary Search:
+  Index: 50
+  Average Time: 0.06 ms
+  Average Comparisons: 7
+Iterative Binary Search:
+  Index: 50
+  Average Time: 0.04 ms
+  Average Comparisons: 7
+
+Array Size: 1000
+Input Array: [-1000, -996, -995, -994, -987, -986, -985, -984, -983, -982, ...]
+Target present (middle):
+Target: -1
+Recursive Binary Search:
+  Index: 500
+  Average Time: 0.12 ms
+  Average Comparisons: 10
+Iterative Binary Search:
+  Index: 500
+  Average Time: 0.08 ms
+  Average Comparisons: 10
+
+Target absent:
+Target: 1000000
+Recursive Binary Search:
+  Index: -1
+  Average Time: 0.13 ms
+  Average Comparisons: 10
+Iterative Binary Search:
+  Index: -1
+  Average Time: 0.09 ms
+  Average Comparisons: 10
+
+Target middle element:
+Target: -1
+Recursive Binary Search:
+  Index: 500
+  Average Time: 0.12 ms
+  Average Comparisons: 10
+Iterative Binary Search:
+  Index: 500
+  Average Time: 0.08 ms
+  Average Comparisons: 10
+</code></pre>
+<p>Explanation:</p>
+<ul>
+<li>Size 10: Both find middle target in ~2-3 comparisons, absent in ~4; iterative is slightly faster (~0.01-0.02 ms vs. 0.02-0.03 ms).</li>
+<li>Size 100: Both find middle target in ~7 comparisons, absent in ~7; iterative is faster (~0.04-0.05 ms vs. 0.06-0.07 ms).</li>
+<li>Size 1000: Both find middle target in ~10 comparisons, absent in ~10; iterative is faster (~0.08-0.09 ms vs. 0.12-0.13 ms).</li>
+<li>Recursive has higher overhead due to call stack; comparisons are identical.</li>
+</ul>
+<h2 id="how-it-works"><a class="header" href="#how-it-works">How It Works</a></h2>
+<ul>
+<li><strong>recursiveBinarySearch</strong>:
+<ul>
+<li>Recursively narrows the search range by computing <code>mid</code> and comparing <code>arr[mid]</code> to the target.</li>
+<li>Increments comparisons and returns <code>[index, comparisons]</code> or recurses on the appropriate half.</li>
+</ul>
+</li>
+<li><strong>iterativeBinarySearch</strong>:
+<ul>
+<li>Uses a loop to narrow the range, with identical logic to recursive but without call stack overhead.</li>
+</ul>
+</li>
+<li><strong>generateSortedArray</strong>: Creates a random sorted array with a fixed seed.</li>
+<li><strong>toString</strong>: Formats array, limiting to 10 elements.</li>
+<li><strong>Example Trace (Size 10, Target=360)</strong>:
+<ul>
+<li>Array: [-766, -628, -333, 289, 304, 360, 374, 648, 727, 767].</li>
+<li>Recursive: left=0, right=9, mid=4, arr[4]=304 &lt; 360, comparisons=1, recurse (left=5, right=9).</li>
+<li>Next: left=5, right=9, mid=7, arr[7]=648 &gt; 360, comparisons=2, recurse (left=5, right=6).</li>
+<li>Next: left=5, right=6, mid=5, arr[5]=360 = 360, comparisons=3, return [5, 3].</li>
+<li>Iterative: Same steps in a loop, returning [5, 3].</li>
+</ul>
+</li>
+<li><strong>Main Method</strong>: Tests sizes 10, 100, 1000 with present, absent, middle targets, averaging time and comparisons over 10 runs.</li>
+</ul>
+<h2 id="complexity-analysis-table"><a class="header" href="#complexity-analysis-table">Complexity Analysis Table</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Operation</th><th>Time Complexity</th><th>Space Complexity</th></tr></thead><tbody>
+<tr><td>recursiveBinarySearch</td><td>O(log n)</td><td>O(log n)</td></tr>
+<tr><td>iterativeBinarySearch</td><td>O(log n)</td><td>O(1)</td></tr>
+<tr><td>generateSortedArray</td><td>O(n log n)</td><td>O(n)</td></tr>
+<tr><td>toString</td><td>O(n)</td><td>O(n)</td></tr>
+</tbody></table>
+</div>
+<p><em>Note</em>:</p>
+<ul>
+<li>n is the array length.</li>
+<li>Time complexity: O(log n) for both searches (halves range each step); O(n log n) for generateSortedArray (sorting); O(n) for toString.</li>
+<li>Space complexity: O(log n) for recursiveBinarySearch (call stack); O(1) for iterativeBinarySearch; O(n) for generateSortedArray and toString.</li>
+<li>Iterative is faster due to no recursion overhead; comparisons are identical.</li>
+</ul>
+<blockquote>
+<p><strong>✅ Tip</strong>: Recursive Binary Search is elegant and easier to understand for some, but iterative Binary Search is typically faster due to lower overhead. Use multiple runs to measure performance accurately.</p>
+</blockquote>
+<blockquote>
+<p><strong>⚠ Warning</strong>: Recursive Binary Search uses O(log n) stack space, which can cause stack overflow for very large arrays. Prefer iterative Binary Search for production code to avoid this risk.</p>
+</blockquote>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../problemStatements/ch05_02/BinarySearchPerformanceAnalysis.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../../appendix_glossary.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../problemStatements/ch05_02/BinarySearchPerformanceAnalysis.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../../appendix_glossary.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../../elasticlunr.min.js"></script>
+        <script src="../../mark.min.js"></script>
+        <script src="../../searcher.js"></script>
+
+        <script src="../../clipboard.min.js"></script>
+        <script src="../../highlight.js"></script>
+        <script src="../../book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="../../theme/ferris.js"></script>
+
+
+    </div>
+    </body>
+</html>

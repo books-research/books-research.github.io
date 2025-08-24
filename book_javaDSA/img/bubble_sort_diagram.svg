@@ -1,0 +1,71 @@
+<svg width="500" height="350" xmlns="http://www.w3.org/2000/svg">
+  <!-- Initial array: [5, 3, 8, 1, 9] -->
+  <rect x="50" y="30" width="40" height="40" stroke="black" fill="white"/>
+  <text x="65" y="55" font-size="20" text-anchor="middle">5</text>
+  <text x="65" y="25" font-size="12" text-anchor="middle">0</text>
+  <rect x="110" y="30" width="40" height="40" stroke="black" fill="white"/>
+  <text x="125" y="55" font-size="20" text-anchor="middle">3</text>
+  <text x="125" y="25" font-size="12" text-anchor="middle">1</text>
+  <rect x="170" y="30" width="40" height="40" stroke="black" fill="white"/>
+  <text x="185" y="55" font-size="20" text-anchor="middle">8</text>
+  <text x="185" y="25" font-size="12" text-anchor="middle">2</text>
+  <rect x="230" y="30" width="40" height="40" stroke="black" fill="white"/>
+  <text x="245" y="55" font-size="20" text-anchor="middle">1</text>
+  <text x="245" y="25" font-size="12" text-anchor="middle">3</text>
+  <rect x="290" y="30" width="40" height="40" stroke="black" fill="white"/>
+  <text x="305" y="55" font-size="20" text-anchor="middle">9</text>
+  <text x="305" y="25" font-size="12" text-anchor="middle">4</text>
+  <text x="190" y="15" font-size="14" text-anchor="middle">Initial Array</text>
+
+  <!-- First pass: Comparisons and swaps -->
+  <!-- Comparison 5 vs. 3, swap -->
+  <path d="M65 90 L125 90" stroke="blue" stroke-width="3" marker-end="url(#arrowhead)" marker-start="url(#arrowhead)"/>
+  <text x="95" y="80" font-size="14" text-anchor="middle" fill="blue">Compare 5>3</text>
+  <path d="M65 110 L125 110" stroke="red" stroke-width="3" marker-end="url(#arrowhead-red)"/>
+  <path d="M125 110 L65 110" stroke="red" stroke-width="3" marker-end="url(#arrowhead-red)"/>
+  <text x="95" y="130" font-size="14" text-anchor="middle" fill="red">Swap 5↔3</text>
+  <!-- Comparison 5 vs. 8, no swap -->
+  <path d="M125 150 L185 150" stroke="blue" stroke-width="3" marker-end="url(#arrowhead)" marker-start="url(#arrowhead)"/>
+  <text x="155" y="140" font-size="14" text-anchor="middle" fill="blue">Compare 5<8</text>
+  <!-- Comparison 8 vs. 1, swap -->
+  <path d="M185 170 L245 170" stroke="blue" stroke-width="3" marker-end="url(#arrowhead)" marker-start="url(#arrowhead)"/>
+  <text x="215" y="160" font-size="14" text-anchor="middle" fill="blue">Compare 8>1</text>
+  <path d="M185 190 L245 190" stroke="red" stroke-width="3" marker-end="url(#arrowhead-red)"/>
+  <path d="M245 190 L185 190" stroke="red" stroke-width="3" marker-end="url(#arrowhead-red)"/>
+  <text x="215" y="210" font-size="14" text-anchor="middle" fill="red">Swap 8↔1</text>
+  <!-- Comparison 8 vs. 9, no swap -->
+  <path d="M245 230 L305 230" stroke="blue" stroke-width="3" marker-end="url(#arrowhead)" marker-start="url(#arrowhead)"/>
+  <text x="275" y="220" font-size="14" text-anchor="middle" fill="blue">Compare 8<9</text>
+
+  <!-- Resulting array after first pass: [3, 5, 1, 8, 9] -->
+  <rect x="50" y="270" width="40" height="40" stroke="black" fill="white"/>
+  <text x="65" y="295" font-size="20" text-anchor="middle">3</text>
+  <text x="65" y="265" font-size="12" text-anchor="middle">0</text>
+  <rect x="110" y="270" width="40" height="40" stroke="black" fill="white"/>
+  <text x="125" y="295" font-size="20" text-anchor="middle">5</text>
+  <text x="125" y="265" font-size="12" text-anchor="middle">1</text>
+  <rect x="170" y="270" width="40" height="40" stroke="black" fill="white"/>
+  <text x="185" y="295" font-size="20" text-anchor="middle">1</text>
+  <text x="185" y="265" font-size="12" text-anchor="middle">2</text>
+  <rect x="230" y="270" width="40" height="40" stroke="black" fill="white"/>
+  <text x="245" y="295" font-size="20" text-anchor="middle">8</text>
+  <text x="245" y="265" font-size="12" text-anchor="middle">3</text>
+  <rect x="290" y="270" width="40" height="40" stroke="black" fill="lightgreen"/>
+  <text x="305" y="295" font-size="20" text-anchor="middle">9</text>
+  <text x="305" y="265" font-size="12" text-anchor="middle">4</text>
+  <text x="190" y="255" font-size="14" text-anchor="middle">After First Pass</text>
+
+  <!-- Arrow definitions -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="blue"/>
+    </marker>
+    <marker id="arrowhead-red" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="red"/>
+    </marker>
+  </defs>
+
+  <!-- Caption -->
+  <text x="50" y="330" font-size="12" text-anchor="start">Bubble Sort compares and swaps adjacent elements, moving the largest</text>
+  <text x="50" y="345" font-size="12" text-anchor="start">unsorted element to the end in each pass until the array is sorted.</text>
+</svg>

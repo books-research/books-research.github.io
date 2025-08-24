@@ -1,0 +1,343 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>TailRecursiveSum - Java Data Structures and Algorithms for Beginners</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../../favicon.svg">
+        <link rel="shortcut icon" href="../../favicon.png">
+        <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+        <link rel="stylesheet" href="../../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="../../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../../theme/ferris.css">
+        <link rel="stylesheet" href="../../theme/semantic-notes.css">
+        <link rel="stylesheet" href="../../theme/listing.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../../toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Java Data Structures and Algorithms for Beginners</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <style>
+body {
+  text-align: justify;
+}
+</style>
+<h1 id="tail-recursive-sum"><a class="header" href="#tail-recursive-sum">Tail-Recursive Sum</a></h1>
+<h2 id="problem-statement"><a class="header" href="#problem-statement">Problem Statement</a></h2>
+<p>Write a Java program that computes the sum of all elements in an array of integers using a tail-recursive function with an accumulator to track the running sum. The program should return the total sum and test the function with arrays of different sizes, including empty arrays and single-element arrays. You can visualize this as tallying the total score of a series of games, where each game’s score is added to a running total, passing the updated total to the next step recursively until all scores are processed.</p>
+<p><strong>Input</strong>: An array of integers (e.g., <code>arr = [1, 2, 3, 4, 5]</code>).
+<strong>Output</strong>: A long integer representing the sum of all elements in the array (e.g., 15 for <code>[1, 2, 3, 4, 5]</code>).
+<strong>Constraints</strong>:</p>
+<ul>
+<li>The array length is between 0 and 10^5.</li>
+<li>Elements are integers between -10^9 and 10^9.</li>
+<li>The array may be empty.
+<strong>Example</strong>:</li>
+<li>Input: <code>arr = [1, 2, 3, 4, 5]</code></li>
+<li>Output: 15</li>
+<li>Explanation: The sum is calculated as 1 + 2 + 3 + 4 + 5 = 15.</li>
+<li>Input: <code>arr = []</code></li>
+<li>Output: 0</li>
+<li>Explanation: The sum of an empty array is 0.</li>
+</ul>
+<h2 id="pseudocode"><a class="header" href="#pseudocode">Pseudocode</a></h2>
+<pre><code>FUNCTION tailRecursiveSum(arr, index, accumulator)
+    IF arr is null OR index equals length of arr THEN
+        RETURN accumulator
+    ENDIF
+    SET newAccumulator to accumulator + arr[index]
+    RETURN tailRecursiveSum(arr, index + 1, newAccumulator)
+ENDFUNCTION
+
+FUNCTION mainSum(arr)
+    IF arr is null THEN
+        RETURN 0
+    ENDIF
+    RETURN tailRecursiveSum(arr, 0, 0)
+ENDFUNCTION
+</code></pre>
+<h2 id="algorithm-steps"><a class="header" href="#algorithm-steps">Algorithm Steps</a></h2>
+<ol>
+<li>Check if the input array is null. If so, return 0.</li>
+<li>Define a tail-recursive helper function that takes the array, the current index, and an accumulator as parameters.</li>
+<li>In the helper function, implement the base case: if the index equals the array length, return the accumulator.</li>
+<li>For the recursive case, add the current element to the accumulator and recursively call the function with the next index and the updated accumulator.</li>
+<li>In the main function, call the tail-recursive function with the initial index set to 0 and the accumulator set to 0.</li>
+<li>Return the final sum computed by the tail-recursive function.</li>
+</ol>
+<h2 id="java-implementation"><a class="header" href="#java-implementation">Java Implementation</a></h2>
+<pre><code class="language-java">public class TailRecursiveSum {
+    // Computes sum of array elements using tail recursion
+    public long sum(int[] arr) {
+        // Check for null array
+        if (arr == null) {
+            return 0;
+        }
+        // Call tail-recursive helper with initial index and accumulator
+        return tailRecursiveSum(arr, 0, 0);
+    }
+
+    // Helper function for tail-recursive sum
+    private long tailRecursiveSum(int[] arr, int index, long accumulator) {
+        // Base case: if index reaches array length, return accumulator
+        if (index == arr.length) {
+            return accumulator;
+        }
+        // Recursive case: update accumulator and recurse
+        return tailRecursiveSum(arr, index + 1, accumulator + arr[index]);
+    }
+}
+</code></pre>
+<h2 id="output"><a class="header" href="#output">Output</a></h2>
+<p>For the input array <code>[1, 2, 3, 4, 5]</code>, the program outputs:</p>
+<pre><code>15
+</code></pre>
+<p>Explanation: The sum is computed as 1 + 2 + 3 + 4 + 5 = 15.</p>
+<p>For an empty array <code>[]</code>, the program outputs:</p>
+<pre><code>0
+</code></pre>
+<p>Explanation: The sum of an empty array is 0.</p>
+<p>For a single-element array <code>[7]</code>, the program outputs:</p>
+<pre><code>7
+</code></pre>
+<p>Explanation: The sum of a single-element array is the element itself.</p>
+<h2 id="how-it-works"><a class="header" href="#how-it-works">How It Works</a></h2>
+<ul>
+<li><strong>Step 1</strong>: The <code>sum</code> method checks if the array is null. For <code>[1, 2, 3, 4, 5]</code>, it calls <code>tailRecursiveSum</code> with <code>index = 0</code> and <code>accumulator = 0</code>.</li>
+<li><strong>Step 2</strong>: In <code>tailRecursiveSum</code>:
+<ul>
+<li>Index 0: <code>accumulator = 0 + 1 = 1</code>, recurse with <code>index = 1</code>, <code>accumulator = 1</code>.</li>
+<li>Index 1: <code>accumulator = 1 + 2 = 3</code>, recurse with <code>index = 2</code>, <code>accumulator = 3</code>.</li>
+<li>Index 2: <code>accumulator = 3 + 3 = 6</code>, recurse with <code>index = 3</code>, <code>accumulator = 6</code>.</li>
+<li>Index 3: <code>accumulator = 6 + 4 = 10</code>, recurse with <code>index = 4</code>, <code>accumulator = 10</code>.</li>
+<li>Index 4: <code>accumulator = 10 + 5 = 15</code>, recurse with <code>index = 5</code>, <code>accumulator = 15</code>.</li>
+<li>Index 5: Base case, return <code>accumulator = 15</code>.</li>
+</ul>
+</li>
+<li><strong>Example Trace</strong>: For <code>[1, 2, 3, 4, 5]</code>, the accumulator builds: 0 → 1 → 3 → 6 → 10 → 15, returning 15.</li>
+<li><strong>Tail Recursion Note</strong>: The function is tail-recursive because the recursive call is the last operation, allowing potential optimization in languages that support tail-call optimization (though Java does not natively optimize tail recursion).</li>
+</ul>
+<h2 id="complexity-analysis-table"><a class="header" href="#complexity-analysis-table">Complexity Analysis Table</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Operation</th><th>Time Complexity</th><th>Space Complexity</th></tr></thead><tbody>
+<tr><td>Recursive Call</td><td>O(n)</td><td>O(n)</td></tr>
+<tr><td>Full Algorithm</td><td>O(n)</td><td>O(n)</td></tr>
+</tbody></table>
+</div>
+<p><em>Note</em>:</p>
+<ul>
+<li>n is the size of the input array.</li>
+<li>Time complexity: O(n), as the function processes each element exactly once.</li>
+<li>Space complexity: O(n) due to the recursive call stack, as Java does not optimize tail recursion.</li>
+<li>Best, average, and worst cases are O(n), as all elements are processed.</li>
+</ul>
+<blockquote>
+<p><strong>✅ Tip</strong>: Use tail recursion with an accumulator to make recursive functions more intuitive by tracking state explicitly. Test with large arrays (e.g., 10^4 elements) and edge cases like empty or single-element arrays to ensure correctness.</p>
+</blockquote>
+<blockquote>
+<p><strong>⚠ Warning</strong>: Java does not optimize tail recursion, so the O(n) space complexity may lead to stack overflow for very large arrays. Consider iterative solutions for better space efficiency in such cases.</p>
+</blockquote>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../problemStatements/ch02_03/TailRecursivePower.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../../problemStatements/arrayProblemSolving.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../problemStatements/ch02_03/TailRecursivePower.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../../problemStatements/arrayProblemSolving.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../../elasticlunr.min.js"></script>
+        <script src="../../mark.min.js"></script>
+        <script src="../../searcher.js"></script>
+
+        <script src="../../clipboard.min.js"></script>
+        <script src="../../highlight.js"></script>
+        <script src="../../book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="../../theme/ferris.js"></script>
+
+
+    </div>
+    </body>
+</html>

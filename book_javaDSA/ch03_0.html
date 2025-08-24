@@ -1,0 +1,314 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Data Structures - Java Data Structures and Algorithms for Beginners</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="theme/ferris.css">
+        <link rel="stylesheet" href="theme/semantic-notes.css">
+        <link rel="stylesheet" href="theme/listing.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Java Data Structures and Algorithms for Beginners</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <style>
+body {
+  text-align: justify;
+}
+</style>
+<h2 id="core-data-structures"><a class="header" href="#core-data-structures">Core Data Structures</a></h2>
+<h3 id="what-are-core-data-structures"><a class="header" href="#what-are-core-data-structures">What are Core Data Structures?</a></h3>
+<p>Core data structures are the basic ways of organizing and storing data so that it can be used efficiently.<br />
+They are the <em>building blocks</em> of all programs — from a simple calculator app to large-scale social media platforms.</p>
+<h3 id="why-learn-core-data-structures"><a class="header" href="#why-learn-core-data-structures">Why Learn Core Data Structures?</a></h3>
+<ul>
+<li><strong>Efficiency:</strong> Choosing the right data structure can make programs run much faster.</li>
+<li><strong>Problem Solving:</strong> Many real-world problems map directly to these structures.</li>
+<li><strong>Foundation for Advanced DSA:</strong> You can’t master algorithms without knowing how data is stored and accessed.</li>
+<li><strong>Interview Readiness:</strong> Core data structures are a favorite topic in technical interviews.</li>
+</ul>
+<h3 id="-what-you-will-learn-in-this-chapter"><a class="header" href="#-what-you-will-learn-in-this-chapter">📖 What You Will Learn in This Chapter</a></h3>
+<p>This chapter introduces you to the most commonly used data structures, their uses, advantages, disadvantages, and Java implementations.</p>
+<h3 id="1-array"><a class="header" href="#1-array">1. <strong>Array</strong></a></h3>
+<ul>
+<li>What is an Array and how it works.</li>
+<li>How to store and access elements using indexes.</li>
+<li>Limitations of arrays.</li>
+<li>Real-life example: Managing a list of student marks.</li>
+</ul>
+<h3 id="2-strings"><a class="header" href="#2-strings">2. <strong>Strings</strong></a></h3>
+<ul>
+<li>How strings store sequences of characters.</li>
+<li>String manipulation in Java.</li>
+<li>Common operations like concatenation, searching, and substring extraction.</li>
+<li>Real-life example: Checking if a password contains a special character.</li>
+</ul>
+<h3 id="3-linked-lists"><a class="header" href="#3-linked-lists">3. <strong>Linked Lists</strong></a></h3>
+<ul>
+<li>How nodes are connected using references.</li>
+<li>Singly vs Doubly linked lists.</li>
+<li>Adding, deleting, and traversing nodes.</li>
+<li>Real-life example: Music playlist navigation.</li>
+</ul>
+<h3 id="4-stacks"><a class="header" href="#4-stacks">4. <strong>Stacks</strong></a></h3>
+<ul>
+<li>Last In, First Out (LIFO) principle.</li>
+<li>Push, Pop, Peek operations.</li>
+<li>Real-life example: Undo/Redo feature in editors.</li>
+</ul>
+<h3 id="5-queues"><a class="header" href="#5-queues">5. <strong>Queues</strong></a></h3>
+<ul>
+<li>First In, First Out (FIFO) principle.</li>
+<li>Enqueue and Dequeue operations.</li>
+<li>Variations like Circular Queue and Priority Queue.</li>
+<li>Real-life example: Ticket booking system.</li>
+</ul>
+<h3 id="6-hashing"><a class="header" href="#6-hashing">6. <strong>Hashing</strong></a></h3>
+<ul>
+<li>Storing and retrieving data using key–value pairs.</li>
+<li>Hash functions and hash tables.</li>
+<li>Handling collisions.</li>
+<li>Real-life example: Fast dictionary lookup.</li>
+</ul>
+<h3 id="7-trees"><a class="header" href="#7-trees">7. <strong>Trees</strong></a></h3>
+<ul>
+<li>Hierarchical data representation.</li>
+<li>Types of trees: Binary, Binary Search Tree (BST), etc.</li>
+<li>Traversal methods (Inorder, Preorder, Postorder).</li>
+<li>Real-life example: Folder structure in your computer.</li>
+</ul>
+<h3 id="8-graphs"><a class="header" href="#8-graphs">8. <strong>Graphs</strong></a></h3>
+<ul>
+<li>Nodes (vertices) and connections (edges).</li>
+<li>Directed vs Undirected graphs.</li>
+<li>Representations: Adjacency Matrix and Adjacency List.</li>
+<li>Real-life example: Social network connections.</li>
+</ul>
+<h2 id="-how-we-will-learn"><a class="header" href="#-how-we-will-learn">🛠 How We Will Learn</a></h2>
+<p>For each data structure, we will cover:</p>
+<ol>
+<li><strong>Definition</strong> – What it is.</li>
+<li><strong>Why</strong> – Advantages and limitations.</li>
+<li><strong>Where to Use</strong> – Real-life scenarios.</li>
+<li><strong>Java Implementation</strong> – With step-by-step explanations.</li>
+<li><strong>Complexity Analysis</strong> – Understanding performance.</li>
+</ol>
+<h3 id="key-takeaway"><a class="header" href="#key-takeaway">Key Takeaway</a></h3>
+<p>By the end of this chapter, you will be able to:</p>
+<ul>
+<li>Identify the right data structure for a problem.</li>
+<li>Implement it in Java.</li>
+<li>Analyze its performance.</li>
+<li>Use it in real-world applications.</li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="ch02_03.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="ch03_01.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="ch02_03.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="ch03_01.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="theme/ferris.js"></script>
+
+
+    </div>
+    </body>
+</html>

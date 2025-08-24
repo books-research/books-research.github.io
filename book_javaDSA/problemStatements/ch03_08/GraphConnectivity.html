@@ -1,0 +1,504 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>GraphConnectivity - Java Data Structures and Algorithms for Beginners</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../../favicon.svg">
+        <link rel="shortcut icon" href="../../favicon.png">
+        <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+        <link rel="stylesheet" href="../../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="../../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../../theme/ferris.css">
+        <link rel="stylesheet" href="../../theme/semantic-notes.css">
+        <link rel="stylesheet" href="../../theme/listing.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../../toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Java Data Structures and Algorithms for Beginners</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <style>
+body {
+  text-align: justify;
+}
+</style>
+<h1 id="graph-connectivity"><a class="header" href="#graph-connectivity">Graph Connectivity</a></h1>
+<h2 id="problem-statement"><a class="header" href="#problem-statement">Problem Statement</a></h2>
+<p>Write a Java program that implements a graph using an adjacency list and checks if the graph is connected, meaning all vertices are reachable from a starting vertex, using Depth-First Search (DFS). The graph is undirected, and connectivity is determined by checking if a DFS from any vertex visits all vertices. The program should test the connectivity check with various graphs, including connected, disconnected, empty, and single-vertex graphs. You can visualize this as exploring a network of cities connected by roads, ensuring you can travel from one city to all others.</p>
+<p><strong>Input</strong>:</p>
+<ul>
+<li>An undirected graph represented by an adjacency list, with vertices as integers (0 to n-1).</li>
+<li>The number of vertices <code>n</code> and a list of edges (pairs of vertices).
+<strong>Output</strong>: A boolean indicating whether the graph is connected, and a string representation of the graph’s adjacency list for clarity.
+<strong>Constraints</strong>:</li>
+<li>The number of vertices <code>n</code> is between 0 and 10^5.</li>
+<li>Edges are pairs of integers [u, v] where 0 ≤ u, v &lt; n.</li>
+<li>The graph is undirected (edge [u, v] implies [v, u]).
+<strong>Example</strong>:</li>
+<li>Input: n = 5, edges = [[0, 1], [1, 2], [2, 3], [3, 4]]</li>
+<li>Output: Connected = true, "Adjacency List: {0=[1], 1=[0, 2], 2=[1, 3], 3=[2, 4], 4=[3]}"</li>
+<li>Explanation: All vertices are reachable from vertex 0.</li>
+<li>Input: n = 5, edges = [[0, 1], [2, 3]]</li>
+<li>Output: Connected = false, "Adjacency List: {0=[1], 1=[0], 2=[3], 3=[2], 4=[]}"</li>
+<li>Explanation: Vertex 4 is unreachable, so the graph is disconnected.</li>
+<li>Input: n = 0, edges = []</li>
+<li>Output: Connected = true, "Adjacency List: {}"</li>
+<li>Explanation: An empty graph is considered connected.</li>
+</ul>
+<h2 id="pseudocode"><a class="header" href="#pseudocode">Pseudocode</a></h2>
+<pre><code>FUNCTION createGraph(n, edges)
+    CREATE adjList as new HashMap
+    FOR i from 0 to n-1
+        SET adjList[i] to empty list
+    ENDFOR
+    FOR each edge [u, v] in edges
+        ADD v to adjList[u]
+        ADD u to adjList[v]
+    ENDFOR
+    RETURN adjList
+ENDFUNCTION
+
+FUNCTION isConnected(adjList, n)
+    IF n is 0 THEN
+        RETURN true
+    ENDIF
+    CREATE visited as boolean array of size n, initialized to false
+    FUNCTION dfs(vertex)
+        SET visited[vertex] to true
+        FOR each neighbor in adjList[vertex]
+            IF NOT visited[neighbor] THEN
+                CALL dfs(neighbor)
+            ENDIF
+        ENDFOR
+    ENDFUNCTION
+    CALL dfs(0)
+    FOR i from 0 to n-1
+        IF NOT visited[i] THEN
+            RETURN false
+        ENDIF
+    ENDFOR
+    RETURN true
+ENDFUNCTION
+
+FUNCTION toString(adjList)
+    CREATE result as new StringBuilder
+    APPEND "Adjacency List: {" to result
+    FOR each vertex in adjList
+        APPEND vertex and "=" and adjList[vertex] to result
+        IF vertex is not last THEN
+            APPEND ", " to result
+        ENDIF
+    ENDFOR
+    APPEND "}" to result
+    RETURN result as string
+ENDFUNCTION
+
+FUNCTION main()
+    SET testCases to array of (n, edges) pairs
+    FOR each testCase in testCases
+        PRINT test case details
+        SET adjList to createGraph(testCase.n, testCase.edges)
+        CALL isConnected(adjList, testCase.n)
+        PRINT connected result and graph using toString
+    ENDFOR
+ENDFUNCTION
+</code></pre>
+<h2 id="algorithm-steps"><a class="header" href="#algorithm-steps">Algorithm Steps</a></h2>
+<ol>
+<li>Define <code>createGraph</code>:
+a. Create a HashMap <code>adjList</code> mapping vertices to lists of neighbors.
+b. Initialize empty lists for vertices 0 to n-1.
+c. Add edges bidirectionally (u→v, v→u).</li>
+<li>Define <code>isConnected</code>:
+a. If n = 0, return true (empty graph is connected).
+b. Use DFS starting from vertex 0:
+<ul>
+<li>Mark vertex as visited.</li>
+<li>Recursively visit unvisited neighbors.
+c. Check if all vertices are visited; return false if any are not.</li>
+</ul>
+</li>
+<li>Define <code>toString</code>:
+a. Convert adjacency list to a string, e.g., "{0=[1], 1=[0, 2], ...}".</li>
+<li>In <code>main</code>, test with:
+a. A connected graph.
+b. A disconnected graph.
+c. An empty graph (n = 0).
+d. A single-vertex graph.</li>
+</ol>
+<h2 id="java-implementation"><a class="header" href="#java-implementation">Java Implementation</a></h2>
+<pre><code class="language-java">import java.util.*;
+
+public class GraphConnectivity {
+    // Creates adjacency list representation of the graph
+    private Map&lt;Integer, List&lt;Integer&gt;&gt; createGraph(int n, int[][] edges) {
+        Map&lt;Integer, List&lt;Integer&gt;&gt; adjList = new HashMap&lt;&gt;();
+        for (int i = 0; i &lt; n; i++) {
+            adjList.put(i, new ArrayList&lt;&gt;());
+        }
+        for (int[] edge : edges) {
+            int u = edge[0], v = edge[1];
+            adjList.get(u).add(v);
+            adjList.get(v).add(u); // Undirected graph
+        }
+        return adjList;
+    }
+
+    // Checks if the graph is connected using DFS
+    public boolean isConnected(Map&lt;Integer, List&lt;Integer&gt;&gt; adjList, int n) {
+        if (n == 0) {
+            return true;
+        }
+        boolean[] visited = new boolean[n];
+        dfs(0, adjList, visited);
+        for (int i = 0; i &lt; n; i++) {
+            if (!visited[i]) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private void dfs(int vertex, Map&lt;Integer, List&lt;Integer&gt;&gt; adjList, boolean[] visited) {
+        visited[vertex] = true;
+        for (int neighbor : adjList.get(vertex)) {
+            if (!visited[neighbor]) {
+                dfs(neighbor, adjList, visited);
+            }
+        }
+    }
+
+    // Converts graph to string (adjacency list)
+    public String toString(Map&lt;Integer, List&lt;Integer&gt;&gt; adjList) {
+        StringBuilder result = new StringBuilder("Adjacency List: {");
+        List&lt;Integer&gt; vertices = new ArrayList&lt;&gt;(adjList.keySet());
+        Collections.sort(vertices); // For consistent output
+        for (int i = 0; i &lt; vertices.size(); i++) {
+            int vertex = vertices.get(i);
+            result.append(vertex).append("=").append(adjList.get(vertex));
+            if (i &lt; vertices.size() - 1) {
+                result.append(", ");
+            }
+        }
+        result.append("}");
+        return result.toString();
+    }
+
+    // Helper class for test cases
+    static class TestCase {
+        int n;
+        int[][] edges;
+
+        TestCase(int n, int[][] edges) {
+            this.n = n;
+            this.edges = edges;
+        }
+    }
+
+    // Main method to test graph connectivity
+    public static void main(String[] args) {
+        GraphConnectivity connectivityChecker = new GraphConnectivity();
+
+        // Test cases
+        TestCase[] testCases = {
+            // Connected graph: 0-1-2-3-4
+            new TestCase(5, new int[][]{{0, 1}, {1, 2}, {2, 3}, {3, 4}}),
+            // Disconnected graph: 0-1, 2-3, 4 isolated
+            new TestCase(5, new int[][]{{0, 1}, {2, 3}}),
+            // Empty graph
+            new TestCase(0, new int[][]{}),
+            // Single vertex
+            new TestCase(1, new int[][]{})
+        };
+
+        // Run test cases
+        for (int i = 0; i &lt; testCases.length; i++) {
+            System.out.println("Test case " + (i + 1) + ":");
+            System.out.println("Vertices: " + testCases[i].n);
+            System.out.println("Edges: " + Arrays.deepToString(testCases[i].edges));
+            Map&lt;Integer, List&lt;Integer&gt;&gt; adjList = connectivityChecker.createGraph(testCases[i].n, testCases[i].edges);
+            boolean isConnected = connectivityChecker.isConnected(adjList, testCases[i].n);
+            System.out.println("Connected: " + isConnected);
+            System.out.println(connectivityChecker.toString(adjList) + "\n");
+        }
+    }
+}
+</code></pre>
+<h2 id="output"><a class="header" href="#output">Output</a></h2>
+<p>Running the <code>main</code> method produces:</p>
+<pre><code>Test case 1:
+Vertices: 5
+Edges: [[0, 1], [1, 2], [2, 3], [3, 4]]
+Connected: true
+Adjacency List: {0=[1], 1=[0, 2], 2=[1, 3], 3=[2, 4], 4=[3]}
+
+Test case 2:
+Vertices: 5
+Edges: [[0, 1], [2, 3]]
+Connected: false
+Adjacency List: {0=[1], 1=[0], 2=[3], 3=[2], 4=[]}
+
+Test case 3:
+Vertices: 0
+Edges: []
+Connected: true
+Adjacency List: {}
+
+Test case 4:
+Vertices: 1
+Edges: []
+Connected: true
+Adjacency List: {0=[]}
+</code></pre>
+<p>Explanation:</p>
+<ul>
+<li>Test case 1: All vertices are reachable from 0 (0→1→2→3→4), so connected.</li>
+<li>Test case 2: Vertex 4 is isolated, so disconnected.</li>
+<li>Test case 3: Empty graph is connected by definition.</li>
+<li>Test case 4: Single vertex is connected (no edges needed).</li>
+</ul>
+<h2 id="how-it-works"><a class="header" href="#how-it-works">How It Works</a></h2>
+<ul>
+<li><strong>createGraph</strong>: Builds an adjacency list using a HashMap, adding undirected edges (u→v, v→u).</li>
+<li><strong>isConnected</strong>:
+<ul>
+<li>Returns true for n = 0 (empty graph).</li>
+<li>Runs DFS from vertex 0, marking visited vertices.</li>
+<li>Checks if all vertices are visited; returns false if any are not.</li>
+</ul>
+</li>
+<li><strong>dfs</strong>: Marks current vertex, recursively visits unvisited neighbors.</li>
+<li><strong>toString</strong>: Formats adjacency list as a string, sorting vertices for consistency.</li>
+<li><strong>Example Trace (Test case 1)</strong>:
+<ul>
+<li>DFS from 0: Visit 0, 1, 2, 3, 4 (via 0→1→2→3→4).</li>
+<li>All vertices visited, return true.</li>
+</ul>
+</li>
+<li><strong>Main Method</strong>: Tests connected graph, disconnected graph, empty graph, and single vertex.</li>
+</ul>
+<h2 id="complexity-analysis-table"><a class="header" href="#complexity-analysis-table">Complexity Analysis Table</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Operation</th><th>Time Complexity</th><th>Space Complexity</th></tr></thead><tbody>
+<tr><td>createGraph</td><td>O(n + e)</td><td>O(n + e)</td></tr>
+<tr><td>isConnected</td><td>O(n + e)</td><td>O(n)</td></tr>
+<tr><td>toString</td><td>O(n log n + e)</td><td>O(n + e)</td></tr>
+</tbody></table>
+</div>
+<p><em>Note</em>:</p>
+<ul>
+<li>n is the number of vertices, e is the number of edges.</li>
+<li>Time complexity: O(n + e) for createGraph (initialize lists and add edges); O(n + e) for isConnected (DFS visits each vertex and edge once); O(n log n + e) for toString (sorting vertices).</li>
+<li>Space complexity: O(n + e) for createGraph and toString (adjacency list); O(n) for isConnected (visited array and recursion stack).</li>
+<li>Worst case: O(n + e) time and space for dense graphs.</li>
+</ul>
+<blockquote>
+<p><strong>✅ Tip</strong>: Use DFS to efficiently explore all reachable vertices from a starting point. For undirected graphs, a single DFS from any vertex is sufficient to check connectivity.</p>
+</blockquote>
+<blockquote>
+<p><strong>⚠ Warning</strong>: Ensure the graph is undirected by adding edges both ways. Handle edge cases like empty graphs or isolated vertices to avoid incorrect connectivity results.</p>
+</blockquote>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../problemStatements/ch03_08/CycleDetection.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../../problemStatements/ch03_08/ShortestPathUnweighted.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../problemStatements/ch03_08/CycleDetection.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../../problemStatements/ch03_08/ShortestPathUnweighted.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../../elasticlunr.min.js"></script>
+        <script src="../../mark.min.js"></script>
+        <script src="../../searcher.js"></script>
+
+        <script src="../../clipboard.min.js"></script>
+        <script src="../../highlight.js"></script>
+        <script src="../../book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="../../theme/ferris.js"></script>
+
+
+    </div>
+    </body>
+</html>

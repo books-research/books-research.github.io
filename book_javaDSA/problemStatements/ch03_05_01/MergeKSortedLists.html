@@ -1,0 +1,623 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>MergeKSortedLists - Java Data Structures and Algorithms for Beginners</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../../favicon.svg">
+        <link rel="shortcut icon" href="../../favicon.png">
+        <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+        <link rel="stylesheet" href="../../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="../../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../../theme/ferris.css">
+        <link rel="stylesheet" href="../../theme/semantic-notes.css">
+        <link rel="stylesheet" href="../../theme/listing.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../../toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Java Data Structures and Algorithms for Beginners</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <style>
+body {
+  text-align: justify;
+}
+</style>
+<h1 id="merge-k-sorted-lists"><a class="header" href="#merge-k-sorted-lists">Merge K Sorted Lists</a></h1>
+<h2 id="problem-statement"><a class="header" href="#problem-statement">Problem Statement</a></h2>
+<p>Write a Java program that merges k sorted arrays into a single sorted array using a priority queue. The program should enqueue the first element of each array along with its array index and value, and repeatedly dequeue the smallest element and enqueue the next element from the same array, continuing until all elements are processed. Test the implementation with various cases, including multiple arrays, single arrays, empty arrays, and arrays with duplicate elements. You can visualize this as combining k sorted lists of exam scores into one sorted list, using a priority queue to always pick the smallest score available from the lists.</p>
+<p><strong>Input</strong>:</p>
+<ul>
+<li>A list of k sorted arrays, where each array contains integers (e.g., [[1,4,5], [1,3,4], [2,6]]).</li>
+<li>k is the number of arrays (0 ≤ k ≤ 10^3).
+<strong>Output</strong>: A single sorted array containing all elements from the input arrays (e.g., [1,1,2,3,4,4,5,6]).
+<strong>Constraints</strong>:</li>
+<li>Each array is sorted in non-decreasing order.</li>
+<li>Array lengths are between 0 and 10^4.</li>
+<li>Elements are integers in the range [-10^9, 10^9].</li>
+<li>Total number of elements across all arrays is at most 10^4.
+<strong>Example</strong>:</li>
+<li>Input: arrays=[[1,4,5], [1,3,4], [2,6]]</li>
+<li>Output: [1,1,2,3,4,4,5,6]</li>
+<li>Explanation: Merges three sorted arrays into one sorted array.</li>
+<li>Input: arrays=[[]]</li>
+<li>Output: []</li>
+<li>Explanation: Single empty array results in an empty output.</li>
+</ul>
+<h2 id="pseudocode"><a class="header" href="#pseudocode">Pseudocode</a></h2>
+<pre><code>CLASS Element
+    SET value to integer
+    SET arrayIndex to integer
+    SET elementIndex to integer
+ENDCLASS
+
+CLASS MinPriorityQueue
+    SET array to new Element array of size 1000
+    SET size to 0
+    
+    FUNCTION enqueue(value, arrayIndex, elementIndex)
+        IF size equals array length THEN
+            RETURN false
+        ENDIF
+        SET array[size] to new Element(value, arrayIndex, elementIndex)
+        CALL siftUp(size)
+        INCREMENT size
+        RETURN true
+    ENDFUNCTION
+    
+    FUNCTION siftUp(index)
+        WHILE index &gt; 0
+            SET parent to (index - 1) / 2
+            IF array[index].value &gt;= array[parent].value THEN
+                BREAK
+            ENDIF
+            SWAP array[index] and array[parent]
+            SET index to parent
+        ENDWHILE
+    ENDFUNCTION
+    
+    FUNCTION dequeue()
+        IF size equals 0 THEN
+            RETURN null
+        ENDIF
+        SET result to array[0]
+        SET array[0] to array[size - 1]
+        DECREMENT size
+        IF size &gt; 0 THEN
+            CALL siftDown(0)
+        ENDIF
+        RETURN result
+    ENDFUNCTION
+    
+    FUNCTION siftDown(index)
+        SET minIndex to index
+        WHILE true
+            SET left to 2 * index + 1
+            SET right to 2 * index + 2
+            IF left &lt; size AND array[left].value &lt; array[minIndex].value THEN
+                SET minIndex to left
+            ENDIF
+            IF right &lt; size AND array[right].value &lt; array[minIndex].value THEN
+                SET minIndex to right
+            ENDIF
+            IF minIndex equals index THEN
+                BREAK
+            ENDIF
+            SWAP array[index] and array[minIndex]
+            SET index to minIndex
+        ENDWHILE
+    ENDFUNCTION
+ENDCLASS
+
+FUNCTION mergeKSortedLists(arrays)
+    IF arrays is empty THEN
+        RETURN empty array
+    ENDIF
+    CREATE queue as new MinPriorityQueue
+    CREATE result as new list
+    FOR i from 0 to arrays length - 1
+        IF arrays[i] is not empty THEN
+            ENQUEUE (arrays[i][0], i, 0) to queue
+        ENDIF
+    ENDFOR
+    WHILE queue is not empty
+        SET element to queue.dequeue()
+        ADD element.value to result
+        SET arrayIndex to element.arrayIndex
+        SET elementIndex to element.elementIndex + 1
+        IF elementIndex &lt; arrays[arrayIndex] length THEN
+            ENQUEUE (arrays[arrayIndex][elementIndex], arrayIndex, elementIndex) to queue
+        ENDIF
+    ENDWHILE
+    RETURN result as array
+ENDFUNCTION
+
+FUNCTION main()
+    SET testCases to array of lists of sorted arrays
+    FOR each testCase in testCases
+        PRINT test case details
+        CALL mergeKSortedLists(testCase)
+        PRINT merged sorted array
+    ENDFOR
+ENDFUNCTION
+</code></pre>
+<h2 id="algorithm-steps"><a class="header" href="#algorithm-steps">Algorithm Steps</a></h2>
+<ol>
+<li>Define an <code>Element</code> class to store a value, its array index, and its position in that array.</li>
+<li>Define a <code>MinPriorityQueue</code> class using a min-heap with:
+a. An array to store <code>Element</code> objects, prioritized by value.
+b. <code>enqueue</code>: Add element, sift up to maintain min-heap.
+c. <code>siftUp</code>: Move smaller value up.
+d. <code>dequeue</code>: Remove smallest value, sift down.
+e. <code>siftDown</code>: Move larger value down.</li>
+<li>In <code>mergeKSortedLists</code>:
+a. If input is empty, return empty array.
+b. Create a min-heap and result list.
+c. Enqueue first element of each non-empty array with its array index and position.
+d. While queue is not empty:
+<ul>
+<li>Dequeue smallest element, add to result.</li>
+<li>If more elements exist in its array, enqueue the next element.
+e. Return result as array.</li>
+</ul>
+</li>
+<li>In <code>main</code>, test with multiple arrays, single arrays, empty arrays, and duplicates.</li>
+</ol>
+<h2 id="java-implementation"><a class="header" href="#java-implementation">Java Implementation</a></h2>
+<pre><code class="language-java">import java.util.*;
+
+public class MergeKSortedLists {
+    // Class to store element value, array index, and element index
+    static class Element {
+        int value;
+        int arrayIndex;
+        int elementIndex;
+
+        Element(int value, int arrayIndex, int elementIndex) {
+            this.value = value;
+            this.arrayIndex = arrayIndex;
+            this.elementIndex = elementIndex;
+        }
+    }
+
+    // Custom min-heap priority queue for elements
+    static class MinPriorityQueue {
+        private Element[] array;
+        private int size;
+        private static final int DEFAULT_SIZE = 1000;
+
+        public MinPriorityQueue() {
+            array = new Element[DEFAULT_SIZE];
+            size = 0;
+        }
+
+        public boolean enqueue(int value, int arrayIndex, int elementIndex) {
+            if (size == array.length) {
+                return false; // Queue full
+            }
+            array[size] = new Element(value, arrayIndex, elementIndex);
+            siftUp(size);
+            size++;
+            return true;
+        }
+
+        private void siftUp(int index) {
+            while (index &gt; 0) {
+                int parent = (index - 1) / 2;
+                if (array[index].value &gt;= array[parent].value) {
+                    break;
+                }
+                // Swap
+                Element temp = array[index];
+                array[index] = array[parent];
+                array[parent] = temp;
+                index = parent;
+            }
+        }
+
+        public Element dequeue() {
+            if (size == 0) {
+                return null; // Queue empty
+            }
+            Element result = array[0];
+            array[0] = array[size - 1];
+            size--;
+            if (size &gt; 0) {
+                siftDown(0);
+            }
+            return result;
+        }
+
+        private void siftDown(int index) {
+            int minIndex = index;
+            while (true) {
+                int left = 2 * index + 1;
+                int right = 2 * index + 2;
+                if (left &lt; size &amp;&amp; array[left].value &lt; array[minIndex].value) {
+                    minIndex = left;
+                }
+                if (right &lt; size &amp;&amp; array[right].value &lt; array[minIndex].value) {
+                    minIndex = right;
+                }
+                if (minIndex == index) {
+                    break;
+                }
+                // Swap
+                Element temp = array[index];
+                array[index] = array[minIndex];
+                array[minIndex] = temp;
+                index = minIndex;
+            }
+        }
+    }
+
+    // Merges k sorted arrays into one sorted array
+    public int[] mergeKSortedLists(int[][] arrays) {
+        if (arrays == null || arrays.length == 0) {
+            return new int[0];
+        }
+
+        MinPriorityQueue queue = new MinPriorityQueue();
+        List&lt;Integer&gt; result = new ArrayList&lt;&gt;();
+
+        // Enqueue first element of each non-empty array
+        for (int i = 0; i &lt; arrays.length; i++) {
+            if (arrays[i] != null &amp;&amp; arrays[i].length &gt; 0) {
+                queue.enqueue(arrays[i][0], i, 0);
+            }
+        }
+
+        // Process queue
+        while (true) {
+            Element element = queue.dequeue();
+            if (element == null) break;
+            result.add(element.value);
+            int arrayIndex = element.arrayIndex;
+            int elementIndex = element.elementIndex + 1;
+            if (elementIndex &lt; arrays[arrayIndex].length) {
+                queue.enqueue(arrays[arrayIndex][elementIndex], arrayIndex, elementIndex);
+            }
+        }
+
+        // Convert result to array
+        int[] merged = new int[result.size()];
+        for (int i = 0; i &lt; result.size(); i++) {
+            merged[i] = result.get(i);
+        }
+        return merged;
+    }
+
+    // Helper class for test cases
+    static class TestCase {
+        int[][] arrays;
+
+        TestCase(int[][] arrays) {
+            this.arrays = arrays;
+        }
+    }
+
+    // Main method to test merge k sorted lists
+    public static void main(String[] args) {
+        MergeKSortedLists merger = new MergeKSortedLists();
+
+        // Test cases
+        List&lt;TestCase&gt; testCases = new ArrayList&lt;&gt;();
+        
+        // Test case 1: Multiple arrays
+        testCases.add(new TestCase(
+            new int[][]{{1,4,5}, {1,3,4}, {2,6}}
+        ));
+        
+        // Test case 2: Single array
+        testCases.add(new TestCase(
+            new int[][]{{1,2,3}}
+        ));
+        
+        // Test case 3: Empty arrays
+        testCases.add(new TestCase(
+            new int[][]{{}}
+        ));
+        
+        // Test case 4: Arrays with duplicates
+        testCases.add(new TestCase(
+            new int[][]{{1,1,1}, {2,2}, {1,3}}
+        ));
+        
+        // Test case 5: Mixed empty and non-empty
+        testCases.add(new TestCase(
+            new int[][]{{}, {1,2}, {3}}
+        ));
+
+        // Run test cases
+        for (int i = 0; i &lt; testCases.size(); i++) {
+            TestCase test = testCases.get(i);
+            System.out.println("Test case " + (i + 1) + ":");
+            System.out.println("Input arrays: " + Arrays.deepToString(test.arrays));
+            int[] result = merger.mergeKSortedLists(test.arrays);
+            System.out.println("Merged sorted array: " + Arrays.toString(result) + "\n");
+        }
+    }
+}
+</code></pre>
+<h2 id="output"><a class="header" href="#output">Output</a></h2>
+<p>Running the <code>main</code> method produces:</p>
+<pre><code>Test case 1:
+Input arrays: [[1, 4, 5], [1, 3, 4], [2, 6]]
+Merged sorted array: [1, 1, 2, 3, 4, 4, 5, 6]
+
+Test case 2:
+Input arrays: [[1, 2, 3]]
+Merged sorted array: [1, 2, 3]
+
+Test case 3:
+Input arrays: [[]]
+Merged sorted array: []
+
+Test case 4:
+Input arrays: [[1, 1, 1], [2, 2], [1, 3]]
+Merged sorted array: [1, 1, 1, 1, 2, 2, 3]
+
+Test case 5:
+Input arrays: [[], [1, 2], [3]]
+Merged sorted array: [1, 2, 3]
+</code></pre>
+<p>Explanation:</p>
+<ul>
+<li>Test case 1: Merges three arrays, producing sorted output [1,1,2,3,4,4,5,6].</li>
+<li>Test case 2: Single array [1,2,3] remains unchanged.</li>
+<li>Test case 3: Single empty array results in empty output.</li>
+<li>Test case 4: Arrays with duplicates merge into [1,1,1,1,2,2,3].</li>
+<li>Test case 5: Empty and non-empty arrays merge into [1,2,3].</li>
+</ul>
+<h2 id="how-it-works"><a class="header" href="#how-it-works">How It Works</a></h2>
+<ul>
+<li><strong>Element</strong>: Stores a value, its array index, and position in that array.</li>
+<li><strong>MinPriorityQueue</strong>:
+<ul>
+<li>Uses a min-heap to prioritize smallest values.</li>
+<li><code>enqueue</code>: Adds element, sifts up.</li>
+<li><code>dequeue</code>: Removes smallest element, sifts down.</li>
+</ul>
+</li>
+<li><strong>mergeKSortedLists</strong>:
+<ul>
+<li>Handles empty input by returning empty array.</li>
+<li>Enqueues first element of each non-empty array.</li>
+<li>Dequeues smallest element, adds to result, enqueues next element from same array.</li>
+<li>Converts result list to array.</li>
+</ul>
+</li>
+<li><strong>Example Trace (Test case 1)</strong>:
+<ul>
+<li>arrays=[[1,4,5], [1,3,4], [2,6]].</li>
+<li>Enqueue: (1,0,0), (1,1,0), (2,2,0) → heap=[(1,0,0),(1,1,0),(2,2,0)].</li>
+<li>Dequeue: (1,0,0), add 1, enqueue (4,0,1) → heap=[(1,1,0),(4,0,1),(2,2,0)].</li>
+<li>Dequeue: (1,1,0), add 1, enqueue (3,1,1) → heap=[(2,2,0),(4,0,1),(3,1,1)].</li>
+<li>Continue until heap empty: result=[1,1,2,3,4,4,5,6].</li>
+</ul>
+</li>
+<li><strong>Main Method</strong>: Tests multiple arrays, single array, empty arrays, duplicates, and mixed cases.</li>
+</ul>
+<h2 id="complexity-analysis-table"><a class="header" href="#complexity-analysis-table">Complexity Analysis Table</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Operation</th><th>Time Complexity</th><th>Space Complexity</th></tr></thead><tbody>
+<tr><td>Enqueue/Dequeue</td><td>O(log k)</td><td>O(1)</td></tr>
+<tr><td>Merge K Lists</td><td>O(N log k)</td><td>O(k + N)</td></tr>
+</tbody></table>
+</div>
+<p><em>Note</em>:</p>
+<ul>
+<li>k is the number of arrays, N is the total number of elements.</li>
+<li>Time complexity: O(log k) for enqueue/dequeue; O(N log k) for N elements with heap of size k.</li>
+<li>Space complexity: O(k) for heap, O(N) for result array.</li>
+<li>Worst case: O(N log k) time, O(k + N) space for large N.</li>
+</ul>
+<blockquote>
+<p><strong>✅ Tip</strong>: Use a min-heap with size k to efficiently merge sorted arrays by always selecting the smallest available element. Track array indices to enqueue the next element.</p>
+</blockquote>
+<blockquote>
+<p><strong>⚠ Warning</strong>: Handle empty arrays and null inputs to avoid errors. Ensure the priority queue size is sufficient for k arrays.</p>
+</blockquote>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../problemStatements/ch03_05_01/KthLargestElement.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../../problemStatements/ch03_05_01/MinHeapToMaxHeap.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../problemStatements/ch03_05_01/KthLargestElement.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../../problemStatements/ch03_05_01/MinHeapToMaxHeap.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../../elasticlunr.min.js"></script>
+        <script src="../../mark.min.js"></script>
+        <script src="../../searcher.js"></script>
+
+        <script src="../../clipboard.min.js"></script>
+        <script src="../../highlight.js"></script>
+        <script src="../../book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="../../theme/ferris.js"></script>
+
+
+    </div>
+    </body>
+</html>

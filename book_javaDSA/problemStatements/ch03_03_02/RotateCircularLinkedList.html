@@ -1,0 +1,531 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>RotateCircularLinkedList - Java Data Structures and Algorithms for Beginners</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../../favicon.svg">
+        <link rel="shortcut icon" href="../../favicon.png">
+        <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+        <link rel="stylesheet" href="../../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="../../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../../theme/ferris.css">
+        <link rel="stylesheet" href="../../theme/semantic-notes.css">
+        <link rel="stylesheet" href="../../theme/listing.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../../toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Java Data Structures and Algorithms for Beginners</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <style>
+body {
+  text-align: justify;
+}
+</style>
+<h1 id="rotate-the-list"><a class="header" href="#rotate-the-list">Rotate the List</a></h1>
+<h2 id="problem-statement"><a class="header" href="#problem-statement">Problem Statement</a></h2>
+<p>Write a Java program that rotates a circular linked list by k positions, moving the head k nodes forward. A circular linked list is a singly linked list where the last node’s <code>next</code> pointer points to the head, forming a cycle. The rotation shifts the head pointer forward by k nodes, effectively redefining the start of the list while maintaining the circular structure. Test the implementation with different values of k and list sizes, including empty lists, single-node lists, k=0, k equal to the list size, and k greater than the list size. You can visualize this as rotating a ring of numbered beads, where the starting bead (head) moves k positions clockwise, and the ring remains connected.</p>
+<p><strong>Input</strong>:</p>
+<ul>
+<li>A circular linked list of integers (e.g., 1→2→3→4→1, where 4→1 forms the cycle) and an integer k (number of positions to rotate).
+<strong>Output</strong>: The rotated list as a string, listing nodes from the new head until just before it cycles (e.g., "3 4 1 2" after rotating 1→2→3→4→1 by k=2).
+<strong>Constraints</strong>:</li>
+<li>The list size is between 0 and 10^5.</li>
+<li>Node values are integers in the range [-10^9, 10^9].</li>
+<li>k is a non-negative integer (k ≥ 0).</li>
+<li>The list may be empty.
+<strong>Example</strong>:</li>
+<li>Input: List = 1→2→3→4→1, k = 2</li>
+<li>Output: "3 4 1 2"</li>
+<li>Explanation: Rotates head from 1 to 3, list becomes 3→4→1→2→3.</li>
+<li>Input: List = [], k = 1</li>
+<li>Output: "[]"</li>
+<li>Explanation: Empty list remains empty.</li>
+<li>Input: List = 1→1, k = 3</li>
+<li>Output: "1"</li>
+<li>Explanation: Single-node list is unchanged (rotation wraps around).</li>
+</ul>
+<h2 id="pseudocode"><a class="header" href="#pseudocode">Pseudocode</a></h2>
+<pre><code>CLASS Node
+    SET value to integer
+    SET next to Node (null by default)
+ENDCLASS
+
+FUNCTION rotateList(head, k)
+    IF head is null OR head.next is head THEN
+        RETURN head
+    ENDIF
+    SET length to 1
+    SET tail to head
+    WHILE tail.next is not head
+        INCREMENT length
+        SET tail to tail.next
+    ENDWHILE
+    SET k to k mod length
+    IF k equals 0 THEN
+        RETURN head
+    ENDIF
+    SET current to head
+    FOR i from 1 to k
+        SET current to current.next
+    ENDFOR
+    SET newHead to current
+    SET tail.next to null
+    SET current to head
+    WHILE current.next is not null
+        SET current to current.next
+    ENDWHILE
+    SET current.next to head
+    SET head to newHead
+    RETURN head
+ENDFUNCTION
+
+FUNCTION toString(head)
+    IF head is null THEN
+        RETURN "[]"
+    ENDIF
+    CREATE result as new StringBuilder
+    SET current to head
+    SET visited as new Set
+    WHILE current is not null AND current not in visited
+        ADD current to visited
+        APPEND current.value to result
+        IF current.next is not head THEN
+            APPEND " " to result
+        ENDIF
+        SET current to current.next
+    ENDWHILE
+    RETURN result as string
+ENDFUNCTION
+
+FUNCTION main()
+    SET testCases to array of test cases (list values, k)
+    FOR each testCase in testCases
+        PRINT test case details
+        CALL rotateList(testCase.head, testCase.k)
+        PRINT rotated list using toString
+    ENDFOR
+ENDFUNCTION
+</code></pre>
+<h2 id="algorithm-steps"><a class="header" href="#algorithm-steps">Algorithm Steps</a></h2>
+<ol>
+<li>Define a <code>Node</code> class with:
+a. An integer <code>value</code>.
+b. A <code>next</code> pointer to the next node.</li>
+<li>In <code>rotateList</code>:
+a. If the list is empty or has one node, return head (no rotation needed).
+b. Find the list length and tail by traversing until <code>tail.next</code> is head.
+c. Compute effective k as <code>k mod length</code> to handle large k.
+d. If k=0, return head (no rotation needed).
+e. Traverse k steps from head to find the new head.
+f. Break the cycle by setting old tail’s <code>next</code> to null.
+g. Find new tail (node before new head), set its <code>next</code> to old head.
+h. Set head to new head, return it.</li>
+<li>In <code>toString</code>:
+a. If head is null, return "[]".
+b. Traverse from head, use a Set to avoid cycling, append values with spaces.
+c. Return the string representation.</li>
+<li>In <code>main</code>, test with different list sizes (empty, single-node, multi-node) and k values (0, equal to length, greater than length).</li>
+</ol>
+<h2 id="java-implementation"><a class="header" href="#java-implementation">Java Implementation</a></h2>
+<pre><code class="language-java">import java.util.*;
+
+public class RotateCircularLinkedList {
+    // Node class for the circular linked list
+    static class Node {
+        int value;
+        Node next;
+
+        Node(int value) {
+            this.value = value;
+            this.next = null;
+        }
+    }
+
+    // Rotates the circular linked list by k positions
+    public Node rotateList(Node head, int k) {
+        if (head == null || head.next == head) {
+            return head;
+        }
+        // Find length and tail
+        int length = 1;
+        Node tail = head;
+        while (tail.next != head) {
+            length++;
+            tail = tail.next;
+        }
+        // Normalize k
+        k = k % length;
+        if (k == 0) {
+            return head;
+        }
+        // Find new head
+        Node current = head;
+        for (int i = 0; i &lt; k; i++) {
+            current = current.next;
+        }
+        Node newHead = current;
+        // Break cycle
+        tail.next = null;
+        // Find new tail (node before newHead)
+        current = head;
+        while (current.next != null) {
+            current = current.next;
+        }
+        // Reconnect to form new cycle
+        current.next = head;
+        head = newHead;
+        return head;
+    }
+
+    // Converts circular linked list to string
+    public String toString(Node head) {
+        if (head == null) {
+            return "[]";
+        }
+        StringBuilder result = new StringBuilder();
+        Node current = head;
+        Set&lt;Node&gt; visited = new HashSet&lt;&gt;();
+        while (current != null &amp;&amp; !visited.contains(current)) {
+            visited.add(current);
+            result.append(current.value);
+            if (current.next != head) {
+                result.append(" ");
+            }
+            current = current.next;
+        }
+        return result.toString();
+    }
+
+    // Helper class for test cases
+    static class TestCase {
+        Node head;
+        int k;
+
+        TestCase(int[] values, int k) {
+            this.k = k;
+            if (values.length == 0) {
+                head = null;
+                return;
+            }
+            head = new Node(values[0]);
+            Node current = head;
+            for (int i = 1; i &lt; values.length; i++) {
+                current.next = new Node(values[i]);
+                current = current.next;
+            }
+            // Make circular
+            current.next = head;
+        }
+    }
+
+    // Main method to test circular linked list rotation
+    public static void main(String[] args) {
+        RotateCircularLinkedList rotator = new RotateCircularLinkedList();
+
+        // Test cases
+        TestCase[] testCases = {
+            new TestCase(new int[]{1, 2, 3, 4}, 2),     // Multi-node, k &lt; length
+            new TestCase(new int[]{}, 1),               // Empty list
+            new TestCase(new int[]{5}, 3),             // Single node
+            new TestCase(new int[]{1, 2, 3}, 3),       // k = length
+            new TestCase(new int[]{1, 2, 3, 4, 5}, 7)  // k &gt; length
+        };
+
+        // Run test cases
+        for (int i = 0; i &lt; testCases.length; i++) {
+            TestCase test = testCases[i];
+            System.out.println("Test case " + (i + 1) + ":");
+            System.out.println("Input list: " + rotator.toString(test.head));
+            System.out.println("Rotate by k=" + test.k);
+            Node rotated = rotator.rotateList(test.head, test.k);
+            System.out.println("Rotated list: " + rotator.toString(rotated) + "\n");
+        }
+    }
+}
+</code></pre>
+<h2 id="output"><a class="header" href="#output">Output</a></h2>
+<p>Running the <code>main</code> method produces:</p>
+<pre><code>Test case 1:
+Input list: 1 2 3 4
+Rotate by k=2
+Rotated list: 3 4 1 2
+
+Test case 2:
+Input list: []
+Rotate by k=1
+Rotated list: []
+
+Test case 3:
+Input list: 5
+Rotate by k=3
+Rotated list: 5
+
+Test case 4:
+Input list: 1 2 3
+Rotate by k=3
+Rotated list: 1 2 3
+
+Test case 5:
+Input list: 1 2 3 4 5
+Rotate by k=7
+Rotated list: 3 4 5 1 2
+</code></pre>
+<p>Explanation:</p>
+<ul>
+<li>Test case 1: Rotates 1→2→3→4→1 by k=2, new head=3, outputs "3 4 1 2".</li>
+<li>Test case 2: Empty list, no rotation, outputs "[]".</li>
+<li>Test case 3: Single node 5→5, k=3, no change, outputs "5".</li>
+<li>Test case 4: Rotates 1→2→3→1 by k=3 (length), no change, outputs "1 2 3".</li>
+<li>Test case 5: Rotates 1→2→3→4→5→1 by k=7 (7 mod 5 = 2), new head=3, outputs "3 4 5 1 2".</li>
+</ul>
+<h2 id="how-it-works"><a class="header" href="#how-it-works">How It Works</a></h2>
+<ul>
+<li><strong>Node</strong>: Stores an integer value and a <code>next</code> pointer.</li>
+<li><strong>rotateList</strong>:
+<ul>
+<li>Handles edge cases: empty list or single node returns unchanged.</li>
+<li>Finds list length and tail by traversing to the node where <code>next</code>=head.</li>
+<li>Normalizes k using <code>k mod length</code> to handle large k.</li>
+<li>If k=0, returns head.</li>
+<li>Traverses k steps to find new head.</li>
+<li>Breaks cycle at old tail, reconnects new tail to old head.</li>
+</ul>
+</li>
+<li><strong>toString</strong>: Traverses from head, uses a Set to prevent cycling, returns space-separated string or "[]".</li>
+<li><strong>Example Trace (Test case 1)</strong>:
+<ul>
+<li>Input: 1→2→3→4→1, k=2.</li>
+<li>length=4, tail=4, k=2.</li>
+<li>current=3 (after 2 steps).</li>
+<li>newHead=3, tail.next=null → 1→2→3, 4.</li>
+<li>new tail=2, 2.next=1, head=3.</li>
+<li>Result: 3→4→1→2→3, outputs "3 4 1 2".</li>
+</ul>
+</li>
+<li><strong>Main Method</strong>: Tests multi-node, empty, single-node, k=length, and k&gt;length cases.</li>
+</ul>
+<h2 id="complexity-analysis-table"><a class="header" href="#complexity-analysis-table">Complexity Analysis Table</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Operation</th><th>Time Complexity</th><th>Space Complexity</th></tr></thead><tbody>
+<tr><td>Rotate List</td><td>O(n)</td><td>O(1)</td></tr>
+<tr><td>To String</td><td>O(n)</td><td>O(n)</td></tr>
+</tbody></table>
+</div>
+<p><em>Note</em>:</p>
+<ul>
+<li>n is the number of nodes in the list.</li>
+<li>Time complexity: O(n) for rotateList (traverse to find length and new head); O(n) for toString (traverse list).</li>
+<li>Space complexity: O(1) for rotateList (constant pointers); O(n) for toString (StringBuilder and Set).</li>
+<li>Worst case: O(n) time, O(n) space for output with large lists.</li>
+</ul>
+<blockquote>
+<p><strong>✅ Tip</strong>: Normalize k using modulo list length to handle large k efficiently. Use a tail pointer to simplify cycle reconnection after rotation.</p>
+</blockquote>
+<blockquote>
+<p><strong>⚠ Warning</strong>: Ensure the cycle is broken and reconnected correctly to avoid infinite loops. Handle edge cases like empty lists or k=0 to prevent unnecessary operations.</p>
+</blockquote>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../problemStatements/ch03_03_02/JosephusProblem.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../../problemStatements/ch03_03_02/RoundRobinScheduler.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../problemStatements/ch03_03_02/JosephusProblem.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../../problemStatements/ch03_03_02/RoundRobinScheduler.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../../elasticlunr.min.js"></script>
+        <script src="../../mark.min.js"></script>
+        <script src="../../searcher.js"></script>
+
+        <script src="../../clipboard.min.js"></script>
+        <script src="../../highlight.js"></script>
+        <script src="../../book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="../../theme/ferris.js"></script>
+
+
+    </div>
+    </body>
+</html>

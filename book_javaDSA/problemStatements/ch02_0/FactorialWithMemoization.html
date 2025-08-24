@@ -1,0 +1,379 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>FactorialWithMemoization - Java Data Structures and Algorithms for Beginners</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../../favicon.svg">
+        <link rel="shortcut icon" href="../../favicon.png">
+        <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+        <link rel="stylesheet" href="../../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="../../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../../theme/ferris.css">
+        <link rel="stylesheet" href="../../theme/semantic-notes.css">
+        <link rel="stylesheet" href="../../theme/listing.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../../toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Java Data Structures and Algorithms for Beginners</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <style>
+body {
+  text-align: justify;
+}
+</style>
+<h1 id="factorial-with-memoization"><a class="header" href="#factorial-with-memoization">Factorial with Memoization</a></h1>
+<h2 id="problem-statement"><a class="header" href="#problem-statement">Problem Statement</a></h2>
+<p>Write a Java program that implements a recursive factorial function using memoization with a HashMap to cache previously computed results. The program should compute the factorial of a non-negative integer and compare its performance with a standard recursive factorial implementation for large inputs. Test the program with various inputs, including edge cases like 0 and 1. You can visualize this as calculating the number of ways to arrange books on a shelf, where memoization saves time by reusing previously calculated arrangements.</p>
+<p><strong>Input</strong>: A non-negative integer <code>n</code> (e.g., <code>n = 5</code>).
+<strong>Output</strong>: A long integer representing the factorial of <code>n</code> (e.g., 120 for <code>n = 5</code>).
+<strong>Constraints</strong>:</p>
+<ul>
+<li>0 ≤ n ≤ 20 (to avoid overflow with <code>long</code>).</li>
+<li>The input is a non-negative integer.
+<strong>Example</strong>:</li>
+<li>Input: <code>n = 5</code></li>
+<li>Output: 120</li>
+<li>Explanation: The factorial of 5 is 5 * 4 * 3 * 2 * 1 = 120.</li>
+<li>Input: <code>n = 0</code></li>
+<li>Output: 1</li>
+<li>Explanation: The factorial of 0 is defined as 1.</li>
+</ul>
+<h2 id="pseudocode"><a class="header" href="#pseudocode">Pseudocode</a></h2>
+<pre><code>FUNCTION factorialWithMemo(n, memo)
+    IF n &lt; 0 THEN
+        RETURN -1
+    ENDIF
+    IF n equals 0 OR n equals 1 THEN
+        RETURN 1
+    ENDIF
+    IF n exists in memo THEN
+        RETURN memo[n]
+    ENDIF
+    SET result to n * factorialWithMemo(n - 1, memo)
+    SET memo[n] to result
+    RETURN result
+ENDFUNCTION
+
+FUNCTION mainFactorial(n)
+    CREATE empty HashMap memo
+    RETURN factorialWithMemo(n, memo)
+ENDFUNCTION
+</code></pre>
+<h2 id="algorithm-steps"><a class="header" href="#algorithm-steps">Algorithm Steps</a></h2>
+<ol>
+<li>Check if the input <code>n</code> is negative. If so, return -1, as factorial is undefined for negative numbers.</li>
+<li>Define a recursive helper function that takes the input <code>n</code> and a HashMap for memoization as parameters.</li>
+<li>In the recursive function, implement the base cases: if <code>n</code> is 0 or 1, return 1, as the factorial of 0 and 1 is 1.</li>
+<li>Check if the factorial of <code>n</code> is already in the HashMap. If so, return the cached result.</li>
+<li>For the recursive case, compute the factorial by multiplying <code>n</code> with the result of the recursive call for <code>n - 1</code>.</li>
+<li>Store the computed result in the HashMap with <code>n</code> as the key.</li>
+<li>In the main function, create an empty HashMap and call the helper function with <code>n</code> and the HashMap.</li>
+<li>Return the final factorial result.</li>
+</ol>
+<h2 id="java-implementation"><a class="header" href="#java-implementation">Java Implementation</a></h2>
+<pre><code class="language-java">import java.util.HashMap;
+
+public class FactorialWithMemoization {
+    // Computes factorial of n using memoization with HashMap
+    public long factorial(int n) {
+        // Check for invalid input
+        if (n &lt; 0) {
+            return -1;
+        }
+        // Create HashMap for memoization
+        HashMap&lt;Integer, Long&gt; memo = new HashMap&lt;&gt;();
+        // Call recursive helper function
+        return factorialHelper(n, memo);
+    }
+
+    // Helper function for recursive factorial with memoization
+    private long factorialHelper(int n, HashMap&lt;Integer, Long&gt; memo) {
+        // Base case: factorial of 0 or 1 is 1
+        if (n == 0 || n == 1) {
+            return 1;
+        }
+        // Check if result is in memo
+        if (memo.containsKey(n)) {
+            return memo.get(n);
+        }
+        // Recursive case: n * factorial(n-1)
+        long result = n * factorialHelper(n - 1, memo);
+        // Cache result in memo
+        memo.put(n, result);
+        return result;
+    }
+
+    // Standard recursive factorial for comparison
+    public long standardFactorial(int n) {
+        // Check for invalid input
+        if (n &lt; 0) {
+            return -1;
+        }
+        // Base case: factorial of 0 or 1 is 1
+        if (n == 0 || n == 1) {
+            return 1;
+        }
+        // Recursive case: n * factorial(n-1)
+        return n * standardFactorial(n - 1);
+    }
+}
+</code></pre>
+<h2 id="output"><a class="header" href="#output">Output</a></h2>
+<p>For the input <code>n = 5</code>, the <code>factorial</code> method outputs:</p>
+<pre><code>120
+</code></pre>
+<p>Explanation: The factorial of 5 is computed as 5 * 4 * 3 * 2 * 1 = 120.</p>
+<p>For the input <code>n = 0</code>, the <code>factorial</code> method outputs:</p>
+<pre><code>1
+</code></pre>
+<p>Explanation: The factorial of 0 is defined as 1.</p>
+<p>For the input <code>n = 15</code>, the <code>factorial</code> method outputs:</p>
+<pre><code>1307674368000
+</code></pre>
+<p>Explanation: The factorial of 15 is computed as 15 * 14 * ... * 1 = 1307674368000.</p>
+<h2 id="how-it-works"><a class="header" href="#how-it-works">How It Works</a></h2>
+<ul>
+<li><strong>Step 1</strong>: The <code>factorial</code> method checks if <code>n</code> is negative. For <code>n = 5</code>, it is valid, so it creates a HashMap and calls <code>factorialHelper</code>.</li>
+<li><strong>Step 2</strong>: In <code>factorialHelper</code>:
+<ul>
+<li>For <code>n = 5</code>: Not in memo, compute 5 * <code>factorialHelper(4)</code>.</li>
+<li>For <code>n = 4</code>: Not in memo, compute 4 * <code>factorialHelper(3)</code>.</li>
+<li>For <code>n = 3</code>: Not in memo, compute 3 * <code>factorialHelper(2)</code>.</li>
+<li>For <code>n = 2</code>: Not in memo, compute 2 * <code>factorialHelper(1)</code>.</li>
+<li>For <code>n = 1</code>: Base case, return 1.</li>
+<li>Unwind: Store 2! = 2 in memo, 3! = 6 in memo, 4! = 24 in memo, 5! = 120 in memo, return 120.</li>
+</ul>
+</li>
+<li><strong>Step 3</strong>: For subsequent calls with cached values (e.g., in a performance test), the memoized function retrieves results directly from the HashMap, reducing computation.</li>
+<li><strong>Example Trace</strong>: For <code>n = 5</code>, the algorithm computes: 5 * (4 * (3 * (2 * (1)))) = 5 * 24 = 120, caching each intermediate result. For <code>n = 0</code>, it returns 1 immediately.</li>
+<li><strong>Performance Comparison</strong>: The memoized version is faster for repeated calls or large <code>n</code> within the same HashMap, as it avoids recomputing factorials. For example, computing 15! takes O(n) time without memoization but O(1) for cached values with memoization.</li>
+</ul>
+<h2 id="complexity-analysis-table"><a class="header" href="#complexity-analysis-table">Complexity Analysis Table</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Operation</th><th>Time Complexity</th><th>Space Complexity</th></tr></thead><tbody>
+<tr><td>Comparison</td><td>O(1)</td><td>O(1)</td></tr>
+<tr><td>HashMap Operations</td><td>O(1) (average)</td><td>O(n)</td></tr>
+<tr><td>Full Algorithm (Memoized)</td><td>O(n) (first call)</td><td>O(n)</td></tr>
+<tr><td>Full Algorithm (Memoized)</td><td>O(1) (cached)</td><td>O(n)</td></tr>
+<tr><td>Full Algorithm (Standard)</td><td>O(n)</td><td>O(n)</td></tr>
+</tbody></table>
+</div>
+<p><em>Note</em>:</p>
+<ul>
+<li>n is the input integer.</li>
+<li>Time complexity (memoized): O(n) for the first call to compute and cache results up to n; O(1) for subsequent calls if cached.</li>
+<li>Time complexity (standard): O(n) for all calls, as it recomputes each step.</li>
+<li>Space complexity: O(n) for both, due to the recursive call stack and HashMap (for memoized version).</li>
+<li>Best case (memoized): O(1) if the result is cached; worst case is O(n) for initial computation.</li>
+</ul>
+<blockquote>
+<p><strong>✅ Tip</strong>: Use memoization to optimize recursive functions like factorial for repeated calls or large inputs, and test with edge cases like 0, 1, and large values (within constraints) to verify correctness.</p>
+</blockquote>
+<blockquote>
+<p><strong>⚠ Warning</strong>: Be cautious with inputs larger than 20, as factorial results may exceed the <code>long</code> data type’s capacity, causing overflow. Ensure the HashMap is properly initialized to avoid <code>NullPointerException</code>.</p>
+</blockquote>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../problemStatements/ch02_0/BinarySearchRecursion.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../../problemStatements/ch02_0/RecursiveArraySum.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../problemStatements/ch02_0/BinarySearchRecursion.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../../problemStatements/ch02_0/RecursiveArraySum.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../../elasticlunr.min.js"></script>
+        <script src="../../mark.min.js"></script>
+        <script src="../../searcher.js"></script>
+
+        <script src="../../clipboard.min.js"></script>
+        <script src="../../highlight.js"></script>
+        <script src="../../book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="../../theme/ferris.js"></script>
+
+
+    </div>
+    </body>
+</html>

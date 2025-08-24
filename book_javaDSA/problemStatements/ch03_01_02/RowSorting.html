@@ -1,0 +1,477 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>RowSorting - Java Data Structures and Algorithms for Beginners</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../../favicon.svg">
+        <link rel="shortcut icon" href="../../favicon.png">
+        <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+        <link rel="stylesheet" href="../../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="../../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../../theme/ferris.css">
+        <link rel="stylesheet" href="../../theme/semantic-notes.css">
+        <link rel="stylesheet" href="../../theme/listing.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../../toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Java Data Structures and Algorithms for Beginners</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <style>
+body {
+  text-align: justify;
+}
+</style>
+<h1 id="row-sorting"><a class="header" href="#row-sorting">Row Sorting</a></h1>
+<h2 id="problem-statement"><a class="header" href="#problem-statement">Problem Statement</a></h2>
+<p>Write a Java program that implements a method to sort each row of a jagged array (a 2D array where each row can have a different length) independently in ascending order. The program should modify the jagged array in-place and test the implementation with jagged arrays containing rows of different lengths, including edge cases like empty matrices, matrices with empty rows, and matrices with rows of varying lengths. You can visualize this as organizing books on multiple shelves of different lengths, where each shelf’s books are sorted by size without affecting other shelves.</p>
+<p><strong>Input</strong>: A jagged 2D array of integers, where each row may have a different length (e.g., <code>matrix = {{4, 2, 1}, {3, 5}, {6, 0, 8, 7}}</code>).
+<strong>Output</strong>: The same jagged array with each row sorted in ascending order (e.g., <code>{{1, 2, 4}, {3, 5}, {0, 6, 7, 8}}</code>).
+<strong>Constraints</strong>:</p>
+<ul>
+<li>The number of rows is between 0 and 100.</li>
+<li>Each row’s length is between 0 and 100.</li>
+<li>Elements are integers between -10^4 and 10^4.</li>
+<li>The matrix may be empty or contain empty or null rows.
+<strong>Example</strong>:</li>
+<li>Input: <code>matrix = {{4, 2, 1}, {3, 5}, {6, 0, 8, 7}}</code></li>
+<li>Output: <code>{{1, 2, 4}, {3, 5}, {0, 6, 7, 8}}</code></li>
+<li>Explanation: Each row is sorted independently: [4, 2, 1] → [1, 2, 4], [3, 5] → [3, 5], [6, 0, 8, 7] → [0, 6, 7, 8].</li>
+<li>Input: <code>matrix = {{}, {1}, {3, 2}}</code></li>
+<li>Output: <code>{{}, {1}, {2, 3}}</code></li>
+<li>Explanation: Empty row stays empty, single-element row stays unchanged, and [3, 2] → [2, 3].</li>
+</ul>
+<h2 id="pseudocode"><a class="header" href="#pseudocode">Pseudocode</a></h2>
+<pre><code>FUNCTION sortRows(matrix)
+    IF matrix is null OR matrix is empty THEN
+        RETURN
+    ENDIF
+    FOR each row in matrix
+        IF row is not null THEN
+            SORT row in ascending order
+        ENDIF
+    ENDFOR
+ENDFUNCTION
+
+FUNCTION main()
+    SET testMatrices to jagged 2D arrays
+    FOR each matrix in testMatrices
+        PRINT original matrix
+        CALL sortRows(matrix)
+        PRINT sorted matrix
+    ENDFOR
+ENDFUNCTION
+</code></pre>
+<h2 id="algorithm-steps"><a class="header" href="#algorithm-steps">Algorithm Steps</a></h2>
+<ol>
+<li>Check if the input matrix is null or empty. If so, return without modifying anything.</li>
+<li>Iterate through each row of the matrix:
+a. If the row is not null, sort it in ascending order using a sorting function.</li>
+<li>The matrix is modified in-place, with each row sorted independently.</li>
+<li>In the <code>main</code> method, create test matrices with varying row lengths and call <code>sortRows</code> to verify correctness, printing the matrix before and after sorting.</li>
+</ol>
+<h2 id="java-implementation"><a class="header" href="#java-implementation">Java Implementation</a></h2>
+<pre><code class="language-java">import java.util.Arrays;
+
+public class RowSorting {
+    // Sorts each row of a jagged array independently in ascending order
+    public void sortRows(int[][] matrix) {
+        // Check for null or empty matrix
+        if (matrix == null || matrix.length == 0) {
+            return;
+        }
+        // Iterate through each row
+        for (int[] row : matrix) {
+            // Sort non-null rows
+            if (row != null) {
+                Arrays.sort(row);
+            }
+        }
+    }
+
+    // Main method to test sortRows with various inputs
+    public static void main(String[] args) {
+        RowSorting sorter = new RowSorting();
+
+        // Test case 1: Jagged matrix with different row lengths
+        int[][] matrix1 = {{4, 2, 1}, {3, 5}, {6, 0, 8, 7}};
+        System.out.println("Test case 1:");
+        System.out.println("Before sorting:");
+        printMatrix(matrix1);
+        sorter.sortRows(matrix1);
+        System.out.println("After sorting:");
+        printMatrix(matrix1);
+
+        // Test case 2: Matrix with empty and single-element rows
+        int[][] matrix2 = {{}, {1}, {3, 2}};
+        System.out.println("\nTest case 2:");
+        System.out.println("Before sorting:");
+        printMatrix(matrix2);
+        sorter.sortRows(matrix2);
+        System.out.println("After sorting:");
+        printMatrix(matrix2);
+
+        // Test case 3: Matrix with all zeros
+        int[][] matrix3 = {{0, 0}, {0}, {0, 0, 0}};
+        System.out.println("\nTest case 3:");
+        System.out.println("Before sorting:");
+        printMatrix(matrix3);
+        sorter.sortRows(matrix3);
+        System.out.println("After sorting:");
+        printMatrix(matrix3);
+
+        // Test case 4: Matrix with negative numbers
+        int[][] matrix4 = {{-3, -1, -2}, {-5}, {-4, -6, -7}};
+        System.out.println("\nTest case 4:");
+        System.out.println("Before sorting:");
+        printMatrix(matrix4);
+        sorter.sortRows(matrix4);
+        System.out.println("After sorting:");
+        printMatrix(matrix4);
+
+        // Test case 5: Null matrix
+        int[][] matrix5 = null;
+        System.out.println("\nTest case 5:");
+        System.out.println("Before sorting:");
+        printMatrix(matrix5);
+        sorter.sortRows(matrix5);
+        System.out.println("After sorting:");
+        printMatrix(matrix5);
+    }
+
+    // Helper method to print jagged matrix
+    private static void printMatrix(int[][] matrix) {
+        if (matrix == null || matrix.length == 0) {
+            System.out.println("null");
+            return;
+        }
+        System.out.println("[");
+        for (int i = 0; i &lt; matrix.length; i++) {
+            System.out.print("  [");
+            if (matrix[i] == null || matrix[i].length == 0) {
+                System.out.print("]");
+            } else {
+                for (int j = 0; j &lt; matrix[i].length; j++) {
+                    System.out.print(matrix[i][j]);
+                    if (j &lt; matrix[i].length - 1) {
+                        System.out.print(", ");
+                    }
+                }
+                System.out.print("]");
+            }
+            System.out.println();
+        }
+        System.out.println("]");
+    }
+}
+</code></pre>
+<h2 id="output"><a class="header" href="#output">Output</a></h2>
+<p>Running the <code>main</code> method produces:</p>
+<pre><code>Test case 1:
+Before sorting:
+[
+  [4, 2, 1]
+  [3, 5]
+  [6, 0, 8, 7]
+]
+After sorting:
+[
+  [1, 2, 4]
+  [3, 5]
+  [0, 6, 7, 8]
+]
+
+Test case 2:
+Before sorting:
+[
+  []
+  [1]
+  [3, 2]
+]
+After sorting:
+[
+  []
+  [1]
+  [2, 3]
+]
+
+Test case 3:
+Before sorting:
+[
+  [0, 0]
+  [0]
+  [0, 0, 0]
+]
+After sorting:
+[
+  [0, 0]
+  [0]
+  [0, 0, 0]
+]
+
+Test case 4:
+Before sorting:
+[
+  [-3, -1, -2]
+  [-5]
+  [-4, -6, -7]
+]
+After sorting:
+[
+  [-3, -2, -1]
+  [-5]
+  [-7, -6, -4]
+]
+
+Test case 5:
+Before sorting:
+null
+After sorting:
+null
+</code></pre>
+<p>Explanation:</p>
+<ul>
+<li>Test case 1: Sorts rows [4, 2, 1] → [1, 2, 4], [3, 5] → [3, 5], [6, 0, 8, 7] → [0, 6, 7, 8].</li>
+<li>Test case 2: Empty row stays empty, [1] stays [1], [3, 2] → [2, 3].</li>
+<li>Test case 3: Rows of zeros remain unchanged.</li>
+<li>Test case 4: Sorts rows with negatives: [-3, -1, -2] → [-3, -2, -1], [-5] → [-5], [-4, -6, -7] → [-7, -6, -4].</li>
+<li>Test case 5: Null matrix remains unchanged.</li>
+</ul>
+<h2 id="how-it-works"><a class="header" href="#how-it-works">How It Works</a></h2>
+<ul>
+<li><strong>Step 1</strong>: The <code>sortRows</code> method checks if the matrix is null or empty. For <code>{{4, 2, 1}, {3, 5}, {6, 0, 8, 7}}</code>, it proceeds.</li>
+<li><strong>Step 2</strong>: Iterate through rows:
+<ul>
+<li>Row 0: <code>[4, 2, 1]</code> → sort to <code>[1, 2, 4]</code>.</li>
+<li>Row 1: <code>[3, 5]</code> → sort to <code>[3, 5]</code> (already sorted).</li>
+<li>Row 2: <code>[6, 0, 8, 7]</code> → sort to <code>[0, 6, 7, 8]</code>.</li>
+</ul>
+</li>
+<li><strong>Example Trace</strong>: For test case 1, each row is sorted independently using <code>Arrays.sort</code>, modifying the matrix in-place.</li>
+<li><strong>Main Method</strong>: Tests with jagged matrices of varying row lengths, including empty rows, all zeros, negative numbers, and a null matrix, printing before and after sorting.</li>
+<li><strong>Sorting Property</strong>: Each row is sorted independently, preserving the jagged structure and handling varying lengths.</li>
+</ul>
+<h2 id="complexity-analysis-table"><a class="header" href="#complexity-analysis-table">Complexity Analysis Table</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Operation</th><th>Time Complexity</th><th>Space Complexity</th></tr></thead><tbody>
+<tr><td>Sorting Rows</td><td>O(Σ(r_i * log r_i))</td><td>O(log r_max)</td></tr>
+<tr><td>Full Algorithm</td><td>O(Σ(r_i * log r_i))</td><td>O(log r_max)</td></tr>
+</tbody></table>
+</div>
+<p><em>Note</em>:</p>
+<ul>
+<li>r_i is the length of the i-th row, r_max is the maximum row length.</li>
+<li>Time complexity: O(Σ(r_i * log r_i)), where each row of length r_i is sorted using <code>Arrays.sort</code> (Timsort, O(r_i * log r_i)). The total is the sum over all rows.</li>
+<li>Space complexity: O(log r_max), as Timsort uses O(log r_i) space for each row, and the maximum row length dominates.</li>
+<li>Worst case: O(N * log N) where N is the total number of elements if one row contains all elements.</li>
+</ul>
+<blockquote>
+<p><strong>✅ Tip</strong>: Use <code>Arrays.sort</code> for efficient row sorting. Test with empty rows, single-element rows, and negative numbers to ensure robustness across different jagged array configurations.</p>
+</blockquote>
+<blockquote>
+<p><strong>⚠ Warning</strong>: Check for null rows to avoid <code>NullPointerException</code>. Ensure the matrix is not null to prevent unexpected behavior during sorting.</p>
+</blockquote>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../problemStatements/ch03_01_02/JaggedArrayTranspose.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../../problemStatements/ch03_01_02/SparseMatrixSum.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../problemStatements/ch03_01_02/JaggedArrayTranspose.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../../problemStatements/ch03_01_02/SparseMatrixSum.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../../elasticlunr.min.js"></script>
+        <script src="../../mark.min.js"></script>
+        <script src="../../searcher.js"></script>
+
+        <script src="../../clipboard.min.js"></script>
+        <script src="../../highlight.js"></script>
+        <script src="../../book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="../../theme/ferris.js"></script>
+
+
+    </div>
+    </body>
+</html>

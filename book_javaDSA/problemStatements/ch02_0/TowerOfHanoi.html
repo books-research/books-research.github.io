@@ -1,0 +1,355 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>TowerOfHanoi - Java Data Structures and Algorithms for Beginners</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../../favicon.svg">
+        <link rel="shortcut icon" href="../../favicon.png">
+        <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+        <link rel="stylesheet" href="../../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="../../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../../theme/ferris.css">
+        <link rel="stylesheet" href="../../theme/semantic-notes.css">
+        <link rel="stylesheet" href="../../theme/listing.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../../toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Java Data Structures and Algorithms for Beginners</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <style>
+body {
+  text-align: justify;
+}
+</style>
+<h1 id="tower-of-hanoi"><a class="header" href="#tower-of-hanoi">Tower of Hanoi</a></h1>
+<h2 id="problem-statement"><a class="header" href="#problem-statement">Problem Statement</a></h2>
+<p>Write a Java program that uses recursion to solve the Tower of Hanoi problem for <code>n</code> disks, printing the sequence of moves required to transfer all disks from a source rod to a destination rod using an auxiliary rod. The rules are: only one disk can be moved at a time, a larger disk cannot be placed on a smaller disk, and disks must be moved between the rods (source, auxiliary, destination). Test the program with different values of <code>n</code>, including edge cases like <code>n = 1</code>. You can visualize this as moving a stack of differently sized books from one table to another, using a third table as temporary storage, ensuring larger books are always below smaller ones.</p>
+<p><strong>Input</strong>: A non-negative integer <code>n</code> representing the number of disks, and three rod names (e.g., <code>source = 'A'</code>, <code>auxiliary = 'B'</code>, <code>destination = 'C'</code>).
+<strong>Output</strong>: A sequence of moves printed in the format "Move disk [number] from [source] to [destination]" (e.g., "Move disk 1 from A to C"), with each move on a new line.
+<strong>Constraints</strong>:</p>
+<ul>
+<li>0 ≤ n ≤ 10 (to keep output manageable and avoid excessive recursion).</li>
+<li>Rod names are single characters (e.g., 'A', 'B', 'C').
+<strong>Example</strong>:</li>
+<li>Input: <code>n = 2, source = 'A', auxiliary = 'B', destination = 'C'</code></li>
+<li>Output:
+<pre><code>Move disk 1 from A to B
+Move disk 2 from A to C
+Move disk 1 from B to C
+</code></pre>
+</li>
+<li>Explanation: The two disks are moved from rod A to rod C using rod B as auxiliary, following the rules of the Tower of Hanoi.</li>
+</ul>
+<h2 id="pseudocode"><a class="header" href="#pseudocode">Pseudocode</a></h2>
+<pre><code>FUNCTION towerOfHanoi(n, source, auxiliary, destination)
+    IF n equals 0 THEN
+        RETURN
+    ENDIF
+    IF n equals 1 THEN
+        PRINT "Move disk 1 from source to destination"
+        RETURN
+    ENDIF
+    CALL towerOfHanoi(n - 1, source, destination, auxiliary)
+    PRINT "Move disk n from source to destination"
+    CALL towerOfHanoi(n - 1, auxiliary, source, destination)
+ENDFUNCTION
+</code></pre>
+<h2 id="algorithm-steps"><a class="header" href="#algorithm-steps">Algorithm Steps</a></h2>
+<ol>
+<li>Check if the number of disks <code>n</code> is 0. If so, return immediately, as no moves are needed.</li>
+<li>Define a recursive function that takes the number of disks <code>n</code> and the names of the source, auxiliary, and destination rods as parameters.</li>
+<li>In the recursive function, implement the base case: if <code>n</code> equals 1, print a move to transfer the single disk from the source to the destination rod and return.</li>
+<li>For the recursive case, perform three steps:
+a. Recursively move <code>n - 1</code> disks from the source rod to the auxiliary rod, using the destination rod as the auxiliary.
+b. Print a move to transfer the nth disk from the source rod to the destination rod.
+c. Recursively move <code>n - 1</code> disks from the auxiliary rod to the destination rod, using the source rod as the auxiliary.</li>
+<li>In the main function, call the recursive function with the input <code>n</code> and rod names (e.g., 'A', 'B', 'C').</li>
+<li>The function prints the sequence of moves to solve the Tower of Hanoi problem.</li>
+</ol>
+<h2 id="java-implementation"><a class="header" href="#java-implementation">Java Implementation</a></h2>
+<pre><code class="language-java">public class TowerOfHanoi {
+    // Solves Tower of Hanoi for n disks and prints moves
+    public void towerOfHanoi(int n, char source, char auxiliary, char destination) {
+        // Base case: no disks to move
+        if (n == 0) {
+            return;
+        }
+        // Base case: single disk, move directly
+        if (n == 1) {
+            System.out.println("Move disk 1 from " + source + " to " + destination);
+            return;
+        }
+        // Recursive case: move n-1 disks to auxiliary rod
+        towerOfHanoi(n - 1, source, destination, auxiliary);
+        // Move nth disk to destination rod
+        System.out.println("Move disk " + n + " from " + source + " to " + destination);
+        // Move n-1 disks from auxiliary to destination rod
+        towerOfHanoi(n - 1, auxiliary, source, destination);
+    }
+}
+</code></pre>
+<h2 id="output"><a class="header" href="#output">Output</a></h2>
+<p>For the input <code>n = 2, source = 'A', auxiliary = 'B', destination = 'C'</code>, the program outputs:</p>
+<pre><code>Move disk 1 from A to B
+Move disk 2 from A to C
+Move disk 1 from B to C
+</code></pre>
+<p>Explanation: The two disks are moved from rod A to rod C using rod B as auxiliary, following the Tower of Hanoi rules.</p>
+<p>For the input <code>n = 1, source = 'A', auxiliary = 'B', destination = 'C'</code>, the program outputs:</p>
+<pre><code>Move disk 1 from A to C
+</code></pre>
+<p>Explanation: A single disk is moved directly from rod A to rod C.</p>
+<h2 id="how-it-works"><a class="header" href="#how-it-works">How It Works</a></h2>
+<ul>
+<li><strong>Step 1</strong>: The <code>towerOfHanoi</code> method checks if <code>n</code> is 0. For <code>n = 2</code>, it proceeds to the recursive case.</li>
+<li><strong>Step 2</strong>: For <code>n = 2</code>:
+<ul>
+<li>First recursive call: <code>towerOfHanoi(1, A, C, B)</code>:
+<ul>
+<li>Base case: <code>n = 1</code>, prints "Move disk 1 from A to B".</li>
+</ul>
+</li>
+<li>Print: "Move disk 2 from A to C".</li>
+<li>Second recursive call: <code>towerOfHanoi(1, B, A, C)</code>:
+<ul>
+<li>Base case: <code>n = 1</code>, prints "Move disk 1 from B to C".</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Step 3</strong>: The recursion generates the sequence of moves to transfer all disks from source to destination while respecting the rules.</li>
+<li><strong>Example Trace</strong>: For <code>n = 2</code>:
+<ul>
+<li>Move disk 1 from A to B (move top disk to auxiliary).</li>
+<li>Move disk 2 from A to C (move largest disk to destination).</li>
+<li>Move disk 1 from B to C (move top disk to destination).</li>
+</ul>
+</li>
+<li><strong>Testing with Different n</strong>: For <code>n = 1</code>, it prints one move. For <code>n = 3</code>, it generates 7 moves (2^3 - 1), following the same recursive pattern.</li>
+</ul>
+<h2 id="complexity-analysis-table"><a class="header" href="#complexity-analysis-table">Complexity Analysis Table</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Operation</th><th>Time Complexity</th><th>Space Complexity</th></tr></thead><tbody>
+<tr><td>Recursive Call</td><td>O(2^n)</td><td>O(n)</td></tr>
+<tr><td>Print Operation</td><td>O(1)</td><td>O(1)</td></tr>
+<tr><td>Full Algorithm</td><td>O(2^n)</td><td>O(n)</td></tr>
+</tbody></table>
+</div>
+<p><em>Note</em>:</p>
+<ul>
+<li>n is the number of disks.</li>
+<li>Time complexity: O(2^n), as the algorithm makes 2^n - 1 moves, with each move involving a constant-time print operation.</li>
+<li>Space complexity: O(n) due to the recursive call stack, which grows linearly with the number of disks.</li>
+<li>Best, average, and worst cases are all O(2^n), as the number of moves is fixed for a given <code>n</code>.</li>
+</ul>
+<blockquote>
+<p><strong>✅ Tip</strong>: Use the Tower of Hanoi to understand recursive problem-solving, and test with small values of <code>n</code> (e.g., 1, 2, 3) to visualize the move sequence. Count the number of moves to confirm it matches 2^n - 1.</p>
+</blockquote>
+<blockquote>
+<p><strong>⚠ Warning</strong>: Avoid large values of <code>n</code> (e.g., &gt;10), as the O(2^n) time complexity leads to an exponential number of moves, causing significant delays. Ensure rod names are distinct to avoid confusion in output.</p>
+</blockquote>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../problemStatements/ch02_0/ReverseStringRecursively.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../../problemStatements/ch02_02/FibonacciOptimization.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../problemStatements/ch02_0/ReverseStringRecursively.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../../problemStatements/ch02_02/FibonacciOptimization.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../../elasticlunr.min.js"></script>
+        <script src="../../mark.min.js"></script>
+        <script src="../../searcher.js"></script>
+
+        <script src="../../clipboard.min.js"></script>
+        <script src="../../highlight.js"></script>
+        <script src="../../book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="../../theme/ferris.js"></script>
+
+
+    </div>
+    </body>
+</html>

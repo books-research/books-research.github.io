@@ -1,0 +1,494 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>MatrixMultiplication - Java Data Structures and Algorithms for Beginners</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../../favicon.svg">
+        <link rel="shortcut icon" href="../../favicon.png">
+        <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+        <link rel="stylesheet" href="../../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="../../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../../theme/ferris.css">
+        <link rel="stylesheet" href="../../theme/semantic-notes.css">
+        <link rel="stylesheet" href="../../theme/listing.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../../toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Java Data Structures and Algorithms for Beginners</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <style>
+body {
+  text-align: justify;
+}
+</style>
+<h1 id="matrix-multiplication"><a class="header" href="#matrix-multiplication">Matrix Multiplication</a></h1>
+<h2 id="problem-statement"><a class="header" href="#problem-statement">Problem Statement</a></h2>
+<p>Write a Java program that implements a method to multiply two 2D arrays (matrices) and return the result as a new 2D array. The program should handle matrix multiplication for matrices of compatible sizes (i.e., the number of columns in the first matrix equals the number of rows in the second matrix) and test the implementation with matrices of different compatible sizes, including square and non-square matrices, and edge cases like single-row or single-column matrices. You can visualize this as combining two grids of numbers, where each cell in the resulting grid is computed by pairing rows from the first grid with columns from the second grid, summing the products of corresponding elements.</p>
+<p><strong>Input</strong>: Two 2D arrays (matrices) <code>A</code> (m × n) and <code>B</code> (n × p), where m is the number of rows in A, n is the number of columns in A and rows in B, and p is the number of columns in B (e.g., <code>A = [[1, 2], [3, 4]]</code>, <code>B = [[5, 6], [7, 8]]</code>).
+<strong>Output</strong>: A new 2D array (m × p) representing the product of A and B (e.g., <code>[[19, 22], [43, 50]]</code>).
+<strong>Constraints</strong>:</p>
+<ul>
+<li>1 ≤ m, n, p ≤ 100.</li>
+<li>Elements are integers between -10^4 and 10^4.</li>
+<li>The number of columns in A equals the number of rows in B (matrices are compatible).
+<strong>Example</strong>:</li>
+<li>Input: <code>A = [[1, 2], [3, 4]]</code>, <code>B = [[5, 6], [7, 8]]</code></li>
+<li>Output: <code>[[19, 22], [43, 50]]</code></li>
+<li>Explanation: For element [0][0] in the result: 1<em>5 + 2</em>7 = 19; for [0][1]: 1<em>6 + 2</em>8 = 22; for [1][0]: 3<em>5 + 4</em>7 = 43; for [1][1]: 3<em>6 + 4</em>8 = 50.</li>
+<li>Input: <code>A = [[1, 2, 3]]</code>, <code>B = [[4], [5], [6]]</code></li>
+<li>Output: <code>[[32]]</code></li>
+<li>Explanation: For element [0][0]: 1<em>4 + 2</em>5 + 3*6 = 32.</li>
+</ul>
+<h2 id="pseudocode"><a class="header" href="#pseudocode">Pseudocode</a></h2>
+<pre><code>FUNCTION multiplyMatrices(A, B)
+    IF A is null OR B is null OR A is empty OR B is empty OR columns of A not equal to rows of B THEN
+        RETURN null
+    ENDIF
+    SET m to number of rows in A
+    SET n to number of columns in A
+    SET p to number of columns in B
+    CREATE result matrix of size m × p
+    FOR i from 0 to m - 1
+        FOR j from 0 to p - 1
+            SET sum to 0
+            FOR k from 0 to n - 1
+                SET sum to sum + A[i][k] * B[k][j]
+            ENDFOR
+            SET result[i][j] to sum
+        ENDFOR
+    ENDFOR
+    RETURN result
+ENDFUNCTION
+
+FUNCTION main()
+    SET testCases to pairs of matrices
+    FOR each (A, B) in testCases
+        CALL multiplyMatrices(A, B)
+        PRINT result
+    ENDFOR
+ENDFUNCTION
+</code></pre>
+<h2 id="algorithm-steps"><a class="header" href="#algorithm-steps">Algorithm Steps</a></h2>
+<ol>
+<li>Check if matrices A or B are null, empty, or incompatible (number of columns in A ≠ number of rows in B). If so, return null.</li>
+<li>Get dimensions: m (rows of A), n (columns of A/rows of B), p (columns of B).</li>
+<li>Create a result matrix of size m × p, initialized to zeros.</li>
+<li>For each element <code>result[i][j]</code> in the result matrix:
+a. Initialize a sum to 0.
+b. For each k from 0 to n-1, compute <code>A[i][k] * B[k][j]</code> and add to the sum.
+c. Set <code>result[i][j]</code> to the computed sum.</li>
+<li>Return the result matrix.</li>
+<li>In the <code>main</code> method, create test cases with different compatible matrix sizes and call <code>multiplyMatrices</code> to verify correctness.</li>
+</ol>
+<h2 id="java-implementation"><a class="header" href="#java-implementation">Java Implementation</a></h2>
+<pre><code class="language-java">public class MatrixMultiplication {
+    // Multiplies two matrices and returns the result
+    public int[][] multiplyMatrices(int[][] A, int[][] B) {
+        // Check for null, empty, or incompatible matrices
+        if (A == null || B == null || A.length == 0 || B.length == 0 || A[0].length != B.length) {
+            return null;
+        }
+        // Get dimensions
+        int m = A.length; // Rows of A
+        int n = A[0].length; // Columns of A, rows of B
+        int p = B[0].length; // Columns of B
+        // Initialize result matrix
+        int[][] result = new int[m][p];
+        // Compute matrix multiplication
+        for (int i = 0; i &lt; m; i++) {
+            for (int j = 0; j &lt; p; j++) {
+                int sum = 0;
+                for (int k = 0; k &lt; n; k++) {
+                    sum += A[i][k] * B[k][j];
+                }
+                result[i][j] = sum;
+            }
+        }
+        return result;
+    }
+
+    // Main method to test multiplyMatrices with various inputs
+    public static void main(String[] args) {
+        MatrixMultiplication multiplier = new MatrixMultiplication();
+
+        // Test case 1: 2x2 matrices
+        int[][] A1 = {{1, 2}, {3, 4}};
+        int[][] B1 = {{5, 6}, {7, 8}};
+        System.out.println("Test case 1:");
+        System.out.println("Matrix A1:");
+        printMatrix(A1);
+        System.out.println("Matrix B1:");
+        printMatrix(B1);
+        int[][] result1 = multiplier.multiplyMatrices(A1, B1);
+        System.out.println("Result:");
+        printMatrix(result1);
+
+        // Test case 2: 1x3 and 3x1 matrices
+        int[][] A2 = {{1, 2, 3}};
+        int[][] B2 = {{4}, {5}, {6}};
+        System.out.println("Test case 2:");
+        System.out.println("Matrix A2:");
+        printMatrix(A2);
+        System.out.println("Matrix B2:");
+        printMatrix(B2);
+        int[][] result2 = multiplier.multiplyMatrices(A2, B2);
+        System.out.println("Result:");
+        printMatrix(result2);
+
+        // Test case 3: 3x2 and 2x3 matrices
+        int[][] A3 = {{1, 2}, {3, 4}, {5, 6}};
+        int[][] B3 = {{7, 8, 9}, {10, 11, 12}};
+        System.out.println("Test case 3:");
+        System.out.println("Matrix A3:");
+        printMatrix(A3);
+        System.out.println("Matrix B3:");
+        printMatrix(B3);
+        int[][] result3 = multiplier.multiplyMatrices(A3, B3);
+        System.out.println("Result:");
+        printMatrix(result3);
+
+        // Test case 4: Incompatible matrices
+        int[][] A4 = {{1, 2}};
+        int[][] B4 = {{3, 4}};
+        System.out.println("Test case 4 (incompatible):");
+        System.out.println("Matrix A4:");
+        printMatrix(A4);
+        System.out.println("Matrix B4:");
+        printMatrix(B4);
+        int[][] result4 = multiplier.multiplyMatrices(A4, B4);
+        System.out.println("Result:");
+        printMatrix(result4);
+    }
+
+    // Helper method to print matrix
+    private static void printMatrix(int[][] matrix) {
+        if (matrix == null) {
+            System.out.println("null");
+            return;
+        }
+        System.out.println("[");
+        for (int i = 0; i &lt; matrix.length; i++) {
+            System.out.print("  [");
+            for (int j = 0; j &lt; matrix[i].length; j++) {
+                System.out.print(matrix[i][j]);
+                if (j &lt; matrix[i].length - 1) {
+                    System.out.print(", ");
+                }
+            }
+            System.out.println("]");
+        }
+        System.out.println("]");
+    }
+}
+</code></pre>
+<h2 id="output"><a class="header" href="#output">Output</a></h2>
+<p>Running the <code>main</code> method produces:</p>
+<pre><code>Test case 1:
+Matrix A1:
+[
+  [1, 2]
+  [3, 4]
+]
+Matrix B1:
+[
+  [5, 6]
+  [7, 8]
+]
+Result:
+[
+  [19, 22]
+  [43, 50]
+]
+Test case 2:
+Matrix A2:
+[
+  [1, 2, 3]
+]
+Matrix B2:
+[
+  [4]
+  [5]
+  [6]
+]
+Result:
+[
+  [32]
+]
+Test case 3:
+Matrix A3:
+[
+  [1, 2]
+  [3, 4]
+  [5, 6]
+]
+Matrix B3:
+[
+  [7, 8, 9]
+  [10, 11, 12]
+]
+Result:
+[
+  [27, 30, 33]
+  [61, 68, 75]
+  [95, 106, 117]
+]
+Test case 4 (incompatible):
+Matrix A4:
+[
+  [1, 2]
+]
+Matrix B4:
+[
+  [3, 4]
+]
+Result:
+null
+</code></pre>
+<p>Explanation:</p>
+<ul>
+<li>Test case 1: Multiplies 2×2 matrices, resulting in <code>[[19, 22], [43, 50]]</code>.</li>
+<li>Test case 2: Multiplies 1×3 and 3×1 matrices, resulting in <code>[[32]]</code>.</li>
+<li>Test case 3: Multiplies 3×2 and 2×3 matrices, resulting in a 3×3 matrix.</li>
+<li>Test case 4: Incompatible matrices (1×2 and 1×2) return null.</li>
+</ul>
+<h2 id="how-it-works"><a class="header" href="#how-it-works">How It Works</a></h2>
+<ul>
+<li><strong>Step 1</strong>: The <code>multiplyMatrices</code> method checks for null, empty, or incompatible matrices. For <code>A = [[1, 2], [3, 4]]</code>, <code>B = [[5, 6], [7, 8]]</code>, it proceeds (2×2 and 2×2 are compatible).</li>
+<li><strong>Step 2</strong>: Initialize <code>m = 2</code>, <code>n = 2</code>, <code>p = 2</code>, and create a 2×2 result matrix.</li>
+<li><strong>Step 3</strong>: Compute each element:
+<ul>
+<li><code>result[0][0]</code>: <code>1*5 + 2*7 = 19</code>.</li>
+<li><code>result[0][1]</code>: <code>1*6 + 2*8 = 22</code>.</li>
+<li><code>result[1][0]</code>: <code>3*5 + 4*7 = 43</code>.</li>
+<li><code>result[1][1]</code>: <code>3*6 + 4*8 = 50</code>.</li>
+</ul>
+</li>
+<li><strong>Example Trace</strong>: For test case 1, computes <code>[[19, 22], [43, 50]]</code> by summing products of rows of A with columns of B.</li>
+<li><strong>Main Method</strong>: Tests with square (2×2), non-square (1×3 × 3×1, 3×2 × 2×3), and incompatible matrices, printing inputs and results.</li>
+<li><strong>Matrix Multiplication</strong>: Each element <code>result[i][j]</code> is the dot product of row i of A and column j of B.</li>
+</ul>
+<h2 id="complexity-analysis-table"><a class="header" href="#complexity-analysis-table">Complexity Analysis Table</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Operation</th><th>Time Complexity</th><th>Space Complexity</th></tr></thead><tbody>
+<tr><td>Multiplication</td><td>O(m<em>n</em>p)</td><td>O(m*p)</td></tr>
+<tr><td>Full Algorithm</td><td>O(m<em>n</em>p)</td><td>O(m*p)</td></tr>
+</tbody></table>
+</div>
+<p><em>Note</em>:</p>
+<ul>
+<li>m is the number of rows in A, n is the number of columns in A/rows in B, p is the number of columns in B.</li>
+<li>Time complexity: O(m<em>n</em>p), as the algorithm iterates m*p times, each performing n multiplications and additions.</li>
+<li>Space complexity: O(m*p), for the result matrix. Temporary variables use O(1) space.</li>
+<li>Best, average, and worst cases are O(m<em>n</em>p).</li>
+</ul>
+<blockquote>
+<p><strong>✅ Tip</strong>: Always check matrix compatibility before multiplication to avoid errors. Test with various sizes, including single-row/column matrices, to ensure robustness.</p>
+</blockquote>
+<blockquote>
+<p><strong>⚠ Warning</strong>: Ensure matrices are not null and have consistent row/column sizes to avoid <code>NullPointerException</code> or <code>ArrayIndexOutOfBoundsException</code>. Be cautious with large matrices, as O(m<em>n</em>p) time complexity can be slow.</p>
+</blockquote>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../problemStatements/ch03_01_01/DiagonalElements.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../../problemStatements/ch03_01_01/TransposeMatrix.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../problemStatements/ch03_01_01/DiagonalElements.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../../problemStatements/ch03_01_01/TransposeMatrix.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../../elasticlunr.min.js"></script>
+        <script src="../../mark.min.js"></script>
+        <script src="../../searcher.js"></script>
+
+        <script src="../../clipboard.min.js"></script>
+        <script src="../../highlight.js"></script>
+        <script src="../../book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="../../theme/ferris.js"></script>
+
+
+    </div>
+    </body>
+</html>

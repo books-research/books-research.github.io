@@ -1,0 +1,258 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Appendix-Glossary of Terms - Java Data Structures and Algorithms for Beginners</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="theme/ferris.css">
+        <link rel="stylesheet" href="theme/semantic-notes.css">
+        <link rel="stylesheet" href="theme/listing.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Java Data Structures and Algorithms for Beginners</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <style>
+body {
+  text-align: justify;
+}
+</style>
+<h1 id="appendix-glossary-of-terms"><a class="header" href="#appendix-glossary-of-terms">Appendix: Glossary of Terms</a></h1>
+<h2 id="introduction"><a class="header" href="#introduction">Introduction</a></h2>
+<p>This glossary provides clear, beginner-friendly definitions for key terms used in the "Java Data Structures and Algorithms for Beginners" curriculum, with a focus on concepts from the Binary Search chapter and broader data structures and algorithms (DSA) topics. It serves as a reference to help students understand technical terminology encountered in problem statements, implementations, and complexity analyses. Terms are drawn from the Binary Search exercises, as well as other core data structures (arrays, linked lists, stacks, queues, hashing, trees, graphs), sorting algorithms (Bubble Sort, Selection Sort, Insertion Sort, Merge Sort), searching algorithms (Linear Search, Binary Search), and recursion. This glossary supports the learning platform’s goal of providing accessible, hands-on education with embedded compilers and visualizations.</p>
+<h2 id="glossary-of-terms"><a class="header" href="#glossary-of-terms">Glossary of Terms</a></h2>
+<ul>
+<li><strong>Algorithm</strong>: A step-by-step procedure or set of rules to solve a problem or perform a task, such as searching or sorting data. Example: Binary Search is an algorithm to find an element in a sorted array.</li>
+<li><strong>Array</strong>: A data structure that stores a fixed-size sequence of elements of the same type, accessed by index. Example: <code>[1, 3, 5, 7]</code> is an array used in Binary Search.</li>
+<li><strong>Big-O Notation</strong>: A mathematical notation to describe the upper bound of an algorithm’s time or space complexity, indicating its efficiency as input size grows. Example: Binary Search has O(log n) time complexity.</li>
+<li><strong>Binary Search</strong>: A divide-and-conquer algorithm that finds an element in a sorted array by repeatedly halving the search interval, comparing the middle element to the target. Example: Finding <code>7</code> in <code>[1, 3, 5, 7, 9]</code> by checking the middle element.</li>
+<li><strong>Complexity</strong>: A measure of an algorithm’s performance, typically in terms of time (execution duration) or space (memory usage). Example: Binary Search’s time complexity is logarithmic, O(log n).</li>
+<li><strong>Divide-and-Conquer</strong>: An algorithmic paradigm that breaks a problem into smaller subproblems, solves them, and combines results. Binary Search uses this by dividing the array in half.</li>
+<li><strong>Duplicate Handling</strong>: Techniques to manage repeated elements in a data structure, such as finding the first and last occurrences of a target in Binary Search. Example: Finding indices [1, 3] for <code>3</code> in <code>[1, 3, 3, 3, 5]</code>.</li>
+<li><strong>Graph</strong>: A data structure with nodes (vertices) connected by edges, used to model relationships. Example: A social network where users are nodes and friendships are edges.</li>
+<li><strong>Hashing</strong>: A technique to map data to a fixed-size array using a hash function, enabling fast retrieval. Example: A phone book mapping names to numbers.</li>
+<li><strong>Index</strong>: A numerical position used to access elements in an array or list. Example: In <code>[1, 3, 5]</code>, the index of <code>5</code> is 2.</li>
+<li><strong>Iterative Algorithm</strong>: An algorithm that uses loops to repeat steps, avoiding recursion. Example: Iterative Binary Search uses a while loop to halve the search range.</li>
+<li><strong>Linked List</strong>: A data structure where elements (nodes) are linked by pointers, allowing dynamic size changes. Example: A playlist where each song points to the next.</li>
+<li><strong>Logarithmic Time</strong>: Time complexity where the running time grows logarithmically with input size, common in Binary Search. Example: O(log n) for searching in a sorted array of size n.</li>
+<li><strong>Queue</strong>: A data structure that follows First-In-First-Out (FIFO) order, where elements are added at the rear and removed from the front. Example: A print job queue.</li>
+<li><strong>Recursion</strong>: A process where a function calls itself to solve smaller instances of a problem. Example: Recursive Binary Search divides the array and calls itself on a smaller range.</li>
+<li><strong>Sorted Array</strong>: An array where elements are arranged in order (e.g., ascending or descending), a prerequisite for Binary Search. Example: <code>[1, 3, 5, 7, 9]</code> is sorted in ascending order.</li>
+<li><strong>Space Complexity</strong>: The amount of memory an algorithm uses relative to input size. Example: Iterative Binary Search has O(1) space complexity, while recursive uses O(log n) due to the call stack.</li>
+<li><strong>Stack</strong>: A data structure that follows Last-In-First-Out (LIFO) order, where elements are added and removed from the top. Example: A browser’s back button history.</li>
+<li><strong>Time Complexity</strong>: The amount of time an algorithm takes to run relative to input size. Example: Binary Search’s O(log n) vs. Linear Search’s O(n).</li>
+<li><strong>Tree</strong>: A hierarchical data structure with nodes connected by edges, where each node has a parent and children. Example: A binary search tree for efficient searches.</li>
+</ul>
+<h2 id="-tip-or-warning-box"><a class="header" href="#-tip-or-warning-box">✅ Tip or Warning Box</a></h2>
+<p><strong>✅ Tip</strong>: Use this glossary as a quick reference when working through Binary Search exercises or other DSA topics. Understanding these terms will help you grasp problem statements, implementations, and complexity analyses more effectively.</p>
+<p><strong>⚠ Warning</strong>: Ensure you understand the context of each term, as some (e.g., complexity) apply differently across algorithms. For example, Binary Search requires a sorted array, unlike Linear Search, which affects their use cases.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="problemStatements/ch05_02/BinarySearchRecursiveImplementation.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="appendix_pseudocode_symbols.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="problemStatements/ch05_02/BinarySearchRecursiveImplementation.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="appendix_pseudocode_symbols.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="theme/ferris.js"></script>
+
+
+    </div>
+    </body>
+</html>

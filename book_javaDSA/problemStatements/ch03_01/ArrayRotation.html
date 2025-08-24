@@ -1,0 +1,441 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>ArrayRotation - Java Data Structures and Algorithms for Beginners</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../../favicon.svg">
+        <link rel="shortcut icon" href="../../favicon.png">
+        <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+        <link rel="stylesheet" href="../../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="../../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../../theme/ferris.css">
+        <link rel="stylesheet" href="../../theme/semantic-notes.css">
+        <link rel="stylesheet" href="../../theme/listing.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../../toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Java Data Structures and Algorithms for Beginners</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <style>
+body {
+  text-align: justify;
+}
+</style>
+<h1 id="array-rotation"><a class="header" href="#array-rotation">Array Rotation</a></h1>
+<h2 id="problem-statement"><a class="header" href="#problem-statement">Problem Statement</a></h2>
+<p>Write a Java program that rotates an array of integers by k positions to the left. The rotation should shift each element k positions left, with elements at the beginning wrapping around to the end of the array. The program should modify the array in-place and test the implementation with different values of k and array sizes, including edge cases like empty arrays, single-element arrays, and k larger than the array length. You can visualize this as rotating a circular table of numbered plates k positions counterclockwise, so the first k plates move to the end while the rest shift forward.</p>
+<p><strong>Input</strong>: An array of integers and a non-negative integer k (e.g., <code>arr = [1, 2, 3, 4, 5], k = 2</code>).
+<strong>Output</strong>: The array modified in-place to reflect the left rotation by k positions (e.g., <code>[3, 4, 5, 1, 2]</code>).
+<strong>Constraints</strong>:</p>
+<ul>
+<li>The array length is between 0 and 10^5.</li>
+<li>Elements are integers between -10^9 and 10^9.</li>
+<li>k is a non-negative integer (0 ≤ k ≤ 10^9).</li>
+<li>The array may be empty.
+<strong>Example</strong>:</li>
+<li>Input: <code>arr = [1, 2, 3, 4, 5], k = 2</code></li>
+<li>Output: <code>[3, 4, 5, 1, 2]</code></li>
+<li>Explanation: Rotating [1, 2, 3, 4, 5] left by 2 positions moves 1 and 2 to the end.</li>
+<li>Input: <code>arr = [1, 2, 3], k = 4</code></li>
+<li>Output: <code>[3, 1, 2]</code></li>
+<li>Explanation: Rotating by k = 4 is equivalent to k = 1 (since 4 % 3 = 1).</li>
+</ul>
+<h2 id="pseudocode"><a class="header" href="#pseudocode">Pseudocode</a></h2>
+<pre><code>FUNCTION rotateArray(arr, k)
+    IF arr is null OR length of arr &lt;= 1 THEN
+        RETURN
+    ENDIF
+    SET n to length of arr
+    SET k to k modulo n
+    IF k equals 0 THEN
+        RETURN
+    ENDIF
+    CALL reverseArray(arr, 0, k - 1)
+    CALL reverseArray(arr, k, n - 1)
+    CALL reverseArray(arr, 0, n - 1)
+ENDFUNCTION
+
+FUNCTION reverseArray(arr, start, end)
+    WHILE start &lt; end
+        SET temp to arr[start]
+        SET arr[start] to arr[end]
+        SET arr[end] to temp
+        INCREMENT start
+        DECREMENT end
+    ENDWHILE
+ENDFUNCTION
+
+FUNCTION main()
+    SET testCases to array of tuples (arr, k)
+    FOR each (arr, k) in testCases
+        CALL rotateArray(arr, k)
+        PRINT arr
+    ENDFOR
+ENDFUNCTION
+</code></pre>
+<h2 id="algorithm-steps"><a class="header" href="#algorithm-steps">Algorithm Steps</a></h2>
+<ol>
+<li>Check if the input array is null or has 0 or 1 element. If so, return, as no rotation is needed.</li>
+<li>Compute the effective rotation value: <code>k = k % n</code>, where <code>n</code> is the array length, to handle cases where k exceeds n.</li>
+<li>If k equals 0 after modulo, return, as no rotation is needed.</li>
+<li>Use the reversal algorithm to rotate the array in-place:
+a. Reverse the first k elements (indices 0 to k-1).
+b. Reverse the remaining elements (indices k to n-1).
+c. Reverse the entire array (indices 0 to n-1).</li>
+<li>The <code>reverseArray</code> helper function swaps elements from <code>start</code> to <code>end</code> using a temporary variable.</li>
+<li>In the <code>main</code> method, create test cases with different array sizes and k values, call <code>rotateArray</code>, and print the results.</li>
+</ol>
+<h2 id="java-implementation"><a class="header" href="#java-implementation">Java Implementation</a></h2>
+<pre><code class="language-java">public class ArrayRotation {
+    // Rotates array left by k positions in-place
+    public void rotateArray(int[] arr, int k) {
+        // Check for null or single-element/empty array
+        if (arr == null || arr.length &lt;= 1) {
+            return;
+        }
+        // Normalize k to handle cases where k &gt; array length
+        int n = arr.length;
+        k = k % n;
+        if (k == 0) {
+            return;
+        }
+        // Perform three reversals
+        reverseArray(arr, 0, k - 1);
+        reverseArray(arr, k, n - 1);
+        reverseArray(arr, 0, n - 1);
+    }
+
+    // Helper function to reverse array segment from start to end
+    private void reverseArray(int[] arr, int start, int end) {
+        while (start &lt; end) {
+            int temp = arr[start];
+            arr[start] = arr[end];
+            arr[end] = temp;
+            start++;
+            end--;
+        }
+    }
+
+    // Main method to test rotateArray with various inputs
+    public static void main(String[] args) {
+        ArrayRotation rotator = new ArrayRotation();
+
+        // Test case 1: Normal array, k = 2
+        int[] arr1 = {1, 2, 3, 4, 5};
+        System.out.print("Test case 1 before: ");
+        printArray(arr1);
+        rotator.rotateArray(arr1, 2);
+        System.out.print("Test case 1 after: ");
+        printArray(arr1);
+
+        // Test case 2: k &gt; array length
+        int[] arr2 = {1, 2, 3};
+        System.out.print("Test case 2 before: ");
+        printArray(arr2);
+        rotator.rotateArray(arr2, 4);
+        System.out.print("Test case 2 after: ");
+        printArray(arr2);
+
+        // Test case 3: Empty array
+        int[] arr3 = {};
+        System.out.print("Test case 3 before: ");
+        printArray(arr3);
+        rotator.rotateArray(arr3, 3);
+        System.out.print("Test case 3 after: ");
+        printArray(arr3);
+
+        // Test case 4: Single-element array
+        int[] arr4 = {7};
+        System.out.print("Test case 4 before: ");
+        printArray(arr4);
+        rotator.rotateArray(arr4, 2);
+        System.out.print("Test case 4 after: ");
+        printArray(arr4);
+
+        // Test case 5: k = 0
+        int[] arr5 = {1, 2, 3, 4};
+        System.out.print("Test case 5 before: ");
+        printArray(arr5);
+        rotator.rotateArray(arr5, 0);
+        System.out.print("Test case 5 after: ");
+        printArray(arr5);
+    }
+
+    // Helper method to print array
+    private static void printArray(int[] arr) {
+        if (arr == null || arr.length == 0) {
+            System.out.println("[]");
+            return;
+        }
+        System.out.print("[");
+        for (int i = 0; i &lt; arr.length; i++) {
+            System.out.print(arr[i]);
+            if (i &lt; arr.length - 1) {
+                System.out.print(", ");
+            }
+        }
+        System.out.println("]");
+    }
+}
+</code></pre>
+<h2 id="output"><a class="header" href="#output">Output</a></h2>
+<p>Running the <code>main</code> method produces:</p>
+<pre><code>Test case 1 before: [1, 2, 3, 4, 5]
+Test case 1 after: [3, 4, 5, 1, 2]
+Test case 2 before: [1, 2, 3]
+Test case 2 after: [3, 1, 2]
+Test case 3 before: []
+Test case 3 after: []
+Test case 4 before: [7]
+Test case 4 after: [7]
+Test case 5 before: [1, 2, 3, 4]
+Test case 5 after: [1, 2, 3, 4]
+</code></pre>
+<p>Explanation:</p>
+<ul>
+<li>Test case 1: Rotates <code>[1, 2, 3, 4, 5]</code> left by 2, resulting in <code>[3, 4, 5, 1, 2]</code>.</li>
+<li>Test case 2: Rotates <code>[1, 2, 3]</code> by k = 4, equivalent to k = 1 (4 % 3), resulting in <code>[3, 1, 2]</code>.</li>
+<li>Test case 3: Empty array remains <code>[]</code>.</li>
+<li>Test case 4: Single-element array <code>[7]</code> remains unchanged.</li>
+<li>Test case 5: k = 0 leaves <code>[1, 2, 3, 4]</code> unchanged.</li>
+</ul>
+<h2 id="how-it-works"><a class="header" href="#how-it-works">How It Works</a></h2>
+<ul>
+<li><strong>Step 1</strong>: The <code>rotateArray</code> method checks if the array is null or has 0 or 1 element. For <code>[1, 2, 3, 4, 5], k = 2</code>, it proceeds.</li>
+<li><strong>Step 2</strong>: Normalize k: <code>n = 5</code>, <code>k = 2 % 5 = 2</code>.</li>
+<li><strong>Step 3</strong>: Perform three reversals:
+<ul>
+<li>Reverse indices 0 to 1: <code>[2, 1, 3, 4, 5]</code>.</li>
+<li>Reverse indices 2 to 4: <code>[2, 1, 5, 4, 3]</code>.</li>
+<li>Reverse entire array: <code>[3, 4, 5, 1, 2]</code>.</li>
+</ul>
+</li>
+<li><strong>Example Trace</strong>: For <code>[1, 2, 3, 4, 5], k = 2</code>, reverses [1, 2] to [2, 1], [3, 4, 5] to [5, 4, 3], then [2, 1, 5, 4, 3] to [3, 4, 5, 1, 2].</li>
+<li><strong>Main Method</strong>: Tests the method with various cases: normal rotation, k &gt; n, empty array, single-element array, and k = 0.</li>
+<li><strong>In-Place Property</strong>: The algorithm uses O(1) extra space by performing swaps via the <code>reverseArray</code> helper.</li>
+</ul>
+<h2 id="complexity-analysis-table"><a class="header" href="#complexity-analysis-table">Complexity Analysis Table</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Operation</th><th>Time Complexity</th><th>Space Complexity</th></tr></thead><tbody>
+<tr><td>Reverse</td><td>O(n)</td><td>O(1)</td></tr>
+<tr><td>Full Algorithm</td><td>O(n)</td><td>O(1)</td></tr>
+</tbody></table>
+</div>
+<p><em>Note</em>:</p>
+<ul>
+<li>n is the size of the input array.</li>
+<li>Time complexity: O(n), as the algorithm performs three reversals, each taking O(n/2), O(n-k), and O(n) respectively, totaling O(n).</li>
+<li>Space complexity: O(1), as only a few temporary variables are used for swapping.</li>
+<li>Best, average, and worst cases are O(n).</li>
+</ul>
+<blockquote>
+<p><strong>✅ Tip</strong>: Normalize k using modulo to handle large k values efficiently. Test with edge cases like k = 0, k &gt; n, and empty arrays to ensure robustness.</p>
+</blockquote>
+<blockquote>
+<p><strong>⚠ Warning</strong>: Ensure the input array is not null to avoid <code>NullPointerException</code>. Verify index bounds in the reverse function to prevent <code>ArrayIndexOutOfBoundsException</code>.</p>
+</blockquote>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../problemStatements/ch03_01/ArrayReversal.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../../problemStatements/ch03_01/ArraySorting.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../problemStatements/ch03_01/ArrayReversal.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../../problemStatements/ch03_01/ArraySorting.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../../elasticlunr.min.js"></script>
+        <script src="../../mark.min.js"></script>
+        <script src="../../searcher.js"></script>
+
+        <script src="../../clipboard.min.js"></script>
+        <script src="../../highlight.js"></script>
+        <script src="../../book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="../../theme/ferris.js"></script>
+
+
+    </div>
+    </body>
+</html>

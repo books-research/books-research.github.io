@@ -1,0 +1,549 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>LowestCommonAncestor - Java Data Structures and Algorithms for Beginners</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../../favicon.svg">
+        <link rel="shortcut icon" href="../../favicon.png">
+        <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+        <link rel="stylesheet" href="../../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="../../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../../theme/ferris.css">
+        <link rel="stylesheet" href="../../theme/semantic-notes.css">
+        <link rel="stylesheet" href="../../theme/listing.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../../toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Java Data Structures and Algorithms for Beginners</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <style>
+body {
+  text-align: justify;
+}
+</style>
+<h1 id="lowest-common-ancestor"><a class="header" href="#lowest-common-ancestor">Lowest Common Ancestor</a></h1>
+<h2 id="problem-statement"><a class="header" href="#problem-statement">Problem Statement</a></h2>
+<p>Write a Java program that extends a Binary Search Tree (BST) implementation to include a method that finds the lowest common ancestor (LCA) of two nodes given their values. The LCA is the deepest node that is an ancestor of both nodes. The program should reuse the BST node structure and test the LCA method with different pairs of values, including cases where both nodes exist, one or both don’t exist, and edge cases like empty trees or single-node trees. The BST property (left subtree values &lt; node value &lt; right subtree values) should be leveraged for efficiency. You can visualize this as finding the closest common ancestor in a family tree for two individuals, using the ordered structure to navigate efficiently.</p>
+<p><strong>Input</strong>:</p>
+<ul>
+<li>A BST represented by nodes with integer values.</li>
+<li>Two integer values, <code>value1</code> and <code>value2</code>, representing the nodes to find the LCA for.
+<strong>Output</strong>: The value of the LCA node, or -1 if the LCA cannot be determined (e.g., one or both values don’t exist), and a string representation of the tree for clarity.
+<strong>Constraints</strong>:</li>
+<li>The tree has between 0 and 10^5 nodes.</li>
+<li>Node values, <code>value1</code>, and <code>value2</code> are integers in the range [-10^9, 10^9].</li>
+<li>Duplicate values are not allowed in the BST.
+<strong>Example</strong>:</li>
+<li>Input: Tree = [5, left: [3, left: [1], right: [4]], right: [7]], Values = [1, 4]</li>
+<li>Output: LCA = 3, "Preorder: 5 3 1 4 7"</li>
+<li>Explanation: Node 3 is the LCA of nodes 1 and 4 (deepest common ancestor).</li>
+<li>Input: Tree = [5, left: [3, left: [1], right: [4]], right: [7]], Values = [1, 6]</li>
+<li>Output: LCA = -1, "Preorder: 5 3 1 4 7"</li>
+<li>Explanation: Node 6 doesn’t exist, so no LCA.</li>
+<li>Input: Tree = [], Values = [1, 2]</li>
+<li>Output: LCA = -1, "Empty"</li>
+<li>Explanation: Empty tree, no LCA.</li>
+</ul>
+<h2 id="pseudocode"><a class="header" href="#pseudocode">Pseudocode</a></h2>
+<pre><code>CLASS Node
+    SET value to integer
+    SET left to Node (null by default)
+    SET right to Node (null by default)
+ENDCLASS
+
+FUNCTION findLCA(root, value1, value2)
+    FUNCTION exists(node, value)
+        IF node is null THEN
+            RETURN false
+        ENDIF
+        IF node.value equals value THEN
+            RETURN true
+        ENDIF
+        IF value &lt; node.value THEN
+            RETURN exists(node.left, value)
+        ELSE
+            RETURN exists(node.right, value)
+        ENDIF
+    ENDFUNCTION
+    IF root is null OR NOT exists(root, value1) OR NOT exists(root, value2) THEN
+        RETURN -1
+    ENDIF
+    SET current to root
+    WHILE current is not null
+        IF value1 &lt; current.value AND value2 &lt; current.value THEN
+            SET current to current.left
+        ELSE IF value1 &gt; current.value AND value2 &gt; current.value THEN
+            SET current to current.right
+        ELSE
+            RETURN current.value
+        ENDIF
+    ENDWHILE
+    RETURN -1
+ENDFUNCTION
+
+FUNCTION toString(root)
+    IF root is null THEN
+        RETURN "Empty"
+    ENDIF
+    CREATE result as new StringBuilder
+    FUNCTION preorder(node)
+        IF node is null THEN
+            RETURN
+        ENDIF
+        APPEND node.value and " " to result
+        CALL preorder(node.left)
+        CALL preorder(node.right)
+    ENDFUNCTION
+    CALL preorder(root)
+    RETURN "Preorder: " + result as string trimmed
+ENDFUNCTION
+
+FUNCTION main()
+    SET testCases to array of (tree, value1, value2) pairs
+    FOR each testCase in testCases
+        PRINT test case details
+        CALL findLCA(testCase.root, testCase.value1, testCase.value2)
+        PRINT LCA and tree using toString
+    ENDFOR
+ENDFUNCTION
+</code></pre>
+<h2 id="algorithm-steps"><a class="header" href="#algorithm-steps">Algorithm Steps</a></h2>
+<ol>
+<li>Reuse the <code>Node</code> class with:
+a. An integer <code>value</code>.
+b. <code>left</code> and <code>right</code> pointers to child nodes.</li>
+<li>Define <code>findLCA</code>:
+a. Check if both <code>value1</code> and <code>value2</code> exist in the tree using a helper function <code>exists</code>.
+b. If the tree is empty or either value doesn’t exist, return -1.
+c. Iteratively traverse from the root:
+<ul>
+<li>If both values are less than the current node’s value, move to the left child.</li>
+<li>If both values are greater than the current node’s value, move to the right child.</li>
+<li>Otherwise, the current node is the LCA (values split or one matches the node).
+d. Return the LCA’s value, or -1 if not found.</li>
+</ul>
+</li>
+<li>Define <code>toString</code>:
+a. If root is null, return "Empty".
+b. Perform preorder traversal, appending values to a string.</li>
+<li>In <code>main</code>, test with:
+a. A pair where both nodes exist (LCA in subtree).
+b. A pair where one node doesn’t exist.
+c. An empty tree.
+d. A single-node tree with matching and non-matching pairs.</li>
+</ol>
+<h2 id="java-implementation"><a class="header" href="#java-implementation">Java Implementation</a></h2>
+<pre><code class="language-java">public class LowestCommonAncestor {
+    // Node class for the binary search tree
+    static class Node {
+        int value;
+        Node left, right;
+
+        Node(int value) {
+            this.value = value;
+            this.left = null;
+            this.right = null;
+        }
+    }
+
+    // Finds the lowest common ancestor of two values
+    public int findLCA(Node root, int value1, int value2) {
+        // Helper function to check if a value exists in the BST
+        boolean exists(Node node, int value) {
+            if (node == null) {
+                return false;
+            }
+            if (node.value == value) {
+                return true;
+            }
+            if (value &lt; node.value) {
+                return exists(node.left, value);
+            } else {
+                return exists(node.right, value);
+            }
+        }
+
+        // Check if both values exist
+        if (root == null || !exists(root, value1) || !exists(root, value2)) {
+            return -1;
+        }
+
+        // Iterative LCA search
+        Node current = root;
+        while (current != null) {
+            if (value1 &lt; current.value &amp;&amp; value2 &lt; current.value) {
+                current = current.left;
+            } else if (value1 &gt; current.value &amp;&amp; value2 &gt; current.value) {
+                current = current.right;
+            } else {
+                return current.value;
+            }
+        }
+        return -1;
+    }
+
+    // Converts tree to string (preorder traversal)
+    public String toString(Node root) {
+        if (root == null) {
+            return "Empty";
+        }
+        StringBuilder result = new StringBuilder();
+        preorder(root, result);
+        return "Preorder: " + result.toString().trim();
+    }
+
+    private void preorder(Node node, StringBuilder result) {
+        if (node == null) {
+            return;
+        }
+        result.append(node.value).append(" ");
+        preorder(node.left, result);
+        preorder(node.right, result);
+    }
+
+    // Helper class for test cases
+    static class TestCase {
+        Node root;
+        int value1, value2;
+
+        TestCase(int[] values, int[][] edges, int value1, int value2) {
+            this.value1 = value1;
+            this.value2 = value2;
+            if (values.length == 0) {
+                root = null;
+                return;
+            }
+            Node[] nodes = new Node[values.length];
+            for (int i = 0; i &lt; values.length; i++) {
+                nodes[i] = new Node(values[i]);
+            }
+            for (int[] edge : edges) {
+                int parent = edge[0], child = edge[1];
+                if (edge[2] == 0) {
+                    nodes[parent].left = nodes[child];
+                } else {
+                    nodes[parent].right = nodes[child];
+                }
+            }
+            root = nodes[0];
+        }
+    }
+
+    // Main method to test LCA
+    public static void main(String[] args) {
+        LowestCommonAncestor lcaFinder = new LowestCommonAncestor();
+
+        // Test cases
+        TestCase[] testCases = {
+            // Both nodes exist: [5, left: [3, left: 1, right: 4], right: 7], values [1, 4]
+            new TestCase(
+                new int[]{5, 3, 1, 4, 7},
+                new int[][]{{0, 1, 0}, {0, 4, 1}, {1, 2, 0}, {1, 3, 1}},
+                1, 4
+            ),
+            // One node doesn’t exist: [5, left: [3, left: 1, right: 4], right: 7], values [1, 6]
+            new TestCase(
+                new int[]{5, 3, 1, 4, 7},
+                new int[][]{{0, 1, 0}, {0, 4, 1}, {1, 2, 0}, {1, 3, 1}},
+                1, 6
+            ),
+            // Empty tree: [], values [1, 2]
+            new TestCase(new int[]{}, new int[][]{}, 1, 2),
+            // Single node, matching pair: [10], values [10, 10]
+            new TestCase(new int[]{10}, new int[][]{}, 10, 10),
+            // Single node, non-matching pair: [10], values [10, 20]
+            new TestCase(new int[]{10}, new int[][]{}, 10, 20)
+        };
+
+        // Run test cases
+        for (int i = 0; i &lt; testCases.length; i++) {
+            System.out.println("Test case " + (i + 1) + ":");
+            System.out.println("Tree: " + lcaFinder.toString(testCases[i].root));
+            System.out.println("Values: [" + testCases[i].value1 + ", " + testCases[i].value2 + "]");
+            int lca = lcaFinder.findLCA(testCases[i].root, testCases[i].value1, testCases[i].value2);
+            System.out.println("LCA: " + lca + "\n");
+        }
+    }
+}
+</code></pre>
+<h2 id="output"><a class="header" href="#output">Output</a></h2>
+<p>Running the <code>main</code> method produces:</p>
+<pre><code>Test case 1:
+Tree: Preorder: 5 3 1 4 7
+Values: [1, 4]
+LCA: 3
+
+Test case 2:
+Tree: Preorder: 5 3 1 4 7
+Values: [1, 6]
+LCA: -1
+
+Test case 3:
+Tree: Empty
+Values: [1, 2]
+LCA: -1
+
+Test case 4:
+Tree: Preorder: 10
+Values: [10, 10]
+LCA: 10
+
+Test case 5:
+Tree: Preorder: 10
+Values: [10, 20]
+LCA: -1
+</code></pre>
+<p>Explanation:</p>
+<ul>
+<li>Test case 1: LCA of 1 and 4 is 3 (deepest common ancestor).</li>
+<li>Test case 2: Node 6 doesn’t exist, so LCA is -1.</li>
+<li>Test case 3: Empty tree, LCA is -1.</li>
+<li>Test case 4: Both values are 10, LCA is 10 (same node).</li>
+<li>Test case 5: Node 20 doesn’t exist, LCA is -1.</li>
+</ul>
+<h2 id="how-it-works"><a class="header" href="#how-it-works">How It Works</a></h2>
+<ul>
+<li><strong>Node</strong>: Stores an integer value and pointers to left and right children.</li>
+<li><strong>findLCA</strong>:
+<ul>
+<li>Uses <code>exists</code> helper to verify both <code>value1</code> and <code>value2</code> are in the tree.</li>
+<li>If tree is empty or either value is missing, returns -1.</li>
+<li>Iteratively traverses: if both values are less than current node, go left; if both greater, go right; otherwise, current node is LCA.</li>
+</ul>
+</li>
+<li><strong>toString</strong>: Performs preorder traversal, returns space-separated values or "Empty".</li>
+<li><strong>Example Trace (Test case 1)</strong>:
+<ul>
+<li>Verify 1 and 4 exist: true.</li>
+<li>Root=5: 1 &lt; 5, 4 &lt; 5, go left.</li>
+<li>Node=3: 1 ≤ 3, 4 &gt; 3, return 3 (split point).</li>
+</ul>
+</li>
+<li><strong>Main Method</strong>: Tests existing nodes, non-existing node, empty tree, single node with matching and non-matching pairs.</li>
+</ul>
+<h2 id="complexity-analysis-table"><a class="header" href="#complexity-analysis-table">Complexity Analysis Table</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Operation</th><th>Time Complexity</th><th>Space Complexity</th></tr></thead><tbody>
+<tr><td>findLCA</td><td>O(h)</td><td>O(h)</td></tr>
+<tr><td>toString</td><td>O(n)</td><td>O(h)</td></tr>
+</tbody></table>
+</div>
+<p><em>Note</em>:</p>
+<ul>
+<li>n is the number of nodes in the tree.</li>
+<li>h is the height of the tree (O(n) for skewed, O(log n) for balanced).</li>
+<li>Time complexity: O(h) for findLCA (traverse to LCA and check existence); O(n) for toString (visit all nodes).</li>
+<li>Space complexity: O(h) for recursion stack in exists and toString.</li>
+<li>Worst case: O(n) time and O(n) space for skewed trees.</li>
+</ul>
+<blockquote>
+<p><strong>✅ Tip</strong>: Leverage the BST property to find the LCA efficiently by moving left or right based on both values’ relation to the current node. Verify node existence to handle invalid inputs.</p>
+</blockquote>
+<blockquote>
+<p><strong>⚠ Warning</strong>: Ensure both values exist in the tree before computing the LCA to avoid incorrect results. Handle edge cases like empty trees or identical values correctly.</p>
+</blockquote>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../problemStatements/ch03_07/HeightOfBST.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../../problemStatements/ch03_07/PreorderPostorderTraversals.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../problemStatements/ch03_07/HeightOfBST.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../../problemStatements/ch03_07/PreorderPostorderTraversals.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../../elasticlunr.min.js"></script>
+        <script src="../../mark.min.js"></script>
+        <script src="../../searcher.js"></script>
+
+        <script src="../../clipboard.min.js"></script>
+        <script src="../../highlight.js"></script>
+        <script src="../../book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="../../theme/ferris.js"></script>
+
+
+    </div>
+    </body>
+</html>

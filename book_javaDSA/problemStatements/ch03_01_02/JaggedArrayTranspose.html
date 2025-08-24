@@ -1,0 +1,506 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>JaggedArrayTranspose - Java Data Structures and Algorithms for Beginners</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../../favicon.svg">
+        <link rel="shortcut icon" href="../../favicon.png">
+        <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+        <link rel="stylesheet" href="../../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="../../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../../theme/ferris.css">
+        <link rel="stylesheet" href="../../theme/semantic-notes.css">
+        <link rel="stylesheet" href="../../theme/listing.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../../toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Java Data Structures and Algorithms for Beginners</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <style>
+body {
+  text-align: justify;
+}
+</style>
+<h1 id="jagged-array-transpose"><a class="header" href="#jagged-array-transpose">Jagged Array Transpose</a></h1>
+<h2 id="problem-statement"><a class="header" href="#problem-statement">Problem Statement</a></h2>
+<p>Write a Java program that implements a method to transpose a jagged array (a 2D array where each row can have a different length), converting rows to columns to create a new jagged array. The i-th row of the transposed array contains all elements from the i-th column of the original array, with row lengths varying based on the number of non-null elements in each column. The program should return the transposed array and test the implementation with irregular jagged arrays, including edge cases like empty arrays, arrays with empty rows, and arrays with varying row lengths. You can visualize this as flipping a ragged grid so that each column becomes a row, like reorganizing a collection of uneven lists into a new set of lists based on column positions.</p>
+<p><strong>Input</strong>: A jagged 2D array of integers, where each row may have a different length (e.g., <code>matrix = {{1, 2, 3}, {4}, {5, 6}}</code>).
+<strong>Output</strong>: A new jagged array where the i-th row contains elements from the i-th column of the input (e.g., <code>{{1, 4, 5}, {2, 6}, {3}}</code>).
+<strong>Constraints</strong>:</p>
+<ul>
+<li>The number of rows is between 0 and 100.</li>
+<li>Each row’s length is between 0 and 100.</li>
+<li>Elements are integers between -10^4 and 10^4.</li>
+<li>The matrix may be empty or contain empty or null rows.
+<strong>Example</strong>:</li>
+<li>Input: <code>matrix = {{1, 2, 3}, {4}, {5, 6}}</code></li>
+<li>Output: <code>{{1, 4, 5}, {2, 6}, {3}}</code></li>
+<li>Explanation: Column 0 ([1, 4, 5]) becomes row 0, column 1 ([2, 6]) becomes row 1, column 2 ([3]) becomes row 2.</li>
+<li>Input: <code>matrix = {{1, 2}, {}, {3}}</code></li>
+<li>Output: <code>{{1, 3}, {2}}</code></li>
+<li>Explanation: Column 0 ([1, 3]) becomes row 0, column 1 ([2]) becomes row 1.</li>
+</ul>
+<h2 id="pseudocode"><a class="header" href="#pseudocode">Pseudocode</a></h2>
+<pre><code>FUNCTION transposeJaggedArray(matrix)
+    IF matrix is null OR matrix is empty THEN
+        RETURN empty array
+    ENDIF
+    SET maxCols to maximum row length in matrix
+    CREATE result as empty dynamic array
+    FOR j from 0 to maxCols - 1
+        CREATE tempList as empty list
+        FOR i from 0 to number of rows in matrix - 1
+            IF matrix[i] is not null AND j &lt; length of matrix[i] THEN
+                ADD matrix[i][j] to tempList
+            ENDIF
+        ENDFOR
+        IF tempList is not empty THEN
+            CREATE newRow array of size tempList size
+            COPY tempList elements to newRow
+            ADD newRow to result
+        ENDIF
+    ENDFOR
+    RETURN result
+ENDFUNCTION
+
+FUNCTION main()
+    SET testMatrices to jagged 2D arrays
+    FOR each matrix in testMatrices
+        PRINT original matrix
+        CALL transposeJaggedArray(matrix)
+        PRINT transposed matrix
+    ENDFOR
+ENDFUNCTION
+</code></pre>
+<h2 id="algorithm-steps"><a class="header" href="#algorithm-steps">Algorithm Steps</a></h2>
+<ol>
+<li>Check if the input matrix is null or empty. If so, return an empty array.</li>
+<li>Determine the maximum number of columns (maxCols) by finding the longest row.</li>
+<li>Initialize an empty <code>ArrayList&lt;int[]&gt;</code> for the result.</li>
+<li>For each column index j from 0 to maxCols-1:
+a. Create a temporary list to collect elements from column j.
+b. Iterate through each row i:
+<ul>
+<li>If row i is not null and j is within its length, add <code>matrix[i][j]</code> to the temporary list.
+c. If the temporary list is not empty, convert it to an array and add it as a row to the result.</li>
+</ul>
+</li>
+<li>Return the result as a jagged array.</li>
+<li>In the <code>main</code> method, create test matrices with irregular row lengths and call <code>transposeJaggedArray</code> to verify correctness, printing the original and transposed matrices.</li>
+</ol>
+<h2 id="java-implementation"><a class="header" href="#java-implementation">Java Implementation</a></h2>
+<pre><code class="language-java">import java.util.ArrayList;
+
+public class JaggedArrayTranspose {
+    // Transposes a jagged array, converting rows to columns
+    public int[][] transposeJaggedArray(int[][] matrix) {
+        // Check for null or empty matrix
+        if (matrix == null || matrix.length == 0) {
+            return new int[0][];
+        }
+        // Find maximum number of columns
+        int maxCols = 0;
+        for (int[] row : matrix) {
+            if (row != null &amp;&amp; row.length &gt; maxCols) {
+                maxCols = row.length;
+            }
+        }
+        // Create result array
+        ArrayList&lt;int[]&gt; result = new ArrayList&lt;&gt;();
+        // Process each column
+        for (int j = 0; j &lt; maxCols; j++) {
+            ArrayList&lt;Integer&gt; tempList = new ArrayList&lt;&gt;();
+            // Collect elements from column j
+            for (int i = 0; i &lt; matrix.length; i++) {
+                if (matrix[i] != null &amp;&amp; j &lt; matrix[i].length) {
+                    tempList.add(matrix[i][j]);
+                }
+            }
+            // Convert non-empty tempList to array and add to result
+            if (!tempList.isEmpty()) {
+                int[] newRow = new int[tempList.size()];
+                for (int k = 0; k &lt; tempList.size(); k++) {
+                    newRow[k] = tempList.get(k);
+                }
+                result.add(newRow);
+            }
+        }
+        // Convert ArrayList to int[][]
+        return result.toArray(new int[0][]);
+    }
+
+    // Main method to test transposeJaggedArray with various inputs
+    public static void main(String[] args) {
+        JaggedArrayTranspose transposer = new JaggedArrayTranspose();
+
+        // Test case 1: Jagged array with varying row lengths
+        int[][] matrix1 = {{1, 2, 3}, {4}, {5, 6}};
+        System.out.println("Test case 1:");
+        System.out.println("Original matrix:");
+        printMatrix(matrix1);
+        System.out.println("Transposed matrix:");
+        printMatrix(transposer.transposeJaggedArray(matrix1));
+
+        // Test case 2: Jagged array with empty rows
+        int[][] matrix2 = {{1, 2}, {}, {3}};
+        System.out.println("\nTest case 2:");
+        System.out.println("Original matrix:");
+        printMatrix(matrix2);
+        System.out.println("Transposed matrix:");
+        printMatrix(transposer.transposeJaggedArray(matrix2));
+
+        // Test case 3: Empty matrix
+        int[][] matrix3 = {};
+        System.out.println("\nTest case 3:");
+        System.out.println("Original matrix:");
+        printMatrix(matrix3);
+        System.out.println("Transposed matrix:");
+        printMatrix(transposer.transposeJaggedArray(matrix3));
+
+        // Test case 4: Matrix with negative numbers
+        int[][] matrix4 = {{-1, -2, -3}, {-4, -5}, {-6}};
+        System.out.println("\nTest case 4:");
+        System.out.println("Original matrix:");
+        printMatrix(matrix4);
+        System.out.println("Transposed matrix:");
+        printMatrix(transposer.transposeJaggedArray(matrix4));
+
+        // Test case 5: Null matrix
+        int[][] matrix5 = null;
+        System.out.println("\nTest case 5:");
+        System.out.println("Original matrix:");
+        printMatrix(matrix5);
+        System.out.println("Transposed matrix:");
+        printMatrix(transposer.transposeJaggedArray(matrix5));
+    }
+
+    // Helper method to print jagged matrix
+    private static void printMatrix(int[][] matrix) {
+        if (matrix == null || matrix.length == 0) {
+            System.out.println("[]");
+            return;
+        }
+        System.out.println("[");
+        for (int i = 0; i &lt; matrix.length; i++) {
+            System.out.print("  [");
+            if (matrix[i] == null || matrix[i].length == 0) {
+                System.out.print("]");
+            } else {
+                for (int j = 0; j &lt; matrix[i].length; j++) {
+                    System.out.print(matrix[i][j]);
+                    if (j &lt; matrix[i].length - 1) {
+                        System.out.print(", ");
+                    }
+                }
+                System.out.print("]");
+            }
+            System.out.println();
+        }
+        System.out.println("]");
+    }
+}
+</code></pre>
+<h2 id="output"><a class="header" href="#output">Output</a></h2>
+<p>Running the <code>main</code> method produces:</p>
+<pre><code>Test case 1:
+Original matrix:
+[
+  [1, 2, 3]
+  [4]
+  [5, 6]
+]
+Transposed matrix:
+[
+  [1, 4, 5]
+  [2, 6]
+  [3]
+]
+
+Test case 2:
+Original matrix:
+[
+  [1, 2]
+  []
+  [3]
+]
+Transposed matrix:
+[
+  [1, 3]
+  [2]
+]
+
+Test case 3:
+Original matrix:
+[]
+Transposed matrix:
+[]
+
+Test case 4:
+Original matrix:
+[
+  [-1, -2, -3]
+  [-4, -5]
+  [-6]
+]
+Transposed matrix:
+[
+  [-1, -4, -6]
+  [-2, -5]
+  [-3]
+]
+
+Test case 5:
+Original matrix:
+[]
+Transposed matrix:
+[]
+</code></pre>
+<p>Explanation:</p>
+<ul>
+<li>Test case 1: Transposes <code>{{1, 2, 3}, {4}, {5, 6}}</code> to <code>{{1, 4, 5}, {2, 6}, {3}}</code>, where column 0 ([1, 4, 5]) becomes row 0, etc.</li>
+<li>Test case 2: Transposes <code>{{1, 2}, {}, {3}}</code> to <code>{{1, 3}, {2}}</code>, handling empty rows.</li>
+<li>Test case 3: Empty matrix returns empty matrix.</li>
+<li>Test case 4: Transposes <code>{{-1, -2, -3}, {-4, -5}, {-6}}</code> to <code>{{-1, -4, -6}, {-2, -5}, {-3}}</code>, handling negatives.</li>
+<li>Test case 5: Null matrix returns empty matrix.</li>
+</ul>
+<h2 id="how-it-works"><a class="header" href="#how-it-works">How It Works</a></h2>
+<ul>
+<li><strong>Step 1</strong>: Check if the matrix is null or empty. For <code>{{1, 2, 3}, {4}, {5, 6}}</code>, proceed.</li>
+<li><strong>Step 2</strong>: Find maxCols = 3 (longest row).</li>
+<li><strong>Step 3</strong>: Initialize result as an empty <code>ArrayList&lt;int[]&gt;</code>.</li>
+<li><strong>Step 4</strong>: For each column j:
+<ul>
+<li>j = 0: Collect [1, 4, 5] (from matrix[0][0], matrix[1][0], matrix[2][0]) → add to result.</li>
+<li>j = 1: Collect [2, 6] (from matrix[0][1], matrix[2][1]; matrix[1] has no column 1) → add to result.</li>
+<li>j = 2: Collect [3] (from matrix[0][2]; others have no column 2) → add to result.</li>
+</ul>
+</li>
+<li><strong>Example Trace</strong>: For test case 1, builds <code>[[1, 4, 5], [2, 6], [3]]</code> by collecting column elements.</li>
+<li><strong>Main Method</strong>: Tests with irregular jagged arrays, including empty rows, empty matrix, negatives, and null matrix.</li>
+<li><strong>Transpose Property</strong>: Each column becomes a row, with row lengths varying based on non-null column elements.</li>
+</ul>
+<h2 id="complexity-analysis-table"><a class="header" href="#complexity-analysis-table">Complexity Analysis Table</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Operation</th><th>Time Complexity</th><th>Space Complexity</th></tr></thead><tbody>
+<tr><td>Transpose</td><td>O(m * c)</td><td>O(m * c)</td></tr>
+<tr><td>Full Algorithm</td><td>O(m * c)</td><td>O(m * c)</td></tr>
+</tbody></table>
+</div>
+<p><em>Note</em>:</p>
+<ul>
+<li>m is the number of rows, c is the maximum row length (maxCols).</li>
+<li>Time complexity: O(m * c), as each element is visited once to build the transposed rows.</li>
+<li>Space complexity: O(m * c), for the result array storing up to m * c elements.</li>
+<li>Best, average, and worst cases are O(m * c).</li>
+</ul>
+<blockquote>
+<p><strong>✅ Tip</strong>: Use a dynamic structure like <code>ArrayList</code> to handle varying row lengths in the transposed array. Test with irregular arrays, including empty and null rows, to ensure robustness.</p>
+</blockquote>
+<blockquote>
+<p><strong>⚠ Warning</strong>: Check for null rows and varying row lengths to avoid <code>NullPointerException</code> or <code>ArrayIndexOutOfBoundsException</code>. Ensure the result array only includes non-empty rows.</p>
+</blockquote>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../problemStatements/ch03_01_02/DynamicRowAddition.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../../problemStatements/ch03_01_02/RowSorting.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../problemStatements/ch03_01_02/DynamicRowAddition.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../../problemStatements/ch03_01_02/RowSorting.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../../elasticlunr.min.js"></script>
+        <script src="../../mark.min.js"></script>
+        <script src="../../searcher.js"></script>
+
+        <script src="../../clipboard.min.js"></script>
+        <script src="../../highlight.js"></script>
+        <script src="../../book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="../../theme/ferris.js"></script>
+
+
+    </div>
+    </body>
+</html>
