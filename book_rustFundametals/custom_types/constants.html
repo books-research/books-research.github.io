@@ -178,9 +178,9 @@
 including global. Both require explicit type annotation:</p>
 <ul>
 <li><code>const</code>: An unchangeable value (the common case).</li>
-<li><code>static</code>: A possibly mutable variable with <a href="../scope/lifetime/static_lifetime.html"><code>'static</code></a> lifetime.
+<li><code>static</code>: A possibly mutable variable with [<code>'static</code>][static] lifetime.
 The static lifetime is inferred and does not have to be specified.
-Accessing or modifying a mutable static variable is <a href="../unsafe.html"><code>unsafe</code></a>.</li>
+Accessing or modifying a mutable static variable is [<code>unsafe</code>][unsafe].</li>
 </ul>
 <pre><pre class="playground"><code class="language-rust editable ignore mdbook-runnable">// Globals are declared outside all other scopes.
 static LANGUAGE: &amp;str = "Rust";
@@ -203,8 +203,6 @@ fn main() {
     THRESHOLD = 5;
     // FIXME ^ Comment out this line
 }</code></pre></pre>
-<h3 id="see-also"><a class="header" href="#see-also">See also:</a></h3>
-<p><a href="../scope/lifetime/static_lifetime.html"><code>'static</code> lifetime</a></p>
 
                     </main>
 

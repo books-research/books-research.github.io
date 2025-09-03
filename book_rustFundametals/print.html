@@ -444,7 +444,7 @@ a few different varieties:</p>
 <li><code>/* Block comments which go to the closing delimiter. */</code></li>
 </ul>
 </li>
-<li><em>Doc comments</em> which are parsed into HTML library <a href="hello/../meta/doc.html">documentation</a>:
+<li><em>Doc comments</em> which are parsed into HTML library [documentation][docs]:
 <ul>
 <li><code>/// Generate library docs for the following item.</code></li>
 <li><code>//! Generate library docs for the enclosing item.</code></li>
@@ -493,8 +493,6 @@ a few different varieties:</p>
     let x = 5 + /* 90 + */ 5;
     println!("Is `x` 10 or 100? x = {}", x);
 }</code></pre></pre>
-<h3 id="see-also"><a class="header" href="#see-also">See also:</a></h3>
-<p><a href="hello/../meta/doc.html">Library documentation</a></p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="formatted-print"><a class="header" href="#formatted-print">Formatted print</a></h1>
 <p>Printing is handled by a series of [<code>macros</code>][macros] defined in
 [<code>std::fmt</code>][fmt] some of which are:</p>
@@ -811,9 +809,6 @@ fn main() {
 <p>Try changing the program so that the index of each element in the vector is also
 printed. The new output should look like this:</p>
 <pre><code class="language-rust ignore">[0: 1, 1: 2, 2: 3]</code></pre>
-<h3 id="see-also-1"><a class="header" href="#see-also-1">See also:</a></h3>
-<p><a href="hello/print/print_display/../../../flow_control/for.html"><code>for</code></a>, <a href="hello/print/print_display/../../../scope/borrow/ref.html"><code>ref</code></a>, <a href="hello/print/print_display/../../../std/result.html"><code>Result</code></a>, <a href="hello/print/print_display/../../../custom_types/structs.html"><code>struct</code></a>,
-<a href="hello/print/print_display/../../../std/result/question_mark.html"><code>?</code></a>, and <a href="hello/print/print_display/../../../std/vec.html"><code>vec!</code></a></p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="formatting"><a class="header" href="#formatting">Formatting</a></h1>
 <p>We've seen that formatting is specified via a <em>format string</em>:</p>
 <ul>
@@ -954,9 +949,6 @@ via a <em>suffix</em> or <em>by default</em>. Integers default to <code>i32</cod
     // and is constructed using parentheses ().
     let my_tuple = (5u32, 1u8, true, -5.04f32);
 }</code></pre></pre>
-<h3 id="see-also-2"><a class="header" href="#see-also-2">See also:</a></h3>
-<p><a href="variable_bindings/mut.html"><code>mut</code></a>, <a href="types/inference.html"><code>inference</code></a>, and
-<a href="variable_bindings/scope.html"><code>shadowing</code></a></p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="literals-and-operators"><a class="header" href="#literals-and-operators">Literals and operators</a></h1>
 <p>Integers <code>1</code>, floats <code>1.2</code>, characters <code>'a'</code>, strings <code>"abc"</code>, booleans <code>true</code>
 and the unit type <code>()</code> can be expressed using literals.</p>
@@ -1247,7 +1239,7 @@ using nested destructuring).</li>
 returns a <code>Rectangle</code> with its top left corner on the point, and a width and
 height corresponding to the <code>f32</code>.</li>
 </ol>
-<h3 id="see-also-3"><a class="header" href="#see-also-3">See also</a></h3>
+<h3 id="see-also"><a class="header" href="#see-also">See also</a></h3>
 <p><a href="custom_types/../attribute.html"><code>attributes</code></a></p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="enums"><a class="header" href="#enums">Enums</a></h1>
 <p>The <code>enum</code> keyword allows the creation of a type which may be one of a few
@@ -1375,8 +1367,6 @@ fn main() {
         Teacher =&gt; println!("Teachers are spreading knowledge!"),
     }
 }</code></pre></pre>
-<h3 id="see-also-4"><a class="header" href="#see-also-4">See also:</a></h3>
-<p><a href="custom_types/enum/../../flow_control/match.html"><code>match</code></a> and <a href="custom_types/enum/../../mod/use.html"><code>use</code></a></p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="c-like"><a class="header" href="#c-like">C-like</a></h1>
 <p><code>enum</code> can also be used as C-like enums.</p>
 <pre><pre class="playground"><code class="language-rust editable">// An attribute to hide warnings for unused code.
@@ -1404,8 +1394,6 @@ fn main() {
     println!("roses are #{:06x}", Color::Red as u32);
     println!("violets are #{:06x}", Color::Blue as u32);
 }</code></pre></pre>
-<h3 id="see-also-5"><a class="header" href="#see-also-5">See also:</a></h3>
-<p><a href="custom_types/enum/../../types/cast.html">casting</a></p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="testcase-linked-list"><a class="header" href="#testcase-linked-list">Testcase: linked-list</a></h1>
 <p>A common way to implement a linked-list is via <code>enums</code>:</p>
 <pre><pre class="playground"><code class="language-rust editable">use crate::List::*;
@@ -1478,16 +1466,14 @@ fn main() {
     println!("linked list has length: {}", list.len());
     println!("{}", list.stringify());
 }</code></pre></pre>
-<h3 id="see-also-6"><a class="header" href="#see-also-6">See also:</a></h3>
-<p><a href="custom_types/enum/../../std/box.html"><code>Box</code></a> and <a href="custom_types/enum/../../fn/methods.html">methods</a></p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="constants"><a class="header" href="#constants">constants</a></h1>
 <p>Rust has two different types of constants which can be declared in any scope
 including global. Both require explicit type annotation:</p>
 <ul>
 <li><code>const</code>: An unchangeable value (the common case).</li>
-<li><code>static</code>: A possibly mutable variable with <a href="custom_types/../scope/lifetime/static_lifetime.html"><code>'static</code></a> lifetime.
+<li><code>static</code>: A possibly mutable variable with [<code>'static</code>][static] lifetime.
 The static lifetime is inferred and does not have to be specified.
-Accessing or modifying a mutable static variable is <a href="custom_types/../unsafe.html"><code>unsafe</code></a>.</li>
+Accessing or modifying a mutable static variable is [<code>unsafe</code>][unsafe].</li>
 </ul>
 <pre><pre class="playground"><code class="language-rust editable ignore mdbook-runnable">// Globals are declared outside all other scopes.
 static LANGUAGE: &amp;str = "Rust";
@@ -1510,8 +1496,6 @@ fn main() {
     THRESHOLD = 5;
     // FIXME ^ Comment out this line
 }</code></pre></pre>
-<h3 id="see-also-7"><a class="header" href="#see-also-7">See also:</a></h3>
-<p><a href="custom_types/../scope/lifetime/static_lifetime.html"><code>'static</code> lifetime</a></p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="variable-bindings"><a class="header" href="#variable-bindings">Variable Bindings</a></h1>
 <p>Rust provides type safety via static typing. Variable bindings can be type
 annotated when declared. However, in most cases, the compiler will be able
@@ -1815,8 +1799,6 @@ fn main() {
 }</code></pre></pre>
 <p>The main use of aliases is to reduce boilerplate; for example the <code>io::Result&lt;T&gt;</code> type
 is an alias for the <code>Result&lt;T, io::Error&gt;</code> type.</p>
-<h3 id="see-also-8"><a class="header" href="#see-also-8">See also:</a></h3>
-<p><a href="types/../attribute.html">Attributes</a></p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="conversion"><a class="header" href="#conversion">Conversion</a></h1>
 <p>Primitive types can be converted to each other through <a href="types/cast.html">casting</a>.</p>
 <p>Rust addresses conversion between custom types (i.e., <code>struct</code> and <code>enum</code>)
@@ -2218,7 +2200,7 @@ The above can be written as:</p>
 }</code></pre></pre>
 <h2 id="for-and-iterators"><a class="header" href="#for-and-iterators">for and iterators</a></h2>
 <p>The <code>for in</code> construct is able to interact with an <code>Iterator</code> in several ways.
-As discussed in the section on the <a href="flow_control/../trait/iter.html">Iterator</a> trait, by default the <code>for</code>
+As discussed in the section on the [Iterator][iter] trait, by default the <code>for</code>
 loop will apply the <code>into_iter</code> function to the collection. However, this is
 not the only means of converting collections into iterators.</p>
 <p><code>into_iter</code>, <code>iter</code> and <code>iter_mut</code> all handle the conversion of a collection
@@ -2278,8 +2260,6 @@ the collection to be modified in place.</li>
 <p>In the above snippets &gt;Note the type of <code>match</code> branch, that is the key
 difference in the types of iteration. The difference in type then of course
 implies differing actions that are able to be performed.</p>
-<h3 id="see-also-9"><a class="header" href="#see-also-9">See also:</a></h3>
-<p><a href="flow_control/../trait/iter.html">Iterator</a></p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="match"><a class="header" href="#match">match</a></h1>
 <p>Rust provides pattern matching via the <code>match</code> keyword, which can be used like
 a C <code>switch</code>. The first matching arm is evaluated and all possible values must be
@@ -2341,8 +2321,6 @@ covered.</p>
         // `_` means don't bind the value to a variable
     }
 }</code></pre></pre>
-<h3 id="see-also-10"><a class="header" href="#see-also-10">See also:</a></h3>
-<p><a href="flow_control/match/destructuring/../../../primitives/tuples.html">Tuples</a></p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="arraysslices"><a class="header" href="#arraysslices">arrays/slices</a></h1>
 <p>Like tuples, arrays and slices can be destructured this way:</p>
 <pre><pre class="playground"><code class="language-rust editable">fn main() {
@@ -2383,8 +2361,6 @@ covered.</p>
         ),
     }
 }</code></pre></pre>
-<h3 id="see-also-11"><a class="header" href="#see-also-11">See also:</a></h3>
-<p><a href="flow_control/match/destructuring/../../../primitives/array.html">Arrays and Slices</a> and <a href="flow_control/match/destructuring/../binding.html">Binding</a> for <code>@</code> sigil</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="enums-1"><a class="header" href="#enums-1">enums</a></h1>
 <p>An <code>enum</code> is destructured similarly:</p>
 <pre><pre class="playground"><code class="language-rust editable">// `allow` required to silence warnings because only
@@ -2427,8 +2403,6 @@ fn main() {
         // Don't need another arm because all variants have been examined
     }
 }</code></pre></pre>
-<h3 id="see-also-12"><a class="header" href="#see-also-12">See also:</a></h3>
-<p><a href="flow_control/match/destructuring/../../../attribute/unused.html"><code>#[allow(...)]</code></a> and <a href="flow_control/match/destructuring/../../../custom_types/enum.html"><code>enum</code></a></p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="pointersref"><a class="header" href="#pointersref">pointers/ref</a></h1>
 <p>For pointers, a distinction needs to be made between destructuring
 and dereferencing as they are different concepts which are used
@@ -2487,8 +2461,6 @@ differently from languages like C/C++.</p>
         },
     }
 }</code></pre></pre>
-<h3 id="see-also-13"><a class="header" href="#see-also-13">See also:</a></h3>
-<p><a href="flow_control/match/destructuring/../../../scope/borrow/ref.html">The ref pattern</a></p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="structs"><a class="header" href="#structs">structs</a></h1>
 <p>Similarly, a <code>struct</code> can be destructured as shown:</p>
 <pre><pre class="playground"><code class="language-rust editable">fn main() {
@@ -2528,8 +2500,6 @@ differently from languages like C/C++.</p>
     let Bar { foo: Foo { x: nested_x, y: nested_y } } = bar;
     println!("Nested: nested_x = {nested_x:?}, nested_y = {nested_y:?}");
 }</code></pre></pre>
-<h3 id="see-also-14"><a class="header" href="#see-also-14">See also:</a></h3>
-<p><a href="flow_control/match/destructuring/../../../custom_types/structs.html">Structs</a></p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="guards"><a class="header" href="#guards">Guards</a></h1>
 <p>A <code>match</code> <em>guard</em> can be added to filter the arm.</p>
 <pre><pre class="playground"><code class="language-rust editable">#[allow(dead_code)]
@@ -2565,9 +2535,6 @@ if all patterns are covered by the match expression.</p>
         // TODO ^ uncomment to fix compilation
     }
 }</code></pre></pre>
-<h3 id="see-also-15"><a class="header" href="#see-also-15">See also:</a></h3>
-<p><a href="flow_control/match/../../primitives/tuples.html">Tuples</a>
-<a href="flow_control/match/../../custom_types/enum.html">Enums</a></p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="binding"><a class="header" href="#binding">Binding</a></h1>
 <p>Indirectly accessing a variable makes it impossible to branch and use that
 variable without re-binding. <code>match</code> provides the <code>@</code> sigil for binding values to
@@ -2619,8 +2586,6 @@ fn main() {
         _            =&gt; (),
     }
 }</code></pre></pre>
-<h3 id="see-also-16"><a class="header" href="#see-also-16">See also:</a></h3>
-<p><a href="flow_control/match/../../fn.html"><code>functions</code></a>, <a href="flow_control/match/../../custom_types/enum.html"><code>enums</code></a> and <a href="flow_control/match/../../std/option.html"><code>Option</code></a></p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="if-let"><a class="header" href="#if-let">if let</a></h1>
 <p>For some use cases, when matching enums, <code>match</code> is awkward. For example:</p>
 <pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
@@ -2723,8 +2688,6 @@ fn main() {
         println!("a is foobar");
     }
 }</code></pre></pre>
-<h3 id="see-also-17"><a class="header" href="#see-also-17">See also:</a></h3>
-<p><a href="flow_control/../custom_types/enum.html"><code>enum</code></a>, <a href="flow_control/../std/option.html"><code>Option</code></a></p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="let-else"><a class="header" href="#let-else">let-else</a></h1>
 <blockquote>
 <p>🛈 stable since: rust 1.88</p>
@@ -2773,8 +2736,6 @@ patterns with an unfortunate bit of repetition and an outer <code>let</code>:</p
 </span><span class="boring">
 </span><span class="boring">assert_eq!(get_count_item("3 chairs"), (3, "chairs"));
 </span><span class="boring">}</span></code></pre></pre>
-<h3 id="see-also-18"><a class="header" href="#see-also-18">See also:</a></h3>
-<p><a href="flow_control/../std/option.html">option</a>, <a href="flow_control/./match.html">match</a>, <a href="flow_control/./if_let.html">if let</a></p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="while-let"><a class="header" href="#while-let">while let</a></h1>
 <p>Similar to <code>if let</code>, <code>while let</code> can make awkward <code>match</code> sequences
 more tolerable. Consider the following sequence that increments <code>i</code>:</p>
@@ -2824,8 +2785,6 @@ loop {
     // ^ `if let` had additional optional `else`/`else if`
     // clauses. `while let` does not have these.
 }</code></pre></pre>
-<h3 id="see-also-19"><a class="header" href="#see-also-19">See also:</a></h3>
-<p><a href="flow_control/../custom_types/enum.html"><code>enum</code></a>, <a href="flow_control/../std/option.html"><code>Option</code></a></p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="functions"><a class="header" href="#functions">Functions</a></h1>
 <p>Functions are declared using the <code>fn</code> keyword. Its arguments are type
 annotated, just like variables, and, if the function returns a value, the
@@ -3128,8 +3087,6 @@ to take ownership of captured variables:</p>
     // to borrow _haystack_ variable immutably, hence _haystack_ is still
     // available and uncommenting above line will not cause an error.
 }</code></pre></pre>
-<h3 id="see-also-20"><a class="header" href="#see-also-20">See also:</a></h3>
-<p><a href="fn/closures/../../std/box.html"><code>Box</code></a> and [<code>std::mem::drop</code>][drop]</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="as-input-parameters"><a class="header" href="#as-input-parameters">As input parameters</a></h1>
 <p>While Rust chooses how to capture variables on the fly mostly without type
 annotation, this ambiguity is not allowed when writing functions. When
@@ -3205,12 +3162,10 @@ fn main() {
 
     println!("3 doubled: {}", apply_to_3(double));
 }</code></pre></pre>
-<h3 id="see-also-21"><a class="header" href="#see-also-21">See also:</a></h3>
-<p>[<code>std::mem::drop</code>][drop], [<code>Fn</code>][fn], [<code>FnMut</code>][fnmut], <a href="fn/closures/../../generics.html">Generics</a>, <a href="fn/closures/../../generics/where.html">where</a> and [<code>FnOnce</code>][fnonce]</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="type-anonymity"><a class="header" href="#type-anonymity">Type anonymity</a></h1>
 <p>Closures succinctly capture variables from enclosing scopes. Does this have
 any consequences? It surely does. Observe how using a closure as a function
-parameter requires <a href="fn/closures/../../generics.html">generics</a>, which is necessary because of how they are
+parameter requires [generics], which is necessary because of how they are
 defined:</p>
 <pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -3246,9 +3201,6 @@ fn main() {
 
     apply(print);
 }</code></pre></pre>
-<h3 id="see-also-22"><a class="header" href="#see-also-22">See also:</a></h3>
-<p>[A thorough analysis][thorough_analysis], [<code>Fn</code>][fn], [<code>FnMut</code>][fn_mut],
-and [<code>FnOnce</code>][fn_once]</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="input-functions"><a class="header" href="#input-functions">Input functions</a></h1>
 <p>Since closures may be used as arguments, you might wonder if the same can be said
 about functions. And indeed they can! If you declare a function that takes a
@@ -3316,8 +3268,6 @@ fn main() {
     fn_mut();
     fn_once();
 }</code></pre></pre>
-<h3 id="see-also-23"><a class="header" href="#see-also-23">See also:</a></h3>
-<p>[<code>Fn</code>][fn], [<code>FnMut</code>][fnmut], <a href="fn/closures/../../generics.html">Generics</a> and <a href="fn/closures/../../trait/impl_trait.html">impl Trait</a>.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="examples-in-std"><a class="header" href="#examples-in-std">Examples in <code>std</code></a></h1>
 <p>This section contains a few examples of using closures from the <code>std</code> library.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="iteratorany"><a class="header" href="#iteratorany">Iterator::any</a></h1>
@@ -3416,11 +3366,6 @@ item, use <code>Iterator::position</code>.</p>
     let index_of_first_negative_number = vec.into_iter().position(|x| x &lt; 0);
     assert_eq!(index_of_first_negative_number, None);
 }</code></pre></pre>
-<h3 id="see-also-24"><a class="header" href="#see-also-24">See also:</a></h3>
-<p>[<code>std::iter::Iterator::find</code>][find]</p>
-<p>[<code>std::iter::Iterator::find_map</code>][find_map]</p>
-<p>[<code>std::iter::Iterator::position</code>][position]</p>
-<p>[<code>std::iter::Iterator::rposition</code>][rposition]</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="higher-order-functions"><a class="header" href="#higher-order-functions">Higher Order Functions</a></h1>
 <p>Rust provides Higher Order Functions (HOF). These are functions that
 take one or more functions and/or produce a more useful function. HOFs
@@ -3694,8 +3639,6 @@ fn main() {
     //println!("The closed box contains: {}", _closed_box.contents);
     // TODO ^ Try uncommenting this line
 }</code></pre></pre>
-<h3 id="see-also-25"><a class="header" href="#see-also-25">See also:</a></h3>
-<p><a href="mod/../generics.html">generics</a> and <a href="mod/../fn/methods.html">methods</a></p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="the-use-declaration"><a class="header" href="#the-use-declaration">The <code>use</code> declaration</a></h1>
 <p>The <code>use</code> declaration can be used to bind a full path to a new name, for easier
 access. It is often used like this:</p>
@@ -4319,8 +4262,6 @@ fn main() {
         println!("Yes. It's definitely *not* linux!");
     }
 }</code></pre></pre>
-<h3 id="see-also-26"><a class="header" href="#see-also-26">See also:</a></h3>
-<p>[the reference][ref], [<code>cfg!</code>][cfg], and <a href="attribute/../macros.html">macros</a>.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="custom"><a class="header" href="#custom">Custom</a></h1>
 <p>Some conditionals like <code>target_os</code> are implicitly provided by <code>rustc</code>, but
 custom conditionals must be passed to <code>rustc</code> using the <code>--cfg</code> flag.</p>
@@ -4383,9 +4324,6 @@ fn main() {
     let _i32  = SingleGen(6); // Uses `i32`.
     let _char = SingleGen('a'); // Uses `char`.
 }</code></pre></pre>
-<h3 id="see-also-27"><a class="header" href="#see-also-27">See also:</a></h3>
-<p>[<code>structs</code>][structs]
-[structs]: custom_types/structs.md</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="functions-1"><a class="header" href="#functions-1">Functions</a></h1>
 <p>The same set of rules can be applied to functions: a type <code>T</code> becomes
 generic when preceded by <code>&lt;T&gt;</code>.</p>
@@ -4432,8 +4370,6 @@ fn main() {
     // Implicitly specified type parameter `char` to `generic()`.
     generic(SGen('c'));
 }</code></pre></pre>
-<h3 id="see-also-28"><a class="header" href="#see-also-28">See also:</a></h3>
-<p><a href="generics/../fn.html">functions</a> and <a href="generics/../custom_types/structs.html"><code>struct</code>s</a></p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="implementation"><a class="header" href="#implementation">Implementation</a></h1>
 <p>Similar to functions, implementations require care to remain generic.</p>
 <pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
@@ -4476,8 +4412,6 @@ fn main() {
 
     println!("{}, {}", x.value(), y.value());
 }</code></pre></pre>
-<h3 id="see-also-29"><a class="header" href="#see-also-29">See also:</a></h3>
-<p><a href="generics/../scope/lifetime/fn.html">functions returning references</a>, <a href="generics/../fn/methods.html"><code>impl</code></a>, and <a href="generics/../custom_types/structs.html"><code>struct</code></a></p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="traits"><a class="header" href="#traits">Traits</a></h1>
 <p>Of course <code>trait</code>s can also be generic. Here we define one which reimplements
 the <code>Drop</code> <code>trait</code> as a generic method to <code>drop</code> itself and an input.</p>
@@ -4511,10 +4445,6 @@ fn main() {
     //null;
     // ^ TODO: Try uncommenting these lines.
 }</code></pre></pre>
-<h3 id="see-also-30"><a class="header" href="#see-also-30">See also:</a></h3>
-<p>[<code>Drop</code>][Drop], [<code>struct</code>][structs], and [<code>trait</code>][traits]
-[structs]: ../custom_types/structs.md
-[traits]: ../trait.md</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="bounds"><a class="header" href="#bounds">Bounds</a></h1>
 <p>When working with generics, the type parameters often must use traits as <em>bounds</em> to
 stipulate what functionality a type implements. For example, the following
@@ -4532,7 +4462,7 @@ fn printer&lt;T: Display&gt;(t: T) {
 // specialization will fail.
 let s = S(vec![1]);</code></pre>
 <p>Another effect of bounding is that generic instances are allowed to access the
-<a href="generics/../fn/methods.html">methods</a> of traits specified in the bounds. For example:</p>
+[methods] of traits specified in the bounds. For example:</p>
 <pre><pre class="playground"><code class="language-rust editable">// A trait which implements the print marker: `{:?}`.
 use std::fmt::Debug;
 
@@ -4571,10 +4501,8 @@ fn main() {
     // ^ TODO: Try uncommenting these.
     // | Error: Does not implement either `Debug` or `HasArea`.
 }</code></pre></pre>
-<p>As an additional &gt;Note, <a href="generics/../generics/where.html"><code>where</code></a> clauses can also be used to apply bounds in
+<p>As an additional &gt;Note, [<code>where</code>][where] clauses can also be used to apply bounds in
 some cases to be more expressive.</p>
-<h3 id="see-also-31"><a class="header" href="#see-also-31">See also:</a></h3>
-<p><a href="generics/../hello/print.html"><code>std::fmt</code></a>, <a href="generics/../custom_types/structs.html"><code>struct</code>s</a>, and <a href="generics/../trait.html"><code>trait</code>s</a></p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="testcase-empty-bounds"><a class="header" href="#testcase-empty-bounds">Testcase: empty bounds</a></h1>
 <p>A consequence of how bounds work is that even if a <code>trait</code> doesn't
 include any functionality, you can still use it as a bound. <code>Eq</code> and
@@ -4606,9 +4534,6 @@ fn main() {
     //println!("A turkey is {}", red(&amp;_turkey));
     // ^ TODO: Try uncommenting this line.
 }</code></pre></pre>
-<h3 id="see-also-32"><a class="header" href="#see-also-32">See also:</a></h3>
-<p>[<code>std::cmp::Eq</code>][eq], [<code>std::marker::Copy</code>][copy], and [<code>trait</code>s][traits]
-[traits]: ../../trait.md</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="multiple-bounds"><a class="header" href="#multiple-bounds">Multiple bounds</a></h1>
 <p>Multiple bounds for a single type can be applied with a <code>+</code>. Like normal, different types are
 separated with <code>,</code>.</p>
@@ -4635,8 +4560,6 @@ fn main() {
 
     compare_types(&amp;array, &amp;vec);
 }</code></pre></pre>
-<h3 id="see-also-33"><a class="header" href="#see-also-33">See also:</a></h3>
-<p><a href="generics/../hello/print.html"><code>std::fmt</code></a> and <a href="generics/../trait.html"><code>trait</code>s</a></p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="where-clauses"><a class="header" href="#where-clauses">Where clauses</a></h1>
 <p>A bound can also be expressed using a <code>where</code> clause immediately
 before the opening <code>{</code>, rather than at the type's first mention.
@@ -4678,8 +4601,6 @@ fn main() {
 
     vec.print_in_option();
 }</code></pre></pre>
-<h3 id="see-also-34"><a class="header" href="#see-also-34">See also:</a></h3>
-<p>[RFC][where], <a href="generics/../custom_types/structs.html"><code>struct</code></a>, and <a href="generics/../trait.html"><code>trait</code></a></p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="new-type-idiom"><a class="header" href="#new-type-idiom">New Type Idiom</a></h1>
 <p>The <code>newtype</code> idiom gives compile time guarantees that the right type of value is supplied
 to a program.</p>
@@ -4722,8 +4643,6 @@ fn main() {
     let years_as_primitive_1: i64 = years.0; // Tuple
     let Years(years_as_primitive_2) = years; // Destructuring
 }</code></pre></pre>
-<h3 id="see-also-35"><a class="header" href="#see-also-35">See also:</a></h3>
-<p><a href="generics/../custom_types/structs.html"><code>structs</code></a></p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="associated-items"><a class="header" href="#associated-items">Associated items</a></h1>
 <p>"Associated Items" refers to a set of rules pertaining to [<code>item</code>][items]s
 of various types. It is an extension to <code>trait</code> generics, and allows
@@ -4784,8 +4703,6 @@ fn main() {
 
     println!("The difference is: {}", difference(&amp;container));
 }</code></pre></pre>
-<h3 id="see-also-36"><a class="header" href="#see-also-36">See also:</a></h3>
-<p><a href="generics/assoc_items/../../custom_types/structs.html"><code>struct</code>s</a>, and <a href="generics/assoc_items/../../trait.html"><code>trait</code>s</a></p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="associated-types"><a class="header" href="#associated-types">Associated types</a></h1>
 <p>The use of "Associated types" improves the overall readability of code
 by moving inner types locally into a trait as <em>output</em> types. Syntax
@@ -4912,8 +4829,6 @@ fn main() {
     // println!("_struct1 == _struct2 yields: {}",
     //           _struct1 == _struct2);
 }</code></pre></pre>
-<h3 id="see-also-37"><a class="header" href="#see-also-37">See also:</a></h3>
-<p><a href="generics/../trait/derive.html">Derive</a>, <a href="generics/../custom_types/structs.html">struct</a>, and <a href="generics/../custom_types/structs.html">TupleStructs</a></p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="testcase-unit-clarification"><a class="header" href="#testcase-unit-clarification">Testcase: unit clarification</a></h1>
 <p>A useful method of unit conversions can be examined by implementing <code>Add</code>
 with a phantom type parameter. The <code>Add</code> <code>trait</code> is examined below:</p>
@@ -4979,9 +4894,6 @@ fn main() {
     // Compile-time Error: type mismatch.
     //let one_feter = one_foot + one_meter;
 }</code></pre></pre>
-<h3 id="see-also-38"><a class="header" href="#see-also-38">See also:</a></h3>
-<p><a href="generics/phantom/../../scope/borrow.html">Borrowing (<code>&amp;</code>)</a>, <a href="generics/phantom/../../generics/bounds.html">Bounds (<code>X: Y</code>)</a>, <a href="generics/phantom/../../custom_types/enum.html">enum</a>, <a href="generics/phantom/../../fn/methods.html">impl &amp; self</a>,
-<a href="generics/phantom/../../trait/ops.html">Overloading</a>, <a href="generics/phantom/../../scope/borrow/ref.html">ref</a>, <a href="generics/phantom/../../trait.html">Traits (<code>X for Y</code>)</a>, and <a href="generics/phantom/../../custom_types/structs.html">TupleStructs</a>.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="scoping-rules"><a class="header" href="#scoping-rules">Scoping rules</a></h1>
 <p>Scopes play an important part in ownership, borrowing, and lifetimes.
 That is, they indicate to the compiler when borrows are valid, when
@@ -5061,8 +4973,6 @@ fn main() {
     let x = ToDrop;
     println!("Made a ToDrop!");
 }</code></pre></pre>
-<h3 id="see-also-39"><a class="header" href="#see-also-39">See also:</a></h3>
-<p>[Box][box]</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="ownership-and-moves"><a class="header" href="#ownership-and-moves">Ownership and moves</a></h1>
 <p>Because variables are in charge of freeing their own resources,
 <strong>resources can only have one owner</strong>. This prevents resources
@@ -5136,14 +5046,14 @@ fn main() {
     println!("mutable_box now contains {}", mutable_box);
 }</code></pre></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="partial-moves"><a class="header" href="#partial-moves">Partial moves</a></h1>
-<p>Within the <a href="scope/move/../../flow_control/match/destructuring.html">destructuring</a> of a single variable, both <code>by-move</code> and
+<p>Within the [destructuring] of a single variable, both <code>by-move</code> and
 <code>by-reference</code> pattern bindings can be used at the same time. Doing
 this will result in a <em>partial move</em> of the variable, which means
 that parts of the variable will be moved while other parts stay. In
 such a case, the parent variable cannot be used afterwards as a
 whole, however the parts that are only referenced (and not moved)
 can still be used. &gt;Note that types that implement the
-<a href="scope/move/../../trait/drop.html"><code>Drop</code> trait</a> cannot be partially moved from, because
+[<code>Drop</code> trait][droptrait] cannot be partially moved from, because
 its <code>drop</code> method would use it afterwards as a whole.</p>
 <pre><pre class="playground"><code class="language-rust editable">fn main() {
     #[derive(Debug)]
@@ -5184,8 +5094,6 @@ give an error as the ownership of <code>person.age</code> would be moved to the
 variable <code>age</code>. If <code>Person.age</code> were stored on the stack, <code>ref</code> would
 not be required as the definition of <code>age</code> would copy the data from
 <code>person.age</code> without moving it.)</p>
-<h3 id="see-also-40"><a class="header" href="#see-also-40">See also:</a></h3>
-<p><a href="scope/move/../../flow_control/match/destructuring.html">destructuring</a></p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="borrowing"><a class="header" href="#borrowing">Borrowing</a></h1>
 <p>Most of the time, we'd like to access data without taking ownership over
 it. To accomplish this, Rust uses a <em>borrowing</em> mechanism. Instead of
@@ -5282,8 +5190,6 @@ fn main() {
     new_edition(&amp;mut immutabook);
     // FIXME ^ Comment out this line
 }</code></pre></pre>
-<h3 id="see-also-41"><a class="header" href="#see-also-41">See also:</a></h3>
-<p><a href="scope/borrow/../lifetime/static_lifetime.html"><code>static</code></a></p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="aliasing-1"><a class="header" href="#aliasing-1">Aliasing</a></h1>
 <p>Data can be immutably borrowed any number of times, but while immutably
 borrowed, the original data can't be mutably borrowed. On the other hand, only
@@ -5436,7 +5342,7 @@ lifetime of a reference should be. The syntax for explicitly annotating
 a lifetime uses an apostrophe character as follows:</p>
 <pre><code class="language-rust ignore">foo&lt;'a&gt;
 // `foo` has a lifetime parameter `'a`</code></pre>
-<p>Similar to <a href="scope/lifetime/../../fn/closures/anonymity.html">closures</a>, using lifetimes requires generics.
+<p>Similar to [closures][anonymity], using lifetimes requires generics.
 Additionally, this lifetime syntax indicates that the lifetime of <code>foo</code>
 may not exceed that of <code>'a</code>. Explicit annotation of a type has the form
 <code>&amp;'a T</code> where <code>'a</code> has already been introduced.</p>
@@ -5478,14 +5384,12 @@ fn main() {
     // longer than the lifetime of the function, but `'a` is longer.
     // Because the lifetime is never constrained, it defaults to `'static`.
 }</code></pre></pre>
-<h3 id="see-also-42"><a class="header" href="#see-also-42">See also:</a></h3>
-<p><a href="scope/lifetime/../../generics.html">generics</a> and <a href="scope/lifetime/../../fn/closures.html">closures</a></p>
 <hr>
 <ol class="footnote-definition"><li id="footnote-1">
-<p><a href="scope/lifetime/elision.html">elision</a> implicitly annotates lifetimes and so is different. <a href="#fr-1-1">↩</a></p>
+<p>[elision] implicitly annotates lifetimes and so is different. <a href="#fr-1-1">↩</a></p>
 </li>
 </ol><div style="break-before: page; page-break-before: always;"></div><h1 id="functions-2"><a class="header" href="#functions-2">Functions</a></h1>
-<p>Ignoring <a href="scope/lifetime/elision.html">elision</a>, function signatures with lifetimes have a few constraints:</p>
+<p>Ignoring [elision], function signatures with lifetimes have a few constraints:</p>
 <ul>
 <li>any reference <em>must</em> have an annotated lifetime.</li>
 <li>any reference being returned <em>must</em> have the same lifetime as an input or
@@ -5536,8 +5440,6 @@ fn main() {
     add_one(&amp;mut t);
     print_one(&amp;t);
 }</code></pre></pre>
-<h3 id="see-also-43"><a class="header" href="#see-also-43">See also:</a></h3>
-<p><a href="scope/lifetime/../../fn.html">Functions</a></p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="methods"><a class="header" href="#methods">Methods</a></h1>
 <p>Methods are annotated similarly to functions:</p>
 <pre><pre class="playground"><code class="language-rust editable">struct Owner(i32);
@@ -5556,8 +5458,6 @@ fn main() {
     owner.add_one();
     owner.print();
 }</code></pre></pre>
-<h3 id="see-also-44"><a class="header" href="#see-also-44">See also:</a></h3>
-<p><a href="scope/lifetime/../../fn/methods.html">methods</a></p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="structs-1"><a class="header" href="#structs-1">Structs</a></h1>
 <p>Annotation of lifetimes in structures are also similar to functions:</p>
 <pre><pre class="playground"><code class="language-rust editable">// A type `Borrowed` which houses a reference to an
@@ -5593,8 +5493,6 @@ fn main() {
     println!("x is borrowed in {:?}", reference);
     println!("y is *not* borrowed in {:?}", number);
 }</code></pre></pre>
-<h3 id="see-also-45"><a class="header" href="#see-also-45">See also:</a></h3>
-<p><a href="scope/lifetime/../../custom_types/structs.html"><code>struct</code>s</a></p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="traits-1"><a class="header" href="#traits-1">Traits</a></h1>
 <p>Annotation of lifetimes in trait methods basically are similar to functions.</p>
 <blockquote>
@@ -5619,8 +5517,6 @@ fn main() {
     let b: Borrowed = Default::default();
     println!("b is {:?}", b);
 }</code></pre></pre>
-<h3 id="see-also-46"><a class="header" href="#see-also-46">See also:</a></h3>
-<p><a href="scope/lifetime/../../trait.html"><code>trait</code>s</a></p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="bounds-1"><a class="header" href="#bounds-1">Bounds</a></h1>
 <p>Just like generic types can be bounded, lifetimes (themselves generic)
 use bounds as well. The <code>:</code> character has a slightly different meaning here,
@@ -5661,9 +5557,6 @@ fn main() {
     print_ref(&amp;ref_x);
     print(ref_x);
 }</code></pre></pre>
-<h3 id="see-also-47"><a class="header" href="#see-also-47">See also:</a></h3>
-<p><a href="scope/lifetime/../../generics.html">generics</a>, <a href="scope/lifetime/../../generics/bounds.html">bounds in generics</a>, and
-<a href="scope/lifetime/../../generics/multi_bounds.html">multiple bounds in generics</a></p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="coercion"><a class="header" href="#coercion">Coercion</a></h1>
 <p>A longer lifetime can be coerced into a shorter one
 so that it works inside a scope it normally wouldn't work in.
@@ -5798,8 +5691,6 @@ fn main() {
 16 | }
    | - `i` dropped here while still borrowed
 </code></pre>
-<h3 id="see-also-48"><a class="header" href="#see-also-48">See also:</a></h3>
-<p><a href="scope/lifetime/../../custom_types/constants.html"><code>'static</code> constants</a></p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="elision"><a class="header" href="#elision">Elision</a></h1>
 <p>Some lifetime patterns are overwhelmingly common and so the borrow checker
 will allow you to omit them to save typing and to improve readability.
@@ -5832,8 +5723,6 @@ fn main() {
     println!("`elided_pass`: {}", elided_pass(&amp;x));
     println!("`annotated_pass`: {}", annotated_pass(&amp;x));
 }</code></pre></pre>
-<h3 id="see-also-49"><a class="header" href="#see-also-49">See also:</a></h3>
-<p>[elision][elision]</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="traits-2"><a class="header" href="#traits-2">Traits</a></h1>
 <p>A <code>trait</code> is a collection of methods defined for an unknown type:
 <code>Self</code>. They can access other methods declared in the same trait.</p>
@@ -5968,9 +5857,6 @@ fn main() {
 
     println!("One foot is {} than one meter.", cmp);
 }</code></pre></pre>
-<h3 id="see-also-50"><a class="header" href="#see-also-50">See also:</a></h3>
-<p>[<code>derive</code>][derive]
-[attribute]: ../attribute.md</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="returning-traits-with-dyn"><a class="header" href="#returning-traits-with-dyn">Returning Traits with <code>dyn</code></a></h1>
 <p>The Rust compiler needs to know how much space every function's return type requires. This means all
 your functions have to return a concrete type. Unlike other languages, if you have a trait like
@@ -7044,8 +6930,6 @@ fn main() {
     eat(cooked_carrot);
     eat(cooked_potato);
 }</code></pre></pre>
-<h3 id="see-also-51"><a class="header" href="#see-also-51">See also:</a></h3>
-<p>[closures][closures], [<code>Option</code>][option], [<code>Option::map()</code>][map]</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="combinators-and_then"><a class="header" href="#combinators-and_then">Combinators: <code>and_then</code></a></h1>
 <p><code>map()</code> was described as a chainable way to simplify <code>match</code> statements.
 However, using <code>map()</code> on a function that returns an <code>Option&lt;T&gt;</code> results
@@ -7111,8 +6995,6 @@ fn main() {
     eat(steak, Day::Tuesday);
     eat(sushi, Day::Wednesday);
 }</code></pre></pre>
-<h3 id="see-also-52"><a class="header" href="#see-also-52">See also:</a></h3>
-<p><a href="error/option_unwrap/../../fn/closures.html">closures</a>, [<code>Option</code>][option], [<code>Option::and_then()</code>][and_then], and [<code>Option::flatten()</code>][flatten]</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="unpacking-options-and-defaults"><a class="header" href="#unpacking-options-and-defaults">Unpacking options and defaults</a></h1>
 <p>There is more than one way to unpack an <code>Option</code> and fall back on a default if it is <code>None</code>. To choose the one that meets our needs, we need to consider the following:</p>
 <ul>
@@ -7206,8 +7088,6 @@ fn main() {
     // should_be_apple is: Apple
     // my_apple is unchanged: Some(Apple)
 }</code></pre></pre>
-<h3 id="see-also-53"><a class="header" href="#see-also-53">See also:</a></h3>
-<p>[<code>closures</code>][closures], [<code>get_or_insert</code>][get_or_insert], [<code>get_or_insert_with</code>][get_or_insert_with], [<code>moved variables</code>][moved], [<code>or</code>][or], [<code>or_else</code>][or_else]</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="result"><a class="header" href="#result"><code>Result</code></a></h1>
 <p><a href="https://doc.rust-lang.org/std/result/enum.Result.html"><code>Result</code></a> is a richer version of the <a href="https://doc.rust-lang.org/std/option/enum.Option.html"><code>Option</code></a> type that
 describes possible <em>error</em> instead of possible <em>absence</em>.</p>
@@ -7339,7 +7219,7 @@ fn main() {
 }</code></pre></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="aliases-for-result"><a class="header" href="#aliases-for-result">aliases for <code>Result</code></a></h1>
 <p>How about when we want to reuse a specific <code>Result</code> type many times?
-Recall that Rust allows us to create <a href="error/result/../../types/alias.html">aliases</a>. Conveniently,
+Recall that Rust allows us to create [aliases][typealias]. Conveniently,
 we can define one for the specific <code>Result</code> in question.</p>
 <p>At a module level, creating aliases can be particularly helpful. Errors
 found in a specific module often have the same <code>Err</code> type, so a single alias
@@ -7370,8 +7250,6 @@ fn main() {
     print(multiply("10", "2"));
     print(multiply("t", "2"));
 }</code></pre></pre>
-<h3 id="see-also-54"><a class="header" href="#see-also-54">See also:</a></h3>
-<p>[<code>io::Result</code>][io_result]</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="early-returns"><a class="header" href="#early-returns">Early returns</a></h1>
 <p>In the previous example, we explicitly handled the errors using combinators.
 Another way to deal with this case analysis is to use a combination of
@@ -7669,8 +7547,6 @@ fn main() {
     print(double_first(empty));
     print(double_first(strings));
 }</code></pre></pre>
-<h3 id="see-also-55"><a class="header" href="#see-also-55">See also:</a></h3>
-<p>[Dynamic dispatch][dynamic_dispatch] and [<code>Error</code> trait][error]</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="other-uses-of-"><a class="header" href="#other-uses-of-">Other uses of <code>?</code></a></h1>
 <p>Notice in the previous example that our immediate reaction to calling
 <code>parse</code> is to <code>map</code> the error from a library error into a boxed
@@ -7732,8 +7608,6 @@ fn main() {
 is very similar to replacing the <code>unwrap</code> calls with <code>?</code> except that the
 return types are <code>Result</code>. As a result, they must be destructured at the
 top level.</p>
-<h3 id="see-also-56"><a class="header" href="#see-also-56">See also:</a></h3>
-<p>[<code>From::from</code>][from] and [<code>?</code>][q_mark]</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="wrapping-errors"><a class="header" href="#wrapping-errors">Wrapping errors</a></h1>
 <p>An alternative to boxing errors is to wrap them in your own error type.</p>
 <pre><pre class="playground"><code class="language-rust editable">use std::error;
@@ -7818,9 +7692,6 @@ fn main() {
 <p>This adds a bit more boilerplate for handling errors and might not be needed in
 all applications. There are some libraries that can take care of the boilerplate
 for you.</p>
-<h3 id="see-also-57"><a class="header" href="#see-also-57">See also:</a></h3>
-<p>[<code>From::from</code>][from] and [<code>Enums</code>][enums]</p>
-<p>[<code>Crates for handling errors</code>][crates-errors]</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="iterating-over-results"><a class="header" href="#iterating-over-results">Iterating over <code>Result</code>s</a></h1>
 <p>An <code>Iter::map</code> operation might fail, for example:</p>
 <pre><pre class="playground"><code class="language-rust editable">fn main() {
@@ -7902,8 +7773,6 @@ the <code>primitives</code>. Some of these include:</p>
 <li>error handling types: <code>Result&lt;i32, i32&gt;</code></li>
 <li>heap allocated pointers: <code>Box&lt;i32&gt;</code></li>
 </ul>
-<h3 id="see-also-58"><a class="header" href="#see-also-58">See also:</a></h3>
-<p><a href="primitives.html">primitives</a> and [the std library][std]</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="box-stack-and-heap"><a class="header" href="#box-stack-and-heap">Box, stack and heap</a></h1>
 <p>All values in Rust are stack allocated by default. Values can be <em>boxed</em>
 (allocated on the heap) by creating a <code>Box&lt;T&gt;</code>. A box is a smart pointer to a
@@ -8658,8 +8527,6 @@ fn main() {
     // println!("rc_examples: {}", rc_examples);
     // TODO ^ Try uncommenting this line
 }</code></pre></pre>
-<h3 id="see-also-59"><a class="header" href="#see-also-59">See also:</a></h3>
-<p>[std::rc][1] and [std::sync::arc][2].</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="arc"><a class="header" href="#arc">Arc</a></h1>
 <p>When shared ownership between threads is needed, <code>Arc</code>(Atomically Reference
 Counted) can be used. This struct, via the <code>Clone</code> implementation can create
@@ -8697,9 +8564,7 @@ things such as:</p>
 <li>Channels</li>
 <li>File I/O</li>
 </ul>
-<p>These expand beyond what the <a href="primitives.html">primitives</a> provide.</p>
-<h3 id="see-also-60"><a class="header" href="#see-also-60">See also:</a></h3>
-<p><a href="primitives.html">primitives</a> and [the std library][std]</p>
+<p>These expand beyond what the [primitives] provide.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="threads"><a class="header" href="#threads">Threads</a></h1>
 <p>Rust provides a mechanism for spawning native OS threads via the <code>spawn</code>
 function, the argument of this function is a moving closure.</p>
@@ -8842,16 +8707,6 @@ fn main() {
 What if the user decides to insert a lot of spaces? Do we <em>really</em> want to spawn 2,000 threads?
 Modify the program so that the data is always chunked into a limited number of chunks,
 defined by a static constant at the beginning of the program.</p>
-<h3 id="see-also-61"><a class="header" href="#see-also-61">See also:</a></h3>
-<ul>
-<li><a href="std_misc/threads/../threads.html">Threads</a></li>
-<li><a href="std_misc/threads/../../std/vec.html">vectors</a> and <a href="std_misc/threads/../../trait/iter.html">iterators</a></li>
-<li><a href="std_misc/threads/../../fn/closures.html">closures</a>, <a href="std_misc/threads/../../scope/move.html">move</a> semantics and [<code>move</code> closures][move_closure]</li>
-<li>[destructuring][destructuring] assignments</li>
-<li>[turbofish notation][turbofish] to help type inference</li>
-<li><a href="std_misc/threads/../../error/option_unwrap.html">unwrap vs. expect</a></li>
-<li>[enumerate][enumerate]</li>
-</ul>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="channels"><a class="header" href="#channels">Channels</a></h1>
 <p>Rust provides asynchronous <code>channels</code> for communication between threads. Channels
 allow a unidirectional flow of information between two end-points: the
@@ -8948,8 +8803,6 @@ fn main() {
 }</code></pre></pre>
 <p>Be sure to check at other <code>Path</code> methods (<code>posix::Path</code> or <code>windows::Path</code>) and
 the <code>Metadata</code> struct.</p>
-<h3 id="see-also-62"><a class="header" href="#see-also-62">See also:</a></h3>
-<p>[OsStr][1] and [Metadata][2].</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="file-io"><a class="header" href="#file-io">File I/O</a></h1>
 <p>The <code>File</code> struct represents a file that has been opened (it wraps a file
 descriptor), and gives read and/or write access to the underlying file.</p>
@@ -9338,8 +9191,6 @@ a
     f.read_to_string(&amp;mut s)?;
     Ok(s)
 }</code></pre>
-<h3 id="see-also-63"><a class="header" href="#see-also-63">See also:</a></h3>
-<p><a href="std_misc/../attribute/cfg.html"><code>cfg!</code></a></p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="program-arguments"><a class="header" href="#program-arguments">Program arguments</a></h1>
 <h2 id="standard-library"><a class="header" href="#standard-library">Standard Library</a></h2>
 <p>The command line arguments can be accessed using <code>std::env::args</code>, which
@@ -9529,7 +9380,7 @@ includes support for writing software tests within the language itself.</p>
 <ul>
 <li><a href="testing/dev_dependencies.html">Dev-dependencies</a></li>
 </ul>
-<h2 id="see-also-64"><a class="header" href="#see-also-64">See Also</a></h2>
+<h2 id="see-also-1"><a class="header" href="#see-also-1">See Also</a></h2>
 <ul>
 <li>[The Book][doc-testing] chapter on testing</li>
 <li>[API Guidelines][doc-nursery] on doc-testing</li>
@@ -9941,7 +9792,7 @@ mod tests {
         assert_eq!(add(2, 3), 5);
     }
 }</code></pre>
-<h2 id="see-also-65"><a class="header" href="#see-also-65">See Also</a></h2>
+<h2 id="see-also-2"><a class="header" href="#see-also-2">See Also</a></h2>
 <p><a href="http://doc.crates.io/specifying-dependencies.html">Cargo</a> docs on specifying dependencies.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="unsafe-operations"><a class="header" href="#unsafe-operations">Unsafe Operations</a></h1>
 <p>"one should try to minimize the amount of unsafe code in a code base." With that
@@ -10454,15 +10305,6 @@ fn main() {
 fn main() {
     foo::r#try();
 }</code></pre>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="meta"><a class="header" href="#meta">Meta</a></h1>
-<p>Some topics aren't exactly relevant to how you program runs but provide you
-tooling or infrastructure support which just makes things better for
-everyone. These topics include:</p>
-<ul>
-<li><a href="meta/doc.html">Documentation</a>: Generate library documentation for users via the included
-<code>rustdoc</code>.</li>
-<li><a href="meta/playground.html">Playground</a>: Integrate the Rust Playground in your documentation.</li>
-</ul>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="documentation"><a class="header" href="#documentation">Documentation</a></h1>
 <p>Use <code>cargo doc</code> to build documentation in <code>target/doc</code>, <code>cargo doc --open</code>
 will automatically open it in your web browser.</p>

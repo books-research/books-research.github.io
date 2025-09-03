@@ -190,7 +190,7 @@ fn printer&lt;T: Display&gt;(t: T) {
 // specialization will fail.
 let s = S(vec![1]);</code></pre>
 <p>Another effect of bounding is that generic instances are allowed to access the
-<a href="../fn/methods.html">methods</a> of traits specified in the bounds. For example:</p>
+[methods] of traits specified in the bounds. For example:</p>
 <pre><pre class="playground"><code class="language-rust editable">// A trait which implements the print marker: `{:?}`.
 use std::fmt::Debug;
 
@@ -229,10 +229,8 @@ fn main() {
     // ^ TODO: Try uncommenting these.
     // | Error: Does not implement either `Debug` or `HasArea`.
 }</code></pre></pre>
-<p>As an additional &gt;Note, <a href="../generics/where.html"><code>where</code></a> clauses can also be used to apply bounds in
+<p>As an additional &gt;Note, [<code>where</code>][where] clauses can also be used to apply bounds in
 some cases to be more expressive.</p>
-<h3 id="see-also"><a class="header" href="#see-also">See also:</a></h3>
-<p><a href="../hello/print.html"><code>std::fmt</code></a>, <a href="../custom_types/structs.html"><code>struct</code>s</a>, and <a href="../trait.html"><code>trait</code>s</a></p>
 
                     </main>
 

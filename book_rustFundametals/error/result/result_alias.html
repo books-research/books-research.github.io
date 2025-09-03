@@ -175,7 +175,7 @@
                     <main>
                         <h1 id="aliases-for-result"><a class="header" href="#aliases-for-result">aliases for <code>Result</code></a></h1>
 <p>How about when we want to reuse a specific <code>Result</code> type many times?
-Recall that Rust allows us to create <a href="../../types/alias.html">aliases</a>. Conveniently,
+Recall that Rust allows us to create [aliases][typealias]. Conveniently,
 we can define one for the specific <code>Result</code> in question.</p>
 <p>At a module level, creating aliases can be particularly helpful. Errors
 found in a specific module often have the same <code>Err</code> type, so a single alias
@@ -206,8 +206,6 @@ fn main() {
     print(multiply("10", "2"));
     print(multiply("t", "2"));
 }</code></pre></pre>
-<h3 id="see-also"><a class="header" href="#see-also">See also:</a></h3>
-<p>[<code>io::Result</code>][io_result]</p>
 
                     </main>
 

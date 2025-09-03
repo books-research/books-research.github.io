@@ -181,7 +181,7 @@ lifetime of a reference should be. The syntax for explicitly annotating
 a lifetime uses an apostrophe character as follows:</p>
 <pre><code class="language-rust ignore">foo&lt;'a&gt;
 // `foo` has a lifetime parameter `'a`</code></pre>
-<p>Similar to <a href="../../fn/closures/anonymity.html">closures</a>, using lifetimes requires generics.
+<p>Similar to [closures][anonymity], using lifetimes requires generics.
 Additionally, this lifetime syntax indicates that the lifetime of <code>foo</code>
 may not exceed that of <code>'a</code>. Explicit annotation of a type has the form
 <code>&amp;'a T</code> where <code>'a</code> has already been introduced.</p>
@@ -223,11 +223,9 @@ fn main() {
     // longer than the lifetime of the function, but `'a` is longer.
     // Because the lifetime is never constrained, it defaults to `'static`.
 }</code></pre></pre>
-<h3 id="see-also"><a class="header" href="#see-also">See also:</a></h3>
-<p><a href="../../generics.html">generics</a> and <a href="../../fn/closures.html">closures</a></p>
 <hr>
 <ol class="footnote-definition"><li id="footnote-1">
-<p><a href="elision.html">elision</a> implicitly annotates lifetimes and so is different. <a href="#fr-1-1">↩</a></p>
+<p>[elision] implicitly annotates lifetimes and so is different. <a href="#fr-1-1">↩</a></p>
 </li>
 </ol>
                     </main>

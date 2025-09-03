@@ -176,7 +176,7 @@
                         <h1 id="type-anonymity"><a class="header" href="#type-anonymity">Type anonymity</a></h1>
 <p>Closures succinctly capture variables from enclosing scopes. Does this have
 any consequences? It surely does. Observe how using a closure as a function
-parameter requires <a href="../../generics.html">generics</a>, which is necessary because of how they are
+parameter requires [generics], which is necessary because of how they are
 defined:</p>
 <pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -212,9 +212,6 @@ fn main() {
 
     apply(print);
 }</code></pre></pre>
-<h3 id="see-also"><a class="header" href="#see-also">See also:</a></h3>
-<p>[A thorough analysis][thorough_analysis], [<code>Fn</code>][fn], [<code>FnMut</code>][fn_mut],
-and [<code>FnOnce</code>][fn_once]</p>
 
                     </main>
 
