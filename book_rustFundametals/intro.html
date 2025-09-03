@@ -1,0 +1,381 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Introduction - Rust Programming Fundamentals</title>
+
+
+        <!-- Custom HTML head -->
+        <script>
+            const mdbookPath = "intro.md";
+            const mdbookPathToRoot = "";
+        </script>
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="theme/ferris.css">
+        <link rel="stylesheet" href="theme/semantic-Notes.css">
+        <link rel="stylesheet" href="theme/listing.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Rust Programming Fundamentals</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h2 id="why-use-rust"><a class="header" href="#why-use-rust"><strong>Why Use Rust?</strong></a></h2>
+<h4 id="high-performance-fast-and-efficient-execution"><a class="header" href="#high-performance-fast-and-efficient-execution"><strong>High Performance (Fast and Efficient Execution)</strong></a></h4>
+<p><strong>Rust is an extremely fast and memory-efficient language.</strong><br />
+It has <strong>no extra runtime</strong> or <strong>garbage collector</strong>. Because of this, Rust:</p>
+<p>✅ Can be used for highly efficient services<br />
+✅ Can run on embedded devices<br />
+✅ Can easily interoperate with other languages</p>
+<h4 id="reliability-greater-safety-and-stability"><a class="header" href="#reliability-greater-safety-and-stability"><strong>Reliability (Greater Safety and Stability)</strong></a></h4>
+<p>Rust’s <strong>rich type system</strong> and <strong>ownership model</strong> ensure:</p>
+<p>✅ <strong>Memory safety</strong><br />
+✅ <strong>Thread safety</strong></p>
+<p>These guarantees allow many programming errors to be caught <strong>at compile time itself.</strong></p>
+<h4 id="productivity-increased-efficiency"><a class="header" href="#productivity-increased-efficiency"><strong>Productivity (Increased Efficiency)</strong></a></h4>
+<p>Rust makes your work simpler, structured, and more effective because it includes:</p>
+<p>✅ Excellent documentation<br />
+✅ A helpful compiler — with clear and useful error messages<br />
+✅ High-quality tools such as:</p>
+<ul>
+<li><strong><code>cargo</code></strong>: Integrated package manager and build tool</li>
+<li><strong>Smart editor support</strong> — code suggestions, type inspection</li>
+<li><strong>Auto-formatter</strong> — keeps code neat and consistent</li>
+<li>And many other useful tools</li>
+</ul>
+<h4 id="rust-is-a-unique-combination-of-speed-safety-and-reliability--making-it-extremely-suitable-for-building-modern-efficient-and-sustainable-software-systems"><a class="header" href="#rust-is-a-unique-combination-of-speed-safety-and-reliability--making-it-extremely-suitable-for-building-modern-efficient-and-sustainable-software-systems"><strong>Rust</strong> is a unique combination of <strong>speed, safety, and reliability</strong> — making it extremely suitable for building <strong>modern, efficient, and sustainable software systems.</strong></a></h4>
+<hr />
+<p><span id="ferris"></span></p>
+<h3 id="understanding-error-messages-while-learning-rust"><a class="header" href="#understanding-error-messages-while-learning-rust"><strong>Understanding Error Messages While Learning Rust!</strong></a></h3>
+<p>An important part of learning Rust is <strong>understanding the compiler’s error messages.</strong><br />
+These messages guide you in the right direction and help you transform your code into working programs.</p>
+<p>That’s why in this book or guide, you’ll often see <strong>examples that don’t compile</strong> — along with the exact error message shown by the compiler at that stage.</p>
+<blockquote>
+<p>Remember: If you type and run a random example, it may not always compile!</p>
+</blockquote>
+<p>Please read the <strong>surrounding text carefully</strong>, because some examples are <strong>intentionally written to produce errors</strong>, so that you can learn from them.</p>
+<h3 id="who-is-ferris--rusts-cute-mascot"><a class="header" href="#who-is-ferris--rusts-cute-mascot"><strong>Who is Ferris? – Rust’s Cute Mascot!</strong></a></h3>
+<p><strong>Ferris</strong> is the official and friendly <strong>mascot of the Rust programming language</strong> — a cheerful red crab who accompanies Rust learners!</p>
+<h3 id="ferris-role-in-learning"><a class="header" href="#ferris-role-in-learning">Ferris’ Role in Learning:</a></h3>
+<blockquote>
+<p>When you learn Rust, Ferris is with you — especially when compiler errors appear!</p>
+</blockquote>
+<p>🔹 Ferris teaches that <strong>errors are not failures</strong>, but <strong>opportunities to learn</strong><br />
+🔹 He shows which code is <strong>correct</strong> and which is <strong>expected to fail</strong><br />
+🔹 In some tutorials, Ferris is used as a special symbol to indicate –<br />
+<em>"This example will not compile, but there’s something valuable to learn from it!"</em></p>
+<div class="table-wrapper"><table><thead><tr><th>Ferris</th><th>Meaning</th></tr></thead><tbody>
+<tr><td><img src="img/ferris/does_not_compile.svg" class="ferris-explain" alt="Ferris with a question mark"/></td><td>This code does not compile!</td></tr>
+<tr><td><img src="img/ferris/panics.svg" class="ferris-explain" alt="Ferris throwing up their hands"/></td><td>This code panics!</td></tr>
+<tr><td><img src="img/ferris/not_desired_behavior.svg" class="ferris-explain" alt="Ferris with one claw up, shrugging"/></td><td>This code does not produce the desired behavior.</td></tr>
+</tbody></table>
+</div>
+<hr />
+<h2 id="what-is-rust-used-for"><a class="header" href="#what-is-rust-used-for"><strong>What is Rust Used For?</strong></a></h2>
+<p>Rust is a <strong>general-purpose</strong> language. With its <strong>direct control over hardware and memory</strong>, it is highly useful for <strong>embedded systems</strong> and <strong>bare-metal development</strong>. But Rust is not limited to that — it is used for a wide variety of applications.</p>
+<p>Let’s explore some key use cases of Rust:</p>
+<h3 id="building-performance-critical-backend-systems"><a class="header" href="#building-performance-critical-backend-systems"><strong>Building Performance-Critical Backend Systems</strong></a></h3>
+<p>Systems that require <strong>fast processing, low latency, and efficient resource usage</strong> are an excellent fit for Rust. With its <strong>thread safety</strong>, <strong>robust error handling</strong>, and high performance, Rust is an ideal choice.</p>
+<p>Example: <strong>GitHub</strong> built the backend of its <strong>code search feature</strong> in Rust!</p>
+<h3 id="operating-system-development"><a class="header" href="#operating-system-development"><strong>Operating System Development</strong></a></h3>
+<p>Rust was originally created to address OS-related issues (e.g., the <em>elevator problem</em>). Hence, it is ideal for building <strong>OSes, kernels, device drivers</strong>, and <strong>low-level components.</strong></p>
+<p>Examples:</p>
+<ul>
+<li><strong>Redox OS</strong> – a Unix-like operating system written in Rust.</li>
+<li><strong>Fuchsia</strong> – Google’s OS, running on Google Nest devices.</li>
+</ul>
+<h3 id="os-related-tasks"><a class="header" href="#os-related-tasks"><strong>OS-Related Tasks</strong></a></h3>
+<p>Rust excels at handling tasks that require <strong>direct interaction with the operating system.</strong></p>
+<p>Examples:</p>
+<ul>
+<li>GitHub Codespaces uses Rust when launching virtual disks.</li>
+<li><strong>Coursera</strong>’s online grading system uses Rust (runs in Docker, requires minimal dependencies).</li>
+</ul>
+<h3 id="web-development-with-rust"><a class="header" href="#web-development-with-rust"><strong>Web Development with Rust</strong></a></h3>
+<p>Rust is now widely used in <strong>server-side web development.</strong><br />
+Its <strong>async programming model</strong>, safety, and performance make it suitable for building <strong>fast and secure APIs and web servers.</strong></p>
+<p>Examples:</p>
+<ul>
+<li>Popular web frameworks like <strong>Rocket</strong> and <strong>Actix Web</strong> are written in Rust.</li>
+</ul>
+<h3 id="crypto-and-blockchain-development"><a class="header" href="#crypto-and-blockchain-development"><strong>Crypto and Blockchain Development</strong></a></h3>
+<p>Rust’s <strong>speed, memory control, and safety</strong> make it a strong choice for blockchain.</p>
+<p>Examples:</p>
+<ul>
+<li><strong>Polkadot</strong> – a multi-chain blockchain platform, whose <strong>runtime logic is written in Rust.</strong></li>
+<li>GitHub’s <strong>awesome-blockchain-rust</strong> repo provides useful components for blockchain apps in Rust.</li>
+</ul>
+<h3 id="building-cli-command-line-interface-tools"><a class="header" href="#building-cli-command-line-interface-tools"><strong>Building CLI (Command-Line Interface) Tools</strong></a></h3>
+<p>Rust-based CLI tools:</p>
+<ul>
+<li>Run fast</li>
+<li>Use minimal memory</li>
+<li>Are expressive and clear</li>
+</ul>
+<p>Building CLI tools is one of the best ways to start learning Rust!</p>
+<h3 id="embedded-systems-and-iot-with-rust"><a class="header" href="#embedded-systems-and-iot-with-rust"><strong>Embedded Systems and IoT with Rust</strong></a></h3>
+<p>Rust’s <strong>small binary size</strong>, <strong>memory control</strong>, and <strong>bug-preventing design</strong> are highly advantageous for <strong>embedded systems</strong> and <strong>IoT devices.</strong></p>
+<ul>
+<li>These devices work in real time, where Rust’s efficiency and safety are critical.</li>
+</ul>
+<p>Rust is not just a programming language — it’s a <strong>mindset</strong> that values <strong>safety, performance, and innovation</strong> equally.</p>
+<hr />
+<h2 id="why-is-rust-becoming-popular-in-ai"><a class="header" href="#why-is-rust-becoming-popular-in-ai">Why is Rust Becoming Popular in AI?</a></h2>
+<p>Traditionally, <strong>Python</strong> and <strong>C++</strong> dominated AI development. But recently, <strong>Rust</strong> has started making a strong impact in this field.<br />
+Thanks to its <strong>performance, safety, and concurrency</strong>, Rust is becoming a serious contender for AI.</p>
+<h2 id="advantages-of-rust-in-ai"><a class="header" href="#advantages-of-rust-in-ai">Advantages of Rust in AI</a></h2>
+<p>Rust’s rising popularity in AI is due to:</p>
+<ul>
+<li><strong>Memory Safety</strong></li>
+<li><strong>High Performance</strong></li>
+<li><strong>Concurrency Power</strong></li>
+</ul>
+<p>These features are vital for building large-scale, reliable AI systems with fewer errors.</p>
+<h3 id="memory-safety-and-zero-cost-abstractions"><a class="header" href="#memory-safety-and-zero-cost-abstractions"><strong>Memory Safety and Zero-Cost Abstractions</strong></a></h3>
+<p>Rust’s strict memory safety rules prevent common issues like <strong>null pointer dereferencing</strong> and <strong>data races</strong> at <strong>compile-time</strong>. This makes it safer than traditional languages like C++.</p>
+<p>For AI, when <strong>low-level control</strong> is needed, Rust allows developers to write efficient code <strong>without sacrificing safety.</strong><br />
+This is made possible by its <strong>Zero-Cost Abstractions</strong> — meaning high-level, easy-to-read code with no performance penalty.</p>
+<h3 id="high-performance-and-concurrency"><a class="header" href="#high-performance-and-concurrency"><strong>High Performance and Concurrency</strong></a></h3>
+<p>Rust provides <strong>system-level access</strong> and is as performant as C++.<br />
+But it also offers <strong>fearless concurrency</strong> — multiple threads can run in parallel <strong>without data races.</strong></p>
+<p>For large AI models requiring <strong>parallel computation</strong>, Rust provides both reliability and efficiency.</p>
+<h2 id="rust-libraries-for-ai"><a class="header" href="#rust-libraries-for-ai">Rust Libraries for AI</a></h2>
+<p>While Rust is not yet the dominant AI language, its <strong>AI ecosystem is growing rapidly.</strong> Some notable libraries are:</p>
+<ul>
+<li><strong>Linfa</strong>: Traditional ML algorithms in Rust</li>
+<li><strong>Tch-rs</strong>: Bindings for PyTorch — bringing PyTorch power into Rust</li>
+<li><strong>Rust-NN</strong>: A library for neural networks, useful for deep learning models</li>
+</ul>
+<p>These tools make Rust a <strong>practical option for AI development.</strong></p>
+<h3 id="rust-is-emerging-as-a-safe-efficient-and-concurrency-friendly-language-for-ai-development--making-it-a-strong-future-choice-for-building-scalable-secure-and-performance-focused-ai-systems"><a class="header" href="#rust-is-emerging-as-a-safe-efficient-and-concurrency-friendly-language-for-ai-development--making-it-a-strong-future-choice-for-building-scalable-secure-and-performance-focused-ai-systems">Rust is emerging as a <strong>safe, efficient, and concurrency-friendly language</strong> for AI development — making it a strong future choice for building <strong>scalable, secure, and performance-focused AI systems.</strong></a></h3>
+<hr />
+<h2 id="how-to-use-this-book"><a class="header" href="#how-to-use-this-book"><strong>How to Use This Book</strong></a></h2>
+<p>In general, this book assumes you’ll read <strong>sequentially from start to finish,</strong> since later chapters build on earlier concepts. Sometimes a topic is introduced briefly at first, then explored in depth in a later chapter.</p>
+<h3 id="-one-final-note"><a class="header" href="#-one-final-note">✅ <strong>One Final &gt;Note:</strong></a></h3>
+<blockquote>
+<p><strong>There’s no “single correct way” to read this book!</strong><br />
+Read whichever chapter you like. If something confuses you, go back to a previous one.<br />
+<em>Learn in the way that works best for you — that’s the right method!</em></p>
+</blockquote>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="welcome.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="list.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="welcome.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="list.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <!-- Livereload script (if served using the cli tool) -->
+        <script>
+            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
+            const socket = new WebSocket(wsAddress);
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="theme/ferris.js"></script>
+
+
+    </div>
+    </body>
+</html>
